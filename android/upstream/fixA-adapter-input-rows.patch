@@ -1,0 +1,46 @@
+diff --git a/runtime/executor/vision_litert_compiled_model_executor.cc b/runtime/executor/vision_litert_compiled_model_executor.cc
+index 4e7e2798..cde1d04a 100644
+--- a/runtime/executor/vision_litert_compiled_model_executor.cc
++++ b/runtime/executor/vision_litert_compiled_model_executor.cc
+@@ -636,9 +636,40 @@ absl::StatusOr<ExecutorVisionData> VisionLiteRtCompiledModelExecutor::Encode(
+         auto adapter_input_buffers,
+         vision_adapter_->GetCompiledModel().CreateInputBuffers(
+             *adapter_signature_index));
++    // `num_patches` counts the tokens the adapter will *emit*. The rows it has
++    // to *consume* are the same number only when the encoder performs the
++    // spatial shrink itself. When the shrink lives in the adapter instead —
++    // LFM2 VL pools 2x2 patches inside its multi_modal_projector — the adapter
++    // takes several encoder rows per output token, so writing `num_patches`
++    // rows leaves the rest of its input at zero and the image is silently
++    // cropped to its first rows.
++    //
++    // Where the patch count was derived from the input tensor, feed the encoder
++    // rows that input actually produced, bounded by both buffers. For an
++    // encoder that shrinks, the adapter's input buffer is the bound and this is
++    // exactly the previous behaviour. The masked path is left alone: there the
++    // mask already states how many rows carry an image.
++    int num_encoder_rows = num_patches;
++    if (!mask_index.HasValue()) {
++      LITERT_ASSIGN_OR_RETURN(auto adapter_input_tensor_type,
++                              adapter_input_buffers[0].TensorType());
++      const auto& adapter_input_dims =
++          adapter_input_tensor_type.Layout().Dimensions();
++      const int adapter_input_rows =
++          adapter_input_dims.size() >= 2
++              ? adapter_input_dims[adapter_input_dims.size() - 2]
++              : num_patches;
++      const int encoder_output_rows =
++          encoder_output_dim > 0
++              ? encoder_output_num_elements / encoder_output_dim
++              : num_patches;
++      num_encoder_rows = std::min(
++          {num_patches_from_input, adapter_input_rows, encoder_output_rows});
++    }
++
+     adapter_input_buffers[0].Clear();
+     LITERT_RETURN_IF_ERROR(adapter_input_buffers[0].Write<float>(absl::MakeSpan(
+-        encoder_output_data.data(), num_patches * encoder_output_dim)));
++        encoder_output_data.data(), num_encoder_rows * encoder_output_dim)));
+ 
+     LITERT_RETURN_IF_ERROR(vision_adapter_->GetCompiledModel().Run(
+         *adapter_signature_index,

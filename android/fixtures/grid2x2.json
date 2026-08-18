@@ -1,0 +1,42 @@
+[
+  {
+    "target": "Settings",
+    "prompt": "Point to the \"Settings\" button.",
+    "box": [
+      33,
+      33,
+      467,
+      467
+    ]
+  },
+  {
+    "target": "Camera",
+    "prompt": "Point to the \"Camera\" button.",
+    "box": [
+      533,
+      33,
+      967,
+      467
+    ]
+  },
+  {
+    "target": "Messages",
+    "prompt": "Point to the \"Messages\" button.",
+    "box": [
+      33,
+      533,
+      467,
+      967
+    ]
+  },
+  {
+    "target": "Photos",
+    "prompt": "Point to the \"Photos\" button.",
+    "box": [
+      533,
+      533,
+      967,
+      967
+    ]
+  }
+]

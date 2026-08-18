@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+shots/
+*.litertlm
+*.tflite
+bazel-*
+.DS_Store
+# measurement output and social-post working material — not repo content
+out/
+demo/
+MODULE.bazel.lock

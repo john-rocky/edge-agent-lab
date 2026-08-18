@@ -1,0 +1,52 @@
+[
+  {
+    "target": "search bar",
+    "prompt": "Point to the search bar at the top of the screen.",
+    "box": [40, 65, 960, 131]
+  },
+  {
+    "target": "account row",
+    "prompt": "Point to the row showing the signed-in Google account.",
+    "box": [40, 155, 960, 233]
+  },
+  {
+    "target": "Network & internet",
+    "prompt": "Point to the \"Network & internet\" menu item.",
+    "box": [40, 256, 960, 331]
+  },
+  {
+    "target": "Wi-Fi icon (small)",
+    "prompt": "Point to the round Wi-Fi icon on the left of the \"Network & internet\" row.",
+    "box": [80, 273, 172, 314]
+  },
+  {
+    "target": "Connected devices",
+    "prompt": "Point to the \"Connected devices\" menu item.",
+    "box": [40, 340, 960, 415]
+  },
+  {
+    "target": "Apps",
+    "prompt": "Point to the \"Apps\" menu item.",
+    "box": [40, 440, 960, 514]
+  },
+  {
+    "target": "Notifications",
+    "prompt": "Point to the \"Notifications\" menu item in the settings list.",
+    "box": [40, 520, 960, 598]
+  },
+  {
+    "target": "Sound & vibration",
+    "prompt": "Point to the \"Sound & vibration\" menu item.",
+    "box": [40, 605, 960, 680]
+  },
+  {
+    "target": "font size (indirect)",
+    "prompt": "I want to change the font size. Point to the settings row I should tap.",
+    "box": [40, 773, 960, 848]
+  },
+  {
+    "target": "Wallpaper & style",
+    "prompt": "Point to the \"Wallpaper & style\" menu item.",
+    "box": [40, 856, 960, 930]
+  }
+]

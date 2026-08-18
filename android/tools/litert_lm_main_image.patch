@@ -1,0 +1,75 @@
+diff --git a/runtime/engine/litert_lm_main.cc b/runtime/engine/litert_lm_main.cc
+index 0bd22a95..2693a5be 100644
+--- a/runtime/engine/litert_lm_main.cc
++++ b/runtime/engine/litert_lm_main.cc
+@@ -58,6 +58,12 @@ ABSL_FLAG(std::string, model_path, "", "Model path to use for LLM execution.");
+ ABSL_FLAG(std::string, input_prompt, "",
+           "Input prompt to use for testing LLM execution.");
+ ABSL_FLAG(std::string, input_prompt_file, "", "File path to the input prompt.");
++ABSL_FLAG(std::string, image_path, "",
++          "Path to an image to send with the prompt. Requires a vision-capable "
++          "model.");
++ABSL_FLAG(bool, image_first, true,
++          "Place the image content part before the text part. This matches "
++          "`litert-lm run --attachment`. Set false to put the text first.");
+ 
+ namespace {
+ 
+@@ -128,9 +134,20 @@ absl::Status MainHelper(int argc, char** argv) {
+   auto backend_str = absl::GetFlag(FLAGS_backend);
+   ABSL_ASSIGN_OR_RETURN(Backend backend,
+                         litert::lm::GetBackendFromString(backend_str));
++  // The SigLIP2 encoder in the LFM2.5-VL family does not compile on the Pixel
++  // GPU delegate, so vision defaults to CPU when an image is supplied.
++  std::optional<Backend> vision_backend;
++  if (!absl::GetFlag(FLAGS_image_path).empty()) {
++    const auto vision_backend_flag = absl::GetFlag(FLAGS_vision_backend);
++    ABSL_ASSIGN_OR_RETURN(
++        Backend vb, litert::lm::GetBackendFromString(
++                        vision_backend_flag.value_or("cpu")));
++    vision_backend = vb;
++  }
+   ABSL_ASSIGN_OR_RETURN(
+       EngineSettings engine_settings,
+-      EngineSettings::CreateDefault(std::move(model_assets), backend));
++      EngineSettings::CreateDefault(std::move(model_assets), backend,
++                                    vision_backend));
+   // Enable benchmark by default.
+   engine_settings.GetMutableBenchmarkParams() =
+       litert::lm::proto::BenchmarkParams();
+@@ -155,6 +172,11 @@ absl::Status MainHelper(int argc, char** argv) {
+   // Create the conversation.
+   std::unique_ptr<Conversation> conversation;
+   auto session_config = litert::lm::SessionConfig::CreateDefault();
++  if (!absl::GetFlag(FLAGS_image_path).empty()) {
++    // Without this the vision executor is never loaded and SendMessage fails
++    // with "Vision executor should not be null".
++    session_config.SetVisionModalityEnabled(true);
++  }
+   ABSL_ASSIGN_OR_RETURN(auto conversation_config,
+                         ConversationConfig::Builder()
+                             .SetSessionConfig(session_config)
+@@ -165,8 +187,22 @@ absl::Status MainHelper(int argc, char** argv) {
+   // Prepare the message to send.
+   json content_list = json::array();
+   const std::string input_prompt = GetInputPrompt();
++  const std::string image_path = absl::GetFlag(FLAGS_image_path);
+   std::cout << "input_prompt: " << input_prompt << std::endl;
+-  content_list.push_back({{"type", "text"}, {"text", input_prompt}});
++  if (!image_path.empty()) {
++    std::cout << "image_path: " << image_path
++              << " (image_first=" << absl::GetFlag(FLAGS_image_first) << ")"
++              << std::endl;
++  }
++  const json image_item = {{"type", "image"}, {"path", image_path}};
++  const json text_item = {{"type", "text"}, {"text", input_prompt}};
++  if (!image_path.empty() && absl::GetFlag(FLAGS_image_first)) {
++    content_list.push_back(image_item);
++  }
++  content_list.push_back(text_item);
++  if (!image_path.empty() && !absl::GetFlag(FLAGS_image_first)) {
++    content_list.push_back(image_item);
++  }
+ 
+   // Send the message and wait for the response, asynchronously log the
+   // response.
