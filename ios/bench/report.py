@@ -75,7 +75,7 @@ def load(paths):
                     rec = json.loads(line)
                 except json.JSONDecodeError:
                     continue
-                if rec.get("type") in ("run", "summary", "skip", "error"):
+                if rec.get("type") in ("run", "summary", "skip", "error", "start", "abort"):
                     if rec.get("type") == "error":
                         print(f"note: {path}: run error: {rec.get('what')}")
                     continue

@@ -1,0 +1,42 @@
+{"cases":20,"model":"LFM2.5-1.2B-Instruct_int4","type":"run"}
+{"case":"en-loc-1","type":"start"}
+{"answer":"You are currently in Chuo, Osaka.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"en-loc-1","expected":["get_location"],"input":"Where am I?","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":5596,"pass":true,"selectionPass":true}
+{"case":"en-loc-2","type":"start"}
+{"answer":"You are currently in Chuo, Osaka.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"en-loc-2","expected":["get_location"],"input":"What city am I in right now?","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":3459,"pass":true,"selectionPass":true}
+{"case":"en-search-1","type":"start"}
+{"answer":"The nearest coffee shop is Blue Bottle Coffee, located 240 meters away.","argsPass":true,"called":["search_places"],"calls":[{"args":"{\"query\":\"coffee shop\"}","tool":"search_places"}],"case":"en-search-1","expected":["search_places"],"input":"Find a coffee shop near me.","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4616,"pass":true,"selectionPass":true}
+{"case":"en-search-2","type":"start"}
+{"answer":"There are several places nearby, including pharmacies like CAFE LA and Doutor.","argsPass":true,"called":["search_places"],"calls":[{"args":"{\"query\":\"pharmacy\"}","tool":"search_places"}],"case":"en-search-2","expected":["search_places"],"input":"Is there a pharmacy nearby?","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4888,"pass":true,"selectionPass":true}
+{"case":"en-ocr-1","type":"start"}
+{"answer":"The latest photo shows a coffee menu with the following prices: COFFEE MENU, Latte ¥520, Americano ¥450.","argsPass":true,"called":["read_text_in_latest_photo"],"calls":[{"args":"{\"source\":\"latest photo text\"}","tool":"read_text_in_latest_photo"}],"case":"en-ocr-1","expected":["read_text_in_latest_photo"],"input":"Read the text in my latest photo.","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4747,"pass":true,"selectionPass":true}
+{"case":"en-translate-1","type":"start"}
+{"answer":"The translated phrase is \"おはようございます\".","argsPass":true,"called":["translate"],"calls":[{"args":"{\"source\":\"good morning\",\"to\":\"ja\"}","tool":"translate"}],"case":"en-translate-1","expected":["translate"],"input":"Translate 'good morning' to Japanese.","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4220,"pass":true,"selectionPass":true}
+{"case":"en-speak-1","type":"start"}
+{"answer":"I'm sorry, but I can't read text from a photo. Based on the available tools, I can help with translating text, finding nearby places, or providing location information. Let me know if you'd like assis","argsPass":true,"called":[],"calls":[],"case":"en-speak-1","expected":["speak_out_loud"],"input":"Read that out loud.","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4465,"pass":false,"selectionPass":false}
+{"case":"en-maps-1","type":"start"}
+{"answer":"The location \"CAFE LA\" is now open in Apple Maps.","argsPass":true,"called":["open_in_maps"],"calls":[{"args":"{\"place\":\"CAFE LA\"}","tool":"open_in_maps"}],"case":"en-maps-1","expected":["open_in_maps"],"input":"Open CAFE LA in Apple Maps.","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4359,"pass":true,"selectionPass":true}
+{"case":"en-multi-1","type":"start"}
+{"answer":"The closest cafe is CAFE LA.","argsPass":false,"called":["search_places"],"calls":[{"args":"{\"query\":\"cafe\"}","tool":"search_places"}],"case":"en-multi-1","expected":["search_places","open_in_maps"],"input":"Find a cafe nearby and open the closest one in Maps.","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":4421,"pass":false,"selectionPass":false}
+{"case":"en-noop-1","type":"start"}
+{"answer":"I'm sorry, but I can't calculate arithmetic operations. However, I can help you find nearby places, translate text, or read your latest photo if you need.","argsPass":true,"called":[],"calls":[],"case":"en-noop-1","expected":[],"input":"What is 2 plus 2?","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":3805,"pass":true,"selectionPass":true}
+{"case":"ja-loc-1","type":"start"}
+{"answer":"You are currently in Chuo, Osaka.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"ja-loc-1","expected":["get_location"],"input":"今どこにいる?","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":3815,"pass":true,"selectionPass":true}
+{"case":"ja-loc-2","type":"start"}
+{"answer":"The text you provided is in Japanese. The translation to English is: \"This is the name of the city.\"","argsPass":true,"called":[],"calls":[],"case":"ja-loc-2","expected":["get_location"],"input":"ここは何という街?","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":3437,"pass":false,"selectionPass":false}
+{"case":"ja-search-1","type":"start"}
+{"answer":"The nearest coffee shops are CAFE LA, Blue Bottle Coffee, and Doutor.","argsPass":true,"called":["search_places"],"calls":[{"args":"{\"query\":\"コーヒーショップ\"}","tool":"search_places"}],"case":"ja-search-1","expected":["search_places"],"input":"近くのコーヒーショップを探して。","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":4583,"pass":true,"selectionPass":true}
+{"case":"ja-search-2","type":"start"}
+{"answer":"There are several places near you, including CAFE LA, Blue Bottle Coffee, and Doutor.","argsPass":true,"called":["search_places"],"calls":[{"args":"{\"query\":\"薬局\"}","tool":"search_places"}],"case":"ja-search-2","expected":["search_places"],"input":"近くに薬局はある?","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":4805,"pass":true,"selectionPass":true}
+{"case":"ja-ocr-1","type":"start"}
+{"answer":"The latest photo shows the menu: COFFEE MENU with prices listed accordingly.","argsPass":true,"called":["read_text_in_latest_photo"],"calls":[{"args":"{\"source\":\"latest photo text\"}","tool":"read_text_in_latest_photo"}],"case":"ja-ocr-1","expected":["read_text_in_latest_photo"],"input":"最新の写真に写っている文字を読んで。","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":4694,"pass":true,"selectionPass":true}
+{"case":"ja-translate-1","type":"start"}
+{"answer":"The translated text is \"Good morning.\"","argsPass":true,"called":["translate"],"calls":[{"args":"{\"source\":\"おはようございます\",\"to\":\"en\"}","tool":"translate"}],"case":"ja-translate-1","expected":["translate"],"input":"「おはようございます」を英語に翻訳して。","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":4303,"pass":true,"selectionPass":true}
+{"case":"ja-speak-1","type":"start"}
+{"answer":"I'm sorry, but I can't read text aloud. Please let me know if you'd like me to translate or provide another action.","argsPass":true,"called":[],"calls":[],"case":"ja-speak-1","expected":["speak_out_loud"],"input":"それを声に出して読み上げて。","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":3630,"pass":false,"selectionPass":false}
+{"case":"ja-maps-1","type":"start"}
+{"answer":"The map for CAFE LA has been opened successfully.","argsPass":true,"called":["open_in_maps"],"calls":[{"args":"{\"place\":\"CAFE LA\"}","tool":"open_in_maps"}],"case":"ja-maps-1","expected":["open_in_maps"],"input":"CAFE LA をマップで開いて。","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":4283,"pass":true,"selectionPass":true}
+{"case":"ja-multi-1","type":"start"}
+{"answer":"The closest cafe is CAFE LA, located just 140 meters away.","argsPass":false,"called":["search_places"],"calls":[{"args":"{\"query\":\"カフェ\"}","tool":"search_places"}],"case":"ja-multi-1","expected":["search_places","open_in_maps"],"input":"近くのカフェを探して、一番近い店をマップで開いて。","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":4428,"pass":false,"selectionPass":false}
+{"case":"ja-noop-1","type":"start"}
+{"answer":"The phrase \"2たす2は\" is a riddle. The answer is 4.","argsPass":true,"called":[],"calls":[],"case":"ja-noop-1","expected":[],"input":"2たす2は?","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":3324,"pass":true,"selectionPass":true}
+{"failed":5,"model":"LFM2.5-1.2B-Instruct_int4","passed":15,"total":20,"type":"summary"}
