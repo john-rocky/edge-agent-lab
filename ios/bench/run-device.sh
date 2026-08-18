@@ -38,6 +38,17 @@ list_files() {
     --subdirectory Documents 2>/dev/null
 }
 
+# Image cases name fixtures that live next to the cases file; the runner
+# attaches Documents/toolbench-fixtures/<name> to the prompt.
+if [[ -d "$HERE/../scenarios/$SCENARIO/fixtures" ]]; then
+  echo "pushing $SCENARIO fixtures..."
+  for fixture in "$HERE/../scenarios/$SCENARIO/fixtures"/*; do
+    xcrun devicectl device copy to --device "$DEVICE" \
+      --domain-type appDataContainer --domain-identifier "$BUNDLE" \
+      --source "$fixture" \
+      --destination "Documents/toolbench-fixtures/${fixture:t}" >/dev/null || exit 1
+  done
+fi
 echo "pushing $SCENARIO cases (toolset $TOOLSET)..."
 xcrun devicectl device copy to --device "$DEVICE" \
   --domain-type appDataContainer --domain-identifier "$BUNDLE" \
