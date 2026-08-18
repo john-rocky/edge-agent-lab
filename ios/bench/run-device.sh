@@ -32,12 +32,23 @@ xcrun devicectl device copy to --device "$DEVICE" \
 for model in "${MODELS[@]}"; do
   baseline=$(list_files | grep -oE "toolbench-[0-9]+\.done" | sort | tail -1)
   echo "== $model (baseline: ${baseline:-none})"
-  # The launch step tolerates the CoreDevice hang seen on 2026-08-18: if it
-  # does not return in 20s, tap the app icon on the phone — but then the
-  # launch args are lost, so prefer replugging the cable and rerunning.
-  timeout 20 xcrun devicectl device process launch --terminate-existing \
-    --device "$DEVICE" "$BUNDLE" --toolbench --model "$model" >/dev/null 2>&1 \
-    || echo "  launch did not return — if the app is not on screen, replug and rerun"
+  # The CoreDevice hang seen on 2026-08-18 is worse than an inconvenience: a
+  # hung launch can still start the app WITHOUT its arguments, and with no
+  # --model the app silently runs the newest bundle. Retry once; if both
+  # hang, skip this model rather than launch the wrong one.
+  launched=0
+  for attempt in 1 2; do
+    if timeout 20 xcrun devicectl device process launch --terminate-existing \
+      --device "$DEVICE" "$BUNDLE" --toolbench --model "$model" >/dev/null 2>&1; then
+      launched=1
+      break
+    fi
+    echo "  launch attempt $attempt hung"
+  done
+  if (( ! launched )); then
+    echo "  skipping $model — args would be lost on a hung launch"
+    continue
+  fi
 
   # A 20-case run is minutes on the 1.2B and tens of minutes on the 2.6B.
   done_name=""
@@ -59,5 +70,12 @@ for model in "${MODELS[@]}"; do
     --domain-type appDataContainer --domain-identifier "$BUNDLE" \
     --source "Documents/$jsonl" --destination "$DEST/$jsonl" >/dev/null 2>&1
   echo "  pulled: $DEST/$jsonl"
+  # The run's own idea of its model, against what was asked for. A hung
+  # launch that dropped the args shows up here as the newest bundle.
+  ran=$(head -1 "$DEST/$jsonl" | grep -o '"model":"[^"]*"')
+  case "$model" in
+    apple) [[ "$ran" == *apple-fm* ]] || echo "  WARNED: asked apple, ran $ran" ;;
+    *) [[ "${ran:l}" == *"${model:l}"* ]] || echo "  WARNED: asked $model, ran $ran" ;;
+  esac
   tail -1 "$DEST/$jsonl"
 done
