@@ -1,15 +1,19 @@
 # Vision — the pixels pick the tool
 
-The photo goes into the prompt with every beat (iOS 27's `Attachment`,
-read natively by Apple's model, or through the LiteRT adapter by an
-LFM2.5-VL bundle), and what the model does depends on what it sees. No
-beat names a tool or an adjustment: "fix it" on a dark photo should
-become brightness, on a tilted one rotate, on a menu OCR. The
-conditional beats are routing decided by pixels — the right answer may
-be no call at all. Tools: `ToolBox.vision` (the 16 stage editing tools +
-read text, identify, note), 19. Launch:
-`--autorun --backend apple --scenario vision`, or `--model VL-450M`.
-Add `--voice` and the beats are spoken.
+Foundation Models' vision, the native way. The photo goes into the
+prompt with every beat as a labelled `Attachment` (Apple's model reads it
+itself; a LiteRT LFM2.5-VL bundle through the adapter), and every photo
+tool takes an `ImageReference` — the model looks, decides, and names the
+picture it means; the tool resolves the label against the live transcript
+(`Tools/VisionTools.swift`). No beat names a tool or an adjustment: "fix
+it" on a dark photo should become brightness, on a tilted one rotate, on
+a menu OCR. The conditional beats are routing decided by pixels — the
+right answer may be no call at all. Tools: `ToolBox.vision`, 14 (the
+editing tools with an image argument, read text, revert, save, note).
+Launch: `--autorun --backend apple --scenario vision`, or
+`--model VL-450M`. Add `--voice` and the beats are spoken. In the chat,
+each attached photo is labelled photo-1, photo-2… so "brighten the first
+one" can mean it.
 
 | beat | say | expect |
 |---|---|---|
