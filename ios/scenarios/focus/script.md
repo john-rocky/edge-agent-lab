@@ -54,6 +54,13 @@ What the bench found, beat by beat (2026-08-18, before any recording)
   notes ("what did I ask you to remember?" → write_note).
 - Dim beat is late so most of the take is filmed at full brightness.
 
+Timer note (2026-08-19): AlarmKit refuses this app — `requestAuthorization`
+itself throws com.apple.AlarmKit.Alarm error 1, with or without countdown
+faces — most likely because a single-target app has no widget extension
+to host the alarm's Live Activity. `set_timer` now rings as a scheduled
+notification when the system alarm is refused, so the beat lands; the
+model sees "timer set for 1500s as a notification".
+
 Recording notes
 
 - Launch with `--scenario focus`.
