@@ -47,6 +47,14 @@ platform-independent on purpose; one scenario, one table, two platforms.
 
 ## Standing rails (grow with every pack, never ahead of one)
 
+- **Try it on Apple's model first.** A new capability is shown the day
+  it works on Apple FM (`--backend apple` on the stage, `--model apple`
+  in the chat, `--voice` for spoken beats); that is a minute per pack,
+  not a quarter of an hour. Quick packs (briefing, sensors, handoff)
+  exist for exactly this and have no cases yet.
+- The bench follows interest, not the calendar: a pack gets its cases
+  and its three-model run when someone bites on the demo. Benching every
+  pack up front is time spent on examples that may be thrown away.
 - Pack cases merge into the bench; the model table gets a row/column.
 - Recipes are extracted from what the pack taught, into docs/.
 - New models are added when a scenario needs them, not for coverage.
