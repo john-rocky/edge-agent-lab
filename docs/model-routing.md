@@ -2,10 +2,21 @@
 
 Measured on iPhone (iOS 27), CPU backend, bare tool-list format, thinking
 budget 32 tokens, via [toolbench](../ios/bench/README.md)
-([raw JSONL](../ios/bench/results/2026-08-18/)). Two scenario packs so
-far: coffee-run (6 tools) and photo-editing (15 tools). The bench
-reproduced the hand-run demo's routing table and corrected one conclusion
-— see translate below.
+([raw JSONL](../ios/bench/results/2026-08-18/)). Four scenario packs so
+far: coffee-run (6 tools), photo-editing (15 tools, then 17), focus (10
+tools) and field-report (10 tools, not yet run). The bench reproduced the
+hand-run demo's routing table and corrected one conclusion — see
+translate below.
+
+| pack | Apple FM | LFM2.5-1.2B int4 | LFM2.5-2.6B int4 |
+|---|---|---|---|
+| coffee-run, 6 tools, 20 cases | 17/20 · 3 s | 15/20 · 4.4 s | 17/20 · 15.5 s |
+| photo-editing, 15 tools, 20 cases | 14/20 · 2.7 s | **16/20** · 7.2 s | 2/20 · context overflow |
+| photo-editing, 17 tools, 30 cases | **24/30** · 1.8 s | 17/30 · 7 s | 0/30 · tool list alone is 1054 tokens > 1024 |
+| focus, 10 tools, 20 cases | 12/20 · 1.4 s | 12/20 · 7.1 s | (8/10 EN, run cut short — rerun pending) |
+
+Reached = every expected call made, in order, with matching arguments;
+extras allowed except on no-op cases. Median per case.
 
 | model | location | search | maps | photo OCR | translate | speak | no-op |
 |---|---|---|---|---|---|---|---|
@@ -68,6 +79,82 @@ to "Apple FM wins outright". How each model loses is the story:
   model buys a smaller context: past some tool-list size the smaller
   model is simply the stronger agent.
 
+## Photo-editing at 17 tools: the going-back triangle
+
+The demo grew the pack to 17 tools (remove_background, revert_to_original
+alongside undo_photo_edit) and the recording had already shown that
+"undo everything" falls into undo on the 1.2B. Ten cases were added to
+measure the triangle in both languages — undo the last edit, undo
+everything, reset it, remove the background, cut out the person — for 30.
+
+| model | reached | exact | no-op restraint | median/case |
+|---|---|---|---|---|
+| Apple FM | **24/30** | 24 | 1/2 | 1.8 s |
+| LFM2.5-1.2B-Instruct_int4 | 17/30 | 17 | 2/2 | 7.0 s |
+| LFM2.5-2.6B_int4 | 0/30 | 0 | — | 2 ms (rejected before generating) |
+
+- **Apple FM owns the triangle.** All ten new cases pass in both
+  languages: "Undo the last edit" → undo_photo_edit, "Undo everything /
+  Reset it" → revert_to_original, "Cut out the person" →
+  remove_background — the discrimination the 1.2B needed a tool-set cut
+  for, it does by name. Five of its six losses are a *magnitude*:
+  "more contrast", "warmer", 「もう少し明るくして」 all arrive as
+  `amount: 100`, the rail. (On the 15-tool run the same Japanese wordings
+  drew a counter-question instead; vague-amount handling is not stable
+  run to run.) The sixth: the Japanese no-op grabbed undo_photo_edit.
+- **1.2B: the same 20 as before, plus one.** On the original twenty it
+  reaches 16, exactly as before; the two extra tools cost nothing there.
+  On the ten new cases it reaches 1: "Undo everything" and "Reset it" both
+  fall into undo_photo_edit (the well, measured on the bench now, not
+  just the stage), "Undo the last edit" is *refused* — "I can't undo the
+  last edit, my capabilities are limited to applying edits" — with
+  undo_photo_edit in the list, and every Japanese wording of the
+  triangle is refused with a recital of the tools it thinks it has. The
+  stage cut (no one-step undo) remains the right recording set; the
+  bench keeps the full set because the well is the measurement.
+- **2.6B: the list no longer fits.** With 15 tools the prompt fitted the
+  1024-token context and generation died mid-thought; with 17 the tool
+  list plus instructions is 1054 tokens and every case is rejected in
+  2 ms ("Input token ids are too long"). The cliff has a number now.
+
+## Focus pack: 10 tools, and a draw
+
+"Help me focus" as timer + notifications + brightness + notes; the axes
+are the `set_` prefix neighbours, get/set brightness, remind-vs-remember
+(schedule_notification vs write_note) and one two-call chain written in
+call order. Apple FM and the 1.2B both reach 12/20 — by losing
+completely different cases.
+
+| model | reached | exact | chains (2) | no-op restraint | median/case |
+|---|---|---|---|---|---|
+| Apple FM | 12/20 | 12 | 2/2 called, 0/2 right amount | 1/2 | 1.4 s |
+| LFM2.5-1.2B-Instruct_int4 | 12/20 | 12 | 0/2 | 0/2 | 7.1 s |
+| LFM2.5-2.6B_int4 | 8/10 EN before the run was cut short | | 0/1 | 0/1 | 22 s |
+
+- **Apple FM: right tool, wrong number.** "Set a timer for 25 minutes"
+  → asks "what should the timer be for?" (the required `label` becomes
+  a question); 「25分」 → `seconds: 150`; "one-hour focus timer" →
+  `seconds: 600` in both languages. Minutes-to-seconds is a failure
+  mode of its own. "Remind me to stretch in half an hour" → set_timer
+  with the right 1800 s — the timer absorbs "remind me in N" — and the
+  EN no-op ("how long should a pomodoro break be?") became a 25-second
+  timer. 「画面を暗くして」 → 50 %, which the case scores as not dim.
+  Chains are called in order every time.
+- **1.2B: right number, wrong tool.** The mashed chain
+  `cancel_notifications({"set_timer(label":"Focus","seconds":3600})`
+  carries the correct 3600 s inside a broken call; "25 minutes" →
+  15000 s (Japanese 「25分」 correct). remind-vs-remember holds up —
+  schedule_notification and write_note both route in both languages —
+  but *read* notes does not: "What did I ask you to remember?" →
+  write_note both times. And this is the first pack where it loses its
+  no-op restraint: both pomodoro questions became timers. The Japanese
+  reminder call dropped a required `title` and errored at the tool.
+- **2.6B, partial:** 8/10 on the English half at 22 s per case (10
+  tools fit its 1024-token context with room to generate) — the chain
+  stopped after cancel_notifications, the no-op grabbed a timer — then
+  the app was sent to the background mid-run (see harness notes) and the
+  Japanese half never ran.
+
 ## Corrected: the 1.2B translate "floor"
 
 The demo concluded the 1.2B never routes translate — five rewrites of
@@ -99,7 +186,23 @@ the 1.2B still answers "I can't" instead of calling the tool.
   retried the call twice.
 - A LiteRT engine hang mid-generation blocks the transcript reader too —
   the runner writes case-start lines and aborts the model's run on a 180 s
-  timeout instead of touching the transcript.
+  timeout instead of touching the transcript. That timeout was dead code
+  until the evening: a `withThrowingTaskGroup` race awaits *every* child
+  before it returns, even after the timer child throws, and a child
+  awaiting a detached `respond` never finishes — the bench sat five
+  minutes past its own deadline. The deadline is now a continuation the
+  timer resumes directly; the hung work stays hung on its own thread.
+- **The "hangs" were the app leaving the foreground.** Three runs froze
+  ~20 s in with no error line; the fourth, with a
+  `didEnterBackground` observer writing to the JSONL, showed
+  `{"type":"background"}` at the exact case the silence began. A
+  backgrounded app generates nothing and its timers stop with it, so
+  no timeout can save it. The runner now keeps the screen awake
+  (`isIdleTimerDisabled`), and the rule for a run is: nobody touches
+  the phone.
+- zsh ties `path` to `PATH`; a `read -r _ path` loop over an empty
+  stream sets `PATH=""` and the next `tee` is "command not found". The
+  orchestrating scripts avoid the name.
 - One hung `devicectl` launch started the app *without its arguments*, and
   the no-`--model` fallback silently ran the newest bundle. Every run's
   JSONL records the model the process actually loaded; the script verifies

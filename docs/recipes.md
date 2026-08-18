@@ -25,6 +25,49 @@ undo from the demo's tool set; the full revert then owned the going-back
 words. When two tools shade the same intent, a small model gives
 everything to one of them — decide which one deserves it.
 
+The bench then measured the well: with the full set, the 1.2B reaches
+1 of 10 going-back / cut-out cases, and refuses "Undo the last edit"
+with undo in its list. Apple FM reaches 10 of 10 — wells are per model,
+and the bigger router has different ones: "Remind me to stretch in half
+an hour" goes to `set_timer` (right seconds, wrong tool) with
+`schedule_notification` present, in both languages. The 1.2B's other
+well is read-vs-write: "What did I ask you to remember?" → `write_note`.
+
+## Take arguments in the user's units
+
+Ask for seconds and the model has to multiply. Apple FM turned "25
+minutes" into a question (what is the timer for?), 「25分」 into 150 s
+and "one hour" into 600 s — twice; the 1.2B made "25 minutes" 15000 s
+while getting 「25分」 right. The routing was perfect every time; the
+arithmetic was not. Give the tool a `minutes` field (or a duration
+string the app parses) and let the model copy the number it heard.
+
+## Every required argument is a question waiting to be asked
+
+`set_timer` requires a `label`; "Set a timer for 25 minutes" gave Apple
+FM nothing to put there, so instead of calling it asked "what should
+the timer be for?" — a lost beat that looks like a routing failure. The
+Japanese photo cases lost three beats the same way to "how much, -100
+to 100?". A required field with no default is a licence to stop and
+ask; make it optional with a sensible default, or supply it in the app.
+
+## Vague amounts land on the rail
+
+"A bit brighter", "more contrast", "warmer": on a 0–100 scale Apple FM
+answers 100, 100, 100 (and once -100). Small models don't interpolate a
+vague adjective onto a numeric range — they pick an end. Offer the steps
+the words already have — `a_little | more | a_lot` — and map them to
+numbers in the app; keep the numeric field for requests that name one.
+
+## Restraint is domain-relative
+
+The 1.2B was the model that never grabbed a tool for "what is 2 plus
+2?" or "when did I take this photo?" — then "how long should a pomodoro
+break be?" became a 25-second timer, in both languages, with Apple FM
+doing the same in English. A no-op that smells like the tool set is not
+a no-op to a small model. Test restraint with in-domain questions, not
+arithmetic.
+
 ## Never tell the model what it cannot do
 
 Negative system-prompt lines are poison at 1.2B: told "you cannot speak
@@ -73,9 +116,11 @@ route fine — the 1.2B scored 16/20 on the photo pack. The ceiling that
 actually bit was the KV cache: the 2.6B's weights cap its context at
 1024 tokens on the phone, the 15-tool list ate nearly all of it, and the
 model died mid-thought on every real case (2/20, versus 17/20 with six
-tools). Budget the tool list against the context the model leaves you,
-not against the model's routing skill — on phone RAM, the bigger model
-can be the weaker agent.
+tools). At 17 tools the list plus instructions is 1054 tokens and the
+engine rejects every request before generating a token (0/30, 2 ms
+each); at 10 tools the same model routes 8 of 10. Budget the tool list
+against the context the model leaves you, not against the model's
+routing skill — on phone RAM, the bigger model can be the weaker agent.
 
 ## Make signed ranges unmistakable
 

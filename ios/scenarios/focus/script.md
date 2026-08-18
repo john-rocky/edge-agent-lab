@@ -1,11 +1,10 @@
-# Focus — demo script (draft, not yet recorded)
+# Focus — demo script (benched, not yet recorded)
 
 Compound device control: one vague sentence steering notifications, a
 timer and the screen itself. The finale is two tools out of one sentence
-— the chaining beat the photo pack never had. Wordings below are written
-against the measured recipes (call-order phrasing for the chain, "the
-words the user will say" for names) but are **not yet device-verified**;
-expect this table to change the way the photo script did.
+— the chaining beat the photo pack never had. The bench has run these
+wordings (Apple FM 12/20, 1.2B 12/20 — see docs/model-routing.md); what
+it found about each beat is under the tables. Nothing recorded yet.
 
 Tool set: `ToolBox.focus`, 10 tools — set_timer / set_brightness /
 get_brightness / schedule_notification / cancel_notifications /
@@ -32,17 +31,27 @@ vibrate as `set_`-prefix and device-action distractors.
 | 5 | 集中したいから画面を暗くして。 | `set_brightness`、画面が目に見えて暗くなる |
 | 6 | 通知を全部止めて、1時間の集中タイマーをかけて。 | `cancel_notifications` → `set_timer(3600s)` |
 
-Design notes (why these wordings)
+What the bench found, beat by beat (2026-08-18, before any recording)
 
-- Beat 6 is written in call order — "silence … and set …" — because the
-  models that chain follow the sentence. The 1.2B is expected to stop
-  after the first call (it never chains, measured twice); if so the
-  recorded cut either keeps the graceful single call or stars a chaining
-  model for this beat.
-- "Remind me" must route to `schedule_notification` while "Remember
-  this" routes to `write_note` — the remind/remember pair is this pack's
-  undo/revert. If one absorbs the other on device, the fix is renaming,
-  not rewording (see recipes).
+- Beat 1, "Set a timer for 25 minutes.": Apple FM does not call — the
+  required `label` becomes "what should the timer be for?"; the 1.2B
+  calls with 15000 s. 「25分のタイマーをかけて」: Apple FM 150 s, 1.2B
+  correct. Before recording, make `label` optional and consider a
+  `minutes` field (recipes: user's units, required-argument questions).
+- Beat 2, "Remind me to stretch in half an hour.": the 1.2B routes
+  `schedule_notification`; Apple FM routes `set_timer` with the right
+  1800 s — its well. Both languages.
+- Beat 3 and 4 route cleanly on both models in both languages.
+- Beat 5, dim: both route `set_brightness`; Apple FM picks 50 % in
+  Japanese, which will not read as "dim" on camera.
+- Beat 6, the chain: Apple FM calls cancel → set_timer in order every
+  time but with 600 s for "one hour"; the 1.2B mashes the second call
+  into the first's arguments (with the correct 3600 s inside). The
+  recorded cut of this beat needs Apple FM plus a fixed timer schema, or
+  drops the chain.
+- The remind/remember pair (schedule_notification vs write_note) held
+  on both models; the pair that broke on the 1.2B was read vs write
+  notes ("what did I ask you to remember?" → write_note).
 - Dim beat is late so most of the take is filmed at full brightness.
 
 Recording notes
