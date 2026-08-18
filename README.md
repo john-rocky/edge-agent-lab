@@ -10,7 +10,8 @@ patterns to build it with, and measurements of which model to run.
 | scenario | you say | what happens |
 |---|---|---|
 | [Coffee run](ios/scenarios/coffee-run/) | "Where am I?" … "Open CAFE LA in Apple Maps." | location → places search → menu OCR → Maps opens. Recorded, 4/4 tool calls on a 1.2B |
-| [Photo editing](ios/scenarios/photo-editing/) | "A bit brighter." "Warmer." "Too much — undo that." | 15 editing tools; edits stack, undo works by voice. Benched on 3 models, recording next |
+| [Photo editing](ios/scenarios/photo-editing/) | "A bit brighter." "Warmer." "Undo everything." "Remove the background." | 17 editing tools; edits stack, a whole chain reverts by voice, the subject lifts off the background. Benched on 3 models, recorded |
+| [Focus](ios/scenarios/focus/) | "Dim the screen — I need to focus." "Silence my notifications and set a one-hour timer." | one sentence fans out into notifications + timer + brightness. Pack built; bench and recording next |
 | [Android screen agent](android/) | "open the notification history" | screenshot → local VLM → tap point → real tap → loop, on a Pixel 8a |
 
 Each iOS scenario is a **pack**: a tool set, a demo script, and benchmark

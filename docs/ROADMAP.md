@@ -23,12 +23,16 @@ its own.
 ## Phases
 
 **1. Photo editing** *(in progress)* — "a bit brighter", "warmer",
-"crop it square": steering a parameter space with vague words. 15 tools;
-the crop/resize/zoom and brightness/exposure/contrast neighborhoods make
-it the first real similar-tools discrimination test.
+"crop it square": steering a parameter space with vague words. 17 tools;
+the crop/resize/zoom and brightness/exposure/contrast neighborhoods, plus
+the undo / revert_to_original / remove_background triangle, make it the
+first real similar-tools discrimination test.
 
-**2. Compound device control, and one business scenario** — "help me
-focus" becoming notifications + timer + brightness; a field report
+**2. Compound device control, and one business scenario** *(focus pack
+built, bench pending)* — "help me focus" becoming notifications + timer
++ brightness (10 tools: the `set_` prefix neighbors, the get/set
+brightness pair, and remind-vs-remember as discrimination axes; the
+chain beat is written in call order). Still to come: a field report
 (photo OCR → note → tomorrow-morning reminder) running fully offline.
 
 **3. Vaguer inputs** — voice in (speech as the vaguest interface),

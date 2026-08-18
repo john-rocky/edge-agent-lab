@@ -55,9 +55,15 @@ SCENARIO=photo-editing ./run-device.sh     # photo pack
 Cases live with their scenario pack in
 [`../scenarios/`](../scenarios/) — each pack is a cases.json, the demo
 script, and the in-app tool set it was written against. `coffee-run`:
-10 EN + 10 JP over the six demo tools. `photo-editing`: 10 + 10 over the
-15 editing tools, where `number±tol` starts earning its keep ("a bit
-brighter" accepts amount 5–55; "half size" accepts 45–55).
+10 EN + 10 JP over the six demo tools. `photo-editing`: 15 + 15 over the
+17 editing tools, where `number±tol` starts earning its keep ("a bit
+brighter" accepts amount 5–55; "half size" accepts 45–55) and the
+undo / revert_to_original / remove_background triangle probes similar-tool
+gravity wells the demo recording already fell into once. `focus`: 10 + 10
+over 10 device-control tools — the `set_` prefix neighbors
+(timer/brightness/torch), the get/set brightness pair, remind-vs-remember
+(schedule_notification vs write_note), and a two-call chain written in
+call order.
 
 ## What a JSONL line records
 
