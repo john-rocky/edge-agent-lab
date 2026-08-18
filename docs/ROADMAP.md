@@ -36,9 +36,11 @@ chain beat is written in call order), and the field report: photo OCR →
 note → tomorrow-morning reminder, fully offline (10 tools; the date
 argument only a `get_current_time` call can ground is the new axis).
 
-**3. Vaguer inputs** — voice in (speech as the vaguest interface),
-image in (VLM → tools; the case format's `image` field is reserved for
-this).
+**3. Vaguer inputs** *(voice built, unrecorded)* — voice in (speech as
+the vaguest interface: SpeechAnalyzer streams the mic into the same send
+path typing uses; the stage's `--voice` takes each beat from the air
+instead of the script), image in (VLM → tools; the case format's `image`
+field is reserved for this).
 
 **4. The same cases on Android** — the case format is
 platform-independent on purpose; one scenario, one table, two platforms.
