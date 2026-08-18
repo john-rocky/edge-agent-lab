@@ -9,8 +9,61 @@ hand-measured routing table in docs/model-routing.md — a mismatch there is a
 harness bug until proven otherwise.
 """
 import json
+import os
 import sys
 from collections import defaultdict
+
+
+def load_cases():
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cases", "core-20.json")
+    with open(path) as f:
+        return {c["id"]: c for c in json.load(f)}
+
+
+def matches(matcher, value):
+    if value is None:
+        return False
+    text = value if isinstance(value, str) else str(value)
+    if "equals" in matcher:
+        return text.lower() == matcher["equals"].lower()
+    if "contains" in matcher:
+        return matcher["contains"].lower() in text.lower()
+    if "number" in matcher:
+        try:
+            return abs(float(value) - matcher["number"]) <= matcher.get("tol", 0)
+        except (TypeError, ValueError):
+            return False
+    return False  # dateResolvesTo needs the run's date; not scored offline
+
+
+def reached(rec, case):
+    """Expected calls as an order-preserving subsequence of what was called.
+
+    The strict in-app `pass` fails a model for a *reasonable* extra call —
+    Apple FM grounds "find a cafe" with get_location first, then searches,
+    which is better, not worse. This scores whether every expected call
+    happened, in order, with matching args. A no-op case stays strict: any
+    call fails it.
+    """
+    if rec.get("error"):
+        return False
+    calls = [(c["tool"], json.loads(c["args"]) if c["args"].startswith("{") else {})
+             for c in rec["calls"]]
+    if not case["expected"]:
+        return not calls
+    at = 0
+    for want in case["expected"]:
+        hit = None
+        for i in range(at, len(calls)):
+            if calls[i][0] != want["tool"]:
+                continue
+            if all(matches(m, calls[i][1].get(k)) for k, m in (want.get("args") or {}).items()):
+                hit = i
+                break
+        if hit is None:
+            return False
+        at = hit + 1
+    return True
 
 
 def load(paths):
@@ -30,21 +83,27 @@ def load(paths):
     return runs
 
 
-def mark(rec):
+def mark(rec, case):
     if rec is None:
         return "·"
     if rec.get("error"):
         return "E"
     if rec["pass"]:
         return "✓"
-    # Selection right but arguments wrong is its own failure mode.
-    return "args" if rec["selectionPass"] else "✗"
+    if case and reached(rec, case):
+        return "○"  # reached the expected calls, with extras around them
+    return "✗"
 
 
 def main(paths):
     runs = load(paths)
     if not runs:
         sys.exit("no case records found")
+    try:
+        case_defs = load_cases()
+    except OSError:
+        case_defs = {}
+        print("note: cases/core-20.json not found; '○' scoring disabled")
     models = sorted(runs)
     cases = sorted({c for per in runs.values() for c in per})
 
@@ -55,26 +114,27 @@ def main(paths):
         for model in models:
             rec = runs[model].get(case)
             called = ",".join(rec["called"]) if rec else ""
-            row += f"{mark(rec)} {called}"[:26].ljust(28)
+            row += f"{mark(rec, case_defs.get(case))} {called}"[:26].ljust(28)
         print(row)
 
-    print()
+    print("\n✓ exact  ○ expected calls reached with extras  ✗ missed  E error\n")
     for model in models:
         per = runs[model]
         for lang in ("en", "ja"):
             recs = [r for r in per.values() if r["lang"] == lang]
             if not recs:
                 continue
-            sel = sum(r["selectionPass"] for r in recs)
-            args = sum(r["argsPass"] for r in recs)
-            ok = sum(r["pass"] for r in recs)
+            exact = sum(r["pass"] for r in recs)
+            ok = sum(
+                1 for r in recs
+                if r["pass"] or (r["case"] in case_defs and reached(r, case_defs[r["case"]]))
+            )
             noop = [r for r in recs if not r["expected"]]
             noop_ok = sum(r["pass"] for r in noop)
             ms = sorted(r["ms"] for r in recs)
             median = ms[len(ms) // 2]
             print(
-                f"{model}  {lang}: pass {ok}/{len(recs)}  "
-                f"selection {sel}  args {args}  "
+                f"{model}  {lang}: reached {ok}/{len(recs)} (exact {exact})  "
                 f"no-op {noop_ok}/{len(noop)}  median {median / 1000:.1f}s"
             )
 
