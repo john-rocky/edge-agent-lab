@@ -11,6 +11,7 @@
 #   ./run-device.sh 1.2B-Instruct     # one model (any --model substring)
 #   SCENARIO=photo-editing ./run-device.sh   # another scenario pack
 set -u
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH
 DEVICE=A6F3E849-1947-5202-9AD1-9C881CA58EEF
 BUNDLE=com.lfmtools.app
 HERE=${0:a:h}
@@ -43,14 +44,19 @@ xcrun devicectl device copy to --device "$DEVICE" \
   --source "$CASES" \
   --destination "Documents/toolbench-cases.json" || exit 1
 
-for model in "${MODELS[@]}"; do
+# One launch, one wait, one pull. Prints the pulled path on success; returns
+# 2 when the run aborted on an engine hang, so the caller can relaunch — a
+# fresh process is a fresh engine, and hangs have not repeated on relaunch.
+run_once() {
+  local model=$1
+  local baseline
   baseline=$(list_files | grep -oE "toolbench-[0-9]+\.done" | sort | tail -1)
   echo "== $model (baseline: ${baseline:-none})"
   # The CoreDevice hang seen on 2026-08-18 is worse than an inconvenience: a
   # hung launch can still start the app WITHOUT its arguments, and with no
   # --model the app silently runs the newest bundle. Retry once; if both
   # hang, skip this model rather than launch the wrong one.
-  launched=0
+  local launched=0 attempt
   for attempt in 1 2; do
     if timeout 20 xcrun devicectl device process launch --terminate-existing \
       --device "$DEVICE" "$BUNDLE" --toolbench --toolset "$TOOLSET" \
@@ -62,11 +68,11 @@ for model in "${MODELS[@]}"; do
   done
   if (( ! launched )); then
     echo "  skipping $model — args would be lost on a hung launch"
-    continue
+    return 1
   fi
 
   # A 20-case run is minutes on the 1.2B and tens of minutes on the 2.6B.
-  done_name=""
+  local done_name="" i newest
   for i in {1..90}; do
     sleep 20
     newest=$(list_files | grep -oE "toolbench-[0-9]+\.done" | sort | tail -1)
@@ -77,20 +83,34 @@ for model in "${MODELS[@]}"; do
   done
   if [[ -z "$done_name" ]]; then
     echo "  no result after 30 min — did the app start with the args?"
-    continue
+    return 1
   fi
 
-  jsonl=${done_name%.done}.jsonl
+  local jsonl=${done_name%.done}.jsonl
   xcrun devicectl device copy from --device "$DEVICE" \
     --domain-type appDataContainer --domain-identifier "$BUNDLE" \
     --source "Documents/$jsonl" --destination "$DEST/$jsonl" >/dev/null 2>&1
   echo "  pulled: $DEST/$jsonl"
   # The run's own idea of its model, against what was asked for. A hung
   # launch that dropped the args shows up here as the newest bundle.
+  local ran
   ran=$(head -1 "$DEST/$jsonl" | grep -o '"model":"[^"]*"')
   case "$model" in
     apple) [[ "$ran" == *apple-fm* ]] || echo "  WARNED: asked apple, ran $ran" ;;
     *) [[ "${ran:l}" == *"${model:l}"* ]] || echo "  WARNED: asked $model, ran $ran" ;;
   esac
   tail -1 "$DEST/$jsonl"
+  if grep -q '"type":"abort"' "$DEST/$jsonl"; then
+    echo "  engine hang aborted this run"
+    return 2
+  fi
+  return 0
+}
+
+for model in "${MODELS[@]}"; do
+  run_once "$model"
+  if (( $? == 2 )); then
+    echo "  relaunching $model once — a fresh process is a fresh engine"
+    run_once "$model"
+  fi
 done
