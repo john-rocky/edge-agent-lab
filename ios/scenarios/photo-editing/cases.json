@@ -27,6 +27,16 @@
     ] },
   { "id": "p-en-noop-1", "input": "When did I take this photo?", "lang": "en",
     "expected": [] },
+  { "id": "p-en-revert-1", "input": "Undo everything — back to the original photo.", "lang": "en",
+    "expected": [{ "tool": "revert_to_original" }] },
+  { "id": "p-en-undo-1", "input": "Undo the last edit.", "lang": "en",
+    "expected": [{ "tool": "undo_photo_edit" }] },
+  { "id": "p-en-reset-1", "input": "Reset it — back to the original.", "lang": "en",
+    "expected": [{ "tool": "revert_to_original" }] },
+  { "id": "p-en-rmbg-1", "input": "Remove the background.", "lang": "en",
+    "expected": [{ "tool": "remove_background" }] },
+  { "id": "p-en-rmbg-2", "input": "Cut out the person.", "lang": "en",
+    "expected": [{ "tool": "remove_background" }] },
 
   { "id": "p-ja-bright-1", "input": "写真をもう少し明るくして。", "lang": "ja",
     "expected": [{ "tool": "adjust_photo_brightness",
@@ -55,5 +65,15 @@
       { "tool": "adjust_photo_brightness" }
     ] },
   { "id": "p-ja-noop-1", "input": "この写真いつ撮った?", "lang": "ja",
-    "expected": [] }
+    "expected": [] },
+  { "id": "p-ja-revert-1", "input": "全部やめて、元の写真に戻して。", "lang": "ja",
+    "expected": [{ "tool": "revert_to_original" }] },
+  { "id": "p-ja-undo-1", "input": "最後の編集だけ取り消して。", "lang": "ja",
+    "expected": [{ "tool": "undo_photo_edit" }] },
+  { "id": "p-ja-reset-1", "input": "リセットして、元に戻して。", "lang": "ja",
+    "expected": [{ "tool": "revert_to_original" }] },
+  { "id": "p-ja-rmbg-1", "input": "背景を消して。", "lang": "ja",
+    "expected": [{ "tool": "remove_background" }] },
+  { "id": "p-ja-rmbg-2", "input": "人物だけ切り抜いて。", "lang": "ja",
+    "expected": [{ "tool": "remove_background" }] }
 ]
