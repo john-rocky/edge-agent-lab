@@ -10,7 +10,7 @@ patterns to build it with, and measurements of which model to run.
 | scenario | you say | what happens |
 |---|---|---|
 | [Coffee run](ios/scenarios/coffee-run/) | "Where am I?" … "Open CAFE LA in Apple Maps." | location → places search → menu OCR → Maps opens. Recorded, 4/4 tool calls on a 1.2B |
-| [Photo editing](ios/scenarios/photo-editing/) | "A bit brighter." "Warmer." "Too much — undo that." | 15 editing tools; edits stack, undo works by voice. Tools + bench cases landed, recording next |
+| [Photo editing](ios/scenarios/photo-editing/) | "A bit brighter." "Warmer." "Too much — undo that." | 15 editing tools; edits stack, undo works by voice. Benched on 3 models, recording next |
 | [Android screen agent](android/) | "open the notification history" | screenshot → local VLM → tap point → real tap → loop, on a Pixel 8a |
 
 Each iOS scenario is a **pack**: a tool set, a demo script, and benchmark
@@ -24,22 +24,24 @@ keep the tools.
 
 ## Which model to run
 
-Measured on device, 20 JP/EN cases over the six coffee-run tools
-([full table and raw JSONL](docs/model-routing.md)):
+Measured on device, 20 JP/EN cases per scenario pack
+([full tables and raw JSONL](docs/model-routing.md)). Reached = expected
+calls made, with correct arguments:
 
-| model | routes | args | no-op restraint | median/case |
-|---|---|---|---|---|
-| Apple FM (on-device) | everything, chains on its own | clean | **grabs a tool anyway (0/2)** | 3 s |
-| LFM2.5-1.2B-Instruct int4 | everything except speak; never chains | clean | perfect (2/2) | 4.4 s |
-| LFM2.5-2.6B int4 | everything, chains multi-tool | clean | grabs a tool anyway (0/2) | 15.5 s |
+| pack | Apple FM | LFM2.5-1.2B int4 | LFM2.5-2.6B int4 |
+|---|---|---|---|
+| Coffee run (6 tools) | **17/20**, 3 s/case | 15/20, 4.4 s | 17/20, 15.5 s |
+| Photo editing (15 tools) | 14/20, 2.7 s | **16/20**, 7.2 s | 2/20 — context overflow |
 
 Working hypothesis: Apple's Foundation Models wins iOS tool-calling
-outright — it is trained for exactly this. The table's job is the
-interesting remainder: where it over-triggers, and what to run where it
-does not exist (Android, custom models, unsupported devices and
-languages). One correction the bench already made: the 1.2B's famous
-"never routes translate" was an anaphora failure ("translate **that**"),
-not a routing floor — quoted text routes cleanly.
+outright — it is trained for exactly this. The measurements keep
+sharpening it: Apple FM is 2–5× faster and routes everything, but it
+grabs a tool on requests that need none, got a signed argument backwards
+("warmer" → amount -100), and in Japanese asks how much instead of
+deciding. The 1.2B never chains but never over-triggers — and beat
+Apple FM on the 15-tool pack. The 2.6B's weights cap its context at
+1024 tokens, and 15 tool schemas don't fit: on phone RAM, the bigger
+model can be the weaker agent.
 
 ## Layout
 

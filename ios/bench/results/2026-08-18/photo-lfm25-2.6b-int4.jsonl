@@ -1,0 +1,42 @@
+{"cases":20,"model":"LFM2.5-2.6B_int4","toolset":"photo","type":"run"}
+{"case":"p-en-bright-1","type":"start"}
+{"answer":"The user wants to make a photo brighter. I need to use the","argsPass":false,"called":[],"calls":[],"case":"p-en-bright-1","expected":["adjust_photo_brightness"],"input":"Make the photo a bit brighter.","lang":"en","model":"LFM2.5-2.6B_int4","ms":18262,"pass":false,"selectionPass":false}
+{"case":"p-en-expo-1","type":"start"}
+{"answer":"The user wants to increase the exposure by one stop. I can","argsPass":false,"called":[],"calls":[],"case":"p-en-expo-1","expected":["adjust_photo_exposure"],"input":"Increase the exposure by one stop.","lang":"en","model":"LFM2.5-2.6B_int4","ms":11823,"pass":false,"selectionPass":false}
+{"case":"p-en-contrast-1","type":"start"}
+{"answer":"The user wants to increase the contrast of a photo. I need to use the","argsPass":false,"called":[],"calls":[],"case":"p-en-contrast-1","expected":["adjust_photo_contrast"],"input":"Give it more contrast.","lang":"en","model":"LFM2.5-2.6B_int4","ms":12236,"pass":false,"selectionPass":false}
+{"case":"p-en-crop-1","type":"start"}
+{"answer":"The user wants to crop the photo to a square aspect ratio. I should use","argsPass":false,"called":[],"calls":[],"case":"p-en-crop-1","expected":["crop_photo"],"input":"Crop it square.","lang":"en","model":"LFM2.5-2.6B_int4","ms":12706,"pass":false,"selectionPass":false}
+{"case":"p-en-zoom-1","type":"start"}
+{"answer":"The user wants to zoom in closer on a photo. I need to use the","argsPass":true,"called":[],"calls":[],"case":"p-en-zoom-1","expected":["zoom_photo"],"input":"Zoom in closer.","lang":"en","model":"LFM2.5-2.6B_int4","ms":13164,"pass":false,"selectionPass":false}
+{"case":"p-en-resize-1","type":"start"}
+{"answer":"The user wants to shrink something to half size. Looking at the","argsPass":false,"called":[],"calls":[],"case":"p-en-resize-1","expected":["resize_photo"],"input":"Shrink it to half size.","lang":"en","model":"LFM2.5-2.6B_int4","ms":13409,"pass":false,"selectionPass":false}
+{"case":"p-en-warm-1","type":"start"}
+{"answer":"The user wants to make a photo feel \"warmer\" - this typically means","argsPass":false,"called":[],"calls":[],"case":"p-en-warm-1","expected":["adjust_photo_warmth"],"input":"Make it feel warmer.","lang":"en","model":"LFM2.5-2.6B_int4","ms":13667,"pass":false,"selectionPass":false}
+{"case":"p-en-rotate-1","type":"start"}
+{"answer":"The user wants to rotate a photo by 90 degrees. I need to","argsPass":false,"called":[],"calls":[],"case":"p-en-rotate-1","expected":["rotate_photo"],"input":"Rotate it 90 degrees.","lang":"en","model":"LFM2.5-2.6B_int4","ms":13639,"pass":false,"selectionPass":false}
+{"case":"p-en-multi-1","type":"start"}
+{"answer":"The user wants me to:\n1. Crop the photo","argsPass":false,"called":[],"calls":[],"case":"p-en-multi-1","expected":["crop_photo","adjust_photo_brightness"],"input":"Crop it square and make it brighter.","lang":"en","model":"LFM2.5-2.6B_int4","ms":13482,"pass":false,"selectionPass":false}
+{"case":"p-en-noop-1","type":"start"}
+{"answer":"The user is asking when they took a photo. I need to check","argsPass":true,"called":[],"calls":[],"case":"p-en-noop-1","expected":[],"input":"When did I take this photo?","lang":"en","model":"LFM2.5-2.6B_int4","ms":13558,"pass":true,"selectionPass":true}
+{"case":"p-ja-bright-1","type":"start"}
+{"answer":"The user wants to make a photo brighter. I should use the adjust","argsPass":false,"called":[],"calls":[],"case":"p-ja-bright-1","expected":["adjust_photo_brightness"],"input":"写真をもう少し明るくして。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13558,"pass":false,"selectionPass":false}
+{"case":"p-ja-expo-1","type":"start"}
+{"answer":"The user wants to \"expose\" (露出) the photo","argsPass":false,"called":[],"calls":[],"case":"p-ja-expo-1","expected":["adjust_photo_exposure"],"input":"露出を1段上げて。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13588,"pass":false,"selectionPass":false}
+{"case":"p-ja-contrast-1","type":"start"}
+{"answer":"The user wants to increase the contrast of a photo. I need to","argsPass":false,"called":[],"calls":[],"case":"p-ja-contrast-1","expected":["adjust_photo_contrast"],"input":"コントラストを強くして。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13629,"pass":false,"selectionPass":false}
+{"case":"p-ja-crop-1","type":"start"}
+{"answer":"The user wants to crop the photo to a square aspect ratio.","argsPass":false,"called":[],"calls":[],"case":"p-ja-crop-1","expected":["crop_photo"],"input":"正方形に切り抜いて。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13491,"pass":false,"selectionPass":false}
+{"case":"p-ja-zoom-1","type":"start"}
+{"answer":"The user is asking me to \"come closer\" or \"get closer\" - this","argsPass":true,"called":[],"calls":[],"case":"p-ja-zoom-1","expected":["zoom_photo"],"input":"もっと寄って。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13747,"pass":false,"selectionPass":false}
+{"case":"p-ja-resize-1","type":"start"}
+{"answer":"The user wants to resize a photo to half its current size.","argsPass":false,"called":[],"calls":[],"case":"p-ja-resize-1","expected":["resize_photo"],"input":"半分のサイズに縮小して。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13568,"pass":false,"selectionPass":false}
+{"case":"p-ja-warm-1","type":"start"}
+{"answer":"The user wants to create a warm atmosphere. Looking at the available tools, I","argsPass":false,"called":[],"calls":[],"case":"p-ja-warm-1","expected":["adjust_photo_warmth"],"input":"暖かい雰囲気にして。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13735,"pass":false,"selectionPass":false}
+{"case":"p-ja-rotate-1","type":"start"}
+{"answer":"The user wants me to rotate a photo 90 degrees to the","argsPass":false,"called":[],"calls":[],"case":"p-ja-rotate-1","expected":["rotate_photo"],"input":"右に90度回転して。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13612,"pass":false,"selectionPass":false}
+{"case":"p-ja-multi-1","type":"start"}
+{"answer":"The user wants me to:\n1. Cut","argsPass":false,"called":[],"calls":[],"case":"p-ja-multi-1","expected":["crop_photo","adjust_photo_brightness"],"input":"正方形に切り抜いて、明るくして。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13293,"pass":false,"selectionPass":false}
+{"case":"p-ja-noop-1","type":"start"}
+{"answer":"The user is asking \"When was this photo taken?\" in Japanese. I","argsPass":true,"called":[],"calls":[],"case":"p-ja-noop-1","expected":[],"input":"この写真いつ撮った?","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13660,"pass":true,"selectionPass":true}
+{"failed":18,"model":"LFM2.5-2.6B_int4","passed":2,"total":20,"type":"summary"}

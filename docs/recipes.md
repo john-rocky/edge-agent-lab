@@ -51,12 +51,27 @@ in an empty answer — and `enableThinking: false` removes the cap instead
 of the thinking. Always set a small thinking budget (the demo uses 32
 tokens ≈ 2 s of silence).
 
-## Fewer tools routes better
+## The tool-list ceiling is memory × count, not count
 
 Routing across all 54 demo tools is past what a 1.2B can do ("read the
-text in my photo" went to `get_audio_route`). Six distinct jobs route
-reliably. Where the ceiling sits between 6 and 54 is what the 15-tool
-photo pack measures next.
+text in my photo" went to `get_audio_route`), but 15 well-named tools
+route fine — the 1.2B scored 16/20 on the photo pack. The ceiling that
+actually bit was the KV cache: the 2.6B's weights cap its context at
+1024 tokens on the phone, the 15-tool list ate nearly all of it, and the
+model died mid-thought on every real case (2/20, versus 17/20 with six
+tools). Budget the tool list against the context the model leaves you,
+not against the model's routing skill — on phone RAM, the bigger model
+can be the weaker agent.
+
+## Make signed ranges unmistakable
+
+"Make it feel warmer" → Apple FM picked the right tool and passed
+`amount: -100`, maximum cooling. A guide that reads "-100 (cooler) to
+100 (warmer)" is apparently not enough at the moment of argument
+filling. Prefer unsigned magnitudes plus a direction enum
+(`direction: warmer|cooler, amount: 0–100`), or bake the direction into
+the tool name — and let the bench's arg matchers catch what routing
+metrics cannot: this call *routed* perfectly.
 
 ## If you fake tool results, fake them well
 

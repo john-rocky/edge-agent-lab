@@ -1,11 +1,11 @@
 # Model routing observations (2026-08-18, on device)
 
-Measured on iPhone (iOS 27), the lfm-tools-ios demo set (6 tools), CPU
-backend, bare tool-list format, thinking budget 32 tokens. Two sources: the
-hand-run stage demo, and the first
-[toolbench](../ios/bench/README.md) run over 20 JP/EN cases
-([raw JSONL](../ios/bench/results/2026-08-18/)). The bench reproduced the
-demo's routing table and corrected one conclusion — see translate below.
+Measured on iPhone (iOS 27), CPU backend, bare tool-list format, thinking
+budget 32 tokens, via [toolbench](../ios/bench/README.md)
+([raw JSONL](../ios/bench/results/2026-08-18/)). Two scenario packs so
+far: coffee-run (6 tools) and photo-editing (15 tools). The bench
+reproduced the hand-run demo's routing table and corrected one conclusion
+— see translate below.
 
 | model | location | search | maps | photo OCR | translate | speak | no-op |
 |---|---|---|---|---|---|---|---|
@@ -37,6 +37,36 @@ like Apple FM: translate on both no-op cases, an unasked OCR call after
 EN searches, and the JA speak case wandered to OCR. Median 15.5 s per
 case — 3.5× the 1.2B, 5× Apple FM. (A first attempt at this run hit a
 mid-generation engine hang; the rerun completed clean.)
+
+## Photo-editing pack: 15 tools, and an upset
+
+| model | reached | exact | no-op restraint | median/case |
+|---|---|---|---|---|
+| Apple FM | 14/20 | 13 | 0/2 | 2.7 s |
+| LFM2.5-1.2B-Instruct_int4 | **16/20** | **16** | 2/2 | 7.2 s |
+| LFM2.5-2.6B_int4 | 2/20 | 2 | (2/2)* | 13.5 s |
+
+The 1.2B beats Apple FM on this pack — the first measured counterexample
+to "Apple FM wins outright". How each model loses is the story:
+
+- **Apple FM**: told "make it feel warmer", it chose the right tool and
+  passed `amount: -100` — maximum *cooling*. A sign error the routing
+  metric alone would have called a pass. In Japanese it stops trusting
+  itself with vague amounts: 「もう少し明るくして」 gets a counter-question
+  ("how much, -100 to 100?") instead of a call — three cases lost that
+  way. And it still grabs a tool on both no-op cases.
+- **1.2B**: discriminates all fifteen tools in English — including the
+  warmth sign Apple FM got wrong — but cannot chain (it mashed two calls
+  into one JSON argument), and in Japanese the enum-argument tools break:
+  「右に90度回転して」 is refused in English, quoting its own enum
+  ("the available rotation options are 90, 180, or 270 degrees").
+- **2.6B: total collapse, and not about routing.** Its 1.55 GB of weights
+  cap the context at 1024 tokens on this phone; the 15-tool list eats
+  nearly all of it, generation dies mid-thought ("I need to use the"),
+  and the only passes are the two no-op cases — correct by paralysis*.
+  The same model scored 17/20 on the 6-tool pack. On phone RAM, a bigger
+  model buys a smaller context: past some tool-list size the smaller
+  model is simply the stronger agent.
 
 ## Corrected: the 1.2B translate "floor"
 
