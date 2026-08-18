@@ -10,6 +10,7 @@ split JP vs EN. `-s` names the scenario pack whose cases.json scores the
 reproduce the hand-measured routing table in docs/model-routing.md — a
 mismatch there is a harness bug until proven otherwise.
 """
+import datetime
 import json
 import os
 import sys
@@ -23,7 +24,7 @@ def load_cases(scenario):
         return {c["id"]: c for c in json.load(f)}
 
 
-def matches(matcher, value):
+def matches(matcher, value, run_date=None):
     if value is None:
         return False
     text = value if isinstance(value, str) else str(value)
@@ -36,10 +37,23 @@ def matches(matcher, value):
             return abs(float(value) - matcher["number"]) <= matcher.get("tol", 0)
         except (TypeError, ValueError):
             return False
-    return False  # dateResolvesTo needs the run's date; not scored offline
+    if "dateResolvesTo" in matcher:
+        # Resolved against the run's own date (the JSONL run line records it);
+        # a run without one cannot score these offline. Mirrors the in-app
+        # matcher: a yyyy-MM-dd prefix or a spelled-out "August 19".
+        delta = {"today": 0, "tomorrow": 1, "yesterday": -1}.get(
+            matcher["dateResolvesTo"].lower())
+        if run_date is None or delta is None:
+            return False
+        target = datetime.date.fromisoformat(run_date) + datetime.timedelta(days=delta)
+        if text.lower().startswith(target.isoformat()):
+            return True
+        spelled = f"{target.strftime('%B')} {target.day}"
+        return spelled.lower() in text.lower()
+    return False
 
 
-def reached(rec, case):
+def reached(rec, case, run_date=None):
     """Expected calls as an order-preserving subsequence of what was called.
 
     The strict in-app `pass` fails a model for a *reasonable* extra call —
@@ -60,7 +74,8 @@ def reached(rec, case):
         for i in range(at, len(calls)):
             if calls[i][0] != want["tool"]:
                 continue
-            if all(matches(m, calls[i][1].get(k)) for k, m in (want.get("args") or {}).items()):
+            if all(matches(m, calls[i][1].get(k), run_date)
+                   for k, m in (want.get("args") or {}).items()):
                 hit = i
                 break
         if hit is None:
@@ -71,6 +86,7 @@ def reached(rec, case):
 
 def load(paths):
     runs = defaultdict(dict)  # model -> case id -> record
+    dates = {}  # model -> the run's own date, from the run line
     for path in paths:
         with open(path) as f:
             for line in f:
@@ -81,25 +97,27 @@ def load(paths):
                 if rec.get("type") in ("run", "summary", "skip", "error", "start", "abort"):
                     if rec.get("type") == "error":
                         print(f"note: {path}: run error: {rec.get('what')}")
+                    if rec.get("type") == "run" and rec.get("date"):
+                        dates[rec["model"]] = rec["date"]
                     continue
                 runs[rec["model"]][rec["case"]] = rec
-    return runs
+    return runs, dates
 
 
-def mark(rec, case):
+def mark(rec, case, run_date=None):
     if rec is None:
         return "·"
     if rec.get("error"):
         return "E"
     if rec["pass"]:
         return "✓"
-    if case and reached(rec, case):
+    if case and reached(rec, case, run_date):
         return "○"  # reached the expected calls, with extras around them
     return "✗"
 
 
 def main(paths, scenario):
-    runs = load(paths)
+    runs, dates = load(paths)
     if not runs:
         sys.exit("no case records found")
     try:
@@ -117,7 +135,7 @@ def main(paths, scenario):
         for model in models:
             rec = runs[model].get(case)
             called = ",".join(rec["called"]) if rec else ""
-            row += f"{mark(rec, case_defs.get(case))} {called}"[:26].ljust(28)
+            row += f"{mark(rec, case_defs.get(case), dates.get(model))} {called}"[:26].ljust(28)
         print(row)
 
     print("\n✓ exact  ○ expected calls reached with extras  ✗ missed  E error\n")
@@ -130,7 +148,9 @@ def main(paths, scenario):
             exact = sum(r["pass"] for r in recs)
             ok = sum(
                 1 for r in recs
-                if r["pass"] or (r["case"] in case_defs and reached(r, case_defs[r["case"]]))
+                if r["pass"]
+                or (r["case"] in case_defs
+                    and reached(r, case_defs[r["case"]], dates.get(model)))
             )
             noop = [r for r in recs if not r["expected"]]
             noop_ok = sum(r["pass"] for r in noop)

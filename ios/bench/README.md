@@ -75,7 +75,9 @@ written.
 
 `case, lang, model, input, expected, called, calls (raw args), selectionPass
 (called sequence == expected), argsPass (all matchers), pass, ms, answer,
-error`.
+error`. The run's opening line also records the run `date`, which is what
+lets `report.py` resolve `dateResolvesTo` matchers offline — "tomorrow"
+only means something relative to the day the run happened.
 
 ## Known asymmetry
 
