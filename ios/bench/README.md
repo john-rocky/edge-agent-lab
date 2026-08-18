@@ -63,7 +63,13 @@ gravity wells the demo recording already fell into once. `focus`: 10 + 10
 over 10 device-control tools — the `set_` prefix neighbors
 (timer/brightness/torch), the get/set brightness pair, remind-vs-remember
 (schedule_notification vs write_note), and a two-call chain written in
-call order.
+call order. `field-report`: 10 + 10 over 10 tools where `dateResolvesTo`
+starts working — "tomorrow at 9" is a date no model knows from weights,
+so the honest route is get_current_time first, scored as a reasonable
+extra. In this pack get_current_time is the one bench tool that is *not*
+canned: the matcher resolves "tomorrow" against the device clock at run
+time, and a canned today would break the cases the day after it was
+written.
 
 ## What a JSONL line records
 

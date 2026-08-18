@@ -26,6 +26,7 @@ case "$SCENARIO" in
   coffee-run) TOOLSET=demo ;;
   photo-editing) TOOLSET=photo ;;
   focus) TOOLSET=focus ;;
+  field-report) TOOLSET=report ;;
   *) echo "unknown scenario $SCENARIO"; exit 1 ;;
 esac
 [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }

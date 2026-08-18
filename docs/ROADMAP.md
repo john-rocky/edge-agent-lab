@@ -28,12 +28,13 @@ the crop/resize/zoom and brightness/exposure/contrast neighborhoods, plus
 the undo / revert_to_original / remove_background triangle, make it the
 first real similar-tools discrimination test.
 
-**2. Compound device control, and one business scenario** *(focus pack
+**2. Compound device control, and one business scenario** *(both packs
 built, bench pending)* — "help me focus" becoming notifications + timer
 + brightness (10 tools: the `set_` prefix neighbors, the get/set
 brightness pair, and remind-vs-remember as discrimination axes; the
-chain beat is written in call order). Still to come: a field report
-(photo OCR → note → tomorrow-morning reminder) running fully offline.
+chain beat is written in call order), and the field report: photo OCR →
+note → tomorrow-morning reminder, fully offline (10 tools; the date
+argument only a `get_current_time` call can ground is the new axis).
 
 **3. Vaguer inputs** — voice in (speech as the vaguest interface),
 image in (VLM → tools; the case format's `image` field is reserved for
