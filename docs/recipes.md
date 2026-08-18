@@ -9,7 +9,21 @@ means 1–3B running on the phone.
 The tool name is the strongest routing signal — stronger than the
 description, stronger than the system prompt. `read_last_answer_aloud`
 routed nothing; renamed `speak_out_loud`, the same model routed "Speak
-that out loud." Pick names by imagining the sentence, not the API.
+that out loud." `cut_out_person` lost "Cut out the person." to
+`flip_photo`; renamed `remove_background` — the word the world uses for
+the job — the same request routed cleanly. Pick names by imagining the
+sentence, not the API.
+
+## Some intents have a gravity well — remove the competitor
+
+On the 1.2B, every wording of "throw away all the edits" routed to the
+one-step `undo_photo_edit`: "Undo everything", "Revert to the original
+photo" (with `revert_to_original` sitting right there in the list), and
+"Reset it" — which routed to `resize_photo` on the `res-` prefix alone.
+The fix that worked was not better wording, it was removing the one-step
+undo from the demo's tool set; the full revert then owned the going-back
+words. When two tools shade the same intent, a small model gives
+everything to one of them — decide which one deserves it.
 
 ## Never tell the model what it cannot do
 
