@@ -59,6 +59,18 @@ vague adjective onto a numeric range — they pick an end. Offer the steps
 the words already have — `a_little | more | a_lot` — and map them to
 numbers in the app; keep the numeric field for requests that name one.
 
+## When the model can't chain, chain in the tool
+
+"Silence my notifications and set a one-hour timer" is two calls, and the
+1.2B mashed the second into the first's arguments while Apple FM made
+the chain and lost the hour on the way. Some jobs are always the same
+three steps; put the steps in one tool. `start_focus_session(minutes)`
+clears notifications, dims the screen, sets the timer and taps the
+haptic — one name to say, one call, and the arithmetic and the ordering
+belong to the app. Build the compound out of the single tools' bodies so
+the two can't drift, and keep the singles in the set: the model picking
+the one call over the three is the demo.
+
 ## Restraint is domain-relative
 
 The 1.2B was the model that never grabbed a tool for "what is 2 plus
