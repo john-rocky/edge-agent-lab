@@ -1,0 +1,42 @@
+{"cases":20,"model":"LFM2.5-2.6B_int4","type":"run"}
+{"case":"en-loc-1","type":"start"}
+{"answer":"You are in Chuo, Osaka.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"en-loc-1","expected":["get_location"],"input":"Where am I?","lang":"en","model":"LFM2.5-2.6B_int4","ms":16767,"pass":true,"selectionPass":true}
+{"case":"en-loc-2","type":"start"}
+{"answer":"You are in Chuo, Osaka.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"en-loc-2","expected":["get_location"],"input":"What city am I in right now?","lang":"en","model":"LFM2.5-2.6B_int4","ms":9964,"pass":true,"selectionPass":true}
+{"case":"en-search-1","type":"start"}
+{"answer":"The latest photo shows a coffee menu with latte at ¥520 and Americano at ¥450.","argsPass":true,"called":["search_places","read_text_in_latest_photo"],"calls":[{"args":"{\"query\":\"coffee shop\"}","tool":"search_places"},{"args":"{}","tool":"read_text_in_latest_photo"}],"case":"en-search-1","expected":["search_places"],"input":"Find a coffee shop near me.","lang":"en","model":"LFM2.5-2.6B_int4","ms":16478,"pass":false,"selectionPass":false}
+{"case":"en-search-2","type":"start"}
+{"answer":"COFFEE MENU\nLatte ¥520\nAmericano ¥450","argsPass":true,"called":["search_places","read_text_in_latest_photo"],"calls":[{"args":"{\"query\":\"pharmacy\"}","tool":"search_places"},{"args":"{}","tool":"read_text_in_latest_photo"}],"case":"en-search-2","expected":["search_places"],"input":"Is there a pharmacy nearby?","lang":"en","model":"LFM2.5-2.6B_int4","ms":15242,"pass":false,"selectionPass":false}
+{"case":"en-ocr-1","type":"start"}
+{"answer":"The latest photo contains a coffee menu with a Latte at ¥520 and an Americano at ¥450.","argsPass":true,"called":["read_text_in_latest_photo"],"calls":[{"args":"{}","tool":"read_text_in_latest_photo"}],"case":"en-ocr-1","expected":["read_text_in_latest_photo"],"input":"Read the text in my latest photo.","lang":"en","model":"LFM2.5-2.6B_int4","ms":19235,"pass":true,"selectionPass":true}
+{"case":"en-translate-1","type":"start"}
+{"answer":"Good morning in Japanese is こんにちは (konnichiwa).","argsPass":true,"called":["translate"],"calls":[{"args":"{\"to\":\"ja\",\"source\":\"good morning\"}","tool":"translate"}],"case":"en-translate-1","expected":["translate"],"input":"Translate 'good morning' to Japanese.","lang":"en","model":"LFM2.5-2.6B_int4","ms":11846,"pass":true,"selectionPass":true}
+{"case":"en-speak-1","type":"start"}
+{"answer":"The previous answer has been spoken out loud.","argsPass":true,"called":["speak_out_loud"],"calls":[{"args":"{}","tool":"speak_out_loud"}],"case":"en-speak-1","expected":["speak_out_loud"],"input":"Read that out loud.","lang":"en","model":"LFM2.5-2.6B_int4","ms":11238,"pass":true,"selectionPass":true}
+{"case":"en-maps-1","type":"start"}
+{"answer":"The CAFE LA location has been opened in Apple Maps.","argsPass":true,"called":["open_in_maps"],"calls":[{"args":"{\"place\":\"CAFE LA\"}","tool":"open_in_maps"}],"case":"en-maps-1","expected":["open_in_maps"],"input":"Open CAFE LA in Apple Maps.","lang":"en","model":"LFM2.5-2.6B_int4","ms":12402,"pass":true,"selectionPass":true}
+{"case":"en-multi-1","type":"start"}
+{"answer":"CAFE LA has been opened in Maps.","argsPass":true,"called":["search_places","open_in_maps"],"calls":[{"args":"{\"query\":\"cafe\"}","tool":"search_places"},{"args":"{\"place\":\"CAFE LA\"}","tool":"open_in_maps"}],"case":"en-multi-1","expected":["search_places","open_in_maps"],"input":"Find a cafe nearby and open the closest one in Maps.","lang":"en","model":"LFM2.5-2.6B_int4","ms":16709,"pass":true,"selectionPass":true}
+{"case":"en-noop-1","type":"start"}
+{"answer":"2 plus 2 = 4.","argsPass":true,"called":["translate"],"calls":[{"args":"{\"to\":\"en\",\"source\":\"2 plus 2\"}","tool":"translate"}],"case":"en-noop-1","expected":[],"input":"What is 2 plus 2?","lang":"en","model":"LFM2.5-2.6B_int4","ms":12411,"pass":false,"selectionPass":false}
+{"case":"ja-loc-1","type":"start"}
+{"answer":"I'm in Chuo, Osaka.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"ja-loc-1","expected":["get_location"],"input":"今どこにいる?","lang":"ja","model":"LFM2.5-2.6B_int4","ms":11579,"pass":true,"selectionPass":true}
+{"case":"ja-loc-2","type":"start"}
+{"answer":"The location is Chuo, Osaka (fixed to ±25 m). This is a district in Osaka, Japan. I'll answer in one short sentence as requested.","argsPass":true,"called":["get_location"],"calls":[{"args":"{}","tool":"get_location"}],"case":"ja-loc-2","expected":["get_location"],"input":"ここは何という街?","lang":"ja","model":"LFM2.5-2.6B_int4","ms":12822,"pass":true,"selectionPass":true}
+{"case":"ja-search-1","type":"start"}
+{"answer":"I found nearby coffee shops: CAFE LA (140 m), Blue Bottle Coffee (240 m), and Doutor (310 m).","argsPass":true,"called":["search_places"],"calls":[{"args":"{\"query\":\"coffee shop\"}","tool":"search_places"}],"case":"ja-search-1","expected":["search_places"],"input":"近くのコーヒーショップを探して。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13835,"pass":true,"selectionPass":true}
+{"case":"ja-search-2","type":"start"}
+{"answer":"近くに薬局はあります。","argsPass":true,"called":["search_places"],"calls":[{"args":"{\"query\":\"薬局\"}","tool":"search_places"}],"case":"ja-search-2","expected":["search_places"],"input":"近くに薬局はある?","lang":"ja","model":"LFM2.5-2.6B_int4","ms":12425,"pass":true,"selectionPass":true}
+{"case":"ja-ocr-1","type":"start"}
+{"answer":"The latest photo displays a coffee menu with items like Latte at ¥520 and Americano at ¥450.","argsPass":true,"called":["read_text_in_latest_photo"],"calls":[{"args":"{}","tool":"read_text_in_latest_photo"}],"case":"ja-ocr-1","expected":["read_text_in_latest_photo"],"input":"最新の写真に写っている文字を読んで。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":15778,"pass":true,"selectionPass":true}
+{"case":"ja-translate-1","type":"start"}
+{"answer":"\"Good morning\" is the English translation of \"おはようございます\".","argsPass":true,"called":["translate"],"calls":[{"args":"{\"source\":\"おはようございます\",\"to\":\"en\"}","tool":"translate"}],"case":"ja-translate-1","expected":["translate"],"input":"「おはようございます」を英語に翻訳して。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":13981,"pass":true,"selectionPass":true}
+{"case":"ja-speak-1","type":"start"}
+{"answer":"(translated text)","argsPass":true,"called":["read_text_in_latest_photo","translate"],"calls":[{"args":"{}","tool":"read_text_in_latest_photo"},{"args":"{\"source\":\"COFFEE MENU\\\\nLatte ¥520\\\\nAmericano ¥450\",\"to\":\"en\"}","tool":"translate"}],"case":"ja-speak-1","expected":["speak_out_loud"],"input":"それを声に出して読み上げて。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":21479,"pass":false,"selectionPass":false}
+{"case":"ja-maps-1","type":"start"}
+{"answer":"spoke the previous answer","argsPass":true,"called":["open_in_maps","speak_out_loud"],"calls":[{"args":"{\"place\":\"CAFE LA\"}","tool":"open_in_maps"},{"args":"{}","tool":"speak_out_loud"}],"case":"ja-maps-1","expected":["open_in_maps"],"input":"CAFE LA をマップで開いて。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":18612,"pass":false,"selectionPass":false}
+{"case":"ja-multi-1","type":"start"}
+{"answer":"The closest cafe, CAFE LA, has been opened in Maps.","argsPass":true,"called":["search_places","open_in_maps"],"calls":[{"args":"{\"query\":\"cafe\"}","tool":"search_places"},{"args":"{\"place\":\"CAFE LA\"}","tool":"open_in_maps"}],"case":"ja-multi-1","expected":["search_places","open_in_maps"],"input":"近くのカフェを探して、一番近い店をマップで開いて。","lang":"ja","model":"LFM2.5-2.6B_int4","ms":17359,"pass":true,"selectionPass":true}
+{"case":"ja-noop-1","type":"start"}
+{"answer":"What is 2 squared?","argsPass":true,"called":["translate"],"calls":[{"args":"{\"source\":\"2たす2は?\",\"to\":\"en\"}","tool":"translate"}],"case":"ja-noop-1","expected":[],"input":"2たす2は?","lang":"ja","model":"LFM2.5-2.6B_int4","ms":20069,"pass":false,"selectionPass":false}
+{"failed":6,"model":"LFM2.5-2.6B_int4","passed":14,"total":20,"type":"summary"}

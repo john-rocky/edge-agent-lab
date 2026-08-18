@@ -12,7 +12,7 @@ demo's routing table and corrected one conclusion — see translate below.
 | Apple FM (on-device) | ✓ | ✓ | ✓ | ✓ | ✓* | ✓ | 0/2 |
 | LFM2.5-1.2B-Instruct_int4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | 2/2 |
 | LFM2.5-1.2B_int4_gpu (on CPU) | ✓ | ✓ | ✓ | ✗ | — | ✗ | — |
-| LFM2.5-2.6B_int4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 0/2 |
+| LFM2.5-2.6B_int4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ (EN; JA missed) | 0/2 |
 
 \* one FoundationModels-internal error on the EN translate case.
 
@@ -31,10 +31,12 @@ can't read text aloud", exactly the demo behavior. But it is the only model
 that passed both no-op cases: it does not grab tools for unrelated
 questions. Median 4.4 s per case.
 
-**2.6B** — 14 cases before an engine hang cut the run (numbers from the
-partial). Routes everything including speak and translate; over-triggers
-like Apple FM (translate on the EN no-op, an unasked OCR call after
-search). ~13 s per case — 3× the 1.2B.
+**2.6B** — reached 17/20 (exact 14). Routes everything and chains
+multi-tool cases correctly in both languages (search → maps). Over-triggers
+like Apple FM: translate on both no-op cases, an unasked OCR call after
+EN searches, and the JA speak case wandered to OCR. Median 15.5 s per
+case — 3.5× the 1.2B, 5× Apple FM. (A first attempt at this run hit a
+mid-generation engine hang; the rerun completed clean.)
 
 ## Corrected: the 1.2B translate "floor"
 

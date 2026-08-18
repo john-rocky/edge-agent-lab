@@ -31,7 +31,7 @@ Measured on device, 20 JP/EN cases over the six coffee-run tools
 |---|---|---|---|---|
 | Apple FM (on-device) | everything, chains on its own | clean | **grabs a tool anyway (0/2)** | 3 s |
 | LFM2.5-1.2B-Instruct int4 | everything except speak; never chains | clean | perfect (2/2) | 4.4 s |
-| LFM2.5-2.6B int4 | everything | clean | grabs a tool anyway | 13 s |
+| LFM2.5-2.6B int4 | everything, chains multi-tool | clean | grabs a tool anyway (0/2) | 15.5 s |
 
 Working hypothesis: Apple's Foundation Models wins iOS tool-calling
 outright — it is trained for exactly this. The table's job is the
