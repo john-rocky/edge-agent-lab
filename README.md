@@ -13,7 +13,15 @@ patterns to build it with, and measurements of which model to run.
 | [Photo editing](ios/scenarios/photo-editing/) | "A bit brighter." "Warmer." "Undo everything." "Remove the background." | 17 editing tools; edits stack, a whole chain reverts by voice, the subject lifts off the background. Benched on 3 models, recorded |
 | [Focus](ios/scenarios/focus/) | "Dim the screen — I need to focus." "Silence my notifications and set a one-hour timer." | one sentence fans out into notifications + timer + brightness. Benched on 2 models (a 12/20 draw, opposite failures); recording next |
 | [Field report](ios/scenarios/field-report/) | "Read the text in my latest photo." "Remind me tomorrow at 9 to file the report." | gauge photo → OCR → note → next-morning reminder, fully offline. Pack built; bench and recording next |
+| [Chains](ios/scenarios/chains/) | "Turn the flashlight on and tell me how much battery I have." "What time is it in Tokyo, and in London?" | two calls out of one sentence, on unrelated tools. 4/4 on Apple FM |
+| [Compound](ios/scenarios/compound/) | "I need to focus for 20 minutes." "Give me my morning briefing." | one call, several APIs: notifications cleared + screen dimmed + timer; five readings in one. The model picks the one call over the three |
+| [Briefing](ios/scenarios/briefing/) · [Sensors](ios/scenarios/sensors/) · [Handoff](ios/scenarios/handoff/) | "Which way am I facing?" "Turn it off and play the mail sound." | quick packs on Apple FM — 17/17 beats; the compass timing out and the model falling back to orientation is the one to watch |
 | [Android screen agent](android/) | "open the notification history" | screenshot → local VLM → tap point → real tap → loop, on a Pixel 8a |
+
+Input is not only typed: the chat has a microphone (SpeechAnalyzer,
+words landing as they are said) and a paperclip (a photo goes in with the
+message — Apple's model reads it natively, a LiteRT vision bundle through
+the adapter). The stage's `--voice` takes every beat from the air.
 
 Each iOS scenario is a **pack**: a tool set, a demo script, and benchmark
 cases that grow the model table below at the same time. The app hosting
