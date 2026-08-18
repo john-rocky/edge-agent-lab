@@ -20,8 +20,15 @@ The runner lives inside the lfm-tools-ios app
    copy from` returns stale cached content for a path it has copied before.
 
 One model per app launch (`--model apple` for Apple's on-device model, any
-filename substring for a LiteRT bundle). [`run-device.sh`](run-device.sh)
-loops the models and pulls the JSONL back.
+filename substring for a LiteRT bundle), one scenario pack per run
+(`--toolset demo|photo` picks the tool set the model sees).
+[`run-device.sh`](run-device.sh) loops the models, pushes the scenario's
+cases, and pulls the JSONL back:
+
+```sh
+./run-device.sh                            # coffee-run pack, three models
+SCENARIO=photo-editing ./run-device.sh     # photo pack
+```
 
 ## Case format
 
@@ -45,8 +52,12 @@ loops the models and pulls the JSONL back.
   Japanese or an English query string, and both are right.
 - `image` is reserved for the VLM stage.
 
-[`cases/core-20.json`](cases/core-20.json): 10 EN + 10 JP over the six demo
-tools, one no-op each.
+Cases live with their scenario pack in
+[`../scenarios/`](../scenarios/) — each pack is a cases.json, the demo
+script, and the in-app tool set it was written against. `coffee-run`:
+10 EN + 10 JP over the six demo tools. `photo-editing`: 10 + 10 over the
+15 editing tools, where `number±tol` starts earning its keep ("a bit
+brighter" accepts amount 5–55; "half size" accepts 45–55).
 
 ## What a JSONL line records
 

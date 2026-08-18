@@ -2,11 +2,13 @@
 """Turn toolbench JSONL runs into a comparison table.
 
     ./report.py /tmp/toolbench-*.jsonl
+    ./report.py -s photo-editing /tmp/toolbench-*.jsonl
 
-One column per model, one row per case; then selection/args/no-op/latency
-summaries split JP vs EN. The point of the first run is to reproduce the
-hand-measured routing table in docs/model-routing.md — a mismatch there is a
-harness bug until proven otherwise.
+One column per model, one row per case; then pass/no-op/latency summaries
+split JP vs EN. `-s` names the scenario pack whose cases.json scores the
+'○ reached' column (default coffee-run). The point of the first run was to
+reproduce the hand-measured routing table in docs/model-routing.md — a
+mismatch there is a harness bug until proven otherwise.
 """
 import json
 import os
@@ -14,8 +16,9 @@ import sys
 from collections import defaultdict
 
 
-def load_cases():
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cases", "core-20.json")
+def load_cases(scenario):
+    path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "..", "scenarios", scenario, "cases.json")
     with open(path) as f:
         return {c["id"]: c for c in json.load(f)}
 
@@ -95,15 +98,15 @@ def mark(rec, case):
     return "✗"
 
 
-def main(paths):
+def main(paths, scenario):
     runs = load(paths)
     if not runs:
         sys.exit("no case records found")
     try:
-        case_defs = load_cases()
+        case_defs = load_cases(scenario)
     except OSError:
         case_defs = {}
-        print("note: cases/core-20.json not found; '○' scoring disabled")
+        print(f"note: no cases.json for scenario {scenario}; '○' scoring disabled")
     models = sorted(runs)
     cases = sorted({c for per in runs.values() for c in per})
 
@@ -140,6 +143,12 @@ def main(paths):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    scenario = "coffee-run"
+    if "-s" in args:
+        at = args.index("-s")
+        scenario = args[at + 1]
+        del args[at : at + 2]
+    if not args:
         sys.exit(__doc__)
-    main(sys.argv[1:])
+    main(args, scenario)

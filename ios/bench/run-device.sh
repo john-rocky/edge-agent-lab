@@ -9,6 +9,7 @@
 #
 #   ./run-device.sh                   # apple, 1.2B-Instruct, 2.6B
 #   ./run-device.sh 1.2B-Instruct     # one model (any --model substring)
+#   SCENARIO=photo-editing ./run-device.sh   # another scenario pack
 set -u
 DEVICE=A6F3E849-1947-5202-9AD1-9C881CA58EEF
 BUNDLE=com.lfmtools.app
@@ -17,16 +18,27 @@ DEST=${TMPDIR:-/tmp}
 MODELS=("$@")
 (( ${#MODELS} )) || MODELS=(apple 1.2B-Instruct 2.6B)
 
+# A scenario pack is a cases file plus the in-app tool set it was written
+# against; they travel together or the run measures nothing.
+SCENARIO=${SCENARIO:-coffee-run}
+CASES="$HERE/../scenarios/$SCENARIO/cases.json"
+case "$SCENARIO" in
+  coffee-run) TOOLSET=demo ;;
+  photo-editing) TOOLSET=photo ;;
+  *) echo "unknown scenario $SCENARIO"; exit 1 ;;
+esac
+[[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }
+
 list_files() {
   xcrun devicectl device info files --device "$DEVICE" \
     --domain-type appDataContainer --domain-identifier "$BUNDLE" \
     --subdirectory Documents 2>/dev/null
 }
 
-echo "pushing cases..."
+echo "pushing $SCENARIO cases (toolset $TOOLSET)..."
 xcrun devicectl device copy to --device "$DEVICE" \
   --domain-type appDataContainer --domain-identifier "$BUNDLE" \
-  --source "$HERE/cases/core-20.json" \
+  --source "$CASES" \
   --destination "Documents/toolbench-cases.json" || exit 1
 
 for model in "${MODELS[@]}"; do
@@ -39,7 +51,8 @@ for model in "${MODELS[@]}"; do
   launched=0
   for attempt in 1 2; do
     if timeout 20 xcrun devicectl device process launch --terminate-existing \
-      --device "$DEVICE" "$BUNDLE" --toolbench --model "$model" >/dev/null 2>&1; then
+      --device "$DEVICE" "$BUNDLE" --toolbench --toolset "$TOOLSET" \
+      --model "$model" >/dev/null 2>&1; then
       launched=1
       break
     fi
