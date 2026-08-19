@@ -30,6 +30,8 @@ case "$SCENARIO" in
   field-report) TOOLSET=report ;;
   video-editing) TOOLSET=video ;;
   store) TOOLSET=store ;;
+  audio) TOOLSET=audio ;;
+  docs) TOOLSET=docs ;;
   *) echo "unknown scenario $SCENARIO"; exit 1 ;;
 esac
 [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }

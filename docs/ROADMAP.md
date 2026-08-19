@@ -36,9 +36,12 @@ existing app categories, and it looks like this:
 |---|---|---|---|
 | ① | Image editing — Lightroom / Canva | adjust, crop, filter, cut out, save; the photo alone as input | **done**: photo-editing, vision, polish |
 | ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, export | **built** (video-editing: 12 tools, 6 beats, 30 cases); first run on Apple FM when the phone is back |
-| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **next** |
-| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, convert | after ③ |
+| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **built** (audio: 15 tools, 6 beats, 32 cases; four synthesized tracks through AVAudioEngine) |
+| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, convert | **built** (docs: 12 tools, 7 beats, 30 cases; a real PDF through PDFKit) |
 | ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built** (store: 14 tools, 7 beats, 34 cases with state); first run on Apple FM when the phone is back |
+
+All five are built (2026-08-19); none of ②–⑤ has run on the phone yet —
+each pack's script.md says what to read in run.log on the first run.
 
 Why these and in this order:
 
@@ -76,9 +79,12 @@ menu would sound like".
   runner attaches, so this routes on the bench too.
 - For ② and ③, **app state** is an input in its own right: playhead,
   selection, sizes, track list — passed by the app, never guessed by the
-  model. Built for ②: the state line opens every message on the stage and
-  every case on the bench (`state` in cases.json), and the model is told
-  what its own calls did before it is asked for the next one.
+  model. Built for ②–⑤: the state line opens every message on the stage
+  and every case on the bench (`state` in cases.json), and the model is
+  told what its own calls did before it is asked for the next one. Each
+  pack's state names what the words will refer to — clips and the
+  playhead, the selection, tracks and their levels, pages by their first
+  line — so "their", "the keys", "the cover" are resolved by the app.
 
 ## Later
 

@@ -30,6 +30,8 @@ cases, and pulls the JSONL back:
 SCENARIO=photo-editing ./run-device.sh     # photo pack
 SCENARIO=video-editing ./run-device.sh     # video pack (state cases)
 SCENARIO=store ./run-device.sh             # store pack (state cases)
+SCENARIO=audio ./run-device.sh             # audio pack (state cases)
+SCENARIO=docs ./run-device.sh              # documents pack (state cases)
 ```
 
 ## Case format
@@ -86,7 +88,14 @@ records: the finders (search by name / filter by field / low stock /
 orders by payment × fulfilment) are scored on their query arguments, the
 bulk actions on acting without re-searching (the `state` carries the
 selection), and update_price vs set_price is the signed-percent-vs-amount
-axis.
+axis. `audio`: 16 + 16 over 15 tools — levels read from the state and
+moved ("a bit quieter" accepts 43–67 from a 70), tracks named by what the
+user calls them (`contains`), booleans for mute / solo scored as
+"true" / "false", two chains. `docs`: 15 + 15 over 12 tools — page numbers
+read from a state that names pages by their first line ("the cover" → 1,
+"the last page" → 6), the this_page / all_pages scope, a go_to → sign
+chain; the JA search query is left unscored (「敷金」 or "deposit" are both
+right).
 
 ## What a JSONL line records
 
