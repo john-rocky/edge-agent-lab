@@ -58,8 +58,10 @@ until told to stop after finders.
 What the model reads (ahead of the words, every beat):
 
     [App state] Store: 24 products (18 active, 4 draft, 2 archived), 20
-    orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or
-    filter first, then act.
+    orders (10 unfulfilled, 5 awaiting payment). Selection: none. Only the
+    bulk tools (reprice, tag, status, stock, fulfil, remind, note) need a
+    search or filter first; refund_order acts straight on its order number,
+    and reports need no selection.
 
     Which products have fewer than 5 in stock?
 

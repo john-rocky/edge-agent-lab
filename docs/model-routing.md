@@ -18,15 +18,15 @@ delete — the confirm argument:
 | pack | tools | cases | Apple FM (Mac) |
 |---|---|---|---|
 | video-editing | 18 | 40 | 34 |
-| store | 18 | 44 | 32 |
+| store | 18 | 44 | 33 |
 | audio | 18 | 38 | 34 |
 | docs | 18 | 42 | 37 |
 | shopping | 12 | 34 | 23 |
-| money | 11 | 30 | 22 |
+| money | 11 | 30 | 27 |
 | inbox | 12 | 34 | 23 |
 
-205/262 overall (store, money and inbox re-measured in the evening round
-below; the other four packs keep their morning numbers). Identical
+211/262 overall (store, money and inbox re-measured in the evening and
+late rounds below; the other four packs keep their morning numbers). Identical
 builds vary by ±2–4 cases per pack between runs — a single run ranks
 packs, not sentences (the noise-floor recipe). What remains is mostly
 the model's character, not the packs': it grabs a tool on no-call cases,
@@ -58,6 +58,26 @@ Raw JSONL: [echo-only](../ios/bench/results/2026-08-19-mac-echo/),
 [structure round](../ios/bench/results/2026-08-19-mac-r2/),
 [final config](../ios/bench/results/2026-08-19-mac-r3/) and
 [inbox final](../ios/bench/results/2026-08-19-mac-r4/).
+
+The late round (same night) took the inbox state-line recipe to store
+and money — and measured its edge. Store's split ("only the bulk tools
+need a search or filter first; refund_order acts straight on its order
+number"), plus dropping its stop-after-finder line and "no need to
+search first" on refund's number guide: 32 → 33, with 注文1007を返金して
+now routing straight to refund_order where it had asked first — though
+the call arrived confirm-true, the gate collapsing exactly as the
+confirm recipe predicts. Money got the same split and dropped six
+cases (22 → 16): "Only the bulk tools (categorize, flag) need a list,
+search or filter first" named the act-tools in every message, and
+every finder in both languages grew a categorize + flag tail. The fix
+that won was a bare "Selection: none." with the instructions restored
+verbatim — one variable against the 22/30 config — landing 27/30, the
+pack's best: both no-call cases pass, the double report call and the
+English tails are gone. What still stands: the Japanese categorize/flag
+pair called together on selection cases, and 予算を設定して answering
+with a plausible tool instead of ask_user. Raw JSONL:
+[split round](../ios/bench/results/2026-08-19-mac-r5/) and
+[bare state line](../ios/bench/results/2026-08-19-mac-r6/).
 
 # On device (2026-08-18)
 

@@ -318,6 +318,22 @@ out (the committed config lands at 23/34 — the structural gain minus the
 noise). The state opens every message: whatever workflow it names
 outranks the tool guides, so make it name the contract, not a habit.
 
+Applied to the money pack the next session, the same split taught a new
+well: "Only the bulk tools (categorize, flag) need a list, search or
+filter first" put the act-tools' names in every message, and every
+finder in both languages grew a categorize + flag tail — 22/30 → 16/30,
+a brand-new failure signature made of exactly the two tools the line
+names. A two-tool parenthetical reads as a to-do list where inbox's
+four-tool family read as a class. What won was saying nothing: a bare
+"Selection: none.", the finder-first contract left to the instructions'
+scoped sentence and the bulk tools' own error results, took the pack to
+27/30 — its best — with both no-call cases passing and the English
+tails gone. The direct-action clause is the safe half of the split:
+store's "refund_order acts straight on its order number" routed
+注文1007を返金して directly where it had asked first. Split the state
+line by tool class when the classes are big enough to read as classes;
+when the bulk family is two tools, name no tools at all.
+
 ## Canned data must be findable in every language the pack tests
 
 「マルエツでいくら使った?」 routed perfectly — search_payee, one call —
