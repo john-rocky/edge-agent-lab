@@ -1,4 +1,40 @@
-# Model routing observations (2026-08-18, on device)
+# Model routing observations
+
+## The Mac lane (2026-08-19, Apple FM via Catalyst — smoke tests, not table rows)
+
+The app builds for Mac Catalyst and Apple's model is available there,
+tools and vision included — so a pack's routing is now measured the day
+it is written, with no phone (`ios/bench/run-mac.sh`,
+[raw JSONL](../ios/bench/results/2026-08-19-mac/)). Same model family as
+the phone, different machine: these numbers guide pack design and do not
+enter the device table below.
+
+After four fix rounds in one afternoon (the failures and their fixes are
+recipes now — argument names, neutral fakes, ask licenses, finder
+discipline):
+
+| pack | tools | cases | Apple FM (Mac) |
+|---|---|---|---|
+| video-editing | 15 | 36 | 32 |
+| store | 16 | 40 | 30 |
+| audio | 16 | 36 | 32 |
+| docs | 14 | 36 | 33 |
+| shopping | 9 | 28 | 21 |
+| money | 9 | 28 | 17 |
+| inbox | 9 | 28 | 17 |
+
+182/232 overall. What remains is mostly the model's character, not the
+packs': it grabs a tool on no-call cases (the count is in the state; it
+calls the report anyway — the same trait the device runs measured), it
+adds a spurious second call far more often in Japanese than in English
+(categorize after a filter, refund after a search), it walks a compound's
+steps by hand rather than calling make_reel, and with everything pushing
+it to ask for a missing caption it still invents one in Japanese. The
+three youngest packs (shopping / money / inbox, written the same day)
+sit lowest — the older packs' gap is four fix rounds, which is the
+argument for the lane.
+
+# On device (2026-08-18)
 
 Measured on iPhone (iOS 27), CPU backend, bare tool-list format, thinking
 budget 32 tokens, via [toolbench](../ios/bench/README.md)

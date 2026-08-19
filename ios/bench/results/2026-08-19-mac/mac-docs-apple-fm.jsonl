@@ -1,0 +1,74 @@
+{"cases":36,"date":"2026-08-19","model":"apple-fm","toolset":"docs","type":"run"}
+{"case":"d-en-search-1","type":"start"}
+{"answer":"The deposit is mentioned on pages 3 and 4.","argsPass":true,"called":["search_document"],"calls":[{"args":"{\"text\":\"deposit\"}","tool":"search_document"}],"case":"d-en-search-1","expected":["search_document"],"input":"Which pages mention the deposit?","lang":"en","model":"apple-fm","ms":1796,"pass":true,"selectionPass":true}
+{"case":"d-en-goto-1","type":"start"}
+{"answer":"You are now on page 5, titled \"House Rules\".","argsPass":true,"called":["go_to_page"],"calls":[{"args":"{\"number\":5}","tool":"go_to_page"}],"case":"d-en-goto-1","expected":["go_to_page"],"input":"Go to the rules page.","lang":"en","model":"apple-fm","ms":1638,"pass":true,"selectionPass":true}
+{"case":"d-en-hl-1","type":"start"}
+{"answer":"All occurrences of \"deposit\" on pages 3 and 4 are now highlighted in yellow.","argsPass":true,"called":["highlight_text"],"calls":[{"args":"{\"color\":\"yellow\",\"text\":\"deposit\"}","tool":"highlight_text"}],"case":"d-en-hl-1","expected":["highlight_text"],"input":"Highlight every 'deposit' in yellow.","lang":"en","model":"apple-fm","ms":1917,"pass":true,"selectionPass":true}
+{"case":"d-en-hl-2","type":"start"}
+{"answer":"The highlights on page 3 have been removed.","argsPass":true,"called":["remove_highlights"],"calls":[{"args":"{\"scope\":\"this_page\"}","tool":"remove_highlights"}],"case":"d-en-hl-2","expected":["remove_highlights"],"input":"Remove the highlights on this page.","lang":"en","model":"apple-fm","ms":1636,"pass":true,"selectionPass":true}
+{"case":"d-en-hl-3","type":"start"}
+{"answer":"All highlights in the document have been cleared.","argsPass":true,"called":["remove_highlights"],"calls":[{"args":"{\"scope\":\"all_pages\"}","tool":"remove_highlights"}],"case":"d-en-hl-3","expected":["remove_highlights"],"input":"Clear all the highlights in the document.","lang":"en","model":"apple-fm","ms":1602,"pass":true,"selectionPass":true}
+{"case":"d-en-note-1","type":"start"}
+{"answer":"A note has been added to page 3.","argsPass":true,"called":["add_note"],"calls":[{"args":"{\"text\":\"check this with the landlord\"}","tool":"add_note"}],"case":"d-en-note-1","expected":["add_note"],"input":"Add a note: check this with the landlord.","lang":"en","model":"apple-fm","ms":1720,"pass":true,"selectionPass":true}
+{"case":"d-en-delete-1","type":"start"}
+{"answer":"The cover page has been deleted. The document now has 5 pages, with page 1 titled \"Lease Agreement\" and no annotations.","argsPass":true,"called":["delete_page"],"calls":[{"args":"{\"number\":1}","tool":"delete_page"}],"case":"d-en-delete-1","expected":["delete_page"],"input":"Delete the cover page.","lang":"en","model":"apple-fm","ms":2027,"pass":true,"selectionPass":true}
+{"case":"d-en-move-1","type":"start"}
+{"answer":"The \"House Rules\" page is now the last page.","argsPass":true,"called":["move_page"],"calls":[{"args":"{\"number\":5,\"to\":6}","tool":"move_page"}],"case":"d-en-move-1","expected":["move_page"],"input":"Move the house rules page to the end.","lang":"en","model":"apple-fm","ms":1727,"pass":true,"selectionPass":true}
+{"case":"d-en-rotate-1","type":"start"}
+{"answer":"Page 2 has been rotated ninety degrees.","argsPass":true,"called":["rotate_page"],"calls":[{"args":"{\"degrees\":\"90\",\"number\":2}","tool":"rotate_page"}],"case":"d-en-rotate-1","expected":["rotate_page"],"input":"Rotate page 2 ninety degrees.","lang":"en","model":"apple-fm","ms":1657,"pass":true,"selectionPass":true}
+{"case":"d-en-insert-1","type":"start"}
+{"answer":"A blank page has been inserted after the parties page, making the document now 7 pages long.","argsPass":true,"called":["insert_blank_page"],"calls":[{"args":"{\"after\":2}","tool":"insert_blank_page"}],"case":"d-en-insert-1","expected":["insert_blank_page"],"input":"Insert a blank page after the parties page.","lang":"en","model":"apple-fm","ms":1767,"pass":true,"selectionPass":true}
+{"case":"d-en-sign-1","type":"start"}
+{"answer":"I've signed the last page.","argsPass":true,"called":["sign_page"],"calls":[{"args":"{\"number\":6}","tool":"sign_page"}],"case":"d-en-sign-1","expected":["sign_page"],"input":"Sign the last page.","lang":"en","model":"apple-fm","ms":1499,"pass":true,"selectionPass":true}
+{"case":"d-en-save-1","type":"start"}
+{"answer":"The document has been saved as 'lease-signed'.","argsPass":true,"called":["save_as"],"calls":[{"args":"{\"name\":\"lease-signed\"}","tool":"save_as"}],"case":"d-en-save-1","expected":["save_as"],"input":"Save it as 'lease-signed'.","lang":"en","model":"apple-fm","ms":1683,"pass":true,"selectionPass":true}
+{"case":"d-en-chain-1","type":"start"}
+{"answer":"I’ve moved to the signatures page and signed it.","argsPass":true,"called":["go_to_page","sign_page"],"calls":[{"args":"{\"number\":6}","tool":"go_to_page"},{"args":"{\"number\":6}","tool":"sign_page"}],"case":"d-en-chain-1","expected":["go_to_page","sign_page"],"input":"Go to the signatures page and sign it.","lang":"en","model":"apple-fm","ms":1972,"pass":true,"selectionPass":true}
+{"case":"d-en-revert-1","type":"start"}
+{"answer":"All changes have been undone. The document is now back to its original state.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"d-en-revert-1","expected":["revert_to_original"],"input":"Undo everything — back to the original.","lang":"en","model":"apple-fm","ms":1756,"pass":true,"selectionPass":true}
+{"case":"d-en-noop-1","type":"start"}
+{"answer":"The document has 6 pages.","argsPass":true,"called":[],"calls":[],"case":"d-en-noop-1","expected":[],"input":"How many pages is this?","lang":"en","model":"apple-fm","ms":1464,"pass":true,"selectionPass":true}
+{"case":"d-en-mark-1","type":"start"}
+{"answer":"The watermark \"DRAFT\" is now across all 6 pages of the document.","argsPass":true,"called":["add_watermark"],"calls":[{"args":"{\"text\":\"DRAFT\"}","tool":"add_watermark"}],"case":"d-en-mark-1","expected":["add_watermark"],"input":"Stamp DRAFT across every page.","lang":"en","model":"apple-fm","ms":1931,"pass":true,"selectionPass":true}
+{"case":"d-en-extract-1","type":"start"}
+{"answer":"I’ve saved pages 3 and 4 as a new file.","argsPass":true,"called":["extract_pages"],"calls":[{"args":"{\"to\":4,\"from\":3}","tool":"extract_pages"}],"case":"d-en-extract-1","expected":["extract_pages"],"input":"Pull pages 3 and 4 out into a new file.","lang":"en","model":"apple-fm","ms":1722,"pass":true,"selectionPass":true}
+{"case":"d-en-ask-1","type":"start"}
+{"answer":"What should the note say?","argsPass":true,"asked":true,"called":[],"calls":[],"case":"d-en-ask-1","expectAsk":true,"expected":[],"input":"Add a note.","lang":"en","model":"apple-fm","ms":1490,"pass":true,"selectionPass":true}
+{"case":"d-ja-search-1","type":"start"}
+{"answer":"The page where \"敷金\" (deposit) is mentioned is page 3: \"Rent and Deposit\".","argsPass":true,"called":[],"calls":[],"case":"d-ja-search-1","expected":["search_document"],"input":"敷金について書いてあるのは何ページ?","lang":"ja","model":"apple-fm","ms":1840,"pass":false,"selectionPass":false}
+{"case":"d-ja-goto-1","type":"start"}
+{"answer":"Page 5, titled \"House Rules\", is now open.","argsPass":true,"called":["go_to_page"],"calls":[{"args":"{\"number\":5}","tool":"go_to_page"}],"case":"d-ja-goto-1","expected":["go_to_page"],"input":"ルールのページを開いて。","lang":"ja","model":"apple-fm","ms":1690,"pass":true,"selectionPass":true}
+{"case":"d-ja-hl-1","type":"start"}
+{"answer":"I've highlighted the word \"deposit\" in yellow on pages 3 and 4.","argsPass":true,"called":["highlight_text"],"calls":[{"args":"{\"text\":\"deposit\",\"color\":\"yellow\"}","tool":"highlight_text"}],"case":"d-ja-hl-1","expected":["highlight_text"],"input":"「deposit」を全部黄色でハイライトして。","lang":"ja","model":"apple-fm","ms":1959,"pass":true,"selectionPass":true}
+{"case":"d-ja-hl-2","type":"start"}
+{"answer":"I’ve removed all highlights from page 3.","argsPass":true,"called":["remove_highlights"],"calls":[{"args":"{\"scope\":\"this_page\"}","tool":"remove_highlights"}],"case":"d-ja-hl-2","expected":["remove_highlights"],"input":"このページのハイライトを消して。","lang":"ja","model":"apple-fm","ms":1740,"pass":true,"selectionPass":true}
+{"case":"d-ja-hl-3","type":"start"}
+{"answer":"すべてのハイライトをすべて削除しました。","argsPass":true,"called":["remove_highlights"],"calls":[{"args":"{\"scope\":\"all_pages\"}","tool":"remove_highlights"}],"case":"d-ja-hl-3","expected":["remove_highlights"],"input":"文書全体のハイライトを全部消して。","lang":"ja","model":"apple-fm","ms":1643,"pass":true,"selectionPass":true}
+{"case":"d-ja-note-1","type":"start"}
+{"answer":"I’ve added the note “大家に確認する” to the open page.","argsPass":true,"called":["add_note"],"calls":[{"args":"{\"text\":\"大家に確認する\"}","tool":"add_note"}],"case":"d-ja-note-1","expected":["add_note"],"input":"メモを付けて:「大家に確認する」。","lang":"ja","model":"apple-fm","ms":1909,"pass":true,"selectionPass":true}
+{"case":"d-ja-delete-1","type":"start"}
+{"answer":"The cover page has been removed. The document now has 5 pages, with \"Lease Agreement\" as the only open page.","argsPass":true,"called":["delete_page"],"calls":[{"args":"{\"number\":1}","tool":"delete_page"}],"case":"d-ja-delete-1","expected":["delete_page"],"input":"表紙を削除して。","lang":"ja","model":"apple-fm","ms":2014,"pass":true,"selectionPass":true}
+{"case":"d-ja-move-1","type":"start"}
+{"answer":"Page 5 (House Rules) has been moved to the end of the document.","argsPass":true,"called":["move_page"],"calls":[{"args":"{\"number\":5,\"to\":6}","tool":"move_page"}],"case":"d-ja-move-1","expected":["move_page"],"input":"ハウスルールのページを最後に移動して。","lang":"ja","model":"apple-fm","ms":1847,"pass":true,"selectionPass":true}
+{"case":"d-ja-rotate-1","type":"start"}
+{"answer":"Page 2 (\"Parties\") has been rotated 90 degrees.","argsPass":true,"called":["rotate_page"],"calls":[{"args":"{\"number\":2,\"degrees\":\"90\"}","tool":"rotate_page"}],"case":"d-ja-rotate-1","expected":["rotate_page"],"input":"2ページ目を90度回転して。","lang":"ja","model":"apple-fm","ms":1839,"pass":true,"selectionPass":true}
+{"case":"d-ja-insert-1","type":"start"}
+{"answer":"I inserted a blank page after page 5, now the document has 7 pages.","argsPass":false,"called":["insert_blank_page"],"calls":[{"args":"{\"after\":5}","tool":"insert_blank_page"}],"case":"d-ja-insert-1","expected":["insert_blank_page"],"input":"当事者のページの後ろに白紙のページを入れて。","lang":"ja","model":"apple-fm","ms":1872,"pass":false,"selectionPass":true}
+{"case":"d-ja-sign-1","type":"start"}
+{"answer":"I've signed the final page.","argsPass":true,"called":["sign_page"],"calls":[{"args":"{\"number\":6}","tool":"sign_page"}],"case":"d-ja-sign-1","expected":["sign_page"],"input":"最後のページに署名して。","lang":"ja","model":"apple-fm","ms":1530,"pass":true,"selectionPass":true}
+{"case":"d-ja-save-1","type":"start"}
+{"answer":"The document has been saved as \"lease-signed\".","argsPass":true,"called":["save_as"],"calls":[{"args":"{\"name\":\"lease-signed\"}","tool":"save_as"}],"case":"d-ja-save-1","expected":["save_as"],"input":"「lease-signed」という名前で保存して。","lang":"ja","model":"apple-fm","ms":1716,"pass":true,"selectionPass":true}
+{"case":"d-ja-chain-1","type":"start"}
+{"answer":"I opened the final page and added your signature.","argsPass":true,"called":["go_to_page","sign_page"],"calls":[{"args":"{\"number\":6}","tool":"go_to_page"},{"args":"{\"number\":6}","tool":"sign_page"}],"case":"d-ja-chain-1","expected":["go_to_page","sign_page"],"input":"署名ページを開いて、署名して。","lang":"ja","model":"apple-fm","ms":1886,"pass":true,"selectionPass":true}
+{"case":"d-ja-revert-1","type":"start"}
+{"answer":"The document is now back to its original state.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"d-ja-revert-1","expected":["revert_to_original"],"input":"全部やめて、元に戻して。","lang":"ja","model":"apple-fm","ms":1552,"pass":true,"selectionPass":true}
+{"case":"d-ja-noop-1","type":"start"}
+{"answer":"The document has 6 pages.","argsPass":true,"called":[],"calls":[],"case":"d-ja-noop-1","expected":[],"input":"これ、何ページある?","lang":"ja","model":"apple-fm","ms":1495,"pass":true,"selectionPass":true}
+{"case":"d-ja-mark-1","type":"start"}
+{"answer":"I’ve added the \"DRAFT\" watermark to all 6 pages of the document.","argsPass":true,"called":["add_watermark"],"calls":[{"args":"{\"text\":\"DRAFT\"}","tool":"add_watermark"}],"case":"d-ja-mark-1","expected":["add_watermark"],"input":"全ページに DRAFT の透かしを入れて。","lang":"ja","model":"apple-fm","ms":1946,"pass":true,"selectionPass":true}
+{"case":"d-ja-extract-1","type":"start"}
+{"answer":"I've created a new file with pages 3 and 4 titled \"saved-pages-3-4.pdf\".","argsPass":true,"called":["extract_pages"],"calls":[{"args":"{\"to\":4,\"from\":3}","tool":"extract_pages"}],"case":"d-ja-extract-1","expected":["extract_pages"],"input":"3〜4ページを別ファイルに抜き出して。","lang":"ja","model":"apple-fm","ms":1970,"pass":true,"selectionPass":true}
+{"case":"d-ja-ask-1","type":"start"}
+{"answer":"何をメモにしたいですか？","argsPass":true,"asked":false,"called":[],"calls":[],"case":"d-ja-ask-1","expectAsk":true,"expected":[],"input":"メモを付けて。","lang":"ja","model":"apple-fm","ms":1521,"pass":false,"selectionPass":true}
+{"failed":3,"model":"apple-fm","passed":33,"total":36,"type":"summary"}

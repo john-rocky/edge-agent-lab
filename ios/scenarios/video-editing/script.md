@@ -14,9 +14,9 @@ fade-out + export) for the person who says what they want, not how.
 Launch: `--autorun --backend apple --scenario video`; `--voice` for
 spoken beats; chat: `--scenario video` without `--autorun`.
 
-Routing verified on Apple FM via the Mac lane (2026-08-19,
-`ios/bench/run-mac.sh` — smoke tests, not table rows); not yet run on the
-phone. `run.log` carries `VIDEO loaded — <state>` once, then per beat
+Routing: **32/36 on Apple FM via the Mac lane** (2026-08-19,
+`ios/bench/run-mac.sh` — smoke tests, not table rows; the misses are the
+compound walked by hand, and JA ask/export); not yet run on the phone. `run.log` carries `VIDEO loaded — <state>` once, then per beat
 `STATE` (the block the model read), `TOOL` (what it called and returned).
 
 | beat | say | expect |

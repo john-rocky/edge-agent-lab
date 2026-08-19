@@ -27,3 +27,7 @@ categories are enums so the rails hold. Cases: 14 EN + 14 JA — the
 filter→categorize chain, report days as numbers, a no-call case (the
 month total is in the state) and an ask-back ("Set a budget." — which,
 to what?).
+
+Routing: **17/28 on Apple FM via the Mac lane** (2026-08-19; the JA half
+keeps adding a categorize or flag after a finder — the eagerness trait,
+still open).
