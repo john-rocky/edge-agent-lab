@@ -118,6 +118,15 @@ tool-count scaling (5→35→70), cross-domain routing over merged packs,
 tool-definition A/B on the same case set, and failure records complete
 enough to analyze across configs.
 
+That program is in service of **the bench's central research question:
+how many tool specs, under what names, with what descriptions, can a
+small on-device LM carry and stay stable?** Everything the bench
+measures folds back into that one prescription — the recipes are its
+qualitative half (names beat descriptions beat instructions; contracts
+live at the tool boundary), the scaling and A/B runs are its
+quantitative half, and the deliverable is the number-and-wording
+envelope an app developer can hand their tools to a small model inside.
+
 ## Later
 
 The same cases on Android — the case format is platform-independent on

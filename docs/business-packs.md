@@ -6,7 +6,12 @@ the phone, not on a leaderboard. Raw speed is not the question. The
 questions are: does the model pick the right tool, fill the right
 arguments, order a multi-call correctly, survive a growing tool list,
 tell similar tools apart, and do all of it in Japanese as well as
-English — per model, and per tool-definition wording.
+English — per model, and per tool-definition wording. Behind all of
+them sits the bench's central research question: **how many tool
+specs, under what names, with what descriptions, does a small LM stay
+stable with** — the packs are the corpus, the evaluation program below
+is the instrument, and the answer is the envelope this OSS exists to
+publish.
 
 The division of labor stays what every recipe here assumes: the model
 turns a short utterance (or an image) into **one of a finite set of
