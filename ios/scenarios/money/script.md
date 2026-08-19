@@ -28,6 +28,9 @@ filter→categorize chain, report days as numbers, a no-call case (the
 month total is in the state) and an ask-back ("Set a budget." — which,
 to what?).
 
-Routing: **20/30 on Apple FM via the Mac lane** (2026-08-19; the JA half
-keeps adding a categorize or flag after a finder — the eagerness trait,
-still open).
+Routing: **22/30 on Apple FM via the Mac lane** (2026-08-19 evening, with
+the finder fakes echoing real arguments and a kana→romaji step in
+search_payee — 「マルエツ」 now finds the Maruetsu rows instead of
+routing perfectly into an empty answer). The categorize-or-flag piled
+onto a finder persists with rich results in both languages — the
+eagerness trait, still open.

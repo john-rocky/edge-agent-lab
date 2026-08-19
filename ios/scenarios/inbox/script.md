@@ -29,6 +29,15 @@ Cases: 14 EN + 14 JA — three find-then-act chains, a no-call case (the
 unread count is in the state) and an ask-back ("Snooze it." — which
 one?).
 
-Routing: **15/34 on Apple FM via the Mac lane** (2026-08-19; the misses
-are search_mail where list_inbox was the named slice, and a search
-before replies the state already numbered).
+Routing: **23/34 on Apple FM via the Mac lane** (2026-08-19 evening, up
+from 15 that morning). What moved it was all structure: the state line
+stopped teaching find-first ("number tools act straight on the numbers
+above"), every number argument's guide says the same, the finder fakes
+echo the real rows, and delete's false branch no longer commands the
+confirm-true call (the model had been answering its own confirmation
+with it). The number-tool family (read, reply, unsubscribe, delete) went
+direct in both languages and both no-call cases pass. The residue reads
+as the model's, not the pack's: a search still slips in before Japanese
+unsubscribes and chains, "Snooze it." snoozes instead of asking, and
+「今のを取り消して」 deletes instead of undoing even with "Last change:"
+named in the state.

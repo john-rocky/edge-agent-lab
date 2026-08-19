@@ -22,7 +22,9 @@ unsetopt nomatch
 HERE=${0:a:h}
 APP=~/code/LiteRT-Models/lfm-tools-ios/build/Build/Products/Debug-maccatalyst/LFMToolsMac.app/Contents/MacOS/LFMToolsMac
 FILES=~/Library/"Application Support"/LFMTools
-OUT="$HERE/results/$(date +%Y-%m-%d)-mac"
+# BENCH_OUT overrides the destination — a second run on the same day must
+# not overwrite the committed baseline JSONL for that date.
+OUT="${BENCH_OUT:-$HERE/results/$(date +%Y-%m-%d)-mac}"
 mkdir -p "$OUT" "$FILES"
 
 [[ -x "$APP" ]] || { echo "no Mac build at $APP — build the LFMToolsMac scheme first"; exit 1; }

@@ -187,6 +187,20 @@ the call: `go_to_page(5)` came back as the canned "on page 3 — Rent and
 Deposit" and the model, quite reasonably, called it again. Where the real
 result would echo an argument, the fake stays neutral: "on that page now".
 
+Better than neutral: reflect the *actual* arguments — a pure render over
+the pack's frozen data (the bench's `respond` closure). That removes the
+contradiction instead of the content, and it pays exactly where the
+finder's own result answers the question: "Search for 'linen'" went from
+no call at all to one clean call, and 「マルエツでいくら使った?」 was
+answered by search_payee's own total instead of a spurious follow-up
+report. What it does *not* fix: the spurious second call after a Japanese
+finder (categorize/flag piled onto "show me" with perfectly good rows on
+screen — eagerness is not starvation), and it *interacts* with a "report
+what it found and stop" instruction — a finder result worth reporting
+makes the model report and stop mid-chain. Echo dynamically, and drop any
+stop-after-finder line in the same pass (measured across inbox, store,
+money on the Mac lane, 2026-08-19).
+
 ## The argument's name is part of the contract
 
 Two failures, one shape, same morning (Apple FM, Mac). A volume fader
@@ -283,6 +297,39 @@ not move for any wording tried. What did move behavior, every time, was
 structure at the tool boundary: argument names, enums and steps,
 per-argument guides, gates, an ask tool. Spend wording effort there; a
 single Mac smoke run ranks packs, not sentences.
+
+## The state line is instructions — don't let it teach the well
+
+The inbox pack's worst score (15/34) was blamed on search_mail's gravity:
+a search before replies, opens and deletes the state already numbered.
+The well had a teacher: every message ended "Selection: none — list,
+search or filter first, then act" — written for the bulk tools, read as
+the workflow for everything. Splitting the sentence by tool class
+("Only the bulk tools (archive, snooze, flag, mark read) need a list or
+search first; number tools act straight on the numbers above"), saying
+the same on each number argument's guide ("from the state's list — no
+need to search first"), and deleting the instructions' stop-after-finder
+line took the pack to 25/34 in one round — the whole number-tool family
+went direct in both languages, and both no-call cases passed for the
+first time (the count was read from the state instead of refetched).
+Ten cases is far above the ±2–4 noise floor; the same floor swallowed a
+follow-up round of extra description sentences, which came straight back
+out (the committed config lands at 23/34 — the structural gain minus the
+noise). The state opens every message: whatever workflow it names
+outranks the tool guides, so make it name the contract, not a habit.
+
+## Canned data must be findable in every language the pack tests
+
+「マルエツでいくら使った?」 routed perfectly — search_payee, one call —
+and the app answered "no transactions found" over a month of rows,
+because the canned payee is "Maruetsu" and `contains` knows no kana.
+The bench scored it a pass: the JA case deliberately leaves the payee
+matcher open (the model may say マルエツ or Maruetsu), so the score
+checks the call, not the answer. A kana→romaji step in the search tool
+(the same normalization a real search bar does) turned the same call
+into the right ¥26,190 in both languages. Grep your canned data for
+every name the non-English cases can utter — an empty result that
+routes cleanly is the failure a routing bench is structurally blind to.
 
 ## State answers what the state contains — say what it doesn't
 

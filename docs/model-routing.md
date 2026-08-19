@@ -18,25 +18,46 @@ delete — the confirm argument:
 | pack | tools | cases | Apple FM (Mac) |
 |---|---|---|---|
 | video-editing | 18 | 40 | 34 |
-| store | 18 | 44 | 31 |
+| store | 18 | 44 | 32 |
 | audio | 18 | 38 | 34 |
 | docs | 18 | 42 | 37 |
 | shopping | 12 | 34 | 23 |
-| money | 11 | 30 | 20 |
-| inbox | 12 | 34 | 15 |
+| money | 11 | 30 | 22 |
+| inbox | 12 | 34 | 23 |
 
-194/262 overall. Identical builds vary by ±2–4 cases per pack between
-runs — a single run ranks packs, not sentences (the noise-floor recipe).
-What remains is mostly the model's character, not the packs': it grabs a
-tool on no-call cases (the count is in the state; it calls the report
-anyway — the same trait the device runs measured), it adds a spurious
-second call far more often in Japanese than in English, it walks a
-compound's steps by hand rather than calling make_reel — and, the same
-instinct, walks a *change* backwards by hand rather than calling
-undo_last. The confirm gate held for refund and collapsed for checkout
-("Check out." arrived as confirm true — the user's words read as the
-consent). inbox sits lowest: search_mail is its gravity well, pulling in
-list-by-slice, read-by-number and delete-by-number alike.
+205/262 overall (store, money and inbox re-measured in the evening round
+below; the other four packs keep their morning numbers). Identical
+builds vary by ±2–4 cases per pack between runs — a single run ranks
+packs, not sentences (the noise-floor recipe). What remains is mostly
+the model's character, not the packs': it grabs a tool on no-call cases,
+it adds a spurious second call far more often in Japanese than in
+English, it walks a compound's steps by hand rather than calling
+make_reel — and, the same instinct, walks a *change* backwards by hand
+rather than calling undo_last. The confirm gate held for refund and
+collapsed for checkout ("Check out." arrived as confirm true — the
+user's words read as the consent).
+
+The evening round (same day) attacked the two lowest packs with
+structure, one lever per run. The finder fakes now echo the real
+arguments — a pure render over the frozen canned data (the fake-well
+recipe) — which fixed the cases a finder's own result answers and
+nothing else; the inbox state line names the contract per tool class
+instead of a find-first habit, every inbox number argument's guide says
+"no need to search first", delete's false branch stopped commanding its
+own confirm-true call (the model had been self-confirming with it), and
+search_payee normalizes kana (「マルエツ」 had routed perfectly into an
+empty answer over a month of Maruetsu rows). inbox 15 → 23 — the
+search_mail well collapsed for the number tools in both languages, and
+both no-call cases now pass, the first pack where they do. money
+20 → 22, store 31 → 32. What held still through every result shape and
+wording tried: the Japanese spurious second call (categorize/flag piled
+onto a finder that returned perfectly good rows — eagerness is not
+starvation), "Snooze it." acting instead of asking, and
+「今のを取り消して」 deleting instead of undoing — character, not packs.
+Raw JSONL: [echo-only](../ios/bench/results/2026-08-19-mac-echo/),
+[structure round](../ios/bench/results/2026-08-19-mac-r2/),
+[final config](../ios/bench/results/2026-08-19-mac-r3/) and
+[inbox final](../ios/bench/results/2026-08-19-mac-r4/).
 
 # On device (2026-08-18)
 
