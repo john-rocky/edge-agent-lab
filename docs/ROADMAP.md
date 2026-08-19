@@ -42,7 +42,7 @@ existing app categories, and it looks like this:
 | ⑥ | Shopping — the buyer's side (Amazon) | search, sort, "the second one" → cart, coupon, checkout, track | **built** (shopping: 12 tools, 34 cases) |
 | ⑦ | Personal finance — Money Forward | filter / search transactions, categorize the selection, budgets, reports, find subscriptions | **built** (money: 11 tools, 30 cases) |
 | ⑧ | Mail triage — Spark / Gmail | list / search → archive, snooze, flag; a reply drafted, never sent | **built** (inbox: 12 tools, 34 cases; all data canned) |
-| ⑨ | CRM — Salesforce / HubSpot | search opportunities by owner/stage/amount/close date, stage updates, follow-up tasks | **spec'd** ([business-packs](business-packs.md)), P0 |
+| ⑨ | CRM — Salesforce / HubSpot | search opportunities by owner/stage/amount/close date, stage updates, follow-up tasks | **built** (crm: 12 tools, 36 cases; frozen today in the state makes relative dates scorable — spec in [business-packs](business-packs.md)) |
 | ⑩ | Project management — Jira / Asana / Linear | search issues, assign, status/priority/due-date changes, close | **spec'd**, P0 |
 | ⑪ | ERP / Accounting — SAP / NetSuite / QuickBooks | invoices (search, mark paid), inventory, expenses, orders | **spec'd**, P1 (money covers the expense corner) |
 | ⑫ | HCM / HR — Workday | employees, leave requests (approve/reject), shifts | **spec'd**, P1 |

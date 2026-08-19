@@ -24,6 +24,7 @@ delete — the confirm argument:
 | shopping | 12 | 34 | 24 |
 | money | 11 | 30 | 27 |
 | inbox | 12 | 34 | 25 |
+| crm | 12 | 36 | 20 |
 
 216/262 overall (store, money, inbox and shopping re-measured in the
 evening and late rounds below; the other three packs keep their morning
@@ -122,6 +123,38 @@ confirm-true; JA undo still walks backwards by hand. Raw JSONL:
 [levers](../ios/bench/results/2026-08-19-mac-r8/),
 [stop line restored](../ios/bench/results/2026-08-19-mac-r9/),
 [set_quantity](../ios/bench/results/2026-08-19-mac-r10/).
+
+The CRM round (2026-08-20) built the first business-wing pack to the
+business-packs spec — 12 tools over a frozen quarter, every action
+taking its record as an id argument, the state pinning a frozen today
+so relative dates score as absolute ones — and measured it in four
+one-variable runs. Static neutral fakes started it at 15/36: every
+Japanese finder grew a get_opportunity tail, one English assign
+flailed through five searches the neutral line never answered, and
+the answers confabulated rows that do not exist (¥1,500,000 deals).
+Dynamic finder and get echoes — the fake-well recipe, again — bought
++5 (20/36, the committed config) and fixed exactly the starvation
+bucket. Two wording rounds against the remaining signature —
+get_opportunity called *before* update / assign / note / undo, with
+the id already in the request — moved nothing they aimed at, and the
+aggressive one broke restraint where it wasn't aiming: "make the
+action call directly, nothing before it" had both no-call cases
+grabbing search sweeps, the Japanese ask case inventing an id, and
+both undo cases walking the stage change backwards by hand (18/36);
+reverted, the pack sat at 20/36 again with the get-prefix untouched
+in both languages. The look-first prefix on id-acting tools is
+character, not wording. What the planted instruments caught, stable
+across runs: 受注にして routed to assign_opportunity with the owner
+filled from the state row's *current* owner; 100万円以上 became
+min_amount 100,000 *and* max_amount 1,000,000 (the 万 split); "We won
+this one — mark it closed." arrived as stage *lost*; and "closing
+this month" never got its close_date_to bound in either language.
+Four definition-optimization targets for the evaluation program's A/B
+loop. Raw JSONL:
+[neutral fakes](../ios/bench/results/2026-08-20-mac-r11/),
+[echo, committed](../ios/bench/results/2026-08-20-mac-r12/),
+[wording round](../ios/bench/results/2026-08-20-mac-r13/) and
+[guides reverted](../ios/bench/results/2026-08-20-mac-r14/).
 
 # On device (2026-08-18)
 

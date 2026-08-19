@@ -54,6 +54,13 @@ while getting 「25分」 right. The routing was perfect every time; the
 arithmetic was not. Give the tool a `minutes` field (or a duration
 string the app parses) and let the model copy the number it heard.
 
+The same failure in yen: a `min_amount` in raw yen asks a Japanese
+request to expand 万 — 100万円以上 arrived as min_amount 100,000 *plus*
+max_amount 1,000,000, the number split across both bounds (crm, Mac,
+2026-08-20), while the English "a million yen or more" filled cleanly.
+A unit the user never says is arithmetic the model must do, and the
+failure is language-shaped.
+
 ## Every required argument is a question waiting to be asked
 
 `set_timer` requires a `label`; "Set a timer for 25 minutes" gave Apple
@@ -208,7 +215,12 @@ screen — eagerness is not starvation), and it *interacts* with a "report
 what it found and stop" instruction — a finder result worth reporting
 makes the model report and stop mid-chain. Echo dynamically, and drop any
 stop-after-finder line in the same pass (measured across inbox, store,
-money on the Mac lane, 2026-08-19).
+money on the Mac lane, 2026-08-19; crm re-ran the whole experiment on
+2026-08-20 — its neutral fakes put a get_opportunity tail on every
+Japanese finder, sent one English request through five searches the
+neutral line never answered, and had the final answers confabulating
+¥1,500,000 deals that do not exist; the echo bought +5 of 36 and fixed
+exactly that bucket).
 
 The drop is not free everywhere: in the shopping pack — static neutral
 fakes, and finder cases that *end* at the finder — deleting "after a
@@ -325,6 +337,23 @@ re-derives the steps rather than calling the meta-tool. Manual reversal
 is *almost* right — until the history and the model's memory of the
 change disagree. If undo matters, put the going-back words in its
 description, expect the by-hand reversal anyway, and measure it.
+
+## The look-first prefix is character — wording will not remove it
+
+On an id-acting pack (crm), Apple FM opens the record before touching
+it: "Move O3 to negotiation." — the id in the sentence — arrives as
+get_opportunity(O3) and then the correct update, and the same prefix
+rides before amount changes, notes and undo in both languages. Dynamic
+echoes removed the *tails* after finders and left the prefix. Three
+wordings of the id contract ("no search call first"; per-argument "no
+search or get call first"; "make the action call directly, nothing
+before it") left it too — and the aggressive third popped three other
+wells while it was at it: both no-call cases started sweeping search,
+the Japanese ask case invented an id, and undo became a by-hand stage
+reversal (Mac, 2026-08-20). A license that pushes one well down pops
+others. The prefix is the records packs' look-first habit with a get
+tool to spend it on: expect it from a strong router, score it as the
+extra call it is, and spend the wording budget elsewhere.
 
 ## Instructions have a noise floor — put contracts in the tools
 
