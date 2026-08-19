@@ -220,7 +220,10 @@ seven built packs; recipes cross-referenced):
    to CRM. Note: the domains collide on names (`search_orders`,
    `search_inventory` exist in two packs) — merging forces either
    prefixes or entity-distinct names, and either choice re-routes old
-   sentences; measure, don't assume.
+   sentences; measure, don't assume. First measured 2026-08-20 (41
+   tools, Apple FM, Mac lane): one domain misroute in 126 cases;
+   the cost of count was longer within-domain wandering — see
+   [model-routing](model-routing.md).
 4. **Definition optimization.** Same tool, A/B on name / description /
    parameter names / enums / schema, same case set (the noise-floor
    recipe: expect structure to move scores and wording to drown; the

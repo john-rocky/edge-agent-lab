@@ -193,6 +193,15 @@ each); at 10 tools the same model routes 8 of 10. Budget the tool list
 against the context the model leaves you, not against the model's
 routing skill — on phone RAM, the bigger model can be the weaker agent.
 
+On the big router the cost of count is different: CRM + PM + Commerce
+merged into one 41-tool list produced exactly one domain misroute in
+126 cases (Apple FM, Mac, 2026-08-20) — but the packs' wandering cases
+wandered *longer* (a 12-call invented chain became 21; an ask case
+rampaged through 13 calls). Count doesn't confuse this model's
+routing; it feeds its eagerness — every added tool is another room for
+a lost model to wander into. Expect scale to stretch failure chains
+before it breaks selection.
+
 ## Make signed ranges unmistakable
 
 "Make it feel warmer" → Apple FM picked the right tool and passed

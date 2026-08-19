@@ -213,6 +213,27 @@ been stable for a day. Raw JSONL:
 [extension](../ios/bench/results/2026-08-20-mac-r19/) and
 [replicate](../ios/bench/results/2026-08-20-mac-r20/).
 
+The cross-domain round (same day, the business wing's first scaling
+measurement — evaluation program #2/#3) merged CRM + PM + Commerce
+into one 41-tool list (rails deduplicated) and re-ran all 126 cases
+against it, each pack's own instructions pinned via the runner's new
+`--instructions` flag so tool count is the only variable. Native
+baselines 20 + 21 + 36 = 77/126; merged: crm 21, pm 16, store 33 =
+**70/126**. The headline: exactly **one** true domain misroute in 126
+cases — 田中さん担当の票を見せて reached for the CRM's search_contacts
+instead of the board's search_issues — so at 41 tools this router
+keeps the domains apart almost perfectly. Where the −7 actually went:
+*within-domain wandering got longer*. The store's Japanese
+invented-chain cases stretched to 21 and 18 calls (reprice / tag /
+status / inventory / fulfil sprees before finally refunding), a PM ask
+case rampaged through 13 calls, and finders grew heavier tails — every
+added tool is another room for a lost model to wander into. The
+confirm-hoisting (refund and cancel answered with a prose question and
+no call) survived the merge unchanged. Count pressure on this model
+shows as chain length, not domain confusion — the envelope's first
+data point. Raw JSONL:
+[cross-domain](../ios/bench/results/2026-08-20-mac-r21/).
+
 # On device (2026-08-18)
 
 Measured on iPhone (iOS 27), CPU backend, bare tool-list format, thinking

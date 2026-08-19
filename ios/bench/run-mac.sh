@@ -30,6 +30,11 @@ mkdir -p "$OUT" "$FILES"
 [[ -x "$APP" ]] || { echo "no Mac build at $APP — build the LFMToolsMac scheme first"; exit 1; }
 
 for SCENARIO in "$@"; do
+  # The cross-domain runs: the merged 41-tool business list against one
+  # pack's cases, with that pack's own instructions pinned — tool count is
+  # the only variable.
+  CASES_DIR=$SCENARIO
+  INSTR=""
   case "$SCENARIO" in
     coffee-run) TOOLSET=demo ;;
     photo-editing) TOOLSET=photo ;;
@@ -44,14 +49,19 @@ for SCENARIO in "$@"; do
     inbox) TOOLSET=inbox ;;
     crm) TOOLSET=crm ;;
     pm) TOOLSET=pm ;;
+    business-crm) TOOLSET=business; CASES_DIR=crm; INSTR=crm ;;
+    business-pm) TOOLSET=business; CASES_DIR=pm; INSTR=pm ;;
+    business-store) TOOLSET=business; CASES_DIR=store; INSTR=store ;;
     *) echo "unknown scenario $SCENARIO"; exit 1 ;;
   esac
-  CASES="$HERE/../scenarios/$SCENARIO/cases.json"
+  CASES="$HERE/../scenarios/$CASES_DIR/cases.json"
   [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }
   cp "$CASES" "$FILES/toolbench-cases.json"
   rm -f "$FILES"/toolbench-*.jsonl "$FILES"/toolbench-*.done
-  echo "== $SCENARIO (toolset $TOOLSET) on Apple FM, Mac"
-  "$APP" --toolbench --toolset "$TOOLSET" --model apple >/dev/null 2>&1 &
+  EXTRA=()
+  [[ -n "$INSTR" ]] && EXTRA=(--instructions "$INSTR")
+  echo "== $SCENARIO (toolset $TOOLSET${INSTR:+, instructions $INSTR}) on Apple FM, Mac"
+  "$APP" --toolbench --toolset "$TOOLSET" $EXTRA --model apple >/dev/null 2>&1 &
   PID=$!
   # Up to 30 min per pack: a records pack with big state blocks and chains
   # runs 10-20 s a case, and the docs pack blew an 8-minute cap.
