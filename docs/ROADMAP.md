@@ -38,7 +38,7 @@ existing app categories, and it looks like this:
 | ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, music, export; make_reel as the one-call compound | **built** (video-editing: 18 tools incl. auto_captions, 40 cases) |
 | ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **built** (audio: 18 tools, 38 cases; four synthesized tracks through AVAudioEngine) |
 | ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, watermark, extract | **built** (docs: 18 tools incl. form filling and redaction, 42 cases; a real PDF through PDFKit) |
-| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built** (store: 18 tools, 44 cases) |
+| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built + Commerce extension** (store: 22 tools, 54 cases — get_product, adjust_product_price, cancel_order, search_customers, create_discount added per [business-packs](business-packs.md)) |
 | ⑥ | Shopping — the buyer's side (Amazon) | search, sort, "the second one" → cart, coupon, checkout, track | **built** (shopping: 12 tools, 34 cases) |
 | ⑦ | Personal finance — Money Forward | filter / search transactions, categorize the selection, budgets, reports, find subscriptions | **built** (money: 11 tools, 30 cases) |
 | ⑧ | Mail triage — Spark / Gmail | list / search → archive, snooze, flag; a reply drafted, never sent | **built** (inbox: 12 tools, 34 cases; all data canned) |

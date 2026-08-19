@@ -342,6 +342,17 @@ the noise-floor recipe. For a verb-named destructive action, do not
 expect an argument to hold the gate; gate it in the app (the tool's
 false-branch is the app's own confirmation dialog either way).
 
+A second gated verb in the same list breaks the gate a new way:
+cancel_order joined refund_order (store, Mac, 2026-08-20) and "Refund
+order 1007." stopped calling anything — the model asked "Confirm the
+full refund?" in prose, both languages, both runs, where it used to
+make the confirm-false call and relay the tool's own question.
+Confirmation became a pre-call habit, and a prose question advances no
+state machine. Cancel itself arrived once as ask_user and once as
+confirm *true* (the verb-as-consent collapse, again). One gated verb
+held; two taught the gate as a ritual. The app-side dialog is the only
+gate that survives every shape.
+
 ## Undo must own the going-back words
 
 `undo_last` in every pack, described "Undo the last change." Asked

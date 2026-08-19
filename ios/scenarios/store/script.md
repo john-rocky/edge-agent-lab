@@ -33,6 +33,20 @@ directly, and counts come from the state; and after a search found an
 unfulfilled order the model helpfully fulfilled it (the eagerness recipe)
 until told to stop after finders.
 
+Commerce extension (2026-08-20, per business-packs.md): get_product,
+adjust_product_price (update_price renamed — a percentage *or* a yen
+amount, the relative half beside set_price), cancel_order (a second
+confirm-gated destructive verb: the fulfil / refund / cancel triangle),
+search_customers and create_discount — 22 tools, 54 cases. Measured
+twice: **36/54** (r19/r20; the old 44 cases sit at 30–31 against their
+35 baseline — the re-routing bill). The second gated verb flipped
+refund from call-then-relay to a prose "Confirm the full refund?" with
+no call at all, in both languages (the confirm recipe's newest shape);
+全部3,000円にして was captured by adjust_product_price with confabulated
+arguments; Japanese finders grew refund_order and get_product tails.
+Kana→romaji now rides in every store finder (田中・ウールマフラー find
+their canned rows).
+
 | beat | say | expect |
 |---|---|---|
 | 1 | Which products have fewer than 5 in stock? | `find_low_stock(below: 5)` — 6 rows, a table on screen; they are now the selection |

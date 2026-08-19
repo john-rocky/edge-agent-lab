@@ -18,7 +18,7 @@ delete — the confirm argument:
 | pack | tools | cases | Apple FM (Mac) |
 |---|---|---|---|
 | video-editing | 18 | 40 | 34 |
-| store | 18 | 44 | 35 |
+| store | 22 | 54 | 36 |
 | audio | 18 | 38 | 34 |
 | docs | 18 | 42 | 37 |
 | shopping | 12 | 34 | 24 |
@@ -186,6 +186,32 @@ call and the prose disagree, and only the call is real. Raw JSONL:
 [weekday](../ios/bench/results/2026-08-20-mac-r16/),
 [due_by rename](../ios/bench/results/2026-08-20-mac-r17/) and
 [committed replicate](../ios/bench/results/2026-08-20-mac-r18/).
+
+The Commerce round (same day) extended the store pack to the business
+spec — get_product, adjust_product_price (update_price renamed, now a
+percentage *or* a yen amount: the relative half beside set_price),
+cancel_order (a second confirm-gated destructive verb, completing the
+fulfil / refund / cancel triangle), search_customers and
+create_discount; 18 → 22 tools, 44 → 54 cases — and measured the
+re-routing bill on two runs (35 and 36 of 54; the old 44 cases sit at
+30–31 against their 35 baseline). The headline is what the second
+gated verb did to the first: "Refund order 1007." now calls **nothing**
+— the model asks "Confirm the full refund?" in prose, in both
+languages, both runs, where it used to make the confirm-false call and
+relay the tool's own question. With one gated verb the contract held;
+with two, confirmation became a *pre-call habit* and the state machine
+never advances. Cancel itself showed the third shape: 注文1012を
+キャンセルして arrived once as ask_user and once as confirm *true* on
+the first call (the user's verb read as the consent — checkout's
+collapse, on a new verb). The pair instrument also fired on schedule:
+全部3,000円にして (an exact price) was captured by adjust_product_price
+with confabulated arguments (percentage −100 *and* amount −3000, the
+answer claiming ¥3,000 success), and Japanese finders grew
+refund_order and get_product tails they did not have before — a tool
+list is one routing surface, and five additions moved wells that had
+been stable for a day. Raw JSONL:
+[extension](../ios/bench/results/2026-08-20-mac-r19/) and
+[replicate](../ios/bench/results/2026-08-20-mac-r20/).
 
 # On device (2026-08-18)
 
