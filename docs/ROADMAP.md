@@ -35,10 +35,10 @@ existing app categories, and it looks like this:
 | # | app type (the real ones) | what a pack calls | status |
 |---|---|---|---|
 | ① | Image editing — Lightroom / Canva | adjust, crop, filter, cut out, save; the photo alone as input | **done**: photo-editing, vision, polish |
-| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, export | **next** |
+| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, export | **built** (video-editing: 12 tools, 6 beats, 30 cases); first run on Apple FM when the phone is back |
 | ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | after ② |
 | ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, convert | after ③ |
-| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **next after ②** — a different bench class |
+| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **next** — a different bench class |
 
 Why these and in this order:
 
@@ -76,7 +76,9 @@ menu would sound like".
   runner attaches, so this routes on the bench too.
 - For ② and ③, **app state** is an input in its own right: playhead,
   selection, sizes, track list — passed by the app, never guessed by the
-  model.
+  model. Built for ②: the state line opens every message on the stage and
+  every case on the bench (`state` in cases.json), and the model is told
+  what its own calls did before it is asked for the next one.
 
 ## Later
 

@@ -28,6 +28,7 @@ cases, and pulls the JSONL back:
 ```sh
 ./run-device.sh                            # coffee-run pack, three models
 SCENARIO=photo-editing ./run-device.sh     # photo pack
+SCENARIO=video-editing ./run-device.sh     # video pack (state cases)
 ```
 
 ## Case format
@@ -50,7 +51,13 @@ SCENARIO=photo-editing ./run-device.sh     # photo pack
 - `args` omitted means the call's arguments are not scored. The JP search
   cases use this deliberately: a Japanese request may legitimately produce a
   Japanese or an English query string, and both are right.
-- `image` is reserved for the VLM stage.
+- `image` names a fixture image the runner attaches to the prompt (the
+  vision packs).
+- `state` is the app state a message opens with, verbatim, for the packs
+  where state is the input (video-editing): the runner sends
+  `[App state] <state>` ahead of `input`, exactly as the stage does, and
+  the session gets that pack's instructions. Cases that name a playhead or
+  a clip edge are only scorable against it.
 
 Cases live with their scenario pack in
 [`../scenarios/`](../scenarios/) — each pack is a cases.json, the demo
@@ -69,7 +76,11 @@ so the honest route is get_current_time first, scored as a reasonable
 extra. In this pack get_current_time is the one bench tool that is *not*
 canned: the matcher resolves "tomorrow" against the device clock at run
 time, and a canned today would break the cases the day after it was
-written.
+written. `video-editing`: 15 + 15 over 12 tools where `state` starts
+working — "split it at the playhead" is scored against the playhead number
+in the state block, "make the second clip slow motion" is a select → speed
+chain, and "how long is the video?" expects no call: the answer is in the
+state.
 
 ## What a JSONL line records
 

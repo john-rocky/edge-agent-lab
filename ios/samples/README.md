@@ -3,7 +3,7 @@
 1. **lfm-tools-ios** — 54-tool agent demo behind Apple's `LanguageModel`
    protocol; the same session runs Apple's on-device model or LFM2.5 via
    LiteRT-LM. Hosts every scenario pack (`--scenario photo|focus|report`),
-   the bench runner (`--toolbench --toolset …`), and voice input (a mic in
+   the bench runner (`--toolbench --toolset …`), the video pack (`--scenario video`, state in / tools out), and voice input (a mic in
    the composer; `--voice` on the stage takes each beat from the
    microphone instead of the script). It lives in
    [LiteRT-Models](https://github.com/john-rocky/LiteRT-Models/tree/screen-agent/lfm-tools-ios)
