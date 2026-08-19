@@ -20,8 +20,8 @@ by 10%" carries no ids: *their* is the selection beat 1 made, resolved by
 the app. The state line at the top of every message says what is selected
 and how it was found; the tools take the numbers the words name.
 
-Routing: **30/40 on Apple FM via the Mac lane** (2026-08-19; EN 17/20 —
-the JA half adds spurious second calls); not yet run on the phone. What those runs taught (fixes in): "everything from
+Routing: **31/44 on Apple FM via the Mac lane** (2026-08-19; the JA half
+adds spurious second calls); not yet run on the phone. What those runs taught (fixes in): "everything from
 Hokkaido Wool" went to name-search until search_products' description
 said vendors are filter_products' job; given a shiny new `search_orders`
 the model reached for it on every order-flavored sentence — including

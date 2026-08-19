@@ -9,30 +9,34 @@ it is written, with no phone (`ios/bench/run-mac.sh`,
 the phone, different machine: these numbers guide pack design and do not
 enter the device table below.
 
-After four fix rounds in one afternoon (the failures and their fixes are
+After six fix rounds across one day (the failures and their fixes are
 recipes now — argument names, neutral fakes, ask licenses, finder
-discipline):
+discipline, the confirm gate, undo ownership, the noise floor), with
+every pack now carrying ask_user, undo_last and — on refund / checkout /
+delete — the confirm argument:
 
 | pack | tools | cases | Apple FM (Mac) |
 |---|---|---|---|
-| video-editing | 15 | 36 | 32 |
-| store | 16 | 40 | 30 |
-| audio | 16 | 36 | 32 |
-| docs | 14 | 36 | 33 |
-| shopping | 9 | 28 | 21 |
-| money | 9 | 28 | 17 |
-| inbox | 9 | 28 | 17 |
+| video-editing | 18 | 40 | 34 |
+| store | 18 | 44 | 31 |
+| audio | 18 | 38 | 34 |
+| docs | 18 | 42 | 37 |
+| shopping | 12 | 34 | 23 |
+| money | 11 | 30 | 20 |
+| inbox | 12 | 34 | 15 |
 
-182/232 overall. What remains is mostly the model's character, not the
-packs': it grabs a tool on no-call cases (the count is in the state; it
-calls the report anyway — the same trait the device runs measured), it
-adds a spurious second call far more often in Japanese than in English
-(categorize after a filter, refund after a search), it walks a compound's
-steps by hand rather than calling make_reel, and with everything pushing
-it to ask for a missing caption it still invents one in Japanese. The
-three youngest packs (shopping / money / inbox, written the same day)
-sit lowest — the older packs' gap is four fix rounds, which is the
-argument for the lane.
+194/262 overall. Identical builds vary by ±2–4 cases per pack between
+runs — a single run ranks packs, not sentences (the noise-floor recipe).
+What remains is mostly the model's character, not the packs': it grabs a
+tool on no-call cases (the count is in the state; it calls the report
+anyway — the same trait the device runs measured), it adds a spurious
+second call far more often in Japanese than in English, it walks a
+compound's steps by hand rather than calling make_reel — and, the same
+instinct, walks a *change* backwards by hand rather than calling
+undo_last. The confirm gate held for refund and collapsed for checkout
+("Check out." arrived as confirm true — the user's words read as the
+consent). inbox sits lowest: search_mail is its gravity well, pulling in
+list-by-slice, read-by-number and delete-by-number alike.
 
 # On device (2026-08-18)
 

@@ -1,0 +1,78 @@
+{"cases":38,"date":"2026-08-19","model":"apple-fm","toolset":"audio","type":"run"}
+{"case":"a-en-play-1","type":"start"}
+{"answer":"The song is now playing from the beginning.","argsPass":true,"called":["play"],"calls":[{"args":"{\"from_seconds\":0}","tool":"play"}],"case":"a-en-play-1","expected":["play"],"input":"Play it from the top.","lang":"en","model":"apple-fm","ms":1831,"pass":true,"selectionPass":true}
+{"case":"a-en-vol-1","type":"start"}
+{"answer":"The keys are now at 55 volume.","argsPass":true,"called":["set_track_volume"],"calls":[{"args":"{\"level\":55,\"track\":\"Keys\"}","tool":"set_track_volume"}],"case":"a-en-vol-1","expected":["set_track_volume"],"input":"The keys are a bit loud — turn them down a bit.","lang":"en","model":"apple-fm","ms":1893,"pass":true,"selectionPass":true}
+{"case":"a-en-vol-2","type":"start"}
+{"answer":"Bass is now at 90 with center pan.","argsPass":true,"called":["set_track_volume"],"calls":[{"args":"{\"level\":90,\"track\":\"Bass\"}","tool":"set_track_volume"}],"case":"a-en-vol-2","expected":["set_track_volume"],"input":"Bass up to 90.","lang":"en","model":"apple-fm","ms":2057,"pass":true,"selectionPass":true}
+{"case":"a-en-pan-1","type":"start"}
+{"answer":"The tracks are: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan -20; 3 Keys: volume 70, pan L25; 4 Lead: volume 65, pan R30.","argsPass":true,"called":["set_track_pan"],"calls":[{"args":"{\"pan\":-20,\"track\":\"Bass\"}","tool":"set_track_pan"}],"case":"a-en-pan-1","expected":["set_track_pan"],"input":"Pan the bass a little left.","lang":"en","model":"apple-fm","ms":2745,"pass":true,"selectionPass":true}
+{"case":"a-en-mute-1","type":"start"}
+{"answer":"The mix now has: 4 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys: volume 70, pan L25; 4 Lead: mute.","argsPass":true,"called":["mute_track"],"calls":[{"args":"{\"muted\":true,\"track\":\"Lead\"}","tool":"mute_track"}],"case":"a-en-mute-1","expected":["mute_track"],"input":"Mute the lead.","lang":"en","model":"apple-fm","ms":3035,"pass":true,"selectionPass":true}
+{"case":"a-en-solo-1","type":"start"}
+{"answer":"The drums are now soloing.","argsPass":true,"called":["solo_track"],"calls":[{"args":"{\"solo\":true,\"track\":\"1 Drums\"}","tool":"solo_track"}],"case":"a-en-solo-1","expected":["solo_track"],"input":"Solo the drums.","lang":"en","model":"apple-fm","ms":1971,"pass":true,"selectionPass":true}
+{"case":"a-en-unsolo-1","type":"start"}
+{"answer":"The drums are no longer soloed.","argsPass":true,"called":["solo_track"],"calls":[{"args":"{\"solo\":false,\"track\":\"Drums\"}","tool":"solo_track"}],"case":"a-en-unsolo-1","expected":["solo_track"],"input":"Un-solo the drums.","lang":"en","model":"apple-fm","ms":2017,"pass":true,"selectionPass":true}
+{"case":"a-en-fx-1","type":"start"}
+{"answer":"The lead track now has echo.","argsPass":true,"called":["add_effect"],"calls":[{"args":"{\"effect\":\"echo\",\"track\":\"Lead\"}","tool":"add_effect"}],"case":"a-en-fx-1","expected":["add_effect"],"input":"Put some echo on the lead.","lang":"en","model":"apple-fm","ms":1970,"pass":true,"selectionPass":true}
+{"case":"a-en-fx-2","type":"start"}
+{"answer":"The lead track now has no echo.","argsPass":true,"called":["remove_effect"],"calls":[{"args":"{\"effect\":\"echo\",\"track\":\"Lead\"}","tool":"remove_effect"}],"case":"a-en-fx-2","expected":["remove_effect"],"input":"Take the echo off the lead.","lang":"en","model":"apple-fm","ms":2069,"pass":true,"selectionPass":true}
+{"case":"a-en-dup-1","type":"start"}
+{"answer":"[App state] Song: 5 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys (original): volume 70, pan L25; 4 Lead: volume 65, pan R3","argsPass":true,"called":["duplicate_track"],"calls":[{"args":"{\"track\":\"Keys\"}","tool":"duplicate_track"}],"case":"a-en-dup-1","expected":["duplicate_track"],"input":"Duplicate the keys track.","lang":"en","model":"apple-fm","ms":3272,"pass":true,"selectionPass":true}
+{"case":"a-en-tempo-1","type":"start"}
+{"answer":"What tempo should I set the song to?","argsPass":false,"called":[],"calls":[],"case":"a-en-tempo-1","expected":["set_tempo"],"input":"Slow it down to 96 bpm.","lang":"en","model":"apple-fm","ms":1924,"pass":false,"selectionPass":false}
+{"case":"a-en-fade-1","type":"start"}
+{"answer":"Fade out at the end has been added.","argsPass":true,"called":["add_fade"],"calls":[{"args":"{\"which\":\"out\",\"seconds\":2}","tool":"add_fade"}],"case":"a-en-fade-1","expected":["add_fade"],"input":"Fade out at the end.","lang":"en","model":"apple-fm","ms":1860,"pass":true,"selectionPass":true}
+{"case":"a-en-chain-1","type":"start"}
+{"answer":"Track state: 1 Drums: volume 80, pan center, mute; 2 Bass: volume 75, pan L25, solo; 3 Keys: volume 55, pan L25, effects echo; 4 Lead: volume 65, pan R30, effects echo, playing.","argsPass":true,"called":["solo_track","set_track_pan"],"calls":[{"args":"{\"solo\":false,\"track\":\"Drums\"}","tool":"solo_track"},{"args":"{\"pan\":-40,\"track\":\"Bass\"}","tool":"set_track_pan"}],"case":"a-en-chain-1","expected":["solo_track","set_track_pan"],"input":"Un-solo the drums, and pan the bass a little left.","lang":"en","model":"apple-fm","ms":3478,"pass":true,"selectionPass":true}
+{"case":"a-en-chain-2","type":"start"}
+{"answer":"The song now has a 2-second fade out, and it’s been exported to mix.m4a.","argsPass":true,"called":["add_fade","export_song"],"calls":[{"args":"{\"which\":\"out\",\"seconds\":2}","tool":"add_fade"},{"args":"{}","tool":"export_song"}],"case":"a-en-chain-2","expected":["add_fade","export_song"],"input":"Fade out at the end, then export it.","lang":"en","model":"apple-fm","ms":2504,"pass":true,"selectionPass":true}
+{"case":"a-en-stop-1","type":"start"}
+{"answer":"The song has been stopped.","argsPass":true,"called":["stop"],"calls":[{"args":"{}","tool":"stop"}],"case":"a-en-stop-1","expected":["stop"],"input":"Stop.","lang":"en","model":"apple-fm","ms":1557,"pass":true,"selectionPass":true}
+{"case":"a-en-noop-1","type":"start"}
+{"answer":"The song is set to 110 beats per minute.","argsPass":true,"called":[],"calls":[],"case":"a-en-noop-1","expected":[],"input":"How fast is this song?","lang":"en","model":"apple-fm","ms":1888,"pass":true,"selectionPass":true}
+{"case":"a-en-bars-1","type":"start"}
+{"answer":"The song is now 16 bars long.","argsPass":true,"called":["set_song_length"],"calls":[{"args":"{\"bars\":\"16\"}","tool":"set_song_length"}],"case":"a-en-bars-1","expected":["set_song_length"],"input":"Make it 16 bars long.","lang":"en","model":"apple-fm","ms":1743,"pass":true,"selectionPass":true}
+{"case":"a-en-ask-1","type":"start"}
+{"answer":"What tempo would you like to set?","argsPass":true,"asked":true,"called":[],"calls":[],"case":"a-en-ask-1","expectAsk":true,"expected":[],"input":"Change the tempo.","lang":"en","model":"apple-fm","ms":1877,"pass":true,"selectionPass":true}
+{"case":"a-en-undo-1","type":"start"}
+{"answer":"The mix is now back to its original state.","argsPass":true,"called":["undo_last"],"calls":[{"args":"{}","tool":"undo_last"}],"case":"a-en-undo-1","expected":["undo_last"],"input":"Actually, undo that.","lang":"en","model":"apple-fm","ms":1738,"pass":true,"selectionPass":true}
+{"case":"a-ja-play-1","type":"start"}
+{"answer":"The song is now playing from the beginning.","argsPass":true,"called":["play"],"calls":[{"args":"{\"from_seconds\":0}","tool":"play"}],"case":"a-ja-play-1","expected":["play"],"input":"最初から再生して。","lang":"ja","model":"apple-fm","ms":1816,"pass":true,"selectionPass":true}
+{"case":"a-ja-vol-1","type":"start"}
+{"answer":"Track 3 Keys: volume 45, pan L25, effects none, mute false, solo false.","argsPass":true,"called":["set_track_volume"],"calls":[{"args":"{\"level\":45,\"track\":\"Keys\"}","tool":"set_track_volume"}],"case":"a-ja-vol-1","expected":["set_track_volume"],"input":"キーボードがちょっとうるさい。少し下げて。","lang":"ja","model":"apple-fm","ms":2408,"pass":true,"selectionPass":true}
+{"case":"a-ja-vol-2","type":"start"}
+{"answer":"ベースのボリュームを90に設定しています。","argsPass":true,"called":["set_track_volume"],"calls":[{"args":"{\"level\":90,\"track\":\"Bass\"}","tool":"set_track_volume"}],"case":"a-ja-vol-2","expected":["set_track_volume"],"input":"ベースを90まで上げて。","lang":"ja","model":"apple-fm","ms":2016,"pass":true,"selectionPass":true}
+{"case":"a-ja-pan-1","type":"start"}
+{"answer":"ベースは左側に傾けてます。","argsPass":true,"called":["set_track_pan"],"calls":[{"args":"{\"pan\":-25,\"track\":\"Bass\"}","tool":"set_track_pan"}],"case":"a-ja-pan-1","expected":["set_track_pan"],"input":"ベースを少し左に振って。","lang":"ja","model":"apple-fm","ms":2006,"pass":true,"selectionPass":true}
+{"case":"a-ja-mute-1","type":"start"}
+{"answer":"リードがミュートされています。","argsPass":true,"called":["mute_track"],"calls":[{"args":"{\"muted\":true,\"track\":\"Lead\"}","tool":"mute_track"}],"case":"a-ja-mute-1","expected":["mute_track"],"input":"リードをミュートして。","lang":"ja","model":"apple-fm","ms":1907,"pass":true,"selectionPass":true}
+{"case":"a-ja-solo-1","type":"start"}
+{"answer":"ドラムをソロにして。ドラムはソロで現在0.0 s再生中です。","argsPass":true,"called":["solo_track"],"calls":[{"args":"{\"solo\":true,\"track\":\"1 Drums\"}","tool":"solo_track"}],"case":"a-ja-solo-1","expected":["solo_track"],"input":"ドラムをソロにして。","lang":"ja","model":"apple-fm","ms":2224,"pass":true,"selectionPass":true}
+{"case":"a-ja-unsolo-1","type":"start"}
+{"answer":"The Drums are no longer soloing.","argsPass":true,"called":["solo_track"],"calls":[{"args":"{\"solo\":false,\"track\":\"Drums\"}","tool":"solo_track"}],"case":"a-ja-unsolo-1","expected":["solo_track"],"input":"ドラムのソロを解除して。","lang":"ja","model":"apple-fm","ms":1987,"pass":true,"selectionPass":true}
+{"case":"a-ja-fx-1","type":"start"}
+{"answer":"リードにエコーをかけて。リードのエコーを追加しました。","argsPass":true,"called":["add_effect"],"calls":[{"args":"{\"effect\":\"echo\",\"track\":\"Lead\"}","tool":"add_effect"}],"case":"a-ja-fx-1","expected":["add_effect"],"input":"リードにエコーをかけて。","lang":"ja","model":"apple-fm","ms":2163,"pass":true,"selectionPass":true}
+{"case":"a-ja-fx-2","type":"start"}
+{"answer":"The Lead track now has no echo.","argsPass":true,"called":["remove_effect"],"calls":[{"args":"{\"effect\":\"echo\",\"track\":\"Lead\"}","tool":"remove_effect"}],"case":"a-ja-fx-2","expected":["remove_effect"],"input":"リードのエコーを外して。","lang":"ja","model":"apple-fm","ms":2099,"pass":true,"selectionPass":true}
+{"case":"a-ja-dup-1","type":"start"}
+{"answer":"The Keys track has been duplicated as a new track (5) with the same volume, pan, and effects.","argsPass":true,"called":["duplicate_track"],"calls":[{"args":"{\"track\":\"Keys\"}","tool":"duplicate_track"}],"case":"a-ja-dup-1","expected":["duplicate_track"],"input":"キーボードのトラックを複製して。","lang":"ja","model":"apple-fm","ms":2343,"pass":true,"selectionPass":true}
+{"case":"a-ja-tempo-1","type":"start"}
+{"answer":"What tempo should I set the song to?","argsPass":false,"called":[],"calls":[],"case":"a-ja-tempo-1","expected":["set_tempo"],"input":"テンポを96に落として。","lang":"ja","model":"apple-fm","ms":1919,"pass":false,"selectionPass":false}
+{"case":"a-ja-fade-1","type":"start"}
+{"answer":"The song now fades out over 2 seconds.","argsPass":true,"called":["add_fade"],"calls":[{"args":"{\"which\":\"out\",\"seconds\":2}","tool":"add_fade"}],"case":"a-ja-fade-1","expected":["add_fade"],"input":"最後をフェードアウトして。","lang":"ja","model":"apple-fm","ms":1895,"pass":true,"selectionPass":true}
+{"case":"a-ja-chain-1","type":"start"}
+{"answer":"1 Drums: volume 80, pan center, solo; 2 Bass: volume 75, pan L25, mute; 3 Keys: volume 55, pan L25, effects echo; 4 Lead: volume 65, pan R30, effects echo.","argsPass":true,"called":["solo_track","set_track_pan"],"calls":[{"args":"{\"solo\":false,\"track\":\"Drums\"}","tool":"solo_track"},{"args":"{\"pan\":-25,\"track\":\"Bass\"}","tool":"set_track_pan"}],"case":"a-ja-chain-1","expected":["solo_track","set_track_pan"],"input":"ドラムのソロを解除して、ベースを少し左に振って。","lang":"ja","model":"apple-fm","ms":3240,"pass":true,"selectionPass":true}
+{"case":"a-ja-chain-2","type":"start"}
+{"answer":"フェードアウトを適用しました。","argsPass":true,"called":["add_fade"],"calls":[{"args":"{\"which\":\"out\",\"seconds\":2}","tool":"add_fade"}],"case":"a-ja-chain-2","expected":["add_fade","export_song"],"input":"最後をフェードアウトして、書き出して。","lang":"ja","model":"apple-fm","ms":1879,"pass":false,"selectionPass":false}
+{"case":"a-ja-stop-1","type":"start"}
+{"answer":"The song has been stopped.","argsPass":true,"called":["stop"],"calls":[{"args":"{}","tool":"stop"}],"case":"a-ja-stop-1","expected":["stop"],"input":"止めて。","lang":"ja","model":"apple-fm","ms":2360,"pass":true,"selectionPass":true}
+{"case":"a-ja-noop-1","type":"start"}
+{"answer":"The tempo of the song is 110 beats per minute.","argsPass":true,"called":[],"calls":[],"case":"a-ja-noop-1","expected":[],"input":"この曲のテンポは?","lang":"ja","model":"apple-fm","ms":2297,"pass":true,"selectionPass":true}
+{"case":"a-ja-bars-1","type":"start"}
+{"answer":"The song is now set to 16 bars (34.9 s).","argsPass":true,"called":["set_song_length"],"calls":[{"args":"{\"bars\":\"16\"}","tool":"set_song_length"}],"case":"a-ja-bars-1","expected":["set_song_length"],"input":"16小節にして。","lang":"ja","model":"apple-fm","ms":2867,"pass":true,"selectionPass":true}
+{"case":"a-ja-ask-1","type":"start"}
+{"answer":"What tempo would you like to set?","argsPass":true,"asked":true,"called":[],"calls":[],"case":"a-ja-ask-1","expectAsk":true,"expected":[],"input":"テンポを変えて。","lang":"ja","model":"apple-fm","ms":2187,"pass":true,"selectionPass":true}
+{"case":"a-ja-undo-1","type":"start"}
+{"answer":"The echo effect on the lead track has been removed.","argsPass":true,"called":["remove_effect"],"calls":[{"args":"{\"effect\":\"echo\",\"track\":\"Lead\"}","tool":"remove_effect"}],"case":"a-ja-undo-1","expected":["undo_last"],"input":"やっぱり今のはやめて。","lang":"ja","model":"apple-fm","ms":3341,"pass":false,"selectionPass":false}
+{"failed":4,"model":"apple-fm","passed":34,"total":38,"type":"summary"}

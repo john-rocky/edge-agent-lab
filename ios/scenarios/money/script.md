@@ -28,6 +28,6 @@ filter→categorize chain, report days as numbers, a no-call case (the
 month total is in the state) and an ask-back ("Set a budget." — which,
 to what?).
 
-Routing: **17/28 on Apple FM via the Mac lane** (2026-08-19; the JA half
+Routing: **20/30 on Apple FM via the Mac lane** (2026-08-19; the JA half
 keeps adding a categorize or flag after a finder — the eagerness trait,
 still open).

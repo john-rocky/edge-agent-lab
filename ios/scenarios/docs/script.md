@@ -15,7 +15,7 @@ Launch: `--autorun --backend apple --scenario docs`; `--voice` for spoken
 beats; chat: `--scenario docs` without `--autorun`. The stage shows the
 open page, big, and the pages as a strip under it.
 
-Routing: **33/36 on Apple FM via the Mac lane** (2026-08-19, the best of
+Routing: **37/42 on Apple FM via the Mac lane** (2026-08-19, the best of
 the seven); not yet run on the phone. What those runs taught (fixes in): a canned bench result
 that echoed the wrong page ("on page 3" against a go_to_page(5)) made
 the model retry the call — the fake-results recipe, again; and asked

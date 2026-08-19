@@ -29,6 +29,6 @@ answers for order #5230, already on its way. Cases: 14 EN + 14 JA — the
 number-from-state axis, a search→add chain, a no-call case (the total is
 in the state) and an ask-back ("Add it to the cart." — add what?).
 
-Routing: **21/28 on Apple FM via the Mac lane** (2026-08-19; up from
+Routing: **23/34 on Apple FM via the Mac lane** (2026-08-19; up from
 13/28 before "the results in the state are live" replaced "search
 before adding" — the model had obeyed that line literally on every add).

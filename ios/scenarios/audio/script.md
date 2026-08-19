@@ -17,7 +17,7 @@ mixer is on stage the whole run (`MixerBoard`): a fader per track,
 visibly at its level — when the model turns the keys down, the fader
 moves.
 
-Routing: **32/36 on Apple FM via the Mac lane** (2026-08-19); not yet
+Routing: **34/38 on Apple FM via the Mac lane** (2026-08-19); not yet
 run on the phone (sound itself is a device-day check). What those runs
 taught (fixes in): as `percent`, "turn them down a bit" arrived as **5**
 — a step, not a fader position; renamed `level` ("where the fader ends

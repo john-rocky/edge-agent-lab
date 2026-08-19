@@ -222,7 +222,7 @@ every addition moves the wells. Re-run the pack's cases when the menu
 grows — this is exactly what the cases are for, and on the Mac lane it
 costs minutes.
 
-## Asking back must be licensed, and narrowly
+## Asking back must be licensed, and narrowly — best of all, routably
 
 By default Apple FM does not ask for a missing required argument in a
 state pack — it invents: "Add a caption." got a made-up caption,
@@ -232,8 +232,57 @@ asked for a duration the request had already given ("for the first
 three seconds") and for a speed "slow motion" already implies. The
 sentence that held: ask **only** when something required is truly
 absent, and *never about a detail the request or the state already
-gives*. The ask-back cases (`expectAsk`) keep both failure modes
-measured: inventing when it should ask, asking when it knows.
+gives*.
+
+The stronger fix was structural: an `ask_user(question)` **tool**, so
+asking is routed like any other capability and the bench can score the
+call. With it in the set, "Refund the order." became
+`ask_user("which order?")` where prose licenses had produced an invented
+number. What remains measured: the records packs like to *look first,
+ask second* (a finder call and then ask_user — half right), and Japanese
+requests still get an invented value mid-chain more often than English
+ones. The ask-back cases (`expectAsk`) keep all of it scored.
+
+## A confirm argument holds until the user's words are the tool's verb
+
+Destructive tools got a `confirm` argument ("pass false unless the user
+has already said yes; false shows them what will happen"). Measured on
+the same afternoon: `refund_order` **held** — "Refund order 1007." came
+in as confirm false and the model relayed the confirmation question —
+while `checkout` **collapsed**: "Check out." arrived as confirm *true*,
+order placed on the first ask, in both languages. The difference reads
+as consent: when the user's own words are the tool's verb, the model
+takes the request as the confirmation. Rewording the guide ("false on
+the first call, always") did not fix checkout and broke refund — see
+the noise-floor recipe. For a verb-named destructive action, do not
+expect an argument to hold the gate; gate it in the app (the tool's
+false-branch is the app's own confirmation dialog either way).
+
+## Undo must own the going-back words
+
+`undo_last` in every pack, described "Undo the last change." Asked
+「やっぱりやめて」 after a mix change, Apple FM did not call it — it
+**walked the change backwards by hand**: re-set four faders to their old
+values and removed the effect, one call each. In the cart, "undo that"
+became `remove_from_cart`. The same primitives instinct that walks past
+`make_reel`: given a goal it can reach with tools it trusts, the model
+re-derives the steps rather than calling the meta-tool. Manual reversal
+is *almost* right — until the history and the model's memory of the
+change disagree. If undo matters, put the going-back words in its
+description, expect the by-hand reversal anyway, and measure it.
+
+## Instructions have a noise floor — put contracts in the tools
+
+Three rounds of rewording one instructions sentence — "after a finder
+returns, stop" versus "…then make the action call" — swung the store
+pack 27/44 → 22/44 and back, while identical builds varied by ±2–4
+cases per pack between runs. Below that floor, prompt surgery is
+indistinguishable from noise: the traits underneath (a spurious second
+call after Japanese finders, a tool grabbed on no-call questions) did
+not move for any wording tried. What did move behavior, every time, was
+structure at the tool boundary: argument names, enums and steps,
+per-argument guides, gates, an ask tool. Spend wording effort there; a
+single Mac smoke run ranks packs, not sentences.
 
 ## State answers what the state contains — say what it doesn't
 

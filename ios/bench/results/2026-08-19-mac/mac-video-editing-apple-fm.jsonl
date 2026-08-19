@@ -1,0 +1,82 @@
+{"cases":40,"date":"2026-08-19","model":"apple-fm","toolset":"video","type":"run"}
+{"case":"v-en-trim-1","type":"start"}
+{"answer":"The first two seconds of clip 1 have been cut.","argsPass":true,"called":["trim_clip"],"calls":[{"args":"{\"seconds\":2,\"edge\":\"start\"}","tool":"trim_clip"}],"case":"v-en-trim-1","expected":["trim_clip"],"input":"Cut the first two seconds.","lang":"en","model":"apple-fm","ms":2280,"pass":true,"selectionPass":true}
+{"case":"v-en-trim-2","type":"start"}
+{"answer":"The timeline now shows clip 1 from 0–11.4 s.","argsPass":true,"called":["trim_clip"],"calls":[{"args":"{\"seconds\":1,\"edge\":\"end\"}","tool":"trim_clip"}],"case":"v-en-trim-2","expected":["trim_clip"],"input":"Chop the last second off.","lang":"en","model":"apple-fm","ms":1964,"pass":true,"selectionPass":true}
+{"case":"v-en-split-1","type":"start"}
+{"answer":"The timeline now has two clips split at the 5-second mark.","argsPass":true,"called":["split_clip"],"calls":[{"args":"{\"seconds\":5}","tool":"split_clip"}],"case":"v-en-split-1","expected":["split_clip"],"input":"Split it at the playhead.","lang":"en","model":"apple-fm","ms":1941,"pass":true,"selectionPass":true}
+{"case":"v-en-speed-1","type":"start"}
+{"answer":"The timeline shows clip 1 at 0–12.4 s, playhead at 5 s, and the clip is now at half speed.","argsPass":true,"called":["set_clip_speed"],"calls":[{"args":"{\"speed\":0.5,\"clip\":1}","tool":"set_clip_speed"}],"case":"v-en-speed-1","expected":["set_clip_speed"],"input":"Slow motion — half speed.","lang":"en","model":"apple-fm","ms":2245,"pass":true,"selectionPass":true}
+{"case":"v-en-crop-1","type":"start"}
+{"answer":"The timeline now has one vertical clip (12.4 s, frame 1920×1080).","argsPass":true,"called":["crop_video"],"calls":[{"args":"{\"aspect\":\"9:16\"}","tool":"crop_video"}],"case":"v-en-crop-1","expected":["crop_video"],"input":"Make it vertical for Reels.","lang":"en","model":"apple-fm","ms":2083,"pass":true,"selectionPass":true}
+{"case":"v-en-crop-2","type":"start"}
+{"answer":"The timeline now has a square crop (1920×1080).","argsPass":true,"called":["crop_video"],"calls":[{"args":"{\"aspect\":\"1:1\"}","tool":"crop_video"}],"case":"v-en-crop-2","expected":["crop_video"],"input":"Square crop.","lang":"en","model":"apple-fm","ms":1947,"pass":true,"selectionPass":true}
+{"case":"v-en-caption-1","type":"start"}
+{"answer":"The caption 'Day 1' has been added at the top for the first three seconds.","argsPass":true,"called":["add_caption"],"calls":[{"args":"{\"position\":\"top\",\"duration_seconds\":3,\"text\":\"Day 1\",\"start_seconds\":0}","tool":"add_caption"}],"case":"v-en-caption-1","expected":["add_caption"],"input":"Add the caption 'Day 1' at the top for the first three seconds.","lang":"en","model":"apple-fm","ms":2194,"pass":true,"selectionPass":true}
+{"case":"v-en-fade-1","type":"start"}
+{"answer":"Fade out added at the end.","argsPass":true,"called":["add_fade"],"calls":[{"args":"{\"seconds\":1,\"which\":\"out\"}","tool":"add_fade"}],"case":"v-en-fade-1","expected":["add_fade"],"input":"Fade out at the end.","lang":"en","model":"apple-fm","ms":1783,"pass":true,"selectionPass":true}
+{"case":"v-en-mute-1","type":"start"}
+{"answer":"The video is now muted.","argsPass":true,"called":["set_volume"],"calls":[{"args":"{\"percent\":0}","tool":"set_volume"}],"case":"v-en-mute-1","expected":["set_volume"],"input":"Mute it.","lang":"en","model":"apple-fm","ms":1651,"pass":true,"selectionPass":true}
+{"case":"v-en-delete-1","type":"start"}
+{"answer":"The second clip has been deleted.","argsPass":true,"called":["delete_clip"],"calls":[{"args":"{\"number\":2}","tool":"delete_clip"}],"case":"v-en-delete-1","expected":["delete_clip"],"input":"Delete the second clip.","lang":"en","model":"apple-fm","ms":1655,"pass":true,"selectionPass":true}
+{"case":"v-en-select-1","type":"start"}
+{"answer":"The second clip is now playing in slow motion.","argsPass":true,"called":["set_clip_speed"],"calls":[{"args":"{\"speed\":0.5,\"clip\":2}","tool":"set_clip_speed"}],"case":"v-en-select-1","expected":["set_clip_speed"],"input":"Make the second clip slow motion.","lang":"en","model":"apple-fm","ms":1859,"pass":true,"selectionPass":true}
+{"case":"v-en-multi-1","type":"start"}
+{"answer":"The first two seconds were cut, the clip cropped to a vertical aspect, and a fade-out was added at the end.","argsPass":true,"called":["trim_clip","crop_video","add_fade"],"calls":[{"args":"{\"edge\":\"start\",\"seconds\":2}","tool":"trim_clip"},{"args":"{\"aspect\":\"9:16\"}","tool":"crop_video"},{"args":"{\"seconds\":2,\"which\":\"out\"}","tool":"add_fade"}],"case":"v-en-multi-1","expected":["trim_clip","crop_video","add_fade"],"input":"Cut the first two seconds, make it vertical, and fade out at the end.","lang":"en","model":"apple-fm","ms":3003,"pass":true,"selectionPass":true}
+{"case":"v-en-export-1","type":"start"}
+{"answer":"The video has been exported to the photo library.","argsPass":true,"called":["export_video"],"calls":[{"args":"{}","tool":"export_video"}],"case":"v-en-export-1","expected":["export_video"],"input":"Export it.","lang":"en","model":"apple-fm","ms":1575,"pass":true,"selectionPass":true}
+{"case":"v-en-revert-1","type":"start"}
+{"answer":"The video is now back to its original state.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"v-en-revert-1","expected":["revert_to_original"],"input":"Undo everything — back to the original.","lang":"en","model":"apple-fm","ms":1793,"pass":true,"selectionPass":true}
+{"case":"v-en-noop-1","type":"start"}
+{"answer":"The video is 12.4 seconds long.","argsPass":true,"called":[],"calls":[],"case":"v-en-noop-1","expected":[],"input":"How long is the video?","lang":"en","model":"apple-fm","ms":1866,"pass":true,"selectionPass":true}
+{"case":"v-en-reel-1","type":"start"}
+{"answer":"Your video has been cropped to 9:16, a fade added, and it's now exported to your photo library.","argsPass":true,"called":["crop_video","add_fade","export_video"],"calls":[{"args":"{\"aspect\":\"9:16\"}","tool":"crop_video"},{"args":"{\"seconds\":1,\"which\":\"both\"}","tool":"add_fade"},{"args":"{}","tool":"export_video"}],"case":"v-en-reel-1","expected":["make_reel"],"input":"Turn it into a Reel.","lang":"en","model":"apple-fm","ms":2803,"pass":false,"selectionPass":false}
+{"case":"v-en-music-1","type":"start"}
+{"answer":"Calm music has been added under the video.","argsPass":true,"called":["add_music"],"calls":[{"args":"{\"style\":\"calm\"}","tool":"add_music"}],"case":"v-en-music-1","expected":["add_music"],"input":"Put some calm music under it.","lang":"en","model":"apple-fm","ms":1664,"pass":true,"selectionPass":true}
+{"case":"v-en-ask-1","type":"start"}
+{"answer":"What text should the caption say?","argsPass":true,"asked":true,"called":[],"calls":[],"case":"v-en-ask-1","expectAsk":true,"expected":[],"input":"Add a caption.","lang":"en","model":"apple-fm","ms":1869,"pass":true,"selectionPass":true}
+{"case":"v-en-autocap-1","type":"start"}
+{"answer":"The speech has been automatically captioned with 3 subtitles.","argsPass":true,"called":["auto_captions"],"calls":[{"args":"{}","tool":"auto_captions"}],"case":"v-en-autocap-1","expected":["auto_captions"],"input":"Caption the speech automatically.","lang":"en","model":"apple-fm","ms":1788,"pass":true,"selectionPass":true}
+{"case":"v-en-undo-1","type":"start"}
+{"answer":"The fade-out has been undone.","argsPass":true,"called":["undo_last"],"calls":[{"args":"{}","tool":"undo_last"}],"case":"v-en-undo-1","expected":["undo_last"],"input":"Actually, undo that.","lang":"en","model":"apple-fm","ms":1633,"pass":true,"selectionPass":true}
+{"case":"v-ja-trim-1","type":"start"}
+{"answer":"The first two seconds of clip 1 have been removed.","argsPass":true,"called":["trim_clip"],"calls":[{"args":"{\"seconds\":2,\"edge\":\"start\"}","tool":"trim_clip"}],"case":"v-ja-trim-1","expected":["trim_clip"],"input":"最初の2秒を消して。","lang":"ja","model":"apple-fm","ms":1912,"pass":true,"selectionPass":true}
+{"case":"v-ja-trim-2","type":"start"}
+{"answer":"The last 1 second of clip 1 has been trimmed.","argsPass":true,"called":["trim_clip"],"calls":[{"args":"{\"seconds\":1,\"edge\":\"end\"}","tool":"trim_clip"}],"case":"v-ja-trim-2","expected":["trim_clip"],"input":"最後の1秒を切って。","lang":"ja","model":"apple-fm","ms":1979,"pass":true,"selectionPass":true}
+{"case":"v-ja-split-1","type":"start"}
+{"answer":"The clip is now split at the playhead position of 5 seconds, creating two new clips.","argsPass":true,"called":["split_clip"],"calls":[{"args":"{\"seconds\":5}","tool":"split_clip"}],"case":"v-ja-split-1","expected":["split_clip"],"input":"再生ヘッドの位置で分割して。","lang":"ja","model":"apple-fm","ms":2018,"pass":true,"selectionPass":true}
+{"case":"v-ja-speed-1","type":"start"}
+{"answer":"The clip is now playing at half speed.","argsPass":true,"called":["set_clip_speed"],"calls":[{"args":"{\"speed\":0.5,\"clip\":1}","tool":"set_clip_speed"}],"case":"v-ja-speed-1","expected":["set_clip_speed"],"input":"半分の速さのスローモーションにして。","lang":"ja","model":"apple-fm","ms":1951,"pass":true,"selectionPass":true}
+{"case":"v-ja-crop-1","type":"start"}
+{"answer":"The frame is now cropped to a 9:16 aspect ratio.","argsPass":true,"called":["crop_video"],"calls":[{"args":"{\"aspect\":\"9:16\"}","tool":"crop_video"}],"case":"v-ja-crop-1","expected":["crop_video"],"input":"縦動画にして。","lang":"ja","model":"apple-fm","ms":2016,"pass":true,"selectionPass":true}
+{"case":"v-ja-crop-2","type":"start"}
+{"answer":"The frame is now cropped to a 1:1 aspect ratio.","argsPass":true,"called":["crop_video"],"calls":[{"args":"{\"aspect\":\"1:1\"}","tool":"crop_video"}],"case":"v-ja-crop-2","expected":["crop_video"],"input":"正方形にクロップして。","lang":"ja","model":"apple-fm","ms":2062,"pass":true,"selectionPass":true}
+{"case":"v-ja-caption-1","type":"start"}
+{"answer":"I've added the caption \"Day 1\" at the top for the first 3 seconds.","argsPass":true,"called":["add_caption"],"calls":[{"args":"{\"position\":\"top\",\"duration_seconds\":3,\"text\":\"Day 1\",\"start_seconds\":0}","tool":"add_caption"}],"case":"v-ja-caption-1","expected":["add_caption"],"input":"最初の3秒間、上に「Day 1」というキャプションを入れて。","lang":"ja","model":"apple-fm","ms":2421,"pass":true,"selectionPass":true}
+{"case":"v-ja-fade-1","type":"start"}
+{"answer":"The timeline now has a 1-second fade-out at the end.","argsPass":true,"called":["add_fade"],"calls":[{"args":"{\"seconds\":1,\"which\":\"out\"}","tool":"add_fade"}],"case":"v-ja-fade-1","expected":["add_fade"],"input":"最後をフェードアウトして。","lang":"ja","model":"apple-fm","ms":2087,"pass":true,"selectionPass":true}
+{"case":"v-ja-mute-1","type":"start"}
+{"answer":"The volume has been muted.","argsPass":true,"called":["set_volume"],"calls":[{"args":"{\"percent\":0}","tool":"set_volume"}],"case":"v-ja-mute-1","expected":["set_volume"],"input":"音を消して。","lang":"ja","model":"apple-fm","ms":1735,"pass":true,"selectionPass":true}
+{"case":"v-ja-delete-1","type":"start"}
+{"answer":"Clip 2 has been removed. Only clip 1 remains.","argsPass":true,"called":["delete_clip"],"calls":[{"args":"{\"number\":2}","tool":"delete_clip"}],"case":"v-ja-delete-1","expected":["delete_clip"],"input":"2つ目のクリップを削除して。","lang":"ja","model":"apple-fm","ms":1908,"pass":true,"selectionPass":true}
+{"case":"v-ja-select-1","type":"start"}
+{"answer":"I’ve set clip 2 to slow motion.","argsPass":true,"called":["select_clip","set_clip_speed"],"calls":[{"args":"{\"number\":2}","tool":"select_clip"},{"args":"{\"speed\":0.5,\"clip\":2}","tool":"set_clip_speed"}],"case":"v-ja-select-1","expected":["set_clip_speed"],"input":"2つ目のクリップをスローモーションにして。","lang":"ja","model":"apple-fm","ms":2621,"pass":false,"selectionPass":false}
+{"case":"v-ja-multi-1","type":"start"}
+{"answer":"The timeline now has the first 10.4 seconds of clip 1, the frame is 1920×1080 (portrait), and the video fades out over 2 seconds.","argsPass":true,"called":["trim_clip","crop_video","add_fade"],"calls":[{"args":"{\"edge\":\"start\",\"seconds\":2}","tool":"trim_clip"},{"args":"{\"aspect\":\"9:16\"}","tool":"crop_video"},{"args":"{\"seconds\":2,\"which\":\"out\"}","tool":"add_fade"}],"case":"v-ja-multi-1","expected":["trim_clip","crop_video","add_fade"],"input":"最初の2秒を消して、縦動画にして、最後をフェードアウトして。","lang":"ja","model":"apple-fm","ms":3472,"pass":true,"selectionPass":true}
+{"case":"v-ja-export-1","type":"start"}
+{"answer":"I added a bottom caption saying \"動画を書き出して。\" for 3 seconds.","argsPass":true,"called":["add_caption"],"calls":[{"args":"{\"position\":\"bottom\",\"duration_seconds\":3,\"text\":\"動画を書き出して。\",\"start_seconds\":0}","tool":"add_caption"}],"case":"v-ja-export-1","expected":["export_video"],"input":"動画を書き出して。","lang":"ja","model":"apple-fm","ms":2571,"pass":false,"selectionPass":false}
+{"case":"v-ja-revert-1","type":"start"}
+{"answer":"All edits have been discarded, returning to the original video.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"v-ja-revert-1","expected":["revert_to_original"],"input":"全部やめて、元の動画に戻して。","lang":"ja","model":"apple-fm","ms":1950,"pass":true,"selectionPass":true}
+{"case":"v-ja-noop-1","type":"start"}
+{"answer":"The video is 12.4 seconds long.","argsPass":true,"called":["ask_user"],"calls":[{"args":"{\"question\":\"How many seconds long is this video?\"}","tool":"ask_user"}],"case":"v-ja-noop-1","expected":[],"input":"この動画、何秒ある?","lang":"ja","model":"apple-fm","ms":2031,"pass":false,"selectionPass":false}
+{"case":"v-ja-reel-1","type":"start"}
+{"answer":"Your リール video is now cropped, faded, and saved to the photo library.","argsPass":true,"called":["crop_video","add_fade","export_video"],"calls":[{"args":"{\"aspect\":\"9:16\"}","tool":"crop_video"},{"args":"{\"seconds\":1,\"which\":\"both\"}","tool":"add_fade"},{"args":"{}","tool":"export_video"}],"case":"v-ja-reel-1","expected":["make_reel"],"input":"リールにして。","lang":"ja","model":"apple-fm","ms":2632,"pass":false,"selectionPass":false}
+{"case":"v-ja-music-1","type":"start"}
+{"answer":"Calm background music has been added to the video.","argsPass":true,"called":["add_music"],"calls":[{"args":"{\"style\":\"calm\"}","tool":"add_music"}],"case":"v-ja-music-1","expected":["add_music"],"input":"落ち着いた感じのBGMを付けて。","lang":"ja","model":"apple-fm","ms":1938,"pass":true,"selectionPass":true}
+{"case":"v-ja-ask-1","type":"start"}
+{"answer":"キャプションを付けて完了しました。","argsPass":true,"asked":false,"called":["add_caption"],"calls":[{"args":"{\"position\":\"top\",\"duration_seconds\":3,\"text\":\"キャプション\",\"start_seconds\":5}","tool":"add_caption"}],"case":"v-ja-ask-1","expectAsk":true,"expected":[],"input":"キャプションを付けて。","lang":"ja","model":"apple-fm","ms":2194,"pass":false,"selectionPass":false}
+{"case":"v-ja-autocap-1","type":"start"}
+{"answer":"字幕を自動で追加したことをしました。","argsPass":true,"called":["auto_captions"],"calls":[{"args":"{}","tool":"auto_captions"}],"case":"v-ja-autocap-1","expected":["auto_captions"],"input":"音声から自動で字幕を付けて。","lang":"ja","model":"apple-fm","ms":1777,"pass":true,"selectionPass":true}
+{"case":"v-ja-undo-1","type":"start"}
+{"answer":"I've undone the fade-out. The timeline now shows the original state.","argsPass":true,"called":["undo_last"],"calls":[{"args":"{}","tool":"undo_last"}],"case":"v-ja-undo-1","expected":["undo_last"],"input":"やっぱり今のはやめて。","lang":"ja","model":"apple-fm","ms":1934,"pass":true,"selectionPass":true}
+{"failed":6,"model":"apple-fm","passed":34,"total":40,"type":"summary"}

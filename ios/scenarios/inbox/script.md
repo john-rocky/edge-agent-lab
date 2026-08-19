@@ -29,6 +29,6 @@ Cases: 14 EN + 14 JA — three find-then-act chains, a no-call case (the
 unread count is in the state) and an ask-back ("Snooze it." — which
 one?).
 
-Routing: **17/28 on Apple FM via the Mac lane** (2026-08-19; the misses
+Routing: **15/34 on Apple FM via the Mac lane** (2026-08-19; the misses
 are search_mail where list_inbox was the named slice, and a search
 before replies the state already numbered).
