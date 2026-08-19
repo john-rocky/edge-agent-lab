@@ -32,6 +32,9 @@ case "$SCENARIO" in
   store) TOOLSET=store ;;
   audio) TOOLSET=audio ;;
   docs) TOOLSET=docs ;;
+  shopping) TOOLSET=shopping ;;
+  money) TOOLSET=money ;;
+  inbox) TOOLSET=inbox ;;
   *) echo "unknown scenario $SCENARIO"; exit 1 ;;
 esac
 [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }

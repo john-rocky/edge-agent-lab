@@ -105,6 +105,8 @@ def load(paths):
 
 
 def mark(rec, case, run_date=None):
+    if rec is not None and rec.get("expectAsk"):
+        return "✓" if rec.get("pass") else "✗"
     if rec is None:
         return "·"
     if rec.get("error"):

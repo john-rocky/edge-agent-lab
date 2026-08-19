@@ -35,13 +35,23 @@ existing app categories, and it looks like this:
 | # | app type (the real ones) | what a pack calls | status |
 |---|---|---|---|
 | ① | Image editing — Lightroom / Canva | adjust, crop, filter, cut out, save; the photo alone as input | **done**: photo-editing, vision, polish |
-| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, export | **built** (video-editing: 12 tools, 6 beats, 30 cases); first run on Apple FM when the phone is back |
-| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **built** (audio: 15 tools, 6 beats, 32 cases; four synthesized tracks through AVAudioEngine) |
-| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, convert | **built** (docs: 12 tools, 7 beats, 30 cases; a real PDF through PDFKit) |
-| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built** (store: 14 tools, 7 beats, 34 cases with state); first run on Apple FM when the phone is back |
+| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, music, export; make_reel as the one-call compound | **built** (video-editing: 15 tools, 6 beats, 36 cases) |
+| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **built** (audio: 16 tools, 6 beats, 36 cases; four synthesized tracks through AVAudioEngine) |
+| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, watermark, extract | **built** (docs: 14 tools, 7 beats, 36 cases; a real PDF through PDFKit) |
+| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built** (store: 16 tools, 7 beats, 40 cases) |
+| ⑥ | Shopping — the buyer's side (Amazon) | search, sort, "the second one" → cart, coupon, checkout, track | **built** (shopping: 9 tools, 6 beats, 28 cases) |
+| ⑦ | Personal finance — Money Forward | filter / search transactions, categorize the selection, budgets, reports, find subscriptions | **built** (money: 9 tools, 6 beats, 28 cases) |
+| ⑧ | Mail triage — Spark / Gmail | list / search → archive, snooze, flag; a reply drafted, never sent | **built** (inbox: 9 tools, 6 beats, 28 cases; all data canned) |
 
-All five are built (2026-08-19); none of ②–⑤ has run on the phone yet —
-each pack's script.md says what to read in run.log on the first run.
+All eight are built (2026-08-19), and none has run on the phone yet — but
+routing no longer waits for the phone: the app builds for Mac Catalyst
+(Apple FM is available on the Mac, tools and vision included), so every
+pack's cases run there first (`ios/bench/run-mac.sh`). The Mac runs are
+smoke tests — the model table stays device-measured — and they already
+paid for themselves: eleven routing bugs found and fixed before any
+recording (see the git log around 2026-08-19). What still needs the
+device: real effects (pixels, speaker, permissions, AlarmKit), timing,
+and every number that goes in the table.
 
 Why these and in this order:
 
