@@ -49,7 +49,7 @@
     ] },
   { "id": "s-en-refund-1", "input": "Refund order 1007.", "lang": "en",
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
-    "expected": [{"tool": "refund_order", "args": {"order_number": {"number": 1007, "tol": 0}}}] },
+    "expected": [{"tool": "refund_order", "args": {"order_number": {"number": 1007, "tol": 0}, "confirm": {"equals": "false"}}}] },
   { "id": "s-en-sales-1", "input": "How were sales this week?", "lang": "en",
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
     "expected": [{"tool": "sales_summary", "args": {"days": {"number": 7, "tol": 0}}}] },
@@ -66,6 +66,12 @@
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
     "expectAsk": true,
     "expected": [] },
+  { "id": "s-en-refund-2", "input": "Yes, go ahead.", "lang": "en",
+    "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Awaiting confirmation: refund order #1007 (Goro Ito, ¥7,200). Selection: none — search or filter first, then act.",
+    "expected": [{"tool": "refund_order", "args": {"order_number": {"number": 1007, "tol": 0}, "confirm": {"equals": "true"}}}] },
+  { "id": "s-en-undo-1", "input": "Actually, undo that last change.", "lang": "en",
+    "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: 6 products from stock below 5: Wool Beanie (¥3,200, stock 0); Straw Hat (¥4,600, stock 1); Wide Chinos (¥8,900, stock 2); Linen Shirt (¥6,800, stock 3); Wool Scarf (¥5,400, stock 4); Field Jacket (¥16,500, stock 4).",
+    "expected": [{"tool": "undo_last"}] },
 
   { "id": "s-ja-lowstock-1", "input": "在庫が5個未満の商品はどれ?", "lang": "ja",
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
@@ -117,7 +123,7 @@
     ] },
   { "id": "s-ja-refund-1", "input": "注文1007を返金して。", "lang": "ja",
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
-    "expected": [{"tool": "refund_order", "args": {"order_number": {"number": 1007, "tol": 0}}}] },
+    "expected": [{"tool": "refund_order", "args": {"order_number": {"number": 1007, "tol": 0}, "confirm": {"equals": "false"}}}] },
   { "id": "s-ja-sales-1", "input": "今週の売上はどうだった?", "lang": "ja",
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
     "expected": [{"tool": "sales_summary", "args": {"days": {"number": 7, "tol": 0}}}] },
@@ -133,5 +139,11 @@
   { "id": "s-ja-ask-1", "input": "注文を返金して。", "lang": "ja",
     "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: none — search or filter first, then act.",
     "expectAsk": true,
-    "expected": [] }
+    "expected": [] },
+  { "id": "s-ja-refund-2", "input": "はい、進めて。", "lang": "ja",
+    "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Awaiting confirmation: refund order #1007 (Goro Ito, ¥7,200). Selection: none — search or filter first, then act.",
+    "expected": [{"tool": "refund_order", "args": {"order_number": {"number": 1007, "tol": 0}, "confirm": {"equals": "true"}}}] },
+  { "id": "s-ja-undo-1", "input": "やっぱりさっきの変更を取り消して。", "lang": "ja",
+    "state": "Store: 24 products (18 active, 4 draft, 2 archived), 20 orders (10 unfulfilled, 5 awaiting payment). Selection: 6 products from stock below 5: Wool Beanie (¥3,200, stock 0); Straw Hat (¥4,600, stock 1); Wide Chinos (¥8,900, stock 2); Linen Shirt (¥6,800, stock 3); Wool Scarf (¥5,400, stock 4); Field Jacket (¥16,500, stock 4).",
+    "expected": [{"tool": "undo_last"}] }
 ]

@@ -45,6 +45,9 @@
     "state": "Money: 30 transactions in the last month, ¥76,000 spent, 5 uncategorized. Budgets: eating_out ¥20,000; groceries ¥40,000; subscriptions ¥5,000; transport ¥10,000. Selection: none — list, search or filter first, then act.",
     "expectAsk": true,
     "expected": [] },
+  { "id": "m-en-undo-1", "input": "Actually, undo that.", "lang": "en",
+    "state": "Money: 30 transactions in the last month, ¥76,000 spent, 5 uncategorized. Budgets: eating_out ¥20,000; groceries ¥40,000; subscriptions ¥5,000; transport ¥10,000. Selection: 5 from uncategorized: Seven-Eleven ¥680 (today, uncategorized); Starbucks ¥720 (3 d ago, uncategorized); Don Quijote ¥2,890 (7 d ago, uncategorized); Seven-Eleven ¥540 (12 d ago, uncategorized); Book Off ¥880 (19 d ago, uncategorized).",
+    "expected": [{"tool": "undo_last"}] },
 
   { "id": "m-ja-report-1", "input": "今週いくら使った?", "lang": "ja",
     "state": "Money: 30 transactions in the last month, ¥76,000 spent, 5 uncategorized. Budgets: eating_out ¥20,000; groceries ¥40,000; subscriptions ¥5,000; transport ¥10,000. Selection: none — list, search or filter first, then act.",
@@ -91,5 +94,8 @@
   { "id": "m-ja-ask-1", "input": "予算を設定して。", "lang": "ja",
     "state": "Money: 30 transactions in the last month, ¥76,000 spent, 5 uncategorized. Budgets: eating_out ¥20,000; groceries ¥40,000; subscriptions ¥5,000; transport ¥10,000. Selection: none — list, search or filter first, then act.",
     "expectAsk": true,
-    "expected": [] }
+    "expected": [] },
+  { "id": "m-ja-undo-1", "input": "やっぱり今のを取り消して。", "lang": "ja",
+    "state": "Money: 30 transactions in the last month, ¥76,000 spent, 5 uncategorized. Budgets: eating_out ¥20,000; groceries ¥40,000; subscriptions ¥5,000; transport ¥10,000. Selection: 5 from uncategorized: Seven-Eleven ¥680 (today, uncategorized); Starbucks ¥720 (3 d ago, uncategorized); Don Quijote ¥2,890 (7 d ago, uncategorized); Seven-Eleven ¥540 (12 d ago, uncategorized); Book Off ¥880 (19 d ago, uncategorized).",
+    "expected": [{"tool": "undo_last"}] }
 ]

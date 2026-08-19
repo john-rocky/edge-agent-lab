@@ -35,13 +35,13 @@ existing app categories, and it looks like this:
 | # | app type (the real ones) | what a pack calls | status |
 |---|---|---|---|
 | ① | Image editing — Lightroom / Canva | adjust, crop, filter, cut out, save; the photo alone as input | **done**: photo-editing, vision, polish |
-| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, music, export; make_reel as the one-call compound | **built** (video-editing: 15 tools, 6 beats, 36 cases) |
-| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **built** (audio: 16 tools, 6 beats, 36 cases; four synthesized tracks through AVAudioEngine) |
-| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, watermark, extract | **built** (docs: 14 tools, 7 beats, 36 cases; a real PDF through PDFKit) |
-| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built** (store: 16 tools, 7 beats, 40 cases) |
-| ⑥ | Shopping — the buyer's side (Amazon) | search, sort, "the second one" → cart, coupon, checkout, track | **built** (shopping: 9 tools, 6 beats, 28 cases) |
-| ⑦ | Personal finance — Money Forward | filter / search transactions, categorize the selection, budgets, reports, find subscriptions | **built** (money: 9 tools, 6 beats, 28 cases) |
-| ⑧ | Mail triage — Spark / Gmail | list / search → archive, snooze, flag; a reply drafted, never sent | **built** (inbox: 9 tools, 6 beats, 28 cases; all data canned) |
+| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, music, export; make_reel as the one-call compound | **built** (video-editing: 18 tools incl. auto_captions, 40 cases) |
+| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | **built** (audio: 18 tools, 38 cases; four synthesized tracks through AVAudioEngine) |
+| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, watermark, extract | **built** (docs: 18 tools incl. form filling and redaction, 42 cases; a real PDF through PDFKit) |
+| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **built** (store: 18 tools, 44 cases) |
+| ⑥ | Shopping — the buyer's side (Amazon) | search, sort, "the second one" → cart, coupon, checkout, track | **built** (shopping: 12 tools, 34 cases) |
+| ⑦ | Personal finance — Money Forward | filter / search transactions, categorize the selection, budgets, reports, find subscriptions | **built** (money: 11 tools, 30 cases) |
+| ⑧ | Mail triage — Spark / Gmail | list / search → archive, snooze, flag; a reply drafted, never sent | **built** (inbox: 12 tools, 34 cases; all data canned) |
 
 All eight are built (2026-08-19), and none has run on the phone yet — but
 routing no longer waits for the phone: the app builds for Mac Catalyst
@@ -100,6 +100,19 @@ menu would sound like".
 
 The same cases on Android — the case format is platform-independent on
 purpose; one scenario, one table, two platforms.
+
+## Three tools every pack carries (2026-08-19)
+
+- **`ask_user`** — asking is routable: when a required detail is truly
+  absent, the model calls a tool instead of inventing (measured: left to
+  prose it invents, especially in Japanese). The ask-back cases score it.
+- **`undo_last`** — every box keeps value snapshots; "やっぱりやめて"
+  works everywhere, and where a full revert also exists the going-back
+  triangle the photo pack measured is re-armed on purpose.
+- **The confirm gate** — destructive tools (refund, checkout, delete)
+  take `confirm`, to be left false until the user has said yes; the app
+  answers a false call with what would happen, the state carries
+  "Awaiting confirmation: …", and the yes-turn is a case of its own.
 
 ## Standing rails (grow with every pack, never ahead of one)
 

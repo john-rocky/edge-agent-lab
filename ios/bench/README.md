@@ -67,9 +67,10 @@ The Mac runs are smoke tests; the model table stays device-measured.
   cases use this deliberately: a Japanese request may legitimately produce a
   Japanese or an English query string, and both are right.
 - `expectAsk: true` marks an ask-back case: the input deliberately omits a
-  required argument ("Add a caption." — saying what?) and a correct run
-  calls nothing and asks back. The runner requires no calls AND a question
-  mark in the answer; the JSONL line records `asked`.
+  required argument ("Add a caption." — saying what?). A correct run calls
+  `ask_user` (asking is routable — every state pack carries the tool) and
+  nothing else, or calls nothing and asks in prose (a question mark in the
+  answer). The JSONL line records `asked`.
 - `image` names a fixture image the runner attaches to the prompt (the
   vision packs).
 - `state` is the app state a message opens with, verbatim, for the packs
@@ -95,26 +96,33 @@ so the honest route is get_current_time first, scored as a reasonable
 extra. In this pack get_current_time is the one bench tool that is *not*
 canned: the matcher resolves "tomorrow" against the device clock at run
 time, and a canned today would break the cases the day after it was
-written. `video-editing`: 18 + 18 over 15 tools where `state` starts
+written. `video-editing`: 20 + 20 over 18 tools where `state` starts
 working — "split it at the playhead" is scored against the playhead number
 in the state block, "make the second clip slow motion" is one call whose
 `clip` argument names the clip, and "how long is the video?" expects no
-call: the answer is in the state. `store`: 20 + 20 over 16 tools — the first pack that operates
+call: the answer is in the state. `store`: 22 + 22 over 18 tools — the first pack that operates
 records: the finders (search by name / filter by field / low stock /
 orders by payment × fulfilment) are scored on their query arguments, the
 bulk actions on acting without re-searching (the `state` carries the
 selection), and update_price vs set_price is the signed-percent-vs-amount
-axis. `audio`: 18 + 18 over 16 tools — levels read from the state and
+axis. `audio`: 19 + 19 over 18 tools — levels read from the state and
 moved ("a bit quieter" accepts 43–67 from a 70), tracks named by what the
 user calls them (`contains`), booleans for mute / solo scored as
-"true" / "false", two chains. `docs`: 18 + 18 over 14 tools — page numbers
+"true" / "false", two chains. `docs`: 21 + 21 over 18 tools — page numbers
 read from a state that names pages by their first line ("the cover" → 1,
 "the last page" → 6), the this_page / all_pages scope, a go_to → sign
 chain; the JA search query is left unscored (「敷金」 or "deposit" are both
-right). `shopping` / `money` / `inbox`: 14 + 14 each over 9 tools — the
-buyer's numbered-results axis ("the second one" is a number in the
-state), the filter→categorize and find→archive chains, and one ask-back
-per language per pack.
+right). `shopping` (17 + 17 over 12 tools) / `money` (15 + 15 over 11) /
+`inbox` (17 + 17 over 12) — the buyer's numbered-results axis ("the
+second one" is a number in the state), the filter→categorize and
+find→archive chains, one ask-back per language per pack, and the two
+newest axes every pack now carries: **undo_last** (「やっぱりやめて」 —
+where a full revert also exists this re-arms the going-back triangle the
+photo pack measured) and the **confirm gate** (refund / checkout /
+delete take `confirm`, to be left false until the user has said yes; the
+pair of cases per pack measures both directions — not confirming
+unasked, and turning "Yes, go ahead." plus the state's "Awaiting
+confirmation" line into confirm true with the right number).
 
 ## What a JSONL line records
 

@@ -60,6 +60,9 @@
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys: volume 70, pan L25; 4 Lead: volume 65, pan R30.",
     "expectAsk": true,
     "expected": [] },
+  { "id": "a-en-undo-1", "input": "Actually, undo that.", "lang": "en",
+    "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), playing at 6.2 s. Tracks: 1 Drums: volume 80, pan center, solo; 2 Bass: volume 75, pan center; 3 Keys: volume 55, pan L25; 4 Lead: volume 65, pan R30, effects echo.",
+    "expected": [{"tool": "undo_last"}] },
 
   { "id": "a-ja-play-1", "input": "最初から再生して。", "lang": "ja",
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys: volume 70, pan L25; 4 Lead: volume 65, pan R30.",
@@ -121,5 +124,8 @@
   { "id": "a-ja-ask-1", "input": "テンポを変えて。", "lang": "ja",
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys: volume 70, pan L25; 4 Lead: volume 65, pan R30.",
     "expectAsk": true,
-    "expected": [] }
+    "expected": [] },
+  { "id": "a-ja-undo-1", "input": "やっぱり今のはやめて。", "lang": "ja",
+    "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), playing at 6.2 s. Tracks: 1 Drums: volume 80, pan center, solo; 2 Bass: volume 75, pan center; 3 Keys: volume 55, pan L25; 4 Lead: volume 65, pan R30, effects echo.",
+    "expected": [{"tool": "undo_last"}] }
 ]
