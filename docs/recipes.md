@@ -17,6 +17,15 @@ that out loud." `cut_out_person` lost "Cut out the person." to
 the job — the same request routed cleanly. Pick names by imagining the
 sentence, not the API.
 
+Still true on Apple FM in the shopping pack: "Actually, make it just
+one." never reached `change_quantity` in three configurations — the
+model put a fresh ×1 in the cart, once by *composing* the set-operation
+as remove_from_cart + add_to_cart (right end state, by hand). Renamed
+`set_quantity` — the user's sentence is a set, not a change — the
+English case routed on the first run, item name filled from the cart
+line. The Japanese 「やっぱり1つにして」 still lands on add_to_cart:
+the verb lever moved one language and not the other.
+
 ## Some intents have a gravity well — remove the competitor
 
 On the 1.2B, every wording of "throw away all the edits" routed to the
@@ -201,6 +210,15 @@ makes the model report and stop mid-chain. Echo dynamically, and drop any
 stop-after-finder line in the same pass (measured across inbox, store,
 money on the Mac lane, 2026-08-19).
 
+The drop is not free everywhere: in the shopping pack — static neutral
+fakes, and finder cases that *end* at the finder — deleting "after a
+search returns, report the results and stop" released sort_results
+tails onto search and filter in both languages, three new failures with
+one signature; restoring the sentence put the tails back under. The
+line is poison where it stops a chain the case needs, protection where
+the finder is the deliverable. Decide per pack by where its cases end,
+not by the recipe's last victory.
+
 Honest in shape, honest in *state* too: a bulk fake that answers
 "snoozed the selected messages" while the case's state says "Selection:
 none" scores a trajectory the real app would refuse. A fake cannot
@@ -268,6 +286,17 @@ number. What remains measured: the records packs like to *look first,
 ask second* (a finder call and then ask_user — half right), and Japanese
 requests still get an invented value mid-chain more often than English
 ones. The ask-back cases (`expectAsk`) keep all of it scored.
+
+An argument guide's example is invent-fodder. Shopping's "Add it to the
+cart." — nothing named, no results in the state — was answered by
+searching for "wireless earbuds", the example phrase in search_catalog's
+own guide ("What to look for, e.g. wireless earbuds"), then buying
+result 1, in both languages. Removing the example didn't make the model
+ask; it made the confabulation visible: the next runs searched for
+"something", "phone", "laptop". The example decides *what* gets
+invented, not *whether* — keep examples out of the guides of tools a
+lost model reaches for, and expect the ask license to lose to a
+plausible first call anyway.
 
 ## A confirm argument holds until the user's words are the tool's verb
 
@@ -371,3 +400,12 @@ state"; the state's titles looked like enough. The line that fixed it:
 the document says needs search_document." A state block is an implicit
 claim of completeness; when it summarizes, say what it leaves out, or
 the model will answer content questions from the summary.
+
+The mirror case: the state must carry the words the user will point
+with. Shopping's result lines were product titles only; "Put the Sony
+ones in the cart" could not be resolved from them (the brand lives in
+the catalog, not the title), so the model searched "Sony" and paid two
+extra calls. Brand-first result lines — "3 Sony Noise Cancelling
+Earbuds" — made the same request one clean add_to_cart(3) in both
+languages, held across three runs. Render into the state every handle a
+person actually grabs a product by: the number, the name, the brand.

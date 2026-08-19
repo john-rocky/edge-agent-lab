@@ -21,12 +21,13 @@ delete — the confirm argument:
 | store | 18 | 44 | 35 |
 | audio | 18 | 38 | 34 |
 | docs | 18 | 42 | 37 |
-| shopping | 12 | 34 | 23 |
+| shopping | 12 | 34 | 24 |
 | money | 11 | 30 | 27 |
 | inbox | 12 | 34 | 25 |
 
-215/262 overall (store, money and inbox re-measured in the evening and
-late rounds below; the other four packs keep their morning numbers). Identical
+216/262 overall (store, money, inbox and shopping re-measured in the
+evening and late rounds below; the other three packs keep their morning
+numbers). Identical
 builds vary by ±2–4 cases per pack between runs — a single run ranks
 packs, not sentences (the noise-floor recipe). What remains is mostly
 the model's character, not the packs': it grabs a tool on no-call cases,
@@ -93,6 +94,34 @@ it skipped nor asks, even though the refusal names the repair ("list,
 search or filter first"). Repair-after-refusal is not in the model's
 repertoire; the first call has to be right. Raw JSONL:
 [honest fakes](../ios/bench/results/2026-08-19-mac-r7/).
+
+The shopping round (the next session, same date) took the lowest-ratio
+pack from 23 to 24 of 34 in three one-variable runs — a small net move
+hiding five attributable flips. What worked: the brand went into the
+state's result lines ("3 Sony Noise Cancelling Earbuds"), and "Put the
+Sony ones in the cart" became one clean add_to_cart(3) in both languages
+(held across all three runs) where it had searched first — the state's
+titles alone could not resolve a brand the user says. And
+change_quantity, renamed set_quantity, caught "Actually, make it just
+one." in English on the first run with the rename — the model had been
+*composing* the set-operation out of remove_from_cart + add_to_cart, the
+by-hand instinct again. What backfired, measured: deleting shopping's
+"after a search returns, report the results and stop" — the deletion
+that lifted inbox and store — released sort_results tails onto the
+finder cases in both languages (three new failures, one signature);
+restored, the tails went back under. The line is poison where it stops a
+chain the case needs, protection where the finder is the deliverable.
+What refused to move in any run: 「カートに入れて」/"Add it to the cart."
+with nothing named still buys something instead of asking — the invented
+query was the search guide's own example phrase verbatim until the
+example was removed, after which the model searched for "something",
+"phone", "laptop" (the example chose *what* was invented, not
+*whether*); JA's 「やっぱり1つにして」 still lands on add_to_cart
+(quantity 1 — which the real app reads as ×3); checkout still arrives
+confirm-true; JA undo still walks backwards by hand. Raw JSONL:
+[levers](../ios/bench/results/2026-08-19-mac-r8/),
+[stop line restored](../ios/bench/results/2026-08-19-mac-r9/),
+[set_quantity](../ios/bench/results/2026-08-19-mac-r10/).
 
 # On device (2026-08-18)
 
