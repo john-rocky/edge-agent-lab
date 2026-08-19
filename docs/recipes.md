@@ -71,6 +71,36 @@ belong to the app. Build the compound out of the single tools' bodies so
 the two can't drift, and keep the singles in the set: the model picking
 the one call over the three is the demo.
 
+## Tell a model that can see to look first
+
+Apple's model reports the vision capability and describes a photo
+perfectly with no tools in the session — and, with tools and our stock
+instructions ("prefer a tool over guessing, call it instead of answering
+yourself"), it removed the background from a mountain range because a
+beat said "if there's a person…". The instructions written for a blind
+router are the wrong bias for a model that can see. Vision packs get
+their own: look first; a conditional is answered by the pixels; when the
+condition is not met, say so and call nothing. Same photo, same tools:
+the conditional then held (no text → no note; a person → cut out).
+
+## Label attachments the way the model will name them
+
+`ImageReference` is how Foundation Models lets the model name the picture
+a tool should act on. Attachments labelled `photo` were referenced as
+`image` in every call — the model reaches for the label its own docs use
+(image-0, image-1) — and nothing resolved. Use the label the model will
+say, and resolve a miss to the newest image in the transcript: with one
+photo in play there is only one thing it can mean, and a demo should not
+die on the spelling of a label.
+
+## Beat order is beat logic when the model sees its own work
+
+Attaching the photo as it is now — edits included — is what makes "a
+little more" mean more; it also means a makeover before the conditionals
+leaves them nothing to do (the already-cut-out portrait got rotated 180°
+by "if there's a person, remove the background"). Conditionals first,
+makeover and save last.
+
 ## Restraint is domain-relative
 
 The 1.2B was the model that never grabbed a tool for "what is 2 plus
