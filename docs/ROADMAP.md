@@ -42,6 +42,11 @@ existing app categories, and it looks like this:
 | ⑥ | Shopping — the buyer's side (Amazon) | search, sort, "the second one" → cart, coupon, checkout, track | **built** (shopping: 12 tools, 34 cases) |
 | ⑦ | Personal finance — Money Forward | filter / search transactions, categorize the selection, budgets, reports, find subscriptions | **built** (money: 11 tools, 30 cases) |
 | ⑧ | Mail triage — Spark / Gmail | list / search → archive, snooze, flag; a reply drafted, never sent | **built** (inbox: 12 tools, 34 cases; all data canned) |
+| ⑨ | CRM — Salesforce / HubSpot | search opportunities by owner/stage/amount/close date, stage updates, follow-up tasks | **spec'd** ([business-packs](business-packs.md)), P0 |
+| ⑩ | Project management — Jira / Asana / Linear | search issues, assign, status/priority/due-date changes, close | **spec'd**, P0 |
+| ⑪ | ERP / Accounting — SAP / NetSuite / QuickBooks | invoices (search, mark paid), inventory, expenses, orders | **spec'd**, P1 (money covers the expense corner) |
+| ⑫ | HCM / HR — Workday | employees, leave requests (approve/reject), shifts | **spec'd**, P1 |
+| ⑬ | Collaboration — Slack / Teams | search messages, reply, reactions, channels | **spec'd**, P2 (inbox covers the mail half) |
 
 All eight are built (2026-08-19), and none has run on the phone yet — but
 routing no longer waits for the phone: the app builds for Mac Catalyst
@@ -95,6 +100,23 @@ menu would sound like".
   pack's state names what the words will refer to — clips and the
   playhead, the selection, tracks and their levels, pages by their first
   line — so "their", "the keys", "the cover" are resolved by the app.
+
+## The business wing (2026-08-20)
+
+⑨–⑬ turn the repo into an **on-device tool-calling benchmark for real
+app categories** — full spec in [business-packs.md](business-packs.md).
+The decisions that shape it (user, 2026-08-20): integration stays
+**mock-only** (no real Salesforce/Shopify/SAP/Jira APIs, no DB, no
+auth), but **every category gets a minimal sample app** — fixture rows
+on screen, a language input, the model's tool call shown verbatim, and
+the visible data changing when the mock tool runs — so the value of
+tool calling is judged by eye as well as by score. Benchmark and sample
+app share one tool implementation (already this repo's architecture;
+store ≈ the Commerce pack's admin half). Beyond per-pack cases, the
+spec adds an evaluation program the current bench doesn't have yet:
+tool-count scaling (5→35→70), cross-domain routing over merged packs,
+tool-definition A/B on the same case set, and failure records complete
+enough to analyze across configs.
 
 ## Later
 
