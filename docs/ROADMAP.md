@@ -12,50 +12,83 @@ The repo has three jobs, in this order:
    tool-calling on iOS outright — it is trained for exactly this. The
    interesting question the table answers is *where it doesn't reach*:
    Android, custom models, devices and languages without Apple
-   Intelligence, and the failure modes the first run already exposed
-   (it grabs a tool on requests that need none).
+   Intelligence, and the failure modes the runs keep exposing (it grabs
+   a tool on requests that need none; its numbers are wrong more often
+   than its tools).
 
 The unit of growth is a **scenario pack**: one directory holding a tool
 set, a demo script, bench cases, and a recording. Adding a pack grows the
 showcase and the benchmark at the same time — the bench never grows on
 its own.
 
-## Phases
+## Where packs come from: market-in
 
-**1. Photo editing** *(in progress)* — "a bit brighter", "warmer",
-"crop it square": steering a parameter space with vague words. 17 tools;
-the crop/resize/zoom and brightness/exposure/contrast neighborhoods, plus
-the undo / revert_to_original / remove_background triangle, make it the
-first real similar-tools discrimination test.
+Not "we have tool calling — what shall we let it operate?" but "here is
+an app millions already use, with a hundred features behind a deep
+touch UI — is calling those features in plain words worth something?"
+The first cut of packs (focus, briefing, sensors, handoff, chains,
+compound) answered the first question: they show chaining and compound
+calls well, and they read as AI-invented uses of AI. They stay as
+capability showcases; they are not the growth axis. The growth axis is
+existing app categories, and it looks like this:
 
-**2. Compound device control, and one business scenario** *(both packs
-built, bench pending)* — "help me focus" becoming notifications + timer
-+ brightness (10 tools: the `set_` prefix neighbors, the get/set
-brightness pair, and remind-vs-remember as discrimination axes; the
-chain beat is written in call order), and the field report: photo OCR →
-note → tomorrow-morning reminder, fully offline (10 tools; the date
-argument only a `get_current_time` call can ground is the new axis).
+| # | app type (the real ones) | what a pack calls | status |
+|---|---|---|---|
+| ① | Image editing — Lightroom / Canva | adjust, crop, filter, cut out, save; the photo alone as input | **done**: photo-editing, vision, polish |
+| ② | Video editing — CapCut / LumaFusion | trim, split, speed, crop to 9:16, captions, fade, stabilise, export | **next** |
+| ③ | Audio / timeline — GarageBand | track volume, pan, duplicate, fade, effects, loops | after ② |
+| ④ | Documents — Acrobat / Goodnotes | delete / reorder pages, annotate, remove highlights, sign, convert | after ③ |
+| ⑤ | Business data — Shopify (store, POS) | filter products by stock, reprice a selection, filter orders by payment × fulfilment | **next after ②** — a different bench class |
 
-**3. Vaguer inputs** *(voice and vision built, unrecorded)* — voice in
-(speech as the vaguest interface: SpeechAnalyzer streams the mic into
-the same send path typing uses; the stage's `--voice` takes each beat
-from the air instead of the script), image in — not "a photo goes with
-the message" but *the pixels pick the tool*: the vision pack attaches
-the photo to every beat and asks "what would you fix?" — brightness on
-a dark one, rotate on a tilted one, OCR on a menu, nothing on a photo
-that needs nothing. The case format's `image` field names a fixture the
-runner attaches, so this routes on the bench too.
+Why these and in this order:
 
-**4. The same cases on Android** — the case format is
-platform-independent on purpose; one scenario, one table, two platforms.
+- ② is the natural step after images, and the model does not have to
+  understand video: the app hands it the playhead, the selected clip and
+  the frame size, and "cut the first two seconds, make it vertical, fade
+  out at the end" is `trim → crop → fade` — three calls replacing a
+  minute of thumb work. **State in, tools out** is the pattern.
+- ⑤ is a different kind of agent: natural language → search → filter →
+  update existing records → a business step. Every pack so far
+  shortcuts an editor's UI; this one operates data. Inputs are tiny, so
+  a local model is in reach — and the bench gets a second class of
+  case (query correctness, not edit correctness).
+- ③ and ④ measure new argument shapes (tracks and time ranges; pages and
+  annotation types) without repeating ①.
+- Files / OS-level operations are not a category: nobody's daily app is
+  "the file system". Calendar and reminders are real but native and
+  commonplace — they stay inside packs as supporting tools, not as packs.
+
+Each pack is a *stand-in* for the app category: the tool set mirrors the
+real app's feature list and argument shapes (the names the app's own menus
+use), the demo runs on a working reimplementation of enough of it to make
+the calls visible, and the recording's claim is "this is what your app's
+menu would sound like".
+
+## Inputs (cross-cutting, built)
+
+- **Text** — typed or scripted beats.
+- **Voice** — SpeechAnalyzer streams the mic into the same send path;
+  the stage's `--voice` takes each beat from the air.
+- **Image, natively** — the photo goes in as an `Attachment`, the model
+  looks and decides, tools take an `ImageReference` and resolve it
+  against the transcript. A photo with no words means "make it look its
+  best" (polish). The case format's `image` field names a fixture the
+  runner attaches, so this routes on the bench too.
+- For ② and ③, **app state** is an input in its own right: playhead,
+  selection, sizes, track list — passed by the app, never guessed by the
+  model.
+
+## Later
+
+The same cases on Android — the case format is platform-independent on
+purpose; one scenario, one table, two platforms.
 
 ## Standing rails (grow with every pack, never ahead of one)
 
 - **Try it on Apple's model first.** A new capability is shown the day
   it works on Apple FM (`--backend apple` on the stage, `--model apple`
   in the chat, `--voice` for spoken beats); that is a minute per pack,
-  not a quarter of an hour. Quick packs (briefing, sensors, handoff)
-  exist for exactly this and have no cases yet.
+  not a quarter of an hour.
 - The bench follows interest, not the calendar: a pack gets its cases
   and its three-model run when someone bites on the demo. Benching every
   pack up front is time spent on examples that may be thrown away.
@@ -66,4 +99,4 @@ platform-independent on purpose; one scenario, one table, two platforms.
 ## Out of scope
 
 General GUI agents (the Android screen agent stays its own track), cloud
-routing, long-context understanding.
+routing, long-context understanding, and file-system agents.
