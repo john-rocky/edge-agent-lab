@@ -61,6 +61,16 @@ max_amount 1,000,000, the number split across both bounds (crm, Mac,
 A unit the user never says is arithmetic the model must do, and the
 failure is language-shaped.
 
+Weekday words are the same trap wearing a calendar: with the state
+pinning "Today: 2026-08-20 (Thursday)" — weekday included — "due by
+Friday" arrived as 08-25 and "next Monday" as 08-28 (a Friday), across
+runs, in both languages (pm, Mac, 2026-08-20). The weekday in the state
+is still right (it fixed the Japanese Friday once, and the words need
+their referent somewhere), but weekday→date is arithmetic, and the
+model does it about as well as it multiplies minutes. The untried
+structural fix is this recipe's own: let the date argument accept the
+weekday word ("friday", "next monday") and do the calendar in the app.
+
 ## Every required argument is a question waiting to be asked
 
 `set_timer` requires a `label`; "Set a timer for 25 minutes" gave Apple
@@ -255,6 +265,13 @@ half speed"), it landed at 0.5. The guide text was right both times and
 lost both times: the model reads the *name* first. Name the argument as
 the value the user's sentence denotes, not as the operation applied to
 it.
+
+Range bounds obey the same law: "anything due by Friday?" put its date
+in `due_date_from` three runs straight, in both languages — the wrong
+end of a symmetric pair. Renamed `due_by` — the sentence's own word —
+both languages filled the right slot on the next run (pm, Mac,
+2026-08-20). The name fixed the slot and only the slot: the date inside
+it stayed wrong (see the units recipe on weekday arithmetic).
 
 ## Take the target as an argument when the model skips the setup call
 

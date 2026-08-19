@@ -43,6 +43,7 @@ for SCENARIO in "$@"; do
     money) TOOLSET=money ;;
     inbox) TOOLSET=inbox ;;
     crm) TOOLSET=crm ;;
+    pm) TOOLSET=pm ;;
     *) echo "unknown scenario $SCENARIO"; exit 1 ;;
   esac
   CASES="$HERE/../scenarios/$SCENARIO/cases.json"

@@ -25,6 +25,7 @@ delete — the confirm argument:
 | money | 11 | 30 | 27 |
 | inbox | 12 | 34 | 25 |
 | crm | 12 | 36 | 20 |
+| pm | 11 | 36 | 21 |
 
 216/262 overall (store, money, inbox and shopping re-measured in the
 evening and late rounds below; the other three packs keep their morning
@@ -155,6 +156,36 @@ loop. Raw JSONL:
 [echo, committed](../ios/bench/results/2026-08-20-mac-r12/),
 [wording round](../ios/bench/results/2026-08-20-mac-r13/) and
 [guides reverted](../ios/bench/results/2026-08-20-mac-r14/).
+
+The PM round (same day, the second business-wing pack) started where
+the CRM round ended — dynamic echoes from the first run, the id
+contract in the CRM pack's committed wording — and landed at 20/36 on
+run one, the CRM level exactly. What its four runs added (r15–r18,
+committed config 21/36, range 19–21): the get-prefix reproduced
+verb-by-verb across the change_* family in both languages, as
+predicted, and was not chased. "Due by Friday" landed in the *from*
+bound three runs straight in both languages; renaming the arguments
+due_from / due_by moved the date into the right slot on the next run —
+the argument's name fixed the slot — while the date *value* stayed
+wrong (Friday → 08-25, next Monday → 08-28) even after the state's
+frozen today grew its weekday ("2026-08-20 (Thursday)", worth +2 once):
+weekday words reach the right argument and the wrong date, a model
+floor the definition loop should try app-side parsing against. New
+character, all stable: Japanese 票を切って never reached create_issue
+in four runs (the model searched, then *re-purposed an existing issue*
+— assigned and re-prioritized APP-6 and reported it created); the
+Japanese undo case failed three different ways in three runs (manual
+reversal to a *guessed* old value — P1 where the truth was P3 —
+manual reversal again, then a flat "I cannot undo, the board only
+shows the current state" with undo_last sitting in the list); one
+English run swept 57 consecutive search_issues calls over two minutes
+without ever acting on the id the sentence named; and create_issue
+omitted the P1 the sentence gave while the answer *claimed* P1 — the
+call and the prose disagree, and only the call is real. Raw JSONL:
+[first run](../ios/bench/results/2026-08-20-mac-r15/),
+[weekday](../ios/bench/results/2026-08-20-mac-r16/),
+[due_by rename](../ios/bench/results/2026-08-20-mac-r17/) and
+[committed replicate](../ios/bench/results/2026-08-20-mac-r18/).
 
 # On device (2026-08-18)
 
