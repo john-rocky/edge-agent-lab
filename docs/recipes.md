@@ -201,6 +201,18 @@ makes the model report and stop mid-chain. Echo dynamically, and drop any
 stop-after-finder line in the same pass (measured across inbox, store,
 money on the Mac lane, 2026-08-19).
 
+Honest in shape, honest in *state* too: a bulk fake that answers
+"snoozed the selected messages" while the case's state says "Selection:
+none" scores a trajectory the real app would refuse. A fake cannot
+change the model's first call — the result arrives after it — so
+making the fakes selection-aware (primed from the case state, flipped
+by the finder echoes) moved no scores at all; every case that passed
+had made the right calls anyway. What it bought is the failure's true
+face, and one finding: told "nothing is selected — list, search or
+filter first", Apple FM relays the refusal in its answer and stops.
+It does not call the finder it was just told about. A small model does
+not repair after a refused call; the first call has to be right.
+
 ## The argument's name is part of the contract
 
 Two failures, one shape, same morning (Apple FM, Mac). A volume fader

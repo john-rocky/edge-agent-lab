@@ -18,14 +18,14 @@ delete — the confirm argument:
 | pack | tools | cases | Apple FM (Mac) |
 |---|---|---|---|
 | video-editing | 18 | 40 | 34 |
-| store | 18 | 44 | 33 |
+| store | 18 | 44 | 35 |
 | audio | 18 | 38 | 34 |
 | docs | 18 | 42 | 37 |
 | shopping | 12 | 34 | 23 |
 | money | 11 | 30 | 27 |
-| inbox | 12 | 34 | 23 |
+| inbox | 12 | 34 | 25 |
 
-211/262 overall (store, money and inbox re-measured in the evening and
+215/262 overall (store, money and inbox re-measured in the evening and
 late rounds below; the other four packs keep their morning numbers). Identical
 builds vary by ±2–4 cases per pack between runs — a single run ranks
 packs, not sentences (the noise-floor recipe). What remains is mostly
@@ -78,6 +78,21 @@ pair called together on selection cases, and 予算を設定して answering
 with a plausible tool instead of ask_user. Raw JSONL:
 [split round](../ios/bench/results/2026-08-19-mac-r5/) and
 [bare state line](../ios/bench/results/2026-08-19-mac-r6/).
+
+Last round of the night: the bulk fakes stopped lying about the
+selection. A per-case flag primed from the case's state line (finder
+echoes replace it; the store's tracks products vs orders) gives a bulk
+call with nothing selected the real app's refusal instead of "snoozed
+the selected messages". Scores held or drifted within the floor —
+inbox 25, store 35, money 27, 215/262 committed — confirming the fake
+was mis-scoring nothing that passed; what it changes is what failure
+looks like. The new measurement it bought: after a mid-chain refusal,
+Apple FM relays it honestly ("the current selection is empty, so
+nothing was archived") and stops — it neither retries with the finder
+it skipped nor asks, even though the refusal names the repair ("list,
+search or filter first"). Repair-after-refusal is not in the model's
+repertoire; the first call has to be right. Raw JSONL:
+[honest fakes](../ios/bench/results/2026-08-19-mac-r7/).
 
 # On device (2026-08-18)
 
