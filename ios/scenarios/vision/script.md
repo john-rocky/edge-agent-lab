@@ -63,3 +63,29 @@ What it took to get here (all measured the same morning)
 Recording notes: the newest library photo is the prop; a person plus
 some text (a menu, a sign) makes beats 2 and 3 both fire. Beat 5 saves a
 copy — delete it before the next take.
+
+## See and choose, split — `--scenario choose`
+
+For the vision bundles too small to route (the 450M sees "Mountains" and
+never calls a tool). Tool calling asks one model to do two things at once:
+look, and pick from a menu of schemas. `Tools/ChooseTools.swift` takes the
+second job away: the app asks one question per beat, the model answers with
+a `@Generable` enum or a yes/no (constrained decoding, the path every
+backend here has), and the app maps the answer to the tool and calls it.
+Tools: none in the session; the app calls the photo tools itself. Launch:
+`--autorun --backend apple --scenario choose`, or `--scenario choose
+--model VL-450M` — the same beats on both, which is the comparison.
+
+| beat | the app asks | the model answers | the app calls |
+|---|---|---|---|
+| 1 | What does this photo need most? | `NeedVerdict.need` ∈ brighter / darker / warmer / cooler / more_contrast / straighten / nothing | the matching adjustment at "some" (35 %), or nothing |
+| 2 | Is there a person in this photo? | `YesNoVerdict {yes, because}` | remove_background if yes |
+| 3 | Is there readable text in this photo? | `YesNoVerdict` | read_text_in_photo → write_note if yes |
+| 4 | *(none)* | — | save_edited_photo |
+
+On stage the bubble is labelled `APP → MODEL`, the badge shows the call the
+app made, and `run.log` carries `CHOSE <answer>` before each `TOOL`. Not
+yet run. When the phone is back: run it on Apple FM first (the answers
+should match the vision pack's routing on the same photo), then on
+`VL-450M` — the claim to test is that a model that never routed now moves
+the same edit, because the choice is an enum and the call is the app's.
