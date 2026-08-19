@@ -35,7 +35,10 @@ in a field with mountains behind (no text):
 
 What it took to get here (all measured the same morning)
 
-- **The model sees.** `capabilities` reports vision; with no tools it
+- **The model sees.** `capabilities` reports vision — and per the
+  framework's own docs, a request needing a capability the model does
+  not declare is thrown out by the system before the executor runs, so
+  an attachment that goes through *is* being seen; with no tools it
   described the photo, said yes to a person, called the exposure right
   and the text absent. The first vision run looked blind — it removed
   the background of a mountain range because a beat said "if there's a
