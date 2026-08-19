@@ -9,13 +9,19 @@ draws itself. State in, tools out: every message opens with the document
 as it is — page count, the open page, each page's title (its first line),
 what is annotated — so "the cover" and "the rules page" are page numbers
 the model reads, and "the last page" is the page count. Tools:
-`ToolBox.docs`, 12 (`Tools/DocTools.swift`). Launch:
-`--autorun --backend apple --scenario docs`; `--voice` for spoken beats.
-The stage shows the open page, big, and the pages as a strip under it.
+`ToolBox.docs`, 14 (`Tools/DocTools.swift`, with `add_watermark` — a big
+translucent word across every page — and `extract_pages` to a new file).
+Launch: `--autorun --backend apple --scenario docs`; `--voice` for spoken
+beats; chat: `--scenario docs` without `--autorun`. The stage shows the
+open page, big, and the pages as a strip under it.
 
-Not yet run — the phone was in use. Written so the first run answers it:
-`run.log` carries `DOC loaded — <state>` once, then per beat `STATE` and
-`TOOL`.
+Routing verified on Apple FM via the Mac lane (2026-08-19); not yet run
+on the phone. What those runs taught (fixes in): a canned bench result
+that echoed the wrong page ("on page 3" against a go_to_page(5)) made
+the model retry the call — the fake-results recipe, again; and asked
+「敷金は何ページ?」 the model answered from the page *titles* in the
+state ("Rent and Deposit" → page 3) instead of searching — the
+instructions now say the state lists titles, not contents.
 
 | beat | say | expect |
 |---|---|---|

@@ -7,8 +7,11 @@ found → a business step (fulfil, remind, refund, report). The data is
 canned — 24 products, 20 orders of a small goods shop, in yen — so the
 inputs are tiny and a local model is in reach, and the bench gets a second
 class of case: was the *query* right, not was the edit right. Tools:
-`ToolBox.store`, 14 (`Tools/StoreTools.swift`). Launch:
-`--autorun --backend apple --scenario store`; `--voice` for spoken beats.
+`ToolBox.store`, 16 (`Tools/StoreTools.swift`) — plus `search_orders` (by
+customer, the order-side second finder) and `export_products_csv`.
+Launch: `--autorun --backend apple --scenario store`; `--voice` for
+spoken beats; chat: `--scenario store` without `--autorun`. The admin's
+list is on stage the whole run (`RecordsPanel`), rows changing in place.
 
 The shape is the admin's own: a search or filter makes a **selection** (the
 admin's checked rows), and the bulk actions — reprice, tag, change status,
@@ -17,9 +20,16 @@ by 10%" carries no ids: *their* is the selection beat 1 made, resolved by
 the app. The state line at the top of every message says what is selected
 and how it was found; the tools take the numbers the words name.
 
-Not yet run — the phone was in use. Written so the first run answers it:
-`run.log` carries per beat `STATE` (the block the model read) and `TOOL`
-(what it called and what came back).
+Routing verified on Apple FM via the Mac lane (2026-08-19); not yet run
+on the phone. What those runs taught (fixes in): "everything from
+Hokkaido Wool" went to name-search until search_products' description
+said vendors are filter_products' job; given a shiny new `search_orders`
+the model reached for it on every order-flavored sentence — including
+before `refund_order(1007)` and on plain count questions — until the
+instructions said finders are for listing, refunds take their number
+directly, and counts come from the state; and after a search found an
+unfulfilled order the model helpfully fulfilled it (the eagerness recipe)
+until told to stop after finders.
 
 | beat | say | expect |
 |---|---|---|

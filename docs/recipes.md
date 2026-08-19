@@ -2,7 +2,10 @@
 
 Patterns that survived contact with real devices. Each one states what to
 do and the measurement or failure that earned it. Sizes below: "small"
-means 1–3B running on the phone.
+means 1–3B running on the phone. Recipes from 2026-08-19 onward include
+failures measured on Apple FM via the Mac lane (the same model family,
+Catalyst build, `ios/bench/run-mac.sh`) — routing evidence, gathered
+without a phone.
 
 ## Name the tool for the verb the user will say
 
@@ -179,4 +182,68 @@ metrics cannot: this call *routed* perfectly.
 A canned result that doesn't look like the real thing causes retries:
 Apple FM saw "(translated text)" come back and called translate twice
 more. Canned results must claim success in the shape the real tool
-answers with.
+answers with. And a canned result that *echoes specifics* can contradict
+the call: `go_to_page(5)` came back as the canned "on page 3 — Rent and
+Deposit" and the model, quite reasonably, called it again. Where the real
+result would echo an argument, the fake stays neutral: "on that page now".
+
+## The argument's name is part of the contract
+
+Two failures, one shape, same morning (Apple FM, Mac). A volume fader
+argument named `percent` ("new level 0–100, 'a bit quieter' is about 15
+less") received **5** — the model sent a step, not a position; renamed
+`level`, "where the fader ends up", the same request landed at 55. A
+speed argument named `multiplier` turned "half speed" into **2** — the
+model multiplied duration, not speed; renamed `speed` ("0.5 plays at
+half speed"), it landed at 0.5. The guide text was right both times and
+lost both times: the model reads the *name* first. Name the argument as
+the value the user's sentence denotes, not as the operation applied to
+it.
+
+## Take the target as an argument when the model skips the setup call
+
+The video pack modeled "make the second clip slow motion" the way the
+app's UI works: tap the clip (`select_clip`), then act. Apple FM skipped
+the tap and called `set_clip_speed` directly — which would have slowed
+the *selected* clip, silently the wrong one. Chains that exist only to
+set an implicit target don't survive; the action tool now takes the clip
+as an optional argument ("omit for the selected clip") and the direct
+call is the right call. Selection state is for the pronouns ("their",
+"them", a silent bulk action) — not for arguments the sentence names.
+
+## A new tool re-routes old sentences
+
+Adding `search_orders` (find orders by customer) to the store pack broke
+cases that had nothing to do with it: "Refund order 1007" now searched
+first, "how many orders are waiting?" — a no-call case — called it
+twice, and one search "helpfully" fulfilled the unfulfilled order it
+found (the eagerness recipe, again). A tool list is one routing surface:
+every addition moves the wells. Re-run the pack's cases when the menu
+grows — this is exactly what the cases are for, and on the Mac lane it
+costs minutes.
+
+## Asking back must be licensed, and narrowly
+
+By default Apple FM does not ask for a missing required argument in a
+state pack — it invents: "Add a caption." got a made-up caption,
+"Refund the order." a made-up-plausible number. One instructions
+sentence ("ask instead of inventing") flipped it — too far: it then
+asked for a duration the request had already given ("for the first
+three seconds") and for a speed "slow motion" already implies. The
+sentence that held: ask **only** when something required is truly
+absent, and *never about a detail the request or the state already
+gives*. The ask-back cases (`expectAsk`) keep both failure modes
+measured: inventing when it should ask, asking when it knows.
+
+## State answers what the state contains — say what it doesn't
+
+The docs pack's state names each page by its first line. Asked 「敷金は
+何ページ?」 (which pages mention the deposit?), Apple FM answered "page
+3" straight from the *titles* — "Rent and Deposit", translated — without
+searching, and could not know the deposit is also on page 4. The
+instructions had said "answer questions about the document from the
+state"; the state's titles looked like enough. The line that fixed it:
+"the state lists page titles, not their contents — a question about what
+the document says needs search_document." A state block is an implicit
+claim of completeness; when it summarizes, say what it leaves out, or
+the model will answer content questions from the summary.

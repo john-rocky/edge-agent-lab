@@ -9,13 +9,21 @@ tempo, a fade, play / stop, export. State in, tools out again: every
 message opens with the track list as it is — names, levels, pans, effects,
 what is muted or soloed, the tempo, whether it is playing — so "a bit
 quieter" is a number the model reads (70) and lowers, and "the keys" is a
-track that exists. Tools: `ToolBox.audio`, 15 (`Tools/AudioTools.swift`).
-Launch: `--autorun --backend apple --scenario audio`; `--voice` for spoken
-beats (the phone will be playing while you talk — say it between bars).
+track that exists. Tools: `ToolBox.audio`, 16 (`Tools/AudioTools.swift`,
+with `set_song_length` in bars). Launch:
+`--autorun --backend apple --scenario audio`; `--voice` for spoken beats
+(the phone will be playing while you talk — say it between bars). The
+mixer is on stage the whole run (`MixerBoard`): a fader per track,
+visibly at its level — when the model turns the keys down, the fader
+moves.
 
-Not yet run — the phone was in use. Written so the first run answers it:
-`run.log` carries per beat `STATE` (the block the model read) and `TOOL`
-(what it called and what came back); the speaker carries the rest.
+Routing verified on Apple FM via the Mac lane (2026-08-19); not yet run
+on the phone (sound itself is a device-day check). What those runs
+taught (fixes in): as `percent`, "turn them down a bit" arrived as **5**
+— a step, not a fader position; renamed `level` ("where the fader ends
+up") — the argument's name is part of the contract. "Fade out at the
+end" pulled in `set_song_length` until the two descriptions stopped
+sharing the word "end"/"runs".
 
 | beat | say | expect |
 |---|---|---|
@@ -23,7 +31,7 @@ Not yet run — the phone was in use. Written so the first run answers it:
 | 2 | The keys are a bit loud — turn them down a bit. | `set_track_volume(Keys, ~55)` — 70 read from the state, about 15 off; the keys drop under the mix |
 | 3 | Put some echo on the lead. | `add_effect(Lead, echo)` — the graph rebuilds mid-song, the lead repeats |
 | 4 | Solo the drums. | `solo_track(Drums, true)` — everything else falls silent |
-| 5 | Un-solo, and pan the bass a little left. | `solo_track(Drums, false)` → `set_track_pan(Bass, ~-30)` — a two-call chain |
+| 5 | Un-solo the drums, and pan the bass a little left. | `solo_track(Drums, false)` → `set_track_pan(Bass, ~-30)` — a two-call chain |
 | 6 | Fade out at the end, then export it. | `add_fade(out, ~2)` → `export_song` — an .m4a in Documents, rendered offline through the same graph |
 
 日本語版(未実測):
@@ -34,7 +42,7 @@ Not yet run — the phone was in use. Written so the first run answers it:
 | 2 | キーボードがちょっとうるさい。少し下げて。 |
 | 3 | リードにエコーをかけて。 |
 | 4 | ドラムをソロにして。 |
-| 5 | ソロを解除して、ベースを少し左に振って。 |
+| 5 | ドラムのソロを解除して、ベースを少し左に振って。 |
 | 6 | 最後をフェードアウトして、書き出して。 |
 
 What the model reads (ahead of the words, every beat):
@@ -47,11 +55,10 @@ What the model reads (ahead of the words, every beat):
 
 Design
 
-- **Numbers to move, not to invent.** The volume guide says "the current
-  level is in the song state; 'a bit quieter' is about 15 less" — the rail
-  recipe applied to a fader: without a reference the model would answer 0
-  or 100. Pan is -100…100 with "0 is centre, -40 is a little left" spelled
-  out (the signed-range recipe).
+- **Numbers to move, not to invent.** The volume guide names the fader
+  position ("where the fader ends up, 0–100; 'a bit quieter' means about
+  15 below" the level in the state) — the rail recipe applied to a fader:
+  without a reference the model answers 0, 100, or a step like 5.
 - **Tracks by what the user calls them.** `track` is a string: a name
   ("Keys"), a number ("3") or the instrument ("keyboard" contains "key").
   The app resolves it; the model does not need an id.

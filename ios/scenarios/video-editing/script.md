@@ -6,21 +6,26 @@ stabilise, volume, export), in the words its menus use, on the newest video
 in the library. The model never sees a frame. **State in, tools out**: every
 message opens with the app's state — the clips on the timeline with their
 times, which one is selected, where the playhead is, the frame size — and
-the tools take the numbers it names. Tools: `ToolBox.video`, 12
-(`Tools/VideoEditTools.swift`). Launch:
-`--autorun --backend apple --scenario video`; `--voice` for spoken beats.
+the tools take the numbers it names. Tools: `ToolBox.video`, 15
+(`Tools/VideoEditTools.swift`) — the menu plus background music
+(`add_music`: the audio pack's synth renders a loop, the composition lays
+it under the timeline) and `make_reel`, the one-call compound (9:16 +
+fade-out + export) for the person who says what they want, not how.
+Launch: `--autorun --backend apple --scenario video`; `--voice` for
+spoken beats; chat: `--scenario video` without `--autorun`.
 
-Not yet run — the phone was in use. Written so the first run answers it:
-`run.log` carries `VIDEO loaded — <state>` once, then per beat `STATE`
-(the block the model read), `TOOL` (what it called and what came back).
+Routing verified on Apple FM via the Mac lane (2026-08-19,
+`ios/bench/run-mac.sh` — smoke tests, not table rows); not yet run on the
+phone. `run.log` carries `VIDEO loaded — <state>` once, then per beat
+`STATE` (the block the model read), `TOOL` (what it called and returned).
 
 | beat | say | expect |
 |---|---|---|
 | 1 | Cut the first two seconds, make it vertical, and fade out at the end. | `trim_clip(start, 2)` → `crop_video(9:16)` → `add_fade(out, ~1)` — three menu items out of one sentence; the frame on stage turns portrait |
 | 2 | Split it at the playhead. | `split_clip(seconds: <the playhead in the state>)` — the state test: the number is in the message, not in the words |
-| 3 | Make the second clip slow motion. | `select_clip(2)` → `set_clip_speed(0.5)` — a two-call chain; clip 2 stretches on the timeline |
+| 3 | Make the second clip slow motion. | `set_clip_speed(speed: 0.5, clip: 2)` — one call; the clip argument exists because the model skips the select step (measured), and the direct call should be the right call |
 | 4 | Caption it 'Tokyo, August' at the bottom for the first three seconds. | `add_caption(text, bottom, 0, 3)` — the frame jumps to the caption |
-| 5 | Mute it. | `set_volume(0)` |
+| 5 | Mute it, and put some calm music under it. | `set_volume(0)` → `add_music(calm)` — the original sound out, synthesized BGM in |
 | 6 | Export it. | `export_video` — renders through the same composition, saves to the library |
 
 日本語版(未実測):
@@ -31,8 +36,8 @@ Not yet run — the phone was in use. Written so the first run answers it:
 | 2 | 再生ヘッドの位置で分割して。 |
 | 3 | 2つ目のクリップをスローモーションにして。 |
 | 4 | 最初の3秒間、下に「Tokyo, August」とキャプションを入れて。 |
-| 5 | 音を消して。 |
-| 6 | 書き出して。 |
+| 5 | 音を消して、落ち着いたBGMを付けて。 |
+| 6 | 動画を書き出して。 |
 
 What the model reads (one line, ahead of the words, every beat):
 
@@ -93,6 +98,28 @@ When the phone is back (what to read in `run.log`)
 - Beat 6 must leave a new video in the library; open it: cropped, faded at
   the end, muted, captioned in its first three seconds. Delete it before
   the next take — it becomes the newest video.
+
+What the Mac runs taught (all measured 2026-08-19, fixes in):
+
+- **The argument's name is part of the contract.** As `multiplier`, "half
+  speed" arrived as 2 — the model reasoned about duration; renamed
+  `speed`, with "slow motion means 0.5" in the guide.
+- Asked to slow "the second clip", the model calls `set_clip_speed`
+  directly and skips `select_clip` — so the tool takes the clip.
+- 「音を消して」 routed to `remove_music` until its description said "not
+  for muting"; `make_reel`'s description had to say "call only this" or
+  the model cropped and faded first and sometimes forgot the export.
+- The ask-back license is hard to pitch at the instructions level — one
+  wording over-fired (asked for a duration the request gave), the scoped
+  one under-fired (invented "Test" as a caption) — so the ask now lives
+  on the argument itself: the text guide says "if the user did not say
+  what the caption should say, do not call this — ask them."
+- Bare 「書き出して。」 routed to nothing (the model recited the state);
+  「動画を書き出して。」 is the demo wording.
+- Offered `make_reel` and told to prefer it, Apple FM still walks
+  crop → fade → export by hand — the right result through the primitives.
+  The compound stays for the models that cannot chain (its original
+  reason); the reel cases measure which kind of router is running.
 
 Recording notes: the prop is the newest library video, ~10–20 s, landscape,
 with sound (beat 5 has to have something to mute), some motion (beat 3's

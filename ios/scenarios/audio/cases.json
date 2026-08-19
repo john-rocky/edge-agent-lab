@@ -35,7 +35,7 @@
   { "id": "a-en-fade-1", "input": "Fade out at the end.", "lang": "en",
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys: volume 70, pan L25; 4 Lead: volume 65, pan R30.",
     "expected": [{"tool": "add_fade", "args": {"which": {"equals": "out"}}}] },
-  { "id": "a-en-chain-1", "input": "Un-solo everything and pan the bass a little left.", "lang": "en",
+  { "id": "a-en-chain-1", "input": "Un-solo the drums, and pan the bass a little left.", "lang": "en",
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), playing at 6.2 s. Tracks: 1 Drums: volume 80, pan center, solo; 2 Bass: volume 75, pan center; 3 Keys: volume 55, pan L25; 4 Lead: volume 65, pan R30, effects echo.",
     "expected": [
       {"tool": "solo_track", "args": {"solo": {"equals": "false"}}},
@@ -97,7 +97,7 @@
   { "id": "a-ja-fade-1", "input": "最後をフェードアウトして。", "lang": "ja",
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), stopped. Tracks: 1 Drums: volume 80, pan center; 2 Bass: volume 75, pan center; 3 Keys: volume 70, pan L25; 4 Lead: volume 65, pan R30.",
     "expected": [{"tool": "add_fade", "args": {"which": {"equals": "out"}}}] },
-  { "id": "a-ja-chain-1", "input": "ソロを全部解除して、ベースを少し左に振って。", "lang": "ja",
+  { "id": "a-ja-chain-1", "input": "ドラムのソロを解除して、ベースを少し左に振って。", "lang": "ja",
     "state": "Song: 4 tracks, 8 bars at 110 bpm (17.5 s), playing at 6.2 s. Tracks: 1 Drums: volume 80, pan center, solo; 2 Bass: volume 75, pan center; 3 Keys: volume 55, pan L25; 4 Lead: volume 65, pan R30, effects echo.",
     "expected": [
       {"tool": "solo_track", "args": {"solo": {"equals": "false"}}},

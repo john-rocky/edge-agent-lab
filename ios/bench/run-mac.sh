@@ -15,6 +15,10 @@
 # would hang a run driven from a shell). Results land next to the device
 # results, prefixed mac-.
 set -u
+# nomatch off, not null_glob: with null_glob an unmatched "ls pattern"
+# becomes a bare ls of the cwd — the wait loop exited instantly and the
+# whole run pulled nothing.
+unsetopt nomatch
 HERE=${0:a:h}
 APP=~/code/LiteRT-Models/lfm-tools-ios/build/Build/Products/Debug-maccatalyst/LFMToolsMac.app/Contents/MacOS/LFMToolsMac
 FILES=~/Library/"Application Support"/LFMTools
@@ -52,7 +56,7 @@ for SCENARIO in "$@"; do
     sleep 6
   done
   kill $PID 2>/dev/null
-  JSONL=$(ls -t "$FILES"/toolbench-*.jsonl 2>/dev/null | head -1)
+  JSONL=$(ls -t "$FILES"/toolbench-<->.jsonl 2>/dev/null | head -1)
   if [[ -z "$JSONL" ]]; then echo "  no result written"; continue; fi
   DEST="$OUT/mac-$SCENARIO-apple-fm.jsonl"
   mv "$JSONL" "$DEST"
