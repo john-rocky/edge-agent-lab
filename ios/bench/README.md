@@ -32,7 +32,19 @@ SCENARIO=video-editing ./run-device.sh     # video pack (state cases)
 SCENARIO=store ./run-device.sh             # store pack (state cases)
 SCENARIO=audio ./run-device.sh             # audio pack (state cases)
 SCENARIO=docs ./run-device.sh              # documents pack (state cases)
+./run-mac.sh video-editing store audio docs shopping money inbox   # no phone
 ```
+
+## The Mac lane
+
+The same runner builds for Mac Catalyst (`LFMToolsMac` — no LiteRT engine
+in that build; Apple's model is the backend, and Foundation Models is
+available on Apple-Intelligence Macs, vision included). `run-mac.sh`
+pushes a pack's cases into the app's file home
+(`~/Library/Application Support/LFMTools`), launches the app headless,
+pulls the JSONL into `results/<date>-mac/`, and prints the fails. This is
+how a pack's routing gets verified the day it is written, with no phone.
+The Mac runs are smoke tests; the model table stays device-measured.
 
 ## Case format
 
@@ -54,6 +66,10 @@ SCENARIO=docs ./run-device.sh              # documents pack (state cases)
 - `args` omitted means the call's arguments are not scored. The JP search
   cases use this deliberately: a Japanese request may legitimately produce a
   Japanese or an English query string, and both are right.
+- `expectAsk: true` marks an ask-back case: the input deliberately omits a
+  required argument ("Add a caption." — saying what?) and a correct run
+  calls nothing and asks back. The runner requires no calls AND a question
+  mark in the answer; the JSONL line records `asked`.
 - `image` names a fixture image the runner attaches to the prompt (the
   vision packs).
 - `state` is the app state a message opens with, verbatim, for the packs
@@ -79,23 +95,26 @@ so the honest route is get_current_time first, scored as a reasonable
 extra. In this pack get_current_time is the one bench tool that is *not*
 canned: the matcher resolves "tomorrow" against the device clock at run
 time, and a canned today would break the cases the day after it was
-written. `video-editing`: 15 + 15 over 12 tools where `state` starts
+written. `video-editing`: 18 + 18 over 15 tools where `state` starts
 working — "split it at the playhead" is scored against the playhead number
-in the state block, "make the second clip slow motion" is a select → speed
-chain, and "how long is the video?" expects no call: the answer is in the
-state. `store`: 17 + 17 over 14 tools — the first pack that operates
+in the state block, "make the second clip slow motion" is one call whose
+`clip` argument names the clip, and "how long is the video?" expects no
+call: the answer is in the state. `store`: 20 + 20 over 16 tools — the first pack that operates
 records: the finders (search by name / filter by field / low stock /
 orders by payment × fulfilment) are scored on their query arguments, the
 bulk actions on acting without re-searching (the `state` carries the
 selection), and update_price vs set_price is the signed-percent-vs-amount
-axis. `audio`: 16 + 16 over 15 tools — levels read from the state and
+axis. `audio`: 18 + 18 over 16 tools — levels read from the state and
 moved ("a bit quieter" accepts 43–67 from a 70), tracks named by what the
 user calls them (`contains`), booleans for mute / solo scored as
-"true" / "false", two chains. `docs`: 15 + 15 over 12 tools — page numbers
+"true" / "false", two chains. `docs`: 18 + 18 over 14 tools — page numbers
 read from a state that names pages by their first line ("the cover" → 1,
 "the last page" → 6), the this_page / all_pages scope, a go_to → sign
 chain; the JA search query is left unscored (「敷金」 or "deposit" are both
-right).
+right). `shopping` / `money` / `inbox`: 14 + 14 each over 9 tools — the
+buyer's numbered-results axis ("the second one" is a number in the
+state), the filter→categorize and find→archive chains, and one ask-back
+per language per pack.
 
 ## What a JSONL line records
 
