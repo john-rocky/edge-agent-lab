@@ -29,6 +29,7 @@ cases, and pulls the JSONL back:
 ./run-device.sh                            # coffee-run pack, three models
 SCENARIO=photo-editing ./run-device.sh     # photo pack
 SCENARIO=video-editing ./run-device.sh     # video pack (state cases)
+SCENARIO=store ./run-device.sh             # store pack (state cases)
 ```
 
 ## Case format
@@ -80,7 +81,12 @@ written. `video-editing`: 15 + 15 over 12 tools where `state` starts
 working — "split it at the playhead" is scored against the playhead number
 in the state block, "make the second clip slow motion" is a select → speed
 chain, and "how long is the video?" expects no call: the answer is in the
-state.
+state. `store`: 17 + 17 over 14 tools — the first pack that operates
+records: the finders (search by name / filter by field / low stock /
+orders by payment × fulfilment) are scored on their query arguments, the
+bulk actions on acting without re-searching (the `state` carries the
+selection), and update_price vs set_price is the signed-percent-vs-amount
+axis.
 
 ## What a JSONL line records
 
