@@ -192,6 +192,22 @@ timestamp copy into trim (the split-at-playhead competence, reused),
 and the look-first chain; the stage demo runs real. Apple ships
 consumer camera-roll moment search (iOS 18 Photos) — the edge is
 search×edit, screen recordings, meetings, and business video.
+**First measured 2026-08-20** (Mac lane, r33–r36): the pack is built —
+`moments` toolset (the video room + search_frames / search_transcript /
+search_screen_text / check_moment / seek / keep_range), a canned
+soccer-match index, 40 cases in scenarios/video-moments. The pack's two
+claims hold: a clause that names its modality lands on its index in
+both languages, and every edit that followed a search copied the
+result's times, not inventions (keep_range 440–462 out of "cut out
+just the penalty"). What fails is the stop, again: a successful search
+is followed by check_moment on its own result or a sweep of the other
+two indexes — one JA case ran 29 search calls, the retrieval twin of
+the loop's 28 rounds — and "just that one moment", with no moment ever
+named, is resolved against the playhead instead of asked about (the
+argument-level ask's first measured failure). Wording moved 9/40 →
+17/40 and stopped; the sweep survived its A/B as character. The stage
+demo (a real index out of the OS's own judges) is the next build.
+Canon: scenarios/video-moments/script.md.
 
 ## The business wing (2026-08-20)
 

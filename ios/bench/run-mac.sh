@@ -42,6 +42,10 @@ for SCENARIO in "$@"; do
     focus) TOOLSET=focus ;;
     field-report) TOOLSET=report ;;
     video-editing) TOOLSET=video ;;
+    # The retrieval archetype's first pack (ROADMAP "Video moment-seek"):
+    # the video room plus canned index tools — clause→index routing, the
+    # timestamp copy out of a result, and the find → seek/cut → export chain.
+    video-moments) TOOLSET=moments ;;
     store) TOOLSET=store ;;
     audio) TOOLSET=audio ;;
     docs) TOOLSET=docs ;;

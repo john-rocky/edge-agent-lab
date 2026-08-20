@@ -154,6 +154,15 @@ delete take `confirm`, to be left false until the user has said yes; the
 pair of cases per pack measures both directions — not confirming
 unasked, and turning "Yes, go ahead." plus the state's "Awaiting
 confirmation" line into confirm true with the right number).
+`video-moments`: 20 + 20 over 24 tools (the video room + 6) — the
+retrieval archetype (ROADMAP "Video moment-seek"): three canned indexes
+over one frozen soccer match (what is seen / said / written on screen),
+clause→index routing scored on the call sequence, the timestamp copy out
+of a *search result* into seek/keep_range (`number±tol` against the
+canned rows — the split-at-playhead competence one step further from the
+words), the find → keep_range → export chain, a forced-choice
+check_moment on a shortlisted frame, and a red-card miss whose honest
+run sweeps all three indexes and answers "not there".
 
 ## What a JSONL line records
 
