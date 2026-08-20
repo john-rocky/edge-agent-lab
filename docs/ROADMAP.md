@@ -143,6 +143,33 @@ Both stay inside this repo's frame: mock/sample-app stages, shared tool
 definitions between demo and bench, and every loop iteration is itself
 a routing decision the existing case format can score.
 
+### The orchestrator thesis (user, 2026-08-20)
+
+Where the photo thread lands after the loop rounds killed
+model-as-judge: **the OS already ships the judges — the model's place
+is the podium, not the bench.** iOS carries a large, free,
+deterministic CV toolbox — Vision (faces, landmarks, OCR, scene
+classes, segmentation, horizon, saliency), CoreImage (the edit ops,
+histograms, auto-adjustment), CoreML (a CLIP index, small
+regressors) — and the LLM/VLM's job is to orchestrate it: parse the
+task sentence into a plan, route each clause to the cheapest layer
+that answers it (metadata → embedding index → classical detector →
+per-candidate VLM, in that cost order), then act. The VLM keeps only
+the long-tail per-item judgments no prebuilt detector covers — always
+forced-choice, always on a shortlist, never as the loop's judge or
+stop. Aesthetic judgment itself: meters diagnose and stop; a scene
+profile picks the targets (VNClassify vs VLM forced-choice is a
+measurable A/B); an optional fine-tune line exists (Q-Align-style
+discrete levels — the fixture generator doubles as a labeled-data
+engine, distortion parameters are free labels). This folds the lab's
+central question into the product one: the room *is* the OS's
+capability list, and the recipes are its design rules. Candidate
+first pack: photo-library ops — a mock library with real
+Vision/CoreImage calls, a CLIP-style index, and
+`check_photo(id, question, options)` — scoring the route choice
+between layers: the retrieval archetype's "knowing what's missing",
+with the cost gradient explicit.
+
 ## The business wing (2026-08-20)
 
 ⑨–⑬ turn the repo into an **on-device tool-calling benchmark for real
