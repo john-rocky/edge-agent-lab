@@ -97,3 +97,20 @@ contract):
   auto_enhance: "make it look its best" with no op named is that well.
 
 Raw JSONL: ../../bench/results/2026-08-20-mac-r27/ … -r32/.
+
+## The judge study (same day, product direction)
+
+Two quick measurements after the loop rounds, scratch scripts over the
+same fixtures. Vision's built-in aesthetics score
+(`VNCalculateImageAestheticsScoresRequest`, on-device, free) is **not a
+judge**: good 0.654 against dark 0.585 / bright 0.614 / cool 0.660 /
+dull 0.629 — no separation — and the r32 burnt-orange ruin scores
+0.732, best of all. It measures appeal, and appeal loves drama; as a
+loop objective it would steer toward the ruin. Plain pixel statistics
+separate all seven defects cleanly (mean luma 0.17 dark / 0.41 bright
+vs 0.29; hi-clip 16% bright; R−B cast +0.02 cool / +0.17 warm vs
++0.08; luma σ 0.13 flat vs 0.26; chroma 0.04 dull vs 0.14). So the
+product shape: meters judge and stop, the correction amount is computed
+not guessed, the aesthetic score at most tiebreaks safe variants, and
+the language model keeps only what only it can do — taste words →
+ops, the one-line explanation, forced-choice refinements.
