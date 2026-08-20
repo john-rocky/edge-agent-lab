@@ -170,6 +170,29 @@ Vision/CoreImage calls, a CLIP-style index, and
 between layers: the retrieval archetype's "knowing what's missing",
 with the cost gradient explicit.
 
+### Video moment-seek (user, 2026-08-20) — retrieval pack candidate
+
+Tag and index videos, then search and **seek** in natural language.
+Three indexes cover what is seen, said and written: CLIP frame
+embeddings at ~1 fps with timestamps (a 10-minute video indexes in
+~10 s, once), the ASR transcript, OCR on keyframes — `clip` and `asr`
+already live in the model repo. A query's clauses route to the right
+index; candidate moments get VLM forced-choice verification for the
+frame index's blind spots (negation, counting, action boundaries);
+and the payoff is the chain into the already-built video pack:
+find_moment → seek → trim → export — "ゴールの瞬間だけ切り出して".
+The LLM works both sides of the index: at query time expanding a
+natural phrase into CLIP-friendly prompt sets, at index time
+proposing the tag vocabulary a domain needs (what to precompute for
+site-inspection footage vs lectures vs screen recordings). Pure
+search needs no LLM — the model earns its place at clause→index
+routing, vocabulary building, and the find→edit chain. Bench shape:
+canned index tools in the video room, scoring clause routing, the
+timestamp copy into trim (the split-at-playhead competence, reused),
+and the look-first chain; the stage demo runs real. Apple ships
+consumer camera-roll moment search (iOS 18 Photos) — the edge is
+search×edit, screen recordings, meetings, and business video.
+
 ## The business wing (2026-08-20)
 
 ⑨–⑬ turn the repo into an **on-device tool-calling benchmark for real
