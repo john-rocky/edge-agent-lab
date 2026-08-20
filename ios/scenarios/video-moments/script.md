@@ -31,13 +31,54 @@ frozen 600 s soccer-match recording, three indexes over the same match, so
 the clause→index choice is scorable and the searches echo real-shaped
 moments ("214–226 s — a goal — a header — and the celebration"). Row
 keywords carry the JA the cases utter (recipes: canned data must be
-findable in every language). The stage demo is the **next** build: the
-index made real with the OS's own judges (~1 fps frames through Vision,
-audio through Speech, CLIP from the model repo) per the orchestrator
-thesis; until then the app tools answer honestly that no index is built,
-and the app's state line does not claim one — the bench cases' `Index:
-ready` line is the mock, stated in the state like every other pack's
-canned world.
+findable in every language).
+
+Stage: **the index is real** (built 2026-08-21, `MomentIndexBox`) — the
+orchestrator thesis's cheapest rungs, no extra models: ≤90 source frames
+through VNClassifyImageRequest + VNRecognizeTextRequest, the audio track
+through the on-device recognizer auto_captions already used; check_moment
+runs the same two requests on the one frame it is asked about. A CLIP
+rung slots in above the classifier when the model repo's embedding build
+lands — today "find the goal" is answered by the commentator's words and
+the scoreboard's OCR, which is the honest edge. `--scenario moments`
+runs it; `--video <path>` loads a file instead of the library (no
+Photos/TCC dialogs in a shell-driven Mac run — export follows the flag,
+file in, file out). `ios/bench/moviefixture.swift` generates the test
+clip: 40 s of synthetic match with a burned-in scoreboard, spoken
+commentary (an explicit English voice) and a crowd-noise bed. The
+recorded take (moment-seek-demo.mp4): "Find the moment they say goal" →
+search_transcript hits 17.3–19.3 s "What a goal an absolute rocket…" →
+"Keep only that moment." → keep_range(17.3, 19.3), 40 s → 2 s →
+"Export it." — a 2-second goal clip in the export folder, fully
+offline.
+
+What the stage build taught (2026-08-21, all measured on the take):
+
+- **The edit vocabulary can trip the safety rails.** "Cut the video down
+  to just that moment" came back "may contain sensitive or unsafe
+  content" from Apple FM — beat reworded to "Keep only that moment."
+  The guardrail reads the verb, not the domain.
+- **`shouldReportPartialResults = false` returns the LAST utterance
+  window only.** Five commentary lines in, one out: the recognizer
+  commits and resets across pauses, the intermediate commits ride
+  partial results, and the single final carries the tail. The fix
+  accumulates segments from every callback, deduplicated by timestamp
+  (`VideoEditBox.transcribe`, shared with auto_captions — which had the
+  same latent bug).
+- **TCC attributes a naked binary to its parent shell.** Launching
+  `LFMToolsMac` straight from Contents/MacOS crashed on the speech
+  permission ("missing usage description" — the built Info.plist has
+  it); the responsible process was the terminal. `open -n <app>
+  --args …` fixes the attribution; the run scripts' bench mode never
+  hit this because the fakes touch nothing permissioned.
+- **The recognizer follows the device locale even when no such
+  recognition locale exists** ("en_JP"): transcription came back
+  garbled until the fixture spoke with an explicit English voice and
+  the recognizer fell back to en-US
+  (`SFSpeechRecognizer(locale:)` chain in transcribe).
+- **A window-layer screencapture (`-l <windowid>`) records the app
+  alone, even occluded** — the take is 92 window shots at ~0.5 s
+  assembled to mp4, nothing else on the screen ever enters the frame.
 
 What is new for the bench to score, in order of ambition:
 

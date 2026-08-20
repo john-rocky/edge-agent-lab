@@ -205,9 +205,14 @@ two indexes — one JA case ran 29 search calls, the retrieval twin of
 the loop's 28 rounds — and "just that one moment", with no moment ever
 named, is resolved against the playhead instead of asked about (the
 argument-level ask's first measured failure). Wording moved 9/40 →
-17/40 and stopped; the sweep survived its A/B as character. The stage
-demo (a real index out of the OS's own judges) is the next build.
-Canon: scenarios/video-moments/script.md.
+17/40 and stopped; the sweep survived its A/B as character. **The stage
+demo runs real** (2026-08-21): `--scenario moments` builds the index
+from the loaded video with the OS's own judges — Vision classify + OCR
+on ≤90 frames, the on-device recognizer on the audio — and the recorded
+take walks the whole chain: "find the moment they say goal" →
+search_transcript hits the commentator's line → keep_range cuts 40 s to
+2 s → export. Fully offline, no models beyond the OS and Apple FM; the
+CLIP rung is what's left. Canon: scenarios/video-moments/script.md.
 
 ## The business wing (2026-08-20)
 
