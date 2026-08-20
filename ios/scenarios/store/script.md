@@ -9,8 +9,9 @@ inputs are tiny and a local model is in reach, and the bench gets a second
 class of case: was the *query* right, not was the edit right. Tools:
 `ToolBox.store`, 16 (`Tools/StoreTools.swift`) — plus `search_orders` (by
 customer, the order-side second finder) and `export_products_csv`.
-Launch: `--autorun --backend apple --scenario store`; `--voice` for
-spoken beats; chat: `--scenario store` without `--autorun`. The admin's
+Launch: `--autorun --backend apple --scenario store`; `--ja` swaps in
+the Japanese beats; `--voice` for spoken beats; chat: `--scenario
+store` without `--autorun`. The admin's
 list is on stage the whole run (`RecordsPanel`), rows changing in place.
 
 The shape is the admin's own: a search or filter makes a **selection** (the
@@ -47,27 +48,47 @@ arguments; Japanese finders grew refund_order and get_product tails.
 Kana→romaji now rides in every store finder (田中・ウールマフラー find
 their canned rows).
 
+Re-cut at 22 tools (2026-08-20), and the re-cut taught the pack's
+biggest lesson yet: **the bench's fresh sessions flatter the stage.**
+The old beat 2 (a 10% cut) and beat 4 (the unpaid-orders finder) pass
+the bench in both measured rounds — and broke on the stage, in both
+languages, where every beat rides a growing transcript.
+adjust_product_price arrived with *no arguments* (twice in English,
+seven times in Japanese), the tool's "give a percentage or a yen
+amount" error taught it nothing, and the answer claimed success with
+self-computed prices — two of six arithmetically wrong (¥8,900 −10% is
+not ¥7,910). The unpaid-orders beat rampaged **38 identical
+search_orders(customer: "Tanaka") calls** — a customer no one named —
+before the app was killed. A bench case is one message; a demo is a
+conversation; the recording keeps to the beats that hold in both:
+
 | beat | say | expect |
 |---|---|---|
 | 1 | Which products have fewer than 5 in stock? | `find_low_stock(below: 5)` — 6 rows, a table on screen; they are now the selection |
-| 2 | Cut their prices by 10%. | `update_price(percent_change: -10)` on the selection — not `set_price`; the prices in the table drop |
+| 2 | Set them all to 3,000 yen. | `set_price(price: 3000)` on the selection — the absolute half of the price pair; every row's price flips to ¥3,000 |
 | 3 | Tag them 'clearance'. | `add_tag(clearance)` on the same selection |
-| 4 | Show me the orders that haven't been paid. | `filter_orders(pending, any)` — 5 rows; the selection is now orders |
-| 5 | Send them a payment reminder. | `send_payment_reminder` on the selection |
-| 6 | Fulfil all the paid orders that haven't shipped yet. | `filter_orders(paid, unfulfilled)` → `fulfill_orders` — a two-call chain; 5 orders flip to fulfilled |
-| 7 | How were sales this week? | `sales_summary(days: 7)` — orders, yen, vs the week before, top items |
+| 4 | Add 20 units to each. | `adjust_inventory(change: 20)` — the stock column climbs |
+| 5 | Fulfil all the paid orders that haven't shipped yet. | `filter_orders(paid, unfulfilled)` → `fulfill_orders` — a two-call chain; 5 orders flip to fulfilled |
+| 6 | How were sales this week? | `sales_summary(days: 7)` — orders, yen, vs the week before, top items |
 
-日本語版(未実測):
+Recorded 2026-08-20 on the Mac lane (Apple FM, 22 tools): six beats,
+63 seconds, every call clean — window-targeted `screencapture -v -l`,
+since a shell-launched Catalyst window neither comes to nor stays in
+front.
+
+日本語版(`--ja`、5 ビート)。未払いの注文とリマインダーは外してある
+(JA の順序ファインダーはベンチでも両ラウンド落ちる)。価格ペアも丸ごと
+外してある — % 版は stage で引数落ち(7 連続)、絶対値版はベンチで
+adjust_product_price に捕食される。JA の価格ペアはこのパックの
+definition 最適化の未解決標的:
 
 | beat | 言う |
 |---|---|
 | 1 | 在庫が5個未満の商品はどれ? |
-| 2 | その商品の価格を10%下げて。 |
-| 3 | 「clearance」のタグを付けて。 |
-| 4 | 未払いの注文を見せて。 |
-| 5 | 支払いのリマインダーを送って。 |
-| 6 | 支払い済みで未発送の注文を全部発送済みにして。 |
-| 7 | 今週の売上はどうだった? |
+| 2 | 「clearance」のタグを付けて。 |
+| 3 | それぞれ在庫を20個追加して。 |
+| 4 | 支払い済みで未発送の注文を全部発送済みにして。 |
+| 5 | 今週の売上はどうだった? |
 
 What the model reads (ahead of the words, every beat):
 
