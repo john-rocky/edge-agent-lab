@@ -101,6 +101,38 @@ menu would sound like".
   playhead, the selection, tracks and their levels, pages by their first
   line — so "their", "the keys", "the cover" are resolved by the app.
 
+## Beyond the input layer: two new routing archetypes (2026-08-20)
+
+Everything above routes one archetype: **input-driven** — a human
+utterance (text, voice, an image), plus the app's state line, goes in;
+tool calls come out; the turn ends. The next axis (user, 2026-08-20) is
+routes where the model is invoked on the **app's own intermediate
+output**, not only on what the user typed or said:
+
+- **Goal-driven (目標達成型)** — perceive → judge → act → perceive the
+  result → judge again, looping until a goal is met. First target: an
+  aesthetic polish loop — the VLM judges the photo aesthetically, picks
+  the enhancement ops the judgment calls for, the app applies them, the
+  VLM judges the result and decides whether to go another round and
+  with which op. The polish scenario is the seed (today it is
+  one-shot). New things for the bench to score: termination (stops at
+  good-enough, doesn't oscillate), the judgment→op mapping, and
+  iterations × cost on device.
+- **Retrieval-driven (検索型)** — the input alone under-determines the
+  action; the model (or the app on its behalf) first searches for or
+  fetches the missing information, that context is handed to the LLM,
+  and the processing is decided from input + fetched context. Distinct
+  from the look-first get prefix inside the packs, which resolves
+  references against mock data already on stage — here the fetch
+  supplies context the input never contained. New things to score:
+  recognizing that information is missing (fetch instead of invent —
+  the ask_user lesson, answered by a tool instead of a human), and the
+  fetch → decide → act chain.
+
+Both stay inside this repo's frame: mock/sample-app stages, shared tool
+definitions between demo and bench, and every loop iteration is itself
+a routing decision the existing case format can score.
+
 ## The business wing (2026-08-20)
 
 ⑨–⑬ turn the repo into an **on-device tool-calling benchmark for real
