@@ -1,0 +1,27 @@
+{
+  "_comment": "The tool-count ladder (business-packs.md, evaluation program #1). Each key is one runnable group: `run-mac.sh ladder-<key>`. A rung is the set of groups sharing a `rung` value; every pack case lands in exactly one group per rung — the first group in this file's order whose tools cover the case's expected calls (ladder.py enforces the rule). Tool subsets are cut from BenchToolBox.business by name (`--only`), so the presented order is always the business list's order. Rungs already measured without cutting: crm@12, pm@11, store@22 (the packs themselves) and all three @41 (business, r21).",
+
+  "crm5a": {"pack": "crm", "rung": "crm5", "tools": ["search_opportunities", "update_opportunity_stage", "create_follow_up_task", "ask_user", "undo_last"]},
+  "crm5b": {"pack": "crm", "rung": "crm5", "tools": ["get_opportunity", "update_opportunity_amount", "assign_opportunity", "ask_user", "undo_last"]},
+  "crm5c": {"pack": "crm", "rung": "crm5", "tools": ["search_contacts", "search_companies", "add_note", "ask_user", "undo_last"]},
+
+  "crm20": {"pack": "crm", "rung": "crm20", "tools": ["search_opportunities", "get_opportunity", "update_opportunity_stage", "update_opportunity_amount", "assign_opportunity", "search_contacts", "get_contact", "search_companies", "create_follow_up_task", "add_note", "ask_user", "undo_last", "search_issues", "get_issue", "create_issue", "assign_issue", "change_issue_status", "change_issue_priority", "change_due_date", "add_comment"]},
+
+  "pm5a": {"pack": "pm", "rung": "pm5", "tools": ["search_issues", "assign_issue", "change_issue_status", "ask_user", "undo_last"]},
+  "pm5b": {"pack": "pm", "rung": "pm5", "tools": ["get_issue", "change_issue_priority", "change_due_date", "ask_user", "undo_last"]},
+  "pm5c": {"pack": "pm", "rung": "pm5", "tools": ["create_issue", "add_comment", "close_issue", "ask_user", "undo_last"]},
+
+  "pm20": {"pack": "pm", "rung": "pm20", "tools": ["search_issues", "get_issue", "create_issue", "assign_issue", "change_issue_status", "change_issue_priority", "change_due_date", "add_comment", "close_issue", "ask_user", "undo_last", "search_opportunities", "get_opportunity", "update_opportunity_stage", "update_opportunity_amount", "assign_opportunity", "search_contacts", "get_contact", "search_companies", "create_follow_up_task"]},
+
+  "store5a": {"pack": "store", "rung": "store5", "tools": ["find_low_stock", "add_tag", "adjust_inventory", "ask_user", "undo_last"]},
+  "store5b": {"pack": "store", "rung": "store5", "tools": ["search_products", "filter_products", "set_product_status", "ask_user", "undo_last"]},
+  "store5c": {"pack": "store", "rung": "store5", "tools": ["adjust_product_price", "set_price", "get_product", "ask_user", "undo_last"]},
+  "store5d": {"pack": "store", "rung": "store5", "tools": ["filter_orders", "fulfill_orders", "send_payment_reminder", "ask_user", "undo_last"]},
+  "store5e": {"pack": "store", "rung": "store5", "tools": ["refund_order", "cancel_order", "search_orders", "ask_user", "undo_last"]},
+  "store5f": {"pack": "store", "rung": "store5", "tools": ["search_customers", "create_discount", "add_order_note", "ask_user", "undo_last"]},
+  "store5g": {"pack": "store", "rung": "store5", "tools": ["export_products_csv", "sales_summary", "search_orders", "ask_user", "undo_last"]},
+
+  "store10a": {"pack": "store", "rung": "store10", "tools": ["search_products", "filter_products", "find_low_stock", "get_product", "adjust_product_price", "set_price", "add_tag", "set_product_status", "ask_user", "undo_last"]},
+  "store10b": {"pack": "store", "rung": "store10", "tools": ["adjust_inventory", "search_orders", "export_products_csv", "filter_orders", "fulfill_orders", "send_payment_reminder", "refund_order", "cancel_order", "ask_user", "undo_last"]},
+  "store10c": {"pack": "store", "rung": "store10", "tools": ["search_customers", "create_discount", "add_order_note", "sales_summary", "search_products", "filter_products", "find_low_stock", "get_product", "ask_user", "undo_last"]}
+}

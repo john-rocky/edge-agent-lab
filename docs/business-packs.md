@@ -210,7 +210,12 @@ seven built packs; recipes cross-referenced):
    accuracy, similar-tool confusion, multi-tool accuracy, latency,
    context use. The ceiling is known to be memory × count, not count
    (the 2.6B died at a 1054-token tool list); business packs give the
-   curve its business shape.
+   curve its business shape. First measured 2026-08-20 (Apple FM, Mac
+   lane): 90/126 at five tools, flat from pack size to twenty, 70/126
+   at 41 — a step at each end, with chain length the monotone axis.
+   The subsets and the case-partition rule live in
+   [ios/bench/ladder.json](../ios/bench/ladder.json); see
+   [model-routing](model-routing.md).
 2. **Realistic in-app mixes.** A real commerce app exposes products +
    orders + customers + inventory + discounts at once; measure entity
    discrimination inside one domain.

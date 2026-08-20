@@ -35,6 +35,7 @@ for SCENARIO in "$@"; do
   # the only variable.
   CASES_DIR=$SCENARIO
   INSTR=""
+  LADDER=""
   case "$SCENARIO" in
     coffee-run) TOOLSET=demo ;;
     photo-editing) TOOLSET=photo ;;
@@ -52,14 +53,29 @@ for SCENARIO in "$@"; do
     business-crm) TOOLSET=business; CASES_DIR=crm; INSTR=crm ;;
     business-pm) TOOLSET=business; CASES_DIR=pm; INSTR=pm ;;
     business-store) TOOLSET=business; CASES_DIR=store; INSTR=store ;;
+    # The tool-count ladder (evaluation program #1): `ladder-<group>` runs one
+    # subset from ladder.json — the business list cut down with --only, the
+    # pack's instructions pinned, and only the cases whose correct tools the
+    # subset holds (ladder.py's first-match partition).
+    ladder-*)
+      LADDER=${SCENARIO#ladder-}
+      TOOLSET=business
+      INSTR=$(python3 "$HERE/ladder.py" pack "$LADDER") || exit 1
+      CASES_DIR=$INSTR
+      ;;
     *) echo "unknown scenario $SCENARIO"; exit 1 ;;
   esac
   CASES="$HERE/../scenarios/$CASES_DIR/cases.json"
   [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }
-  cp "$CASES" "$FILES/toolbench-cases.json"
+  if [[ -n "$LADDER" ]]; then
+    python3 "$HERE/ladder.py" cases "$LADDER" > "$FILES/toolbench-cases.json" || exit 1
+  else
+    cp "$CASES" "$FILES/toolbench-cases.json"
+  fi
   rm -f "$FILES"/toolbench-*.jsonl "$FILES"/toolbench-*.done
   EXTRA=()
   [[ -n "$INSTR" ]] && EXTRA=(--instructions "$INSTR")
+  [[ -n "$LADDER" ]] && EXTRA+=(--only "$(python3 "$HERE/ladder.py" tools "$LADDER")")
   echo "== $SCENARIO (toolset $TOOLSET${INSTR:+, instructions $INSTR}) on Apple FM, Mac"
   "$APP" --toolbench --toolset "$TOOLSET" $EXTRA --model apple >/dev/null 2>&1 &
   PID=$!

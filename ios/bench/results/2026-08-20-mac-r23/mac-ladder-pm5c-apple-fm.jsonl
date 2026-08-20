@@ -1,0 +1,14 @@
+{"cases":6,"date":"2026-08-20","model":"apple-fm","toolNames":"ask_user,undo_last,create_issue,add_comment,close_issue","tools":5,"toolset":"business","type":"run"}
+{"case":"p-en-close-1","type":"start"}
+{"answer":"APP-11 has been closed.","argsPass":true,"called":["close_issue"],"calls":[{"args":"{\"id\":\"APP-11\"}","tool":"close_issue"}],"case":"p-en-close-1","expected":["close_issue"],"input":"Close APP-11.","lang":"en","model":"apple-fm","ms":1409,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"p-en-comment-1","type":"start"}
+{"answer":"Comment added to APP-9.","argsPass":true,"called":["add_comment"],"calls":[{"args":"{\"text\":\"keys rotated in staging\",\"id\":\"APP-9\"}","tool":"add_comment"}],"case":"p-en-comment-1","expected":["add_comment"],"input":"Comment on APP-9: keys rotated in staging.","lang":"en","model":"apple-fm","ms":1465,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"p-en-create-1","type":"start"}
+{"answer":"A P1 issue titled \"webhook retries flood the queue\" was created in the Backend project.","argsPass":true,"called":["create_issue"],"calls":[{"args":"{\"title\":\"webhook retries flood the queue\",\"priority\":\"P1\",\"project\":\"Backend\"}","tool":"create_issue"}],"case":"p-en-create-1","expected":["create_issue"],"input":"Open a P1 issue in Backend: webhook retries flood the queue.","lang":"en","model":"apple-fm","ms":1785,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"p-ja-close-1","type":"start"}
+{"answer":"APP-11 has been closed.","argsPass":true,"called":["close_issue"],"calls":[{"args":"{\"id\":\"APP-11\"}","tool":"close_issue"}],"case":"p-ja-close-1","expected":["close_issue"],"input":"APP-11をクローズして。","lang":"ja","model":"apple-fm","ms":1448,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"p-ja-comment-1","type":"start"}
+{"answer":"APP-9にコメントを付けました。","argsPass":true,"called":["add_comment"],"calls":[{"args":"{\"text\":\"ステージングでキー交換済み。\",\"id\":\"APP-9\"}","tool":"add_comment"}],"case":"p-ja-comment-1","expected":["add_comment"],"input":"APP-9にコメントして: ステージングでキー交換済み。","lang":"ja","model":"apple-fm","ms":1653,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"p-ja-create-1","type":"start"}
+{"answer":"New P1 issue created in Backend: \"webhookのリトライがキューを圧迫している\".","argsPass":true,"called":["create_issue"],"calls":[{"args":"{\"title\":\"webhookのリトライがキューを圧迫している\",\"priority\":\"P1\",\"project\":\"Backend\"}","tool":"create_issue"}],"case":"p-ja-create-1","expected":["create_issue"],"input":"BackendにP1で票を切って: webhookのリトライがキューを圧迫している。","lang":"ja","model":"apple-fm","ms":1857,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"failed":0,"model":"apple-fm","passed":6,"total":6,"type":"summary"}

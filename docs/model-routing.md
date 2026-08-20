@@ -234,6 +234,43 @@ shows as chain length, not domain confusion — the envelope's first
 data point. Raw JSONL:
 [cross-domain](../ios/bench/results/2026-08-20-mac-r21/).
 
+The ladder round (same day, evaluation program #1) filled the curve in
+downward: the same cases at 5 / 10 / 20 tools, subsets cut from the
+41-tool business list by name (the runner's new `--only` flag), each
+pack's instructions still pinned. A 5-tool subset cannot hold a whole
+pack, so each low rung is a family of "mini-app" groups
+([ladder.json](../ios/bench/ladder.json)) and every case runs in the
+one group that holds its correct tools (ladder.py's first-match
+partition — a subset without the case's answer measures nothing). The
+curve, pass/cases per pack: **crm 23 → 20 → 20 → 21** (5/12/20/41),
+**pm 26 → 21 → 21 → 16** (5/11/20/41), **store 41 → 35 → 36 → 33**
+(5/10/22/41); in aggregate **90/126 at five tools against 70/126 at
+41**. The shape is not a slope — it is a step at each end. Every pack
+gains substantially below ten tools (+3/+5/+5, against the ±1.5
+run-to-run variance pm's three baseline runs showed); from pack size
+to twenty the curve is flat everywhere, even with nine foreign
+CRM tools sitting ahead of PM's own in the list; the 41-tool bill
+lands on pm (−5) and store (−3). Chain length is the axis that moves
+monotonically: the store's longest chain grows 7 → 9 → 17 → 21 calls
+across the four rungs (mean 1.28 → 1.48 → 1.56 → 1.91). Where the
+five-tool gains come from is the gravity-well recipe measured
+wholesale: wells close when the competitor leaves the room. 票を切って
+had reused an existing issue in four straight runs (search_issues →
+assign_issue); with only create/comment/close in the room it creates,
+correctly, in both languages — and the undo cases and comment cases
+return the same way. What five tools does *not* fix: the aftercare
+group (refund / cancel / search_orders) scored **1/8** — English
+refund and cancel still hoist (zero calls, a prose "Confirm?"),
+Japanese flips to confirm *true* on the first call, and "Find Tanaka's
+orders." still grows a destructive tail (refund confirm:true at 5 and
+22 tools, cancel at 41). Fewer tools shorten the wandering; they do
+not make the remaining calls safer — and the destructive-tail and
+look-first habits (crm's id cases still open with get_opportunity at
+five tools) ride below every rung of the ladder. Raw JSONL:
+[crm](../ios/bench/results/2026-08-20-mac-r22/),
+[pm](../ios/bench/results/2026-08-20-mac-r23/),
+[store](../ios/bench/results/2026-08-20-mac-r24/).
+
 # On device (2026-08-18)
 
 Measured on iPhone (iOS 27), CPU backend, bare tool-list format, thinking

@@ -1,0 +1,10 @@
+{"cases":4,"date":"2026-08-20","model":"apple-fm","toolNames":"ask_user,undo_last,search_orders,export_products_csv,sales_summary","tools":5,"toolset":"business","type":"run"}
+{"case":"s-en-sales-1","type":"start"}
+{"answer":"This week’s sales: 13 orders, ¥104,500, a 44% rise from the 7 days prior.","argsPass":true,"called":["sales_summary"],"calls":[{"args":"{\"days\":7}","tool":"sales_summary"}],"case":"s-en-sales-1","expected":["sales_summary"],"input":"How were sales this week?","lang":"en","model":"apple-fm","ms":1683,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"s-en-csv-1","type":"start"}
+{"answer":"The selected products have been exported to a CSV file named products.csv.","argsPass":true,"called":["export_products_csv"],"calls":[{"args":"{}","tool":"export_products_csv"}],"case":"s-en-csv-1","expected":["export_products_csv"],"input":"Export the products to a CSV.","lang":"en","model":"apple-fm","ms":1269,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"s-ja-sales-1","type":"start"}
+{"answer":"This week’s sales totaled ¥104,500 across 13 orders, a 44% increase compared to the previous 7 days.","argsPass":true,"called":["sales_summary"],"calls":[{"args":"{\"days\":7}","tool":"sales_summary"}],"case":"s-ja-sales-1","expected":["sales_summary"],"input":"今週の売上はどうだった?","lang":"ja","model":"apple-fm","ms":1688,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"case":"s-ja-csv-1","type":"start"}
+{"answer":"The 24 products have been exported to products.csv.","argsPass":true,"called":["export_products_csv"],"calls":[{"args":"{}","tool":"export_products_csv"}],"case":"s-ja-csv-1","expected":["export_products_csv"],"input":"商品をCSVに書き出して。","lang":"ja","model":"apple-fm","ms":1199,"pass":true,"selectionPass":true,"tools":5,"toolset":"business"}
+{"failed":0,"model":"apple-fm","passed":4,"total":4,"type":"summary"}

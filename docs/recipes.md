@@ -45,6 +45,15 @@ an hour" goes to `set_timer` (right seconds, wrong tool) with
 `schedule_notification` present, in both languages. The 1.2B's other
 well is read-vs-write: "What did I ask you to remember?" → `write_note`.
 
+The ladder run (2026-08-20) measured the removal wholesale: 票を切って
+had reused an existing issue in four straight runs — search_issues,
+then assign_issue, then an answer claiming the issue was created — a
+JA create-verb well stable at 11, 20 and 41 tools. In a five-tool room
+holding only create / comment / close, it calls create_issue with the
+right title, priority and project, in both languages. The well is not
+the verb: it is the competitor. When a create intent keeps landing on
+a finder, the fix to try first is the room, not the description.
+
 ## Take arguments in the user's units
 
 Ask for seconds and the model has to multiply. Apple FM turned "25
@@ -201,6 +210,18 @@ rampaged through 13 calls). Count doesn't confuse this model's
 routing; it feeds its eagerness — every added tool is another room for
 a lost model to wander into. Expect scale to stretch failure chains
 before it breaks selection.
+
+The full ladder (the same cases at 5/10/20/41 tools, Mac, 2026-08-20)
+gave that curve its shape: a step at each end, flat in the middle.
+Every pack gained substantially below ten tools (crm 23/36, pm 26/36,
+store 41/54 — 90/126 in aggregate against 70/126 at 41); from pack
+size to twenty tools every pack was flat within run-to-run variance;
+the 41-tool bill landed on two packs of three. The monotone axis is
+chain length: the store's longest failure chain grew 7 → 9 → 17 → 21
+calls across the four rungs. For an app developer the reading is:
+under ~10 well-chosen tools buys real accuracy, 10–20 is a plateau
+this router does not charge for, and what count never buys is safety —
+the destructive-tail and confirm wells ride below every rung.
 
 ## Make signed ranges unmistakable
 
@@ -362,6 +383,17 @@ confirm *true* (the verb-as-consent collapse, again). One gated verb
 held; two taught the gate as a ritual. The app-side dialog is the only
 gate that survives every shape.
 
+Shrinking the list does not restore the gate. In a five-tool room
+holding only refund, cancel and the order finder (the ladder run,
+2026-08-20), the pair scored 1/8: English refund and cancel still
+called nothing and asked in prose, Japanese called refund with confirm
+*true* on the first ask, and cancel misrouted to refund outright. The
+same run pinned the worst shape as count-independent: "Find Tanaka's
+orders." — a pure read — grew a refund confirm:true tail at 5 and 22
+tools and a cancel tail at 41. The gated pair is a hazard at every
+list size it appears in; the app dialog is not a mitigation but the
+mechanism.
+
 ## Undo must own the going-back words
 
 `undo_last` in every pack, described "Undo the last change." Asked
@@ -390,7 +422,11 @@ the Japanese ask case invented an id, and undo became a by-hand stage
 reversal (Mac, 2026-08-20). A license that pushes one well down pops
 others. The prefix is the records packs' look-first habit with a get
 tool to spend it on: expect it from a strong router, score it as the
-extra call it is, and spend the wording budget elsewhere.
+extra call it is, and spend the wording budget elsewhere. The ladder
+run put a floor under "character": in a five-tool room (get, amount,
+assign, plus the rails) the id cases still open with get_opportunity —
+three of six, both Japanese id-act cases among them. No list is small
+enough to starve the habit as long as the get tool is in it.
 
 ## Instructions have a noise floor — put contracts in the tools
 

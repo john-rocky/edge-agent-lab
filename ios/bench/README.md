@@ -46,6 +46,19 @@ pulls the JSONL into `results/<date>-mac/`, and prints the fails. This is
 how a pack's routing gets verified the day it is written, with no phone.
 The Mac runs are smoke tests; the model table stays device-measured.
 
+Two flag pairs serve the business wing's evaluation program.
+`--instructions <pack>` pins the instructions independently of
+`--toolset`, so the cross-domain runs (`business-crm` etc.) grow the
+tool list while each pack's cases keep their measured instructions.
+`--only <name,name,…>` cuts the toolset down to the named tools, list
+order preserved — the tool-count ladder. A five-tool subset cannot
+hold a whole pack, so [ladder.json](ladder.json) cuts each low rung
+into "mini-app" groups and [ladder.py](ladder.py) assigns every case
+to the one group holding its correct tools (first group in file order
+that covers the case's expected calls; a subset without the case's
+answer measures nothing). `./run-mac.sh ladder-crm5a` runs one group;
+`ladder.py check` proves every rung is a partition.
+
 ## Case format
 
 ```json
@@ -126,11 +139,13 @@ confirmation" line into confirm true with the right number).
 
 ## What a JSONL line records
 
-`case, lang, model, input, expected, called, calls (raw args), selectionPass
-(called sequence == expected), argsPass (all matchers), pass, ms, answer,
-error`. The run's opening line also records the run `date`, which is what
-lets `report.py` resolve `dateResolvesTo` matchers offline — "tomorrow"
-only means something relative to the day the run happened.
+`case, lang, model, toolset, tools (list size), input, expected, called,
+calls (raw args), selectionPass (called sequence == expected), argsPass
+(all matchers), pass, ms, answer, error`. The run's opening line records
+the run `date` — what lets `report.py` resolve `dateResolvesTo` matchers
+offline; "tomorrow" only means something relative to the day the run
+happened — and `toolNames`, the full list the model saw, so a row's
+tool-list identity survives into cross-config analysis.
 
 ## Known asymmetry
 
