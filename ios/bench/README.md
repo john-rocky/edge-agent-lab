@@ -72,7 +72,10 @@ all-canned rule: the model must judge its own actual output. Fixtures
 are not committed — `fixtures.swift` generates them from a local base
 photo into the app's fixture folder; eyeball them before a run.
 `./run-mac.sh polish polish-see` runs the loop and the sight-alone
-control.
+control. `replay.swift` turns a loop run's JSONL back into pixels — it
+re-applies the recorded calls with the app's own filter recipes and
+composes a before/after contact sheet, one row per case, so what the
+loop did to a photo is a picture, not an op list.
 
 ## Case format
 
