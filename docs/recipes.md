@@ -80,6 +80,19 @@ model does it about as well as it multiplies minutes. The untried
 structural fix is this recipe's own: let the date argument accept the
 weekday word ("friday", "next monday") and do the calendar in the app.
 
+The currency in a definition is part of the contract too — both ways
+(store `--usd` recording, Mac, 2026-08-20). Outbound: with every
+fixture and tool result in dollars, one leftover "in yen" in a guide
+kept the *answers* in ¥ — "All six products are now set to ¥30"
+against an all-$ screen, two takes running, gone the moment the guides
+said dollars. Inbound: "Set them all to $30." grazed
+adjust_product_price (whose guide showed "$5" examples) before
+recovering to set_price, twice; "Set them all to 30 dollars." went
+straight to set_price both times — the spelled-out word matches "New
+price in dollars" the way "3,000 yen" had matched "price in yen". The
+model routes and speaks in whatever units the definitions are written
+in, not the units on screen.
+
 ## Every required argument is a question waiting to be asked
 
 `set_timer` requires a `label`; "Set a timer for 25 minutes" gave Apple

@@ -10,8 +10,11 @@ class of case: was the *query* right, not was the edit right. Tools:
 `ToolBox.store`, 16 (`Tools/StoreTools.swift`) — plus `search_orders` (by
 customer, the order-side second finder) and `export_products_csv`.
 Launch: `--autorun --backend apple --scenario store`; `--ja` swaps in
-the Japanese beats; `--voice` for spoken beats; chat: `--scenario
-store` without `--autorun`. The admin's
+the Japanese beats; `--usd` prices the shop in dollars (fixtures at
+1/100 of yen, western customer names, de-yenned definitions — the
+published EN recording's mode; beat 2 becomes "Set them all to 30
+dollars", see the units recipe); `--voice` for spoken beats; chat:
+`--scenario store` without `--autorun`. The admin's
 list is on stage the whole run (`RecordsPanel`), rows changing in place.
 
 The shape is the admin's own: a search or filter makes a **selection** (the
