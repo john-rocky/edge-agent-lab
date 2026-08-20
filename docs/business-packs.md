@@ -228,7 +228,11 @@ seven built packs; recipes cross-referenced):
    sentences; measure, don't assume. First measured 2026-08-20 (41
    tools, Apple FM, Mac lane): one domain misroute in 126 cases;
    the cost of count was longer within-domain wandering — see
-   [model-routing](model-routing.md).
+   [model-routing](model-routing.md). The merge's other choice — one
+   instructions text or each pack's own — is measured too (same day,
+   twice replicated): the merged text costs 5/126 against per-pack
+   pinning, all of it in the CRM, whose contracts live nowhere but
+   its instructions.
 4. **Definition optimization.** Same tool, A/B on name / description /
    parameter names / enums / schema, same case set (the noise-floor
    recipe: expect structure to move scores and wording to drown; the

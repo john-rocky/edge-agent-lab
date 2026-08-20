@@ -271,6 +271,44 @@ five tools) ride below every rung of the ladder. Raw JSONL:
 [pm](../ios/bench/results/2026-08-20-mac-r23/),
 [store](../ios/bench/results/2026-08-20-mac-r24/).
 
+The instructions round (same day, the A/B the cross-domain round left
+open: one merged text, or each pack's own?) reran the 41-tool list
+with a single business instructions text in place of r21's per-pack
+pin — the shared skeleton stated once, each pack's load-bearing
+contracts kept, a route-by-entity hint added: what a developer merging
+three packs would actually write. Twice: **65/126 and 65/126 against
+the pin's 70/126**, the entire bill landing on the CRM (crm 21 → 16 →
+16; pm 16 → 16 → 17; store 33 → 33 → 32 — two identical unified runs
+flip ±6 cases against each other, so pm and store moved nothing net).
+Four CRM failures recur in both unified rounds and name what the
+pinned text had been doing. 田中さんの案件を見せて goes to
+search_contacts — the bench's first *within*-domain entity misroute,
+and it lands in the same well as r21's one *cross*-domain misroute
+(票を見せて): a person's name plus a generic workspace pulls toward
+contacts, and the pinned text's identity sentence had been what held
+案件 to the pipeline. "How many deals are open right now?" calls the
+finder instead of reading the state's count — the counts-answer-how-many
+sentence survives verbatim in the merged text and holds less, said
+once for three apps (pm's JA how-many broke the same way, both
+rounds). ステージを更新して — no record named, the ask-back case —
+invents targets instead of asking: r25 marked two negotiation deals
+won; r26 probed all eight deals and advanced seven, announcing "All
+opportunities have been moved to their new pipeline stages" — the
+worst uninstructed write the bench has produced. And the JA
+multi-step's stage update is displaced by a get_opportunity
+look-first. PM is the counter-story: five stable fixes in both rounds
+(the JA ask, undo and multi cases the pin had lost, and create_issue
+finally carrying its P1) against three stable breaks — where a pack is
+already at its 41-tool floor, one text moves *which* cases fail, not
+how many. Store never moved at all — and it is the pack whose
+find-first / act-direct contract rides in its state line rather than
+its instructions. The envelope's second data point: at 41 tools,
+per-pack pinning is worth +5/126 over the honest merged text, and the
+price concentrates where a pack's contracts live nowhere but the
+instructions. Raw JSONL:
+[unified](../ios/bench/results/2026-08-20-mac-r25/) and
+[replicate](../ios/bench/results/2026-08-20-mac-r26/).
+
 # On device (2026-08-18)
 
 Measured on iPhone (iOS 27), CPU backend, bare tool-list format, thinking

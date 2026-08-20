@@ -441,6 +441,20 @@ structure at the tool boundary: argument names, enums and steps,
 per-argument guides, gates, an ask tool. Spend wording effort there; a
 single Mac smoke run ranks packs, not sentences.
 
+The floor is about rewording one text; *whose* text is above it. At 41
+tools the merged business list ran twice with each case's own pack
+instructions pinned and twice with one honest merged text — the same
+contracts, stated once for a three-app workspace: pinning is worth
++5/126, every point of it in the CRM. The sentences barely differed;
+the identity did. "You are operating the user's CRM" scopes 案件 to
+the pipeline (merged, it went to search_contacts — a within-domain
+entity misroute), keeps a how-many question on the state's counts, and
+keeps the ask-back license attached to its cases (merged, ステージを
+更新して advanced seven deals uninstructed). The pack that never moved
+is the one whose find-first / act-direct contract rides in its state
+line: a contract survives the merge only where it lives outside the
+instructions.
+
 ## The state line is instructions — don't let it teach the well
 
 The inbox pack's worst score (15/34) was blamed on search_mail's gravity:

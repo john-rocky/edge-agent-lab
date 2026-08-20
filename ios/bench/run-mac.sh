@@ -53,6 +53,12 @@ for SCENARIO in "$@"; do
     business-crm) TOOLSET=business; CASES_DIR=crm; INSTR=crm ;;
     business-pm) TOOLSET=business; CASES_DIR=pm; INSTR=pm ;;
     business-store) TOOLSET=business; CASES_DIR=store; INSTR=store ;;
+    # The instructions A/B's unified side: the same 41-tool list, one
+    # merged instruction text (ToolBox.businessInstructions) instead of
+    # the case's own pack's — business-* above is the pinned side.
+    unified-crm) TOOLSET=business; CASES_DIR=crm; INSTR=business ;;
+    unified-pm) TOOLSET=business; CASES_DIR=pm; INSTR=business ;;
+    unified-store) TOOLSET=business; CASES_DIR=store; INSTR=business ;;
     # The tool-count ladder (evaluation program #1): `ladder-<group>` runs one
     # subset from ladder.json — the business list cut down with --only, the
     # pack's instructions pinned, and only the cases whose correct tools the
