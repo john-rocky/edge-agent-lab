@@ -1,0 +1,195 @@
+[
+  {
+    "id": "loop-dark",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-dark.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [
+      {
+        "tool": "adjust_photo_brightness",
+        "direction": "brighter"
+      },
+      {
+        "tool": "adjust_photo_exposure",
+        "direction": "up"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_brightness",
+        "direction": "darker"
+      },
+      {
+        "tool": "adjust_photo_exposure",
+        "direction": "down"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-bright",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-bright.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [
+      {
+        "tool": "adjust_photo_brightness",
+        "direction": "darker"
+      },
+      {
+        "tool": "adjust_photo_exposure",
+        "direction": "down"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_brightness",
+        "direction": "brighter"
+      },
+      {
+        "tool": "adjust_photo_exposure",
+        "direction": "up"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-cool",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-cool.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [
+      {
+        "tool": "adjust_photo_warmth",
+        "direction": "warmer"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_warmth",
+        "direction": "cooler"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-warm",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-warm.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [
+      {
+        "tool": "adjust_photo_warmth",
+        "direction": "cooler"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_warmth",
+        "direction": "warmer"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-flat",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-flat.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [
+      {
+        "tool": "adjust_photo_contrast",
+        "direction": "more"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_contrast",
+        "direction": "less"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-dull",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-dull.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [
+      {
+        "tool": "adjust_photo_saturation",
+        "direction": "more_vivid"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_saturation",
+        "direction": "more_muted"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-good",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-good.jpg",
+    "input": "",
+    "maxRounds": 4,
+    "needs": [],
+    "avoid": [],
+    "expected": []
+  },
+  {
+    "id": "loop-dark-r6",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-dark.jpg",
+    "input": "",
+    "maxRounds": 6,
+    "needs": [
+      {
+        "tool": "adjust_photo_brightness",
+        "direction": "brighter"
+      },
+      {
+        "tool": "adjust_photo_exposure",
+        "direction": "up"
+      }
+    ],
+    "avoid": [
+      {
+        "tool": "adjust_photo_brightness",
+        "direction": "darker"
+      },
+      {
+        "tool": "adjust_photo_exposure",
+        "direction": "down"
+      }
+    ],
+    "expected": []
+  },
+  {
+    "id": "loop-good-r6",
+    "lang": "en",
+    "loop": true,
+    "image": "loop-good.jpg",
+    "input": "",
+    "maxRounds": 6,
+    "needs": [],
+    "avoid": [],
+    "expected": []
+  }
+]

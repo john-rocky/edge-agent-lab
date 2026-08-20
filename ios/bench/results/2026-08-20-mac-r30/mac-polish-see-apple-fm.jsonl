@@ -1,0 +1,16 @@
+{"cases":7,"date":"2026-08-20","model":"apple-fm","toolNames":"","tools":0,"toolset":"look","type":"run"}
+{"case":"see-dark","type":"start"}
+{"answer":"The photo is about right. The lighting is balanced, with no significant overexposure or underexposure.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-dark","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":1448,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-bright","type":"start"}
+{"answer":"About right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-bright","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":658,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-cool","type":"start"}
+{"answer":"About right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-cool","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":655,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-warm","type":"start"}
+{"answer":"About right. The image has a balanced exposure with natural warmth enhancing the scene.","answerPass":true,"argsPass":true,"called":[],"calls":[],"case":"see-warm","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":956,"pass":true,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-flat","type":"start"}
+{"answer":"About right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-flat","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":650,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-dull","type":"start"}
+{"answer":"It is about right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-dull","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":683,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-good","type":"start"}
+{"answer":"The photo is about right.","answerPass":true,"argsPass":true,"called":[],"calls":[],"case":"see-good","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":644,"pass":true,"selectionPass":true,"tools":0,"toolset":"look"}
+{"failed":5,"model":"apple-fm","passed":2,"total":7,"type":"summary"}

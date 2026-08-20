@@ -59,6 +59,21 @@ that covers the case's expected calls; a subset without the case's
 answer measures nothing). `./run-mac.sh ladder-crm5a` runs one group;
 `ladder.py check` proves every rung is a partition.
 
+The polish loop (the goal-driven archetype, ROADMAP "Beyond the input
+layer") adds a multi-turn mode: a case with `loop: true` re-attaches
+the edited photo after every round and asks again, until a round makes
+no tool call or `maxRounds` cuts it off. `needs`/`avoid` carry the
+fixture's ground-truth ops (tool + direction); the JSONL row records
+`rounds`, `stopped`, `oscillated` and `ops` per round. `answerContains`
+scores a prose answer by keyword (the polish-see perception controls —
+eyes on the answers still required, substrings false-pass). The vision
+toolset runs its real edit bodies, the one deliberate exception to the
+all-canned rule: the model must judge its own actual output. Fixtures
+are not committed — `fixtures.swift` generates them from a local base
+photo into the app's fixture folder; eyeball them before a run.
+`./run-mac.sh polish polish-see` runs the loop and the sight-alone
+control.
+
 ## Case format
 
 ```json

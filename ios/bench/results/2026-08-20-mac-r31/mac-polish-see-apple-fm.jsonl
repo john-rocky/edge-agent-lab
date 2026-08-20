@@ -1,0 +1,20 @@
+{"cases":9,"date":"2026-08-20","model":"apple-fm","toolNames":"","tools":0,"toolset":"look","type":"run"}
+{"case":"see-dark","type":"start"}
+{"answer":"The photo is about right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-dark","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":1076,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-bright","type":"start"}
+{"answer":"About right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-bright","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":634,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-cool","type":"start"}
+{"answer":"About right. The image needs a slight increase in brightness to enhance the natural colors and details in the landscape.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-cool","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":1092,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-warm","type":"start"}
+{"answer":"About right. The image is well-balanced in brightness, contrast, and color.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-warm","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":888,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-flat","type":"start"}
+{"answer":"About right. The image was slightly too dark, so I increased the brightness to bring out the details.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-flat","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":1092,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-dull","type":"start"}
+{"answer":"The photo is about right.","answerPass":false,"argsPass":true,"called":[],"calls":[],"case":"see-dull","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":648,"pass":false,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-good","type":"start"}
+{"answer":"The photo is about right.","answerPass":true,"argsPass":true,"called":[],"calls":[],"case":"see-good","expected":[],"input":"Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.","lang":"en","model":"apple-fm","ms":643,"pass":true,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-dark-forced","type":"start"}
+{"answer":"Too dark. The image is underexposed, with shadows that are too deep and lack detail.","answerPass":true,"argsPass":true,"called":[],"calls":[],"case":"see-dark-forced","expected":[],"input":"Is this photo too dark or too bright? Answer with just one of the two.","lang":"en","model":"apple-fm","ms":778,"pass":true,"selectionPass":true,"tools":0,"toolset":"look"}
+{"case":"see-bright-forced","type":"start"}
+{"answer":"Too bright.","answerPass":true,"argsPass":true,"called":[],"calls":[],"case":"see-bright-forced","expected":[],"input":"Is this photo too dark or too bright? Answer with just one of the two.","lang":"en","model":"apple-fm","ms":416,"pass":true,"selectionPass":true,"tools":0,"toolset":"look"}
+{"failed":6,"model":"apple-fm","passed":3,"total":9,"type":"summary"}

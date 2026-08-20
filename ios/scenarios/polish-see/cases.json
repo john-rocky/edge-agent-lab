@@ -1,0 +1,104 @@
+[
+  {
+    "id": "see-dark",
+    "lang": "en",
+    "image": "loop-dark.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "dark"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-bright",
+    "lang": "en",
+    "image": "loop-bright.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "too bright",
+      "overexposed",
+      "blown"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-cool",
+    "lang": "en",
+    "image": "loop-cool.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "too cool",
+      "blue"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-warm",
+    "lang": "en",
+    "image": "loop-warm.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "too warm",
+      "orange"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-flat",
+    "lang": "en",
+    "image": "loop-flat.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "washed",
+      "flat",
+      "low contrast",
+      "hazy"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-dull",
+    "lang": "en",
+    "image": "loop-dull.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "dull",
+      "muted",
+      "desaturated",
+      "faded"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-good",
+    "lang": "en",
+    "image": "loop-good.jpg",
+    "input": "Is this photo too dark, too bright, too warm, too cool, washed out, dull, or about right? Answer in a few words.",
+    "answerContains": [
+      "about right",
+      "balanced",
+      "well"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-dark-forced",
+    "lang": "en",
+    "image": "loop-dark.jpg",
+    "input": "Is this photo too dark or too bright? Answer with just one of the two.",
+    "answerContains": [
+      "too dark"
+    ],
+    "expected": []
+  },
+  {
+    "id": "see-bright-forced",
+    "lang": "en",
+    "image": "loop-bright.jpg",
+    "input": "Is this photo too dark or too bright? Answer with just one of the two.",
+    "answerContains": [
+      "too bright"
+    ],
+    "expected": []
+  }
+]

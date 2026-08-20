@@ -538,3 +538,44 @@ extra calls. Brand-first result lines — "3 Sony Noise Cancelling
 Earbuds" — made the same request one clean add_to_cart(3) in both
 languages, held across three runs. Render into the state every handle a
 person actually grabs a product by: the number, the name, the brand.
+
+## Vague judgments land on the rail too — give the question an anyOf
+
+Asked "too dark, too bright, too warm, too cool, washed out, dull, or
+about right?" about photos with each of those defects injected, Apple FM
+answered "about right" to every one — including a photo 1.4 stops from
+black. Asked about the same photo with the escape removed — "too dark or
+too bright? Answer with just one of the two" — it answered "Too dark.
+The image is underexposed, with shadows that are too deep and lack
+detail." The perception was there; the open question's escape option ate
+it. The act-side twin, from the same day's polish loop: told "make an
+edit if it still needs one, call nothing when it looks its best", the
+model called nothing zero times in twenty-eight rounds — the escape
+never taken in the act direction — and rephrasing the loop's reprompt as
+"does it still need improving — yes or no?" produced the first genuine
+stop.
+
+The amounts recipe (vague amounts land on the rail) is one instance of
+something wider: an open judgment collapses to a default — "about right"
+when answering costs nothing, "one more edit" when the room offers
+tools. Wherever a loop or a route hangs on the model's judgment, shape
+the judgment like an argument: enumerate its answers, force one, and
+keep the default you fear off the list. A judge that must say yes or no
+can say no; a judge allowed to say "about right" always will.
+
+## The aesthetic prior is a gravity well — the same edits whatever the photo
+
+Handed a defect photo and "judge what this picture needs", Apple FM
+applies nearly the same sequence every time — brighter, more contrast,
+warmer, then auto_enhance — whatever the pixels say: exposure *up* on
+the overexposed fixture, *warmer* on the orange one, and in four rounds
+the desaturated fixture never saw the saturation tool. The op choice
+comes from what photos-in-general want, not from what this photo shows —
+even though the same model names the defect correctly when the question
+is a forced choice. Perception existing is not perception steering.
+Before building a perceive→judge→act loop on a small VLM, measure the
+judge separately (a no-tools, forced-choice probe per defect) and then
+the judgment→op mapping, and expect the well: the ops inside the prior
+(brighten, warm, punch up, enhance) fire regardless of the picture, and
+the ops outside it (darken, cool, desaturate) do not come even when the
+pixels name them.

@@ -117,7 +117,17 @@ output**, not only on what the user typed or said:
   with which op. The polish scenario is the seed (today it is
   one-shot). New things for the bench to score: termination (stops at
   good-enough, doesn't oscillate), the judgment→op mapping, and
-  iterations × cost on device.
+  iterations × cost on device. **First measured 2026-08-20** (Mac
+  lane, r27–r32): the loop machinery is built — loop cases in
+  scenarios/polish, perception controls in scenarios/polish-see —
+  and Apple FM never stops under the open contract, edits from a
+  prior ritual rather than the pixels, and answers every open quality
+  question "about right" while getting the forced binary right. The
+  stop and the judgment both need forced choice (one genuine stop
+  once the reprompt asked yes/no), and the context window is the
+  iteration budget. Canon: scenarios/polish/script.md, the
+  model-routing loop paragraph, recipes "Vague judgments land on the
+  rail too" / "The aesthetic prior is a gravity well".
 - **Retrieval-driven (検索型)** — the input alone under-determines the
   action; the model (or the app on its behalf) first searches for or
   fetches the missing information, that context is handed to the LLM,
