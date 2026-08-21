@@ -521,6 +521,16 @@ once they recur)
   — it did not come back down when the check got no further help. So
   the lever is not a better answer; it is leaving nothing there worth
   having, or removing the tool from the room.
+- **Re-run the motivating case before building the fix it motivated.**
+  Two gaps this file recorded as open were implemented and changed
+  **0 of 120** replayed check calls. The wrapper-noun gate was written
+  for "Is the PK scene at 460 seconds?" — a case an *earlier* round's
+  short-token fix had already rescued, so "scene" was never alone
+  again. A canon entry is a record of what was true when it was
+  written; the artifact is the authority, and a replay costs minutes
+  against an afternoon of building. (Worth building anyway when the
+  gate is a safety net rather than a feature — but ship it knowing it
+  covers residue, and say so.)
 - **A tool that can rank but cannot decide presence must not use the
   presence verb.** CLIP's argmax found the right scene for 8 of 8
   answerable queries on journey.mp4 and no cosine threshold could
