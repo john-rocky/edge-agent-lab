@@ -370,11 +370,16 @@ once they recur)
 - **Removing the tool does not remove the ritual: the answering slot
   refills.** Taking check_moment out of the take's room ended every
   harm it caused — beat 1 denying its own search hit went 3/12 → 0/9,
-  index sweeps 2/12 → 0/9, a spurious set_clip_speed 2/12 → 0/9 — and
-  beat 1 immediately grew a `seek` instead, in 9 of 9 runs, where none
+  index sweeps 2/12 → 0/9 — and beat 1 immediately grew a `seek`
+  instead, in 9 of 9 runs, where none
   of the 12 runs with the check present had seeked there. The model
   does not want *that tool*; it wants something to do after an answer.
-  Design for where the slot refills, because it will.
+  Design for where the slot refills, because it will. (One stray does
+  *not* belong to the room and was nearly miscredited: `set_clip_speed`
+  vanished from the take runs too, but r41's failure dump shows it in
+  three JA bench cases with the check present — it is a JA-input stray
+  of the model's, not something the ruling bought. Before crediting a
+  change to your change, look for it where your change was not made.)
 - **The aggregate belongs to the config; the case list is a coin.** Two
   runs of one config scored identically on the old 40 and made the same
   number of check calls — while 7 of those 40 flipped verdict and 3 of
