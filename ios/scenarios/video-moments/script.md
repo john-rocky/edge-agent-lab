@@ -414,3 +414,50 @@ tell instead of voting no.
   the model declined to export at all — and to export_video cleanly in
   the second. The bare 書き出す is ambiguous to the router in a way
   "Export it." is not; EN exported 7 s at 1280×720 on the first try.
+
+r39b and r40 close the D2 lane. r39b re-ran r39's exact config on r39's own
+binary, before a line of the tokenizer fix landed; r40 carries it; and
+between the two rounds beat 4 was scouted twelve times on journey.mp4 —
+four wordings, three runs each, every other beat held fixed. The wording
+question is the flagship take's last open one, so it went first: bench runs
+and stage runs share the app bundle and the support folder, and neither can
+be read while the other is in flight.
+
+- **The ritual's jump was the configuration, not a coin.** r39's 19 cases /
+  20 calls looked like the one number outside the band. r39b, same binary
+  and same cases, made 18 / 20; r40 made 18 / 20 again. Three rounds now
+  sit where r38 sat at 15 / 15 and r35 at 7 / 7, so the plateau moved and
+  stayed moved — and nothing in any of these diffs touches the tool
+  description or the stop contract. The aggregates say it and the case
+  lists never could: 16/46 in all three rounds, while the old-40 subset
+  read 13, then 15, then 14, and the JA/EN split went 4/12 → 6/10 → 7/9
+  with the first two rounds sharing a binary. Read the round; the cases are
+  a coin.
+- **Beat 4's wobble is real and it belongs to the control alone — one miss
+  in twelve.** 「動画を書き出して。」 exported twice and on its third run
+  called `auto_captions`, got "could not transcribe: Operation Stopped",
+  and answered 「動画の音声が認識できませんでした。何か音声が聞こえるで
+  しょうか？」 without ever reaching export — the r39 scout's failure,
+  reproduced on demand a day later. 「エクスポートして。」, 「動画ファイル
+  として書き出して。」 and 「この動画を保存して。」 each went to
+  `export_video` three times for three, 7 s at 1280×720 out of 25.3 s every
+  time, and all twelve runs put beat 3's keep_range on 12–19 s. Three runs
+  is a thin sample and the three alternatives tie clean, so the finding is
+  not a ranking among them: it is that the ambiguity lives in the bare verb.
+  Give 書き出す a noun to land on (ファイルとして) or drop it for a word with
+  no transcription neighbour (エクスポート, 保存) and the router stops
+  guessing.
+- **The two tokenizers agree now, and it buys exactly one verdict.** The
+  check's `contentWords` dropped every token under three characters while
+  search kept a two-character token carrying a digit; the check now keeps a
+  token that is long enough, carries a digit, or is written as an acronym.
+  Replayed over all 75 recorded check calls of r38, r39, r39b and r40, the
+  new rule changes exactly one verdict, and it is the same one every round:
+  m-ja-check-2's 「いいえ」 becomes 「はい」 once "PK" survives the floor to
+  meet the penalty row's own key. r40 shows it live — the case answers
+  「はい」 and its answer keyword passes for the first time in four rounds —
+  and the case still fails, because the model checked 442.75 s of a case
+  that asks for 460 ± 0.1. Twenty-four of the 75 calls gained a token and
+  only that one changed an answer: the rest are digits split out of "1-0"
+  or "440.5" in calls that had already matched an option by name. The floor
+  was a real hole and a small one, which is what a parity fix should be.
