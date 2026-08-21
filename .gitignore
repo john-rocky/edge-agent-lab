@@ -9,3 +9,5 @@ bazel-*
 out/
 demo/
 MODULE.bazel.lock
+# SwiftPM build products (ios/bench/cliprung)
+.build/

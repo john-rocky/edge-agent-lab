@@ -595,3 +595,27 @@ beside the Japanese beat, 2 of 5. One round, five runs, and the aggregate
 belongs to the config — but a lever aimed at the bubble's language pulling
 the retrieval ritual back is the shape this lane keeps rediscovering, and
 it is a reason to prefer the preamble beyond the 6-of-10.
+
+The CLIP rung was measured next, without a device, in a native macOS harness
+(`ios/bench/cliprung`) because CoreAI.framework is missing from the Mac
+Catalyst SDK tree and the Mac lane therefore cannot link it — the rung is
+device-only, and the in-app half is written but compiled out on Catalyst, so
+every number above still describes the binary the bench runs. Eleven queries
+over journey.mp4's four scenes, both arms fed the same 25 frames at the
+index's own cadence: the label shelf lands 6, including two the playbook had
+filed under "CLIP territory" (VNClassify says `path` and `sunset sunrise`,
+which is the third time this lane has been surprised by what the shelf
+already knows), and misses exactly the queries whose words it holds no token
+for — "a puppy running on the sand", "tall buildings seen from above". CLIP
+ranks the right scene first for all 8, so the retrieval is not the problem;
+the acceptance rule is. No cosine threshold separates a true hit from a
+query this footage never contained — 「雪」's English twin "snow" is refused
+at 0.21 while "a person walking away" survives it at 0.265, on footage with
+no person in it — which makes the shipped wiring labels-first, CLIP only
+where the shelf is silent, and the alias table still the bridge for JA
+queries because CLIP is asked in the model's own words either way. The
+prettiest failure is shared: `VNRecognizeAnimals` fires `cat` on the beach
+puppy at 12–13 s, and CLIP scores "a cat" *higher* on that scene than "dog".
+The next round is the first one with a device: the same 11 queries through
+`search_frames` on the phone, and beat 1 worded for a moment the shelf
+cannot name.

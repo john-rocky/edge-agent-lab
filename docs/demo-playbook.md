@@ -365,6 +365,67 @@ journey.mp4 frame, (3) wire it behind `search_frames` at the same ≤90
 samples and run the A/B. Vision's feature print remains no shortcut: it
 compares image to image only.
 
+**Measured 2026-08-21 (no device — a native macOS harness), and the
+rung is device-only after all.** One correction to the paragraph above:
+CoreAI.framework is in the macOS 27 SDK and the iphoneos 27 SDK but
+**not in the Mac Catalyst iOSSupport tree**, so the Catalyst app — the
+whole Mac bench and stage lane — cannot link it. "Device-and-Catalyst"
+was wrong; in-app CLIP is device-only, and the A/B therefore lives
+outside the app, at `ios/bench/cliprung` (SwiftPM, `swift run -c release
+cliprung`, `DEVELOPER_DIR` pinned to the beta or `swift` cannot see
+CoreAI). It samples journey.mp4 on `buildIndex`'s own cadence (25
+frames, 1 s apart, maxSize 512), hands the same decoded frames to both
+arms, and scores 11 queries against the four scenes as ground truth —
+4 the shelf should answer, 4 it should not, 3 that should hit nothing.
+Raw run in `ios/bench/cliprung/results/journey-2026-08-21.md`.
+
+- **Arm A is stronger than this spec assumed: 6 of 8, not 4.** Two of
+  the three "the label shelf cannot name this" examples written above
+  are on the shelf — VNClassify says `path` (forest, 6–12 s) and
+  `sunset sunrise` + `cityscape` (skyline, 19–25 s), so "a path through
+  trees" and "sunset over the city" both land, first row, right scene.
+  What it genuinely cannot do is the two queries whose words the shelf
+  has no token for at all: "a puppy running on the sand" (the label is
+  `dog`; nothing says puppy, running, or sand) and "tall buildings seen
+  from above". Before claiming a rung is needed, ask the shelf.
+- **Arm B's ranking is perfect and its acceptance rule is not.** CLIP's
+  argmax lands in the right scene for 8 of 8 answerable queries,
+  including both the shelf misses (0.329 and 0.285) — the retrieval is
+  not in doubt. The threshold is: 0.18 → 8/8 with 3 of 3 false
+  positives, 0.21 → 8/8 and 2, 0.24 → 7/8 and 2, 0.27 → 4/8 and 0,
+  0.30 → 1/8 and 0. There is no cut that keeps the true hits and
+  refuses the misses, because **the cosine scale is per-query, not
+  per-corpus**: "a person walking away" peaks at 0.265 on footage with
+  no person in it, above "ocean" at 0.232 on the beach it is actually
+  looking at. Peak-minus-median contrast does not rescue it either
+  (0.06 → 5/8 and 0 FP; 0.04 → 7/8 and 1).
+- **Labels-first is what ships, and it is measurably the best arm.**
+  Arm A's rows, arm B only where arm A returned nothing: 8/8 at every
+  threshold from 0.18 to 0.27, and at 0.27 CLIP contributes no false
+  positive at all — the only one left is arm A's own (see below). So
+  `search_frames` is wired that way, with `MomentIndexBox.clipThreshold
+  = 0.27`, every use behind `#if canImport(CoreAIKitVision)`, and the
+  label path untouched as the fallback. Catalyst compiles the rung out
+  entirely (verified: the CLIP log strings and the CoreAI link are in
+  the iOS binary and absent from the Catalyst one), so bench and stage
+  behave exactly as r38–r42 measured them.
+- **Both arms confuse the puppy with a cat, for different reasons.**
+  Arm A's one false positive is `VNRecognizeAnimals` firing `cat` on
+  the beach puppy at 12–13 s, so a bare 「猫」 finds the dog scene
+  through the alias table. CLIP scores "a cat" at 0.247 on that same
+  scene — *above* its own score for "dog" (0.242). The detector rung and
+  the embedding rung fail this one identically; no threshold and no
+  contrast margin separates it. If a take must be safe against it, the
+  answer is a verification frame, not a better score.
+- **Cost, for the budget line:** 25 frames embedded in 0.4 s on the
+  GPU (~15 ms/frame, M-series, warm) against 0.5 s for the whole label
+  shelf on the same frames; queries are batched three per graph run,
+  which is what the export's [3,77] text side is for. The rung roughly
+  doubles index time and adds a 305 MB bundle. The app never downloads
+  it during a build — `MomentIndexBox.primeCLIP()` behind
+  `--prime-clip` does, once, on purpose; until then the rung stays dark
+  and the index is byte-for-byte today's.
+
 ### F. Session hygiene for implementation sessions
 
 Model: Opus is the default executor for A–E; return to Fable only for
@@ -457,3 +518,12 @@ once they recur)
   (Jaccard ≥ 0.5), capped at 4 s. The find→**jump**→cut→export arc is
   the canonical four beats now — the jump is the "found it" shot, and
   it must land on the cut, not on the detector's first confident frame.
+- **An embedding's score is a per-query scale, not a per-corpus one.**
+  CLIP ranked the right moment first for all 8 queries this footage can
+  answer, and no single cosine threshold told a true hit from a query
+  the footage never contained: "a person walking away" peaks at 0.265
+  with no person in any frame, above "ocean" at 0.232 on the beach it
+  is actually looking at. Rank is the signal; presence is not. Use the
+  embedding where the cheaper rung is silent, keep the cheaper rung's
+  rows when it speaks, and if a beat has to be safe against a false
+  yes, verify a frame — do not tune the number.
