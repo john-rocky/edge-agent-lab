@@ -594,6 +594,25 @@ once they recur)
   against an afternoon of building. (Worth building anyway when the
   gate is a safety net rather than a feature — but ship it knowing it
   covers residue, and say so.)
+- **Calibration fixes the scale, not the embedding.** Scoring each
+  query against a 422-frame null corpus of unrelated footage did
+  exactly what the per-query-scale diagnosis predicted: in raw cosine,
+  five of eight true hits sat inside the false-positive range; in z
+  units, one. "A person walking away" fell from 0.265 — above five real
+  hits — to z 2.09, below all eight. The one survivor is a genuine
+  visual confusion ("a cat" on a beach puppy, which the detector rung
+  gets wrong too), and no amount of normalising touches it. So when a
+  scorer's errors are a mix, calibrate first and count what is left:
+  what survives is a model problem, and the residue tells you which
+  kind of work is actually in front of you.
+- **A null corpus only calibrates a query whose subject it has seen.**
+  The same experiment refused "a person walking away" *because* the
+  null was workplace footage full of people — its background mean was
+  the highest of eleven queries. A person-free null would have let that
+  query through as a false positive. A calibration set is not neutral
+  background; it is a claim about what is ordinary, and it can only
+  make a query look unremarkable if it contains that query's subject.
+  Say what a null is made of whenever you quote a number from it.
 - **A tool that can rank but cannot decide presence must not use the
   presence verb.** CLIP's argmax found the right scene for 8 of 8
   answerable queries on journey.mp4 and no cosine threshold could
