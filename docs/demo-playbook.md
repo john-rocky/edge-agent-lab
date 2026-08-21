@@ -167,9 +167,18 @@ end-to-end; JA hits the index through the detector-noun aliases.
 3. Speak the four beats. EN: "Find the moment the dog appears." /
    "Jump to that moment." / "Keep only that moment." / "Export it."
    JA: 「犬が出てくる瞬間を探して。」/「その瞬間にジャンプして。」/
-   「その瞬間だけ残して。」/「**動画を**書き出して。」 — the bare
-   「書き出して。」routes away from export (the video pack's measured
-   lesson holds in this room too).
+   「その瞬間だけ残して。」/ beat 4 — see the warning below.
+   **Beat 4 is the wobbly one, and it is the money shot.** Bare
+   「書き出して。」 routes away from export; 「動画を書き出して。」 was
+   the fix, and it too missed in one JA scout of two (2026-08-21): the
+   model called `auto_captions`, got "could not transcribe", and then
+   refused to export at all — 「音声が読み取れなかったため、書き出し
+   できません」. The suspected reason is that 書き出す sits one
+   character from 書き起こす, which *is* transcription, so the verb
+   points at the caption tool as readily as at export. Scout beat 4's
+   wording before the take and use whatever routes clean (「エクスポート
+   して。」 is the katakana candidate with no such neighbour); the EN
+   "Export it." has never missed.
 4. Record via QuickTime device mirroring. Retries per the playbook
    rule. Known JA wart: beat 1's spoken answer sometimes hedges after
    a boundary check misfire — the chain still lands; retake for a
@@ -224,10 +233,26 @@ mechanical and one that needed a decision:
    it is the same answer for any question about something the OS shelf
    cannot name.
 
-Then re-run (r39) and re-scout both languages on journey.mp4. Open
-after that, and measured, not assumed: the JA arc's beat 2 added a
-`split_clip` after its seek, so keep_range took 12–25.3 s instead of
-12–19 — read the log for what routed there before rewording the beat.
+**Measured after the fact (r39, three scouts).** The ruling is right
+and nearly untestable from the bench: replaying every check call of r38
+and r39 through both matchers changes exactly one verdict, and the
+cannot-evaluate branch fired **zero times in 20 calls** — the model
+writes its check questions in English even on JA cases (16 of 20), and
+its JA ones carry timestamp options whose digits make the presence test
+runnable. The branch lives on the real index, where a JA question meets
+an English label shelf; there the 犬/猫 alias defeats it on purpose by
+injecting "dog". Two things it does not cover, both open: a question
+whose only surviving content word is a wrapper noun ("scene") still
+returns a *correctly evaluated* wrong no, and the 3-character floor in
+`contentWords` drops short acronyms the truths do hold ("PK") — the
+search tokenizer keeps a 2-char token when it carries a digit, and the
+two tokenizers should agree.
+
+And the beat-2 worry was a coin, not a rule: `split_clip` did not
+recur in any of three scouts (two JA, one EN), all of which ran
+seek 12 → keep_range 12–19 → 25.3 s becomes 7 s. Nothing to reword
+there — which is the aggregate-vs-coin rule catching its first live
+case.
 
 ### E. The CLIP rung (model repo lane)
 
