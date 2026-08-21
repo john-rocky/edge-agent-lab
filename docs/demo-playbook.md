@@ -161,24 +161,42 @@ end-to-end; JA hits the index through the detector-noun aliases.
 1. AirDrop journey.mp4 to the phone, save to the camera roll **last**
    (the app loads the newest library video).
 2. Build the LFMTools iOS target to the device (Xcode Beta 5), scheme
-   arguments: `--scenario moments --voice --autorun --backend apple`.
-   First launch fires the Photos / mic / speech permission prompts —
-   accept before the take.
+   arguments: `--scenario moments --voice --autorun --backend apple
+   --without check_moment`. First launch fires the Photos / mic /
+   speech permission prompts — accept before the take.
+   **The take's room has no check_moment, and that is a product
+   ruling, not a hidden edit.** The pack's own design note already says
+   the check is the long tail and never the stop condition of anything;
+   what the rounds added is that it is the single largest retake risk.
+   It vetoes retrieval (beat 1 hedged 「見つかりません」 in run 1 of the
+   12 scouts, against its own search hit, with a spurious index sweep
+   and a spurious set_clip_speed behind it), and the ritual that calls
+   it has a floor no wording has moved: 18–19 of 46 cases across three
+   rounds and two binaries. A four-beat take asks nothing about one
+   frame, so the tool earns nothing and costs takes. The line this
+   stays on the right side of: the bench keeps all 24 tools and keeps
+   scoring the ritual honestly — what changes is the product's tool
+   list on this screen, not the world, the index, or a result.
 3. Speak the four beats. EN: "Find the moment the dog appears." /
    "Jump to that moment." / "Keep only that moment." / "Export it."
    JA: 「犬が出てくる瞬間を探して。」/「その瞬間にジャンプして。」/
-   「その瞬間だけ残して。」/ beat 4 — see the warning below.
-   **Beat 4 is the wobbly one, and it is the money shot.** Bare
+   「その瞬間だけ残して。」/「**エクスポートして。**」
+   **Beat 4 was the wobbly one, and it is the money shot.** Bare
    「書き出して。」 routes away from export; 「動画を書き出して。」 was
-   the fix, and it too missed in one JA scout of two (2026-08-21): the
-   model called `auto_captions`, got "could not transcribe", and then
-   refused to export at all — 「音声が読み取れなかったため、書き出し
-   できません」. The suspected reason is that 書き出す sits one
-   character from 書き起こす, which *is* transcription, so the verb
-   points at the caption tool as readily as at export. Scout beat 4's
-   wording before the take and use whatever routes clean (「エクスポート
-   して。」 is the katakana candidate with no such neighbour); the EN
-   "Export it." has never missed.
+   the fix, and it missed too — 12 scouts, 2026-08-21: control 2/3,
+   the miss calling `auto_captions`, getting "could not transcribe",
+   and then refusing to export at all (「動画の音声が認識できません
+   でした」). 書き出す sits one character from 書き起こす, which *is*
+   transcription, so the verb points at the caption tool as readily as
+   at export. Three replacements went 3/3 each — 「エクスポートして。」,
+   「動画ファイルとして書き出して。」,「この動画を保存して。」 — and
+   the take takes the katakana one: it is the shortest (the voice-sized
+   rule) and the only one carrying no 書き出す at all. The general
+   rule, worth more than the wording: **when a verb has a near
+   neighbour that names another tool, replace the verb or give it a
+   noun to land on.** Both repairs worked; only the bare verb failed.
+   EN "Export it." has never missed. Beat 3 landed keep_range 12–19 →
+   7 s in all twelve runs, both languages — the arc itself is solid.
 4. Record via QuickTime device mirroring. Retries per the playbook
    rule. Known JA wart: beat 1's spoken answer sometimes hedges after
    a boundary check misfire — the chain still lands; retake for a
@@ -322,8 +340,12 @@ once they recur)
   (spec C) doubled its own call rate — 7 calls in 7 cases became 15 in
   14, reproduced exactly across two runs — and most of the new calls
   verify a search that had already succeeded. The stop contract did not
-  move. So the lever on a ritual is not a better answer; it is leaving
-  nothing there worth having, or removing the tool from the room.
+  move. **The plateau then stayed up**: 19/20, 18/20, 18/20 across
+  r39/r39b/r40, three rounds and two binaries, against r35's 7/7. A
+  ritual's floor is a property of what the room offers, and it ratchets
+  — it did not come back down when the check got no further help. So
+  the lever is not a better answer; it is leaving nothing there worth
+  having, or removing the tool from the room.
 - **The aggregate belongs to the config; the case list is a coin.** Two
   runs of one config scored identically on the old 40 and made the same
   number of check calls — while 7 of those 40 flipped verdict and 3 of
