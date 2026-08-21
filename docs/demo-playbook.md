@@ -150,9 +150,12 @@ the truths list names the thing. Spec:
 ### B. iPhone voice take — the flagship (user shoots)
 
 Footage: **journey.mp4** (25 s, four scenes: street → forest path →
-beach puppy → sunset skyline; dog scene 12–19 s; built with
-takekit/concat.swift from Pexels 2675512 / 4729779 / 853936 /
-28320907). Scouted clean on the Mac lane 2026-08-21, EN four beats
+beach puppy → sunset skyline; built with takekit/concat.swift from
+Pexels 2675512 / 4729779 / 853936 / 28320907). Its cuts are at
+**6.08 / 12.17 / 19.25 s** of 25.33 s total (ffprobe scene detect), so
+the dog scene is 12.17–19.25 s and a correctly scene-snapped keep_range
+is ~12–19 → a 7 s clip: the take's own arithmetic, checkable without
+the app. Scouted clean on the Mac lane 2026-08-21, EN four beats
 end-to-end; JA hits the index through the detector-noun aliases.
 
 1. AirDrop journey.mp4 to the phone, save to the camera roll **last**
@@ -195,6 +198,37 @@ honestly, or search learns a tiny JA→EN alias table for detector nouns
 (dog/cat/犬/猫) — prefer the alias table; it is the same findability
 rule the canned worlds follow.
 
+### D2. A check that cannot read the question must not veto
+
+Ruled 2026-08-21 after r38 measured the JA mirrors. Two gaps, one
+mechanical and one that needed a decision:
+
+1. **Mechanical**: はい/いいえ is a yes/no pair and 「いいえ」 is not in
+   the negation marker list, so the pair reads all-positive, falls to
+   "none of those", and the model says the thing is not present.
+   Partition it — both checks, textually parallel, as ever.
+2. **The decision**: `contentWords` splits on non-letters, so a
+   Japanese question is one token and can never match an English
+   label. The presence test is therefore blind to every JA noun outside
+   the 犬/猫 alias table — and being blind, it answers *no*. Growing the
+   alias table until it covers a language is the wrong shape; the right
+   one comes from this file's own two heuristics (verification vetoes
+   retrieval; answers follow the verdict word): **when the check cannot
+   evaluate the question — no direct option match, and no content word
+   of the question survives into a form the truths could contain — it
+   must not return a negative verdict.** It says it cannot tell, and
+   lists what the frame shows. The model then falls back on the search
+   hit it already has, which is the correct behavior; a confident *no*
+   from a tool that never read the question is the failure mode the
+   whole take-lane keeps rediscovering. This generalizes past Japanese:
+   it is the same answer for any question about something the OS shelf
+   cannot name.
+
+Then re-run (r39) and re-scout both languages on journey.mp4. Open
+after that, and measured, not assumed: the JA arc's beat 2 added a
+`split_clip` after its seek, so keep_range took 12–25.3 s instead of
+12–19 — read the log for what routed there before rewording the beat.
+
 ### E. The CLIP rung (model repo lane)
 
 Embedding index behind search_frames for everything the label shelf
@@ -204,6 +238,27 @@ over threshold, rendered as the same Row shape. Then the measurable
 A/B the ROADMAP promises: labels-only vs labels+CLIP hit rate on the
 same footage set, same beats. This is where "find the goal" starts
 working on footage with no scoreboard.
+
+**Readiness, audited 2026-08-21 — the weights are the lane's first
+step, not its assumption.** The ROADMAP said `clip` lives in the model
+repo; nothing on this machine holds CLIP/SigLIP/MobileCLIP weights in
+any loadable format (no .mlpackage, .mlmodelc, .tflite, .litertlm,
+.onnx, .pte, .aimodel). What exists is the conversion path
+(`coreai-models/models/clip/export.py`, `executorch-models/convert/
+export_clip.py` plus its two model cards) and a remote pointer
+(`coreai-kit` `ModelID.clipViTB32` → a HF repo, never fetched — the
+CoreAIKit model cache has a dozen other models and no CLIP). The
+runtime half is in better shape than the weights: `coreai-kit`'s
+`CoreAIKitVision/ImageTextEncoder.swift` already encodes both towers
+(`encode(image:)` / `encode(text:)` + `cosineSimilarity`) against a
+bundle of one .aimodel plus tokenizer.json, with a real BPE
+`CLIPTokenizer.swift` beside it — but lfm-tools-ios has no dependency
+on CoreAIKit today. So the order is: (1) produce a bundle (fetch or
+export both towers — the text tower is the half usually missing, and
+it is the half a text query needs), (2) prove `ImageTextEncoder` on
+one journey.mp4 frame outside the app, (3) then wire the rung and run
+the A/B. Vision's feature print is not a shortcut here: it compares
+image to image only, and nothing bridges it to a text query.
 
 ### F. Session hygiene for implementation sessions
 
@@ -237,6 +292,24 @@ once they recur)
   (en_JP): explicit recognizer fallback chain, explicit fixture voices.
 - **Scout, then word.** Never write a beat before reading what the
   index actually produced for that exact footage.
+- **A tool that answers gets called more; the ritual feeds on
+  usefulness.** Teaching the canned check to answer instead of refusing
+  (spec C) doubled its own call rate — 7 calls in 7 cases became 15 in
+  14, reproduced exactly across two runs — and most of the new calls
+  verify a search that had already succeeded. The stop contract did not
+  move. So the lever on a ritual is not a better answer; it is leaving
+  nothing there worth having, or removing the tool from the room.
+- **The aggregate belongs to the config; the case list is a coin.** Two
+  runs of one config scored identically on the old 40 and made the same
+  number of check calls — while 7 of those 40 flipped verdict and 3 of
+  14 ritual cases swapped identity. Never read one case's flip as a
+  change; never report a round without saying it is one run.
+- **The model does not translate the query — measured, twice.** 29 of
+  37 search calls on JA inputs carried JA strings, and the 8 English
+  ones copied a Latin or numeric token straight out of the request
+  (PK, FULL TIME, 0-0). A bare 「雪」 went to the index as 「雪」. Every
+  real index needs its own alias table for the nouns a take can utter;
+  the findability rule is not a canned-world convenience.
 - **Detector rows start late — snap them to the scene boundary.** The
   animal detector first fired ~2 s after the cut that opens the dog
   scene, and the seek visibly missed the scene's head. "The moment" a

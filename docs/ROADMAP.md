@@ -175,8 +175,10 @@ with the cost gradient explicit.
 Tag and index videos, then search and **seek** in natural language.
 Three indexes cover what is seen, said and written: CLIP frame
 embeddings at ~1 fps with timestamps (a 10-minute video indexes in
-~10 s, once), the ASR transcript, OCR on keyframes — `clip` and `asr`
-already live in the model repo. A query's clauses route to the right
+~10 s, once), the ASR transcript, OCR on keyframes. ASR shipped from
+the OS's own recognizer; the CLIP half was written down here as
+"already in the model repo" and **is not** — see the playbook's spec E
+for what is actually on disk. A query's clauses route to the right
 index; candidate moments get VLM forced-choice verification for the
 frame index's blind spots (negation, counting, action boundaries);
 and the payoff is the chain into the already-built video pack:
