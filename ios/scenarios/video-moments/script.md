@@ -79,6 +79,31 @@ What the stage build taught (2026-08-21, all measured on the take):
 - **A window-layer screencapture (`-l <windowid>`) records the app
   alone, even occluded** — the take is 92 window shots at ~0.5 s
   assembled to mp4, nothing else on the screen ever enters the frame.
+  Tooling now lives in `ios/bench/takekit/`; taste, material rules and
+  the post formula in docs/demo-playbook.md.
+
+The real-footage take (2026-08-21, Pexels street→beach-puppy composite,
+`--beats` flag): "Find the moment the dog appears" → the frames index
+answers 14–23 s → keep_range → a 9-second dog clip exported. What it
+taught, beyond the playbook:
+
+- **The classifier speaks in scene nouns; the detector rung carries the
+  objects.** VNClassify never said "dog" about a backlit puppy filling
+  half the frame (outdoor/ocean/street only) — VNRecognizeAnimals
+  (dog/cat) put the rows in. The cost ladder is real: classifier →
+  specialized detector → (next) CLIP.
+- **Verification can veto retrieval.** The self-check ritual, pointed
+  at one exact frame with free-worded options, answered "none of
+  those" and the model concluded "no dog" — against its own search
+  hit, twice. Fixes that held: checks are range-aware (±0.6 s, runs
+  merged at 3.2×step) and option-tolerant (negation partition, yes/no
+  answered from the question's content words).
+- **Answers follow the verdict word, not the evidence list.** "none of
+  those — … shows: dog" was read as *no dog*; two later empty sweeps
+  outvoted one earlier hit. Search hits now open with "found", and
+  the check's verdict word carries its truth. After both, the run is
+  clean; take variance remains (one pseudo-ask retake), which is what
+  the playbook's retry rule is for.
 
 What is new for the bench to score, in order of ambition:
 
