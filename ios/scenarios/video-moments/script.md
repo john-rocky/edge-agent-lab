@@ -537,3 +537,61 @@ untouched, `answerLanguageLine` named at exactly two lines and both inside
 the stage's session assembly — and the bench's own JA cases answered in
 Japanese 7 of 23 times, inside the 4–7 the unchanged instructions have
 produced every round.
+
+r43 is the answer-language A/B, and one of the four levers moves it. No
+bench round: 31 JA stage runs of journey.mp4 in one sitting, one binary
+carrying all four conditions behind a launch flag so no batch could be
+measured against a different build, the four interleaved round-robin
+against drift, and every run's language read per bubble rather than from
+beat 1. The conditions were r42's English line in the session preamble
+(A), the same sentence written in Japanese there instead (B), the English
+sentence appended to each turn's message instead of the preamble (C), and
+the Japanese sentence appended per turn (D). **All three bubbles in
+Japanese: A 1 of 11, B 6 of 10, C 0 of 5, D 0 of 5.** The pre-registered
+five-run batch read A 0/5, B 3/5, C 0/5, D 0/5, and because five runs
+cannot tell 2/5 from 3/5 a second batch of A and B repeated it exactly —
+A 0/5, B 3/5 again, the same margin twice on the same afternoon (Fisher
+one-sided p = 0.02 for B against A, 0.002 against A+C+D pooled). **What
+the model follows is the language the instruction block is written in,
+and only that block.** It is not the instruction's content: all four say
+the same thing, and saying it in English is the 1-of-11 arm — the rate r41
+measured with no line at all, and r42 with one. It is not the request's
+language, which was Japanese in all 31 runs, exactly as r42 concluded. And
+it is not proximity to the turn, which was the open question this round
+existed to close: the *identical Japanese sentence* one line below the
+beat text moved nothing, 0 of 5, while the same sentence in the preamble
+moved 6 of 10. Position and language are both load-bearing and neither
+alone does anything. Nor does the Japanese line hijack an English take —
+three EN runs under it answered in English 3 of 3, same clean arc — so it
+ships as the stage's one line for every pack, with
+`ToolBox.momentsInstructions` still byte-identical and the bench still the
+control. Bubble and prompt never had to be split: `question` is the beat
+text and the state packs already send `AppState.compose(state:request:)`,
+so C and D rode in the message and the take would have recorded only the
+beat. What 6 of 10 is not is a solved take. Four JA takes in ten still
+answer English and need a retake, which is a different order of problem
+from one in six but not the end of it; the next lever to try is where the
+preamble's Japanese sits and how much of it there is, since one sentence
+at the tail of an English block is the smallest possible dose. **The arc
+underneath was the cleanest yet and belongs to no condition**: 27 of the
+31 runs called exactly `search_frames` → `seek` 12 s → `keep_range` 12–19
+→ `export_video`, every keep_range that fired took 12–19, and 30 of 31
+exports ffprobe at 7.000 s out of 25.333. The four exceptions are worth
+their names. One A run tripped Apple FM's safety filter on beat 1
+(「犬が出てくる瞬間を探して。」), then searched all three indexes for
+"12 s", found nothing, never called keep_range, and exported the untrimmed
+25.333 s — the guardrail reading a verb it cleared in the round's other 30
+runs and in all twelve of r41's and r42's. One B run spent
+the money shot early, calling `keep_range` on beat 1 instead of `seek`,
+then two more keep_ranges on beat 2 (one a no-op against the already-cut
+timeline); the export was still 7.000 s and the take still unshippable.
+And **both beat-1 denials in the round fell in C** — search_frames hit
+12–19 s, the model swept `search_transcript` and `search_screen_text`
+anyway and answered "I couldn't find the moment where a dog appears",
+then cut 12–19 correctly on beat 2. That failure mode was 3 of 12 with
+check_moment in the room and 0 of 18 without it across r41 and r42; it
+came back in the one condition that puts an extra English imperative
+beside the Japanese beat, 2 of 5. One round, five runs, and the aggregate
+belongs to the config — but a lever aimed at the bubble's language pulling
+the retrieval ritual back is the shape this lane keeps rediscovering, and
+it is a reason to prefer the preamble beyond the 6-of-10.
