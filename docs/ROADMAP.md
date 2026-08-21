@@ -200,12 +200,32 @@ deleting them. A bulk destructive tool plus a finder whose emptiest
 call means *everything* is a wipe waiting for a confused turn; an
 argument-less finder now answers with the library's shape and selects
 nothing, and delete refuses a whole-library selection. Four bench
-rounds never saw it. Also open: whether `album`
-belongs in a finder at all when `add_to_album` owns the word, a gate
-that survives two languages (JA 「削除して」 arrives `confirm: true`,
-EN calls no delete at all), and the perception rung — the mock library
-is real Vision's slot, not its substitute, and the pack is written so
-the swap changes no case. Canon: scenarios/photo-library/script.md.
+rounds never saw it. **The album filter then left `find_photos` and
+became a tool of its own (l5), and the band moved 36–40 → 40–43** —
+the destination album finally has only the tool that creates it to
+land on, and `place` reached its slot for the first time in five
+rounds; the repeat is what keeps that a two-or-three-case claim rather
+than the five the first run advertised. **The perception rung runs**
+(l5, stage only): `libraryfixture.swift` builds twelve real
+photographs out of footage this lane already holds,
+`libraryscout.swift` prints what the shelf says about them, and
+`indexFixtures()` replaces the canned content with VNClassify, the
+animal detector, VNRecognizeText, face presence, a Laplacian sharpness
+meter and an average-hash duplicate pass. It taught four things worth
+the build: the classifier is thinner than prose (`beach` on one of two
+beach photos), the animal detector flickers species between
+neighbouring frames, face detection finds nothing where the classifier
+says "people 0.84", and the sharpness meter reads edge detail rather
+than focus — so it takes the CLIP ruling and returns a ranking. Then
+the model called the ranking "blurry" anyway, off the tool's *name*:
+a rung that cannot decide must be renamed, not just re-worded. Still
+open: the remaining slots (`favorites_only` still catches the verb in
+"Favourite the fireworks photo"), a gate that survives two languages
+(JA 「削除して」 arrives `confirm: true`, EN calls no delete at all),
+and a photo set with faces in it — the rung runs on twelve frames of
+somebody else's footage, and a camera roll is the one thing this lane
+cannot produce for itself. Canon:
+scenarios/photo-library/script.md.
 
 ### Video moment-seek (user, 2026-08-20) — retrieval pack candidate
 

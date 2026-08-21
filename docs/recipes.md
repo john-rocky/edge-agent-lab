@@ -433,6 +433,30 @@ tools and a cancel tail at 41. The gated pair is a hazard at every
 list size it appears in; the app dialog is not a mitigation but the
 mechanism.
 
+## A rung that can only rank has to be renamed, not just re-worded
+
+The moment-seek lane ruled that a tool which can rank but cannot decide
+presence must not use the presence verb, and gave CLIP's rows a verdict
+word their evidence supports ("the closest-looking window is…"). The
+photo-library pack's sharpness rung inherited that ruling and then
+measured its limit. Over real pixels the meter is the variance of the
+Laplacian, and what it ranks is *edge detail*, not focus — the softest
+photo in a twelve-photo fixture library was a flat wooden shop sign
+(152) and the sharpest a leafy path (1536), with nothing out of focus
+anywhere in the set. So the tool returns the softest third with the
+numbers, worded `found 1 photo (softest-looking (edge detail, lowest
+first))` and never the word blurry.
+
+The model read that result and answered: **"One photo (#9) looks
+blurry."** It took the deciding word from the tool's *name*,
+`find_blurry_photos`, which is the strongest signal in the whole
+contract (this file's first recipe) and which no result string
+outranks. Re-wording an answer is half the job; a rung that cannot
+decide must not be *named* for the decision either. Rename it for what
+it measures — the same way a tool is named for the verb the user will
+say — or expect the claim you refused to make to come back in the
+model's own sentence.
+
 ## A finder's emptiest call is the dangerous one
 
 The photo-library stage's first end-to-end run deleted the library. Five

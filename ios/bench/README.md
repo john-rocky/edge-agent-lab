@@ -171,7 +171,14 @@ forced-choice check over a canned camera roll of 28 photos. Each case
 carries a `layer` field the Swift runner ignores and `rounds.py` reads
 with `ROUNDS_CASES`, so a round reports not only how many cases passed
 but how many opened on the rung that could answer them cheapest — the
-number this pack exists for.
+number this pack exists for. Two scripts serve its perception rung,
+which the bench never runs and the stage does: `libraryfixture.swift`
+builds a library of real photographs out of footage already on disk
+(journey.mp4 and two what-can-ai-see Pexels clips) with a manifest for
+the things no pixel carries, and `libraryscout.swift` prints what
+VNClassify, the animal detector, OCR, face detection, a Laplacian
+sharpness meter and an average hash say about a folder of images —
+scout, then word, the playbook's rule for footage applied to stills.
 
 ## What a JSONL line records
 

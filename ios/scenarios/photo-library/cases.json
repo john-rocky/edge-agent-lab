@@ -58,7 +58,7 @@
     "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
     "expected": [
       {
-        "tool": "find_photos",
+        "tool": "find_photos_in_album",
         "args": {
           "album": {
             "contains": "kyoto"
@@ -496,7 +496,7 @@
     "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
     "expected": [
       {
-        "tool": "find_photos"
+        "tool": "find_photos_in_album"
       }
     ]
   },

@@ -8,7 +8,8 @@ visible in the tool name:
 
 | rung | tool | what only it can answer |
 |---|---|---|
-| metadata | `find_photos(when, place, album, favorites_only)` | "last summer", "in Kyoto", "the Kyoto trip album", "my favourites" |
+| metadata | `find_photos(when, place, favorites_only)` | "last summer", "in Kyoto", "my favourites" |
+| an album | `find_photos_in_album(album)` | "the Kyoto trip album" (l5 — it used to be a slot on find_photos, and see below for why it is not) |
 | the picture index | `search_photos(query)` | "the beach photos", "the fireworks one" |
 | faces | `find_photos_of_person(name)` | "the ones with Mei in them" |
 | OCR | `find_photos_with_text(text)` | "the photo that says Q1 ROADMAP", "the receipts" |
@@ -16,7 +17,7 @@ visible in the tool name:
 | the per-photo look | `check_photo(id, question, options)` | "in photo 25, is the dog on the grass or the sand?" |
 
 Then the operating half — `open_photo`, `add_to_album`, `favorite_photos`,
-`delete_photos(confirm)` — plus `undo_last` and `ask_user`. **Thirteen tools.**
+`delete_photos(confirm)` — plus `undo_last` and `ask_user`. **Fourteen tools.**
 The finders replace the selection (or narrow it, with `refine`), and the acts
 work on what was found: the store pack's contract, over photos.
 
@@ -35,14 +36,14 @@ bench render that one frozen world (`LibraryEcho` calls the app's own matchers,
 so the two cannot drift; moment-seek keeps two parallel matchers on purpose,
 because they are its measured control, and this pack has no such history yet).
 
-What is **not built yet** is the perception rung the ROADMAP's definition names:
-VNClassify / VNDetectFaceRectangles / VNRecognizeText / a CoreImage sharpness
-meter over real pixels, replacing `looks` / `people` / `text` / `sharp` with
-what the OS says about fixture images. The tool boundary and every case above it
-are written to survive that swap unchanged. The CLIP rung above it is
-device-only (playbook spec E: CoreAI.framework is absent from the Mac Catalyst
-SDK tree), so it waits for the phone. Nothing measured below touches pixels, and
-nothing below claims to.
+The **perception rung is built and runs on the stage** — `indexFixtures()`
+replaces those rows with what Vision and CoreImage say about a folder of real
+photographs, and "The perception rung, on real pixels" below is what it
+measured. It is not what the bench runs: every round in this file is the canned
+world, on purpose, because a case worded against a label is only scorable while
+that label is a fact somebody wrote down. The CLIP rung above it is device-only
+(playbook spec E: CoreAI.framework is absent from the Mac Catalyst SDK tree),
+so it waits for the phone.
 
 ## The canned library (what a case can point at)
 
@@ -97,9 +98,12 @@ nothing below claims to.
 | l2b | nothing — l2 again, same binary | 40/52 | 47/52 | 3 |
 | l3 | a silent rung names the rung that can answer; a refusal names the recovery, not the roster | 36/52 | 44/52 | 0 |
 | l4 | an argument-less finder selects nothing; delete refuses the whole library | 38/52 | 44/52 | 0 |
+| l5 | the album filter leaves find_photos and becomes its own tool | 43/52 | 47/52 | 0 |
+| l5b | nothing — l5 again, same binary | 40/52 | 46/52 | 0 |
 
-**Read the last two columns.** The total sits in a 36–40 band across five runs
-of four configurations and says almost nothing; `routed` — did the opening call
+**Read the last two columns.** The total sat in a 36–40 band across five runs
+of four configurations before the album split moved it to 40–43, and on its own
+it says little; `routed` — did the opening call
 land on the rung that can answer cheapest — is the pack's thesis and never
 left 44–47; and the absence count is what the rulings were actually aimed at.
 
@@ -275,6 +279,121 @@ than the case it fails, and the bench cannot say so. Either the runner learns
 a case shape that allows a named recovery prefix, or rounds like this one are
 read on the absence count and the answers, with the total noted as unmoved.
 
+### l5 / l5b — the album slot leaves the finder: 43/52 then 40/52
+
+l1–l4's open item #1, done as one variable: `find_photos` loses its `album`
+argument and `find_photos_in_album(album)` becomes a tool (13 → 14). The
+destination album now has exactly one tool it can land on, and it is the one
+that creates.
+
+**43/52 in l5 — the best round the pack has had — and 40/52 when the same
+config ran again.** So the band moved from 36–40 to 40–43 and the split is
+worth about two or three cases, not the five the first run advertised; the
+repeat is the entire reason that sentence can be written. Nine cases failed in
+l5 against fourteen in l4, and what the split fixed is what it was aimed at:
+"Find last summer's photos and put them in an album called Summer" chains
+cleanly, "Which photos did I take in Kyoto?" reaches the `place` slot for the
+first time in five rounds, and the OCR rung went 4/4 for the first time.
+
+What it did not fix, in both runs: the composition case now *stops* after
+`find_photos` instead of narrowing (a shorter wrong answer than l1's five
+calls, but still wrong), "Favourite the fireworks photo" still opens with
+`find_photos(favorites_only: true)` — the verb still matches a filter's name —
+and JA 「アルバムに入れて」 opens with `find_photos_in_album`, which is the
+album word attracting the album tool one room over. The slot moved; the
+attraction did not.
+
+## The perception rung, on real pixels
+
+The ROADMAP's sentence for this pack is "a mock library with **real
+Vision/CoreImage calls**". It is true now, on the Mac, for four of the five
+rungs — and what it cost to find out is the part worth reading.
+
+Two new tools in `ios/bench`. `libraryfixture.swift` builds a library of real
+photographs out of footage this lane already holds: eight frames of
+journey.mp4 (the moment-seek take's own four Pexels scenes) and four from two
+what-can-ai-see Pexels clips, twelve photos with a manifest that carries the
+things no pixel does — dates, places, albums, favourites, the people's names.
+`libraryscout.swift` runs the shelf over them and prints what it says, because
+the playbook's rule for footage holds for stills: **scout, then word.**
+`PhotoLibraryBox.indexFixtures()` then replaces the canned rows with the
+measurement — classify + the animal detector for `looks`, VNRecognizeText for
+`text`, VNDetectFaceRectangles for face presence, variance of the Laplacian for
+softness, an 8×8 average hash for the pairs. The bench never reaches any of it
+(it runs LibraryEcho over LibraryData), so every round above still measures the
+binary it measured.
+
+```
+LIBRARY indexed 12 photos from pixels — 0 faces detected, 1 with text, 6 in near-identical pairs
+LIBRARY labels: adult, animal, beach, building, canine, cityscape, crosswalk,
+                decorative plant, dirt road, dog, foliage, land, liquid, machine
+LIBRARY softness: #9 152, #2 298, #1 316, #8 444, #7 448, #4 473
+```
+
+What the shelf actually said, against what the canned world assumed:
+
+- **The scene classifier is narrower than the story.** `beach` fired on one of
+  the two beach photos, at 0.35 — the other answers `ocean, water, water body,
+  outdoor`. "Show me the beach ones" on real pixels finds one photo where the
+  canned world has seven. Nothing is wrong; the shelf is simply thinner than
+  prose, which is the third time this lane has had to ask the shelf before
+  claiming a rung.
+- **The animal detector flickers between species.** The same beach scene
+  sampled 0.03 s apart answered `cat` in one scout and `dog` in the next.
+  Spec E already records both rungs confusing this puppy with a cat; here the
+  confusion is not even stable across neighbouring frames, which is why the
+  moments index merges runs and its check reads three frames rather than one.
+- **The face rung has nothing to stand on here, and says so.** Zero faces in
+  twelve photos, in a set where the classifier says `people 0.84, adult 0.84`
+  twice. Scene classification and face detection are not the same question,
+  and a library that names people from a manifest must not be described as
+  detecting them. The log prints the count so the gap is visible rather than
+  assumed. Real portraits are exactly what a personal camera roll has and what
+  this machine does not.
+- **The sharpness meter reads edge detail, not focus.** Softest in the set is a
+  flat wooden shop sign (152); sharpest is a leafy path (1536); nothing in the
+  twelve is out of focus. A smooth sea and a plain wall are "soft" exactly as
+  motion blur is. That is the CLIP rung's situation with a different sensor, so
+  it takes the same ruling: over pixels the tool returns the softest third as a
+  **ranking**, with the numbers, and never says a photo is blurry.
+- **The duplicate hash needed measuring, and 3 bits is the number.** At the
+  8-bit gap the scout used, three frames of one office all matched each other;
+  at ≤3 exactly the three intended pairs survive and the beach pair (7 bits
+  apart, genuinely different moments) drops out.
+
+Then the stage ran it, and the two most useful findings came from beats that
+failed:
+
+- **A ranker has to be renamed, not just re-worded.** `find_blurry_photos`
+  answered `found 1 photo (softest-looking (edge detail, lowest first))` — the
+  verdict word its evidence supports, exactly as spec E ruled for CLIP — and
+  the model reported: *"One photo (#9) looks blurry."* It supplied the
+  deciding word from the **tool's name**, which is the strongest routing and
+  reading signal there is (recipes' first rule). Re-wording a result is not
+  enough to stop a rung from claiming what it cannot decide; the name carries
+  the claim too.
+- **A required argument gets filled with the question's own noun.** "Which of
+  my photos have text in them?" became `find_photos_with_text(text: "text")`
+  and matched nothing. The tool has no "any text at all" mode, its argument is
+  required, and the model filled it with the word in front of it — the
+  every-required-argument recipe, in a shape where the invented value is the
+  question's own vocabulary.
+- Worded in the room's own words, the rung works: "Find the photo that says
+  WELCOME." → `find_photos_with_text` → #9, whose OCR really does read
+  `WELCOME WE ARE OPEN`; "Which photos came out blurry?" → the softest third;
+  "Show me the beach ones." → the one photo the classifier calls a beach. And
+  "Which ones look softest?" — a word the room does not hold — spent five
+  `check_photo` calls instead, which is the scout-then-word rule catching the
+  author of this file writing a beat against a word no tool carries.
+
+**Not swapped into the pack.** The measured rows would break two anchors the
+52 cases rest on — the honest-empty case (a dog the detector sometimes calls a
+cat is a cat query that finds something) and the blurry case (a verdict becomes
+a ranking) — so the canned world stays the bench's world, and the fixture
+library is the stage's. Swapping properly means re-wording the cases against
+the shelf's own vocabulary, on a library of real photographs someone actually
+took. That is a decision with a photo set attached, not a refactor.
+
 ## The stage's first run deleted the library
 
 The stage is wired (`--scenario library --autorun --backend apple`, Mac
@@ -339,11 +458,11 @@ the prose question. Nothing about the argument decides it.
 
 ## Open, in the order that pays
 
-1. **The `album` slot.** It is in every chain failure of every round — as a
-   filter that eats a destination, and as a filter the model refills after
-   being refused. The room is the fix the recipes reach for first, not the
-   description: the question is whether a metadata finder should carry an
-   album filter at all when `add_to_album` owns the word.
+1. **The remaining slots.** l5 took `album` out and the band moved; what is
+   left in `find_photos` is `when`, `place` and `favorites_only`, and the last
+   of those still catches the verb in "Favourite the fireworks photo" in every
+   round. The l6 candidate is the same ruling carried to its end — one clause,
+   one tool — measured against l5's band rather than argued.
 2. **The gate.** Two languages, two opposite failures, in a pack that deletes:
    JA 「削除して」 arrives `confirm: true` on the first ask, EN "Delete the
    duplicates." calls no delete at all and asks in prose. The app dialog is
@@ -352,8 +471,8 @@ the prose question. Nothing about the argument decides it.
    able to say "this prefix is allowed" — a redirected first call followed by
    the right one is not the same event as a ritual tail, and today they score
    identically.
-4. **The perception rung** — real Vision/CoreImage over fixture photos, which
-   is what makes the ROADMAP's sentence true. Needs images: a synthetic
-   generator (the `fixtures.swift` / `moviefixture.swift` precedent) proves the
-   plumbing, real photos are needed for a take.
-5. **The CLIP rung and the stage take** — device only.
+4. **The photo set.** The rung runs; what it runs on is twelve frames of
+   somebody else's footage. A camera roll of real photographs — with faces in
+   it — is what turns the fixture library into the pack's world and the pack
+   into a take, and it is the one thing this lane cannot produce for itself.
+5. **The CLIP rung and the device take** — device only.
