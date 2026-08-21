@@ -579,3 +579,62 @@ the judgment→op mapping, and expect the well: the ops inside the prior
 (brighten, warm, punch up, enhance) fire regardless of the picture, and
 the ops outside it (darken, cool, desaturate) do not come even when the
 pixels name them.
+
+## The ritual's floor belongs to the room, and it ratchets
+
+Teaching a tool to answer makes it get called more. The moment-seek
+bench's canned check_moment learned the real check's semantics — a
+verdict word instead of a refusal — and its own call rate went from 7
+calls in 7 cases to 15 in 14, reproduced exactly across two runs of the
+identical config; most of the new calls verify a search that had
+already succeeded, and the stop contract did not move. The floor then
+stayed up: 19/20, 18/20, 18/20 across three later rounds and two
+binaries. A ritual's floor is a property of what the room offers, not
+of what the instructions ask, and it ratchets — it did not come back
+down when the tool got no further help.
+
+Removing the tool does not remove the ritual either; the answering slot
+refills. Taking check_moment out of a take's room ended every harm it
+caused — the model denying its own search hit went 3/12 → 0/9, index
+sweeps 2/12 → 0/9 — and the first beat immediately grew a `seek`
+instead, in 9 of 9 runs, where none of the 12 runs with the check
+present had seeked there. The model does not want *that tool*; it wants
+something to do after an answer. So the lever is never a better answer
+and rarely a better sentence: it is leaving nothing in the room worth
+calling, and then designing for where the slot refills, because it
+will. (Check the attribution before crediting your change: a spurious
+set_clip_speed vanished from the same nine runs and turned out to be a
+Japanese-input habit visible in the bench with the full pack present.)
+
+## A verb with a near neighbour routes to the neighbour
+
+「動画を書き出して。」 — export the video — called `auto_captions` in
+one run of three, failed to transcribe, and then refused to export at
+all. 書き出す (export) sits one character from 書き起こす (transcribe),
+so the verb points at the caption tool as readily as at the export one.
+Two independent repairs both went 3/3: replace the verb
+(「エクスポートして。」, katakana, no such neighbour) or give it a noun
+to land on (「動画ファイルとして書き出して。」). Only the bare verb
+failed. This is the gravity-well recipe read from the other side —
+there the fix was removing the competing tool, here the competitor is a
+homophone in the user's own sentence and the fix is in the sentence.
+When a pack's demo or docs put words in the user's mouth, check every
+verb for a near neighbour that names another tool in the room; when
+they don't, expect the misroute and name the object.
+
+## The reply follows the language of the instruction block
+
+Not the request's language, and not the nearest turn's. A Japanese
+request to a stage whose instructions are English comes back in English
+— 1 of 11 runs answered Japanese. The same instruction sentence
+rewritten in Japanese, same slot, took it to 6 of 10; the *identical*
+Japanese sentence appended one line under the user's own turn moved
+nothing, 0 of 5. All four conditions said the same thing, so content is
+not the lever and proximity is not the lever: the preamble's own
+language is. The effect is asymmetric, with English as the attractor —
+an English preamble overrides a Japanese request, a Japanese preamble
+does not override an English one (an English run under the Japanese
+line stayed English 3 of 3). For anything that ships in two languages,
+write the preamble in the language the user speaks and re-measure the
+other one; and keep the line out of any instruction text a bench shares
+as its control.
