@@ -158,6 +158,21 @@
       {"tool": "search_frames"},
       {"tool": "check_moment", "args": {"seconds": {"number": 160, "tol": 4}}}
     ] },
+  { "id": "m-ja-veto-1", "input": "雨が降り始める場面を探して、そのフレームを確認してから、何秒からか教えて。", "lang": "ja",
+    "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
+    "answerContains": ["320"],
+    "expected": [
+      {"tool": "search_frames"},
+      {"tool": "check_moment", "args": {"seconds": {"number": 325, "tol": 6}}}
+    ] },
+  { "id": "m-ja-check-2", "input": "460秒のフレームを見て。PKの場面?はい、いいえで答えて。", "lang": "ja",
+    "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
+    "answerContains": ["はい", "yes"],
+    "expected": [{"tool": "check_moment", "args": {"seconds": {"number": 460, "tol": 0.1}}}] },
+  { "id": "m-ja-check-3", "input": "100秒のフレームを確認して。ゴールはある、それともゴールなし?", "lang": "ja",
+    "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
+    "answerContains": ["なし", "ない", "ありません", "no"],
+    "expected": [{"tool": "check_moment", "args": {"seconds": {"number": 100, "tol": 0.1}}}] },
   { "id": "m-ja-miss-1", "input": "レッドカードの場面はある?", "lang": "ja",
     "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
     "answerContains": ["ない", "ありません", "見つかり", "no"],

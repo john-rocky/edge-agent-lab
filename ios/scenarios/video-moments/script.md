@@ -282,3 +282,78 @@ real-footage take's failure modes joined the EN block.
   here. The case is worth keeping precisely because the trap is the
   model's wording choice, not the tool's: it will fire on the rounds
   where the model asks "is it raining".
+
+r37b re-ran r37's config on r37's binary, before a line of spec D
+landed: one round cannot tell a ritual from a coin flip, and every
+reading in this lane is a difference between rounds. r38 is the first
+round with the check's boundary fix, the JA verdict parity (negation
+markers, detector-noun aliases) and the three JA mirrors in it — 46
+cases, the JA block now carrying the same veto / yes-no / negated-option
+trio as the EN.
+
+- **The band: the aggregate belongs to the config, the case list is
+  noise.** r37b scored 15/43 to r37's 14/43 — and on the old 40 the two
+  rounds are identical, 13/40 each, against r35's 17. So is the check
+  ritual: 14 cases, 15 calls in both rounds, where r35 made 7 in 7. Yet
+  only 11 of those 14 case *identities* overlap, and 7 of the 40 cases
+  flipped verdict between two runs of the same config. Read a single
+  case's PASS/FAIL as a coin; read the round's totals as the
+  configuration speaking. The r35 → r37 drop is therefore not a run
+  artifact: a check that answers something usable gives the retrieval
+  ritual somewhere to go, and it goes there every time.
+- **17/46 in r38, 15/40 on the old 40** — two back inside the band, the
+  ritual unmoved at 15 cases / 15 calls. Nothing in this round was aimed
+  at the ritual, and nothing touched it.
+- **The three JA mirrors fail three different ways, and all three are
+  the point.** m-ja-veto-1: search 「雨が降り始める場面」 hits 320–330 s,
+  then the check at 320 s comes back "none of those", the model sweeps
+  the other two indexes and hedges — the veto its English twin dodged
+  the same round. The cause is not the verdict semantics but the
+  tokenizer: JA writes no spaces, so the question's content words are
+  one long clause that no English label can contain, and presence can
+  never be found. m-ja-check-2: the model asked its question in English
+  with JA options 「はい」/「いいえ」 — and 「いいえ」 is not a negation
+  marker (the markers cover the 〜ない / なし forms), so the pair reads
+  all-positive, presence fails, and "none of those" becomes "The PK
+  scene is not present". A JA yes/no pair needs its own partition; that
+  is the next ruling, not a wart to leave. m-ja-check-3: the JA negation
+  partition did work — 「ゴールあり」/「ゴールなし」 split, and the
+  positive matched the truth 「ゴール」 by name — but the model searched
+  first and then checked 214 s, the goal it found, instead of the 100 s
+  the case asked about. Two of the three also moved the asked time
+  (450 s for 460, 214 s for 100): on JA input this model treats a
+  timestamp in the request as a suggestion.
+- **The boundary fix holds, and it says so in one line.** Both scouts on
+  journey.mp4 logged `MOMENTS check at 12 s sits on a cut — keeping the
+  forward scene: 12.6 s, 13.2 s, 13.8 s` — the centre frame dropped with
+  the backward one, two replacements walked in from ahead. The check's
+  evidence tail is now `cat, dog, liquid, water, water body, ocean`
+  where the same check on the same second returned `plant, outdoor,
+  foliage, land, dirt road, road, path, trail` before: the beach scene
+  the question was about, not the forest that ends at the cut. Beat 1
+  trusts the hit in both languages — "The dog appears around 12 seconds
+  in the frame" (EN), "I found a moment around 12 seconds where a cat,
+  dog, … are visible" (JA) — where the pre-fix JA run on the same beat
+  answered "I couldn't find the exact moment of the dog appearing". EN
+  then ran the whole arc clean: seek 12 s → keep_range 12–19 → export,
+  25.3 s → 7 s. JA reached the export too, but beat 2 added a
+  split_clip after its seek, and
+  beat 3's keep_range took 12–25.3 s from the split instead of the row's
+  12–19 — the arc lands, the arithmetic does not. That is the JA retake
+  note for the flagship take.
+- **The model does not translate the query. It hands the index the
+  user's Japanese.** Measured, not assumed: a probe beat
+  「雪が映っている瞬間を探して。」 on footage with no snow came back
+  `no moments found for "雪" in the picture` — the bare JA noun, straight
+  through. The bench agrees at scale: 29 of the 37 search calls the JA
+  cases made in r38 carried JA query strings, and every one of the eight
+  English ones copied a Latin or numeric token out of the request itself
+  ("PK", "FULL TIME", "0-0", "300 s"). Not one JA noun was rendered into
+  English. The detector-noun alias table is therefore load-bearing, not
+  a nicety — it is the only reason 「犬が出てくる瞬間」 finds a row whose
+  text is "dog" — and the same rule now carries the check's presence
+  test. Its limit is its length: 犬 and 猫 are aliased, 雨 and ゴール are
+  not, which is exactly where m-ja-veto-1 breaks. (Aside, unscored: the
+  Mac model answers 20 of 23 JA cases in English. The cases accept both
+  languages' keywords, so it costs nothing here — but a voice take on
+  the phone is a spoken answer, and that is a take-lane question.)
