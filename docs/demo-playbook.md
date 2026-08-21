@@ -186,7 +186,9 @@ end-to-end; JA hits the index through the detector-noun aliases.
    found-it shot still happens; it happens on the sentence that asks
    for it. The four-beat arc stays canon for anything where the model
    does *not* pre-seek; check the log before assuming which room you
-   are in.
+   are in. The one run whose beat-1 seek ran on to the scene's tail
+   (19 s) was a coin: nine fresh runs put every beat-1 seek on the cut
+   at 12 s, and none of the nine made a spurious call of any kind.
    EN: "Find the moment the dog appears." / "Keep only that moment." /
    "Export it."
    JA:「犬が出てくる瞬間を探して。」/「その瞬間だけ残して。」/
@@ -214,14 +216,24 @@ end-to-end; JA hits the index through the detector-noun aliases.
    put an English bubble on a Japanese sentence, against 8 of 12
    answering in Japanese when the check was still in the room. On a
    voice take the bubble is the entire muted narrative, so this is now
-   the JA take's main retake cause. The ruling: the answer's language
-   is the *stage's* contract, not the pack's — a stage-only
+   the JA take's main retake cause. The ruling was: the answer's
+   language is the *stage's* contract, not the pack's — a stage-only
    instruction line saying to answer in the language of the request,
    never added to `ToolBox.momentsInstructions`, which the bench shares
-   and which must stay the control. That shared text still names
-   check_moment even where the take's room has none; leave it, and
-   read a take's first log line (`TOOLS 23 — without check_moment`) for
-   what the room actually held.
+   and must stay the control. **It shipped, it was measured, and it
+   failed: 1 of 6 before the line, 1 of 6 after.** The wiring is not in
+   doubt (the string is in the built dylib, appended unconditionally to
+   every stage session); the instruction is. So an instruction line in
+   the session preamble is not a lever on this model's answer language,
+   and the open question is whether anything closer to the turn is —
+   the same beat text carries a Japanese sentence and gets an English
+   reply, so the request's own language is evidently not the signal
+   either. What *did* correlate, and nobody designed: the check being
+   in the room at all (8 of 12 Japanese with it, 1 of 6 without it,
+   twice).
+   That shared instruction text still names check_moment even where
+   the take's room has none; leave it, and read a take's first log line
+   (`TOOLS 23 — without check_moment`) for what the room actually held.
 5. The Mac take (moment-seek-real-demo.mp4) demotes to the thread's
    second tweet — the "how" shot.
 
