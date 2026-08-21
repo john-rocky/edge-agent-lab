@@ -84,6 +84,18 @@ var bundlePath =
         as NSString).expandingTildeInPath
 var thresholds: [Float] = [0.18, 0.21, 0.24, 0.27, 0.30]
 var units = GraphModel.ComputeUnits.gpu
+/// The package directory, so the default manifest and cache resolve wherever
+/// `swift run` is invoked from.
+let packageDirectory = URL(fileURLWithPath: #filePath)
+    .deletingLastPathComponent()  // Sources/cliprung
+    .deletingLastPathComponent()  // Sources
+    .deletingLastPathComponent()  // cliprung
+var backgroundManifest: String? =
+    packageDirectory.appendingPathComponent("background/null-corpus.txt").path
+var backgroundCache: String? =
+    packageDirectory.appendingPathComponent(".build/background-embeds.bin").path
+var backgroundFramesPerClip = 2
+var zMargins: [Float] = [2.0, 2.5, 3.0, 3.5, 4.0]
 
 var args = Array(CommandLine.arguments.dropFirst())
 while let flag = args.first {
@@ -92,6 +104,11 @@ while let flag = args.first {
     case "--video": videoPath = (args.removeFirst() as NSString).expandingTildeInPath
     case "--bundle": bundlePath = (args.removeFirst() as NSString).expandingTildeInPath
     case "--thresholds": thresholds = args.removeFirst().split(separator: ",").compactMap { Float($0) }
+    case "--background": backgroundManifest = (args.removeFirst() as NSString).expandingTildeInPath
+    case "--background-frames": backgroundFramesPerClip = Int(args.removeFirst()) ?? 2
+    case "--no-background": backgroundManifest = nil
+    case "--no-background-cache": backgroundCache = nil
+    case "--z": zMargins = args.removeFirst().split(separator: ",").compactMap { Float($0) }
     case "--units":
         switch args.removeFirst() {
         case "ane", "neuralEngine": units = .neuralEngine
@@ -425,4 +442,115 @@ for t in thresholds {
         }
     }
     print("| \(f2(t)) | \(hit)/\(a.answerable) | \(fp)/\(misses) |")
+}
+
+// MARK: - The z rule: each query read in its own units
+//
+// Everything above measures the cosine on an absolute scale, which is the
+// thing the A/B found does not exist. Below, the same 11 queries are scored
+// against a background corpus of unrelated footage first, and the peak inside
+// journey.mp4 is reported as z = (peak − mean_bg) / sd_bg. A z cut is
+// equivalently a per-query cosine cut at mean_bg + z·sd_bg, so the two are the
+// same rule expressed in different units — which is the whole claim under
+// test. Nothing here touches the rates above; it is an added section.
+
+if let backgroundManifest {
+    let manifest = URL(fileURLWithPath: backgroundManifest)
+    let cache = backgroundCache.map { URL(fileURLWithPath: $0) }
+    let background = try await BackgroundCorpus.build(
+        manifest: manifest, cache: cache, framesPerClip: backgroundFramesPerClip, runner: runner)
+
+    print("")
+    print("## the z rule — each query against its own null")
+    print("")
+    let sourceNote =
+        background.fromCache
+        ? "read from cache"
+        : "decoded in \(f(background.decodeCost)) s, embedded in \(f(background.embedCost)) s "
+            + "(\(f(background.embedCost / Double(max(1, background.frames)) * 1000)) ms/frame)"
+    print(
+        "background: \(background.clips) clips, \(background.frames) frames "
+            + "(\(backgroundFramesPerClip) per clip), manifest \(manifest.lastPathComponent) — \(sourceNote)"
+    )
+    let bytes = background.frames * runner.embeddingDimension * MemoryLayout<Float>.size
+    print(
+        "background embeddings: \(background.frames)×\(runner.embeddingDimension) float32 = "
+            + "\(String(format: "%.0f", Double(bytes) / 1024)) KB (\(String(format: "%.0f", Double(bytes) / 2048)) KB as float16)"
+    )
+
+    let stats = queries.indices.map { background.stats(for: queryEmbeds[$0]) }
+    func z(_ score: Float, _ q: Int) -> Float {
+        stats[q].sd > 0 ? (score - stats[q].mean) / stats[q].sd : 0
+    }
+    /// The same z bar applied per frame — i.e. the per-query cosine cut.
+    func zRows(_ q: Int, margin: Float) -> [Row] {
+        let cut = stats[q].mean + margin * stats[q].sd
+        let hitTimes = samples.indices.filter { cosines[q][$0] >= cut }.map { samples[$0].time }
+        return runs(hitTimes, label: "clip", step: step)
+    }
+
+    print("")
+    print("### z by query (peak inside journey.mp4, in that query's own background units)")
+    print("")
+    print("| query | kind | expected | peak | bg mean | bg sd | z | cut at z=3.0 |")
+    print("|---|---|---|---|---|---|---|---|")
+    for (q, query) in queries.enumerated() {
+        let peak = best(cosines[q])
+        print(
+            "| \(query.text) | \(query.kind) | \(query.expect ?? "—") | \(f2(peak.score)) "
+                + "| \(f2(stats[q].mean)) | \(f2(stats[q].sd)) | \(String(format: "%.3f", z(peak.score, q))) "
+                + "| \(f2(stats[q].mean + 3.0 * stats[q].sd)) |")
+    }
+
+    print("")
+    print("### z sweep — CLIP alone, accepting the peak only when z ≥ margin")
+    print("")
+    print("| rule | answerable hits (seek lands) | any-row hits | false positives on \(misses) should-miss |")
+    print("|---|---|---|---|")
+    for margin in zMargins {
+        var hit = 0, any = 0, fp = 0
+        for (q, query) in queries.enumerated() {
+            let peak = best(cosines[q])
+            let rows = zRows(q, margin: margin)
+            if let expect = query.expect {
+                if z(peak.score, q) >= margin, lands(peak.time, in: expect) { hit += 1 }
+                if rows.contains(where: { overlaps($0, expect) }) { any += 1 }
+            } else if !rows.isEmpty {
+                fp += 1
+            }
+        }
+        print("| B — CLIP z ≥ \(String(format: "%.1f", margin)) | \(hit)/\(a.answerable) | \(any)/\(a.answerable) | \(fp)/\(misses) |")
+    }
+
+    print("")
+    print("### labels+CLIP under the z rule (arm A's rows, arm B where arm A is silent)")
+    print("")
+    print("| z | hits | false positives |")
+    print("|---|---|---|")
+    for margin in zMargins {
+        var hit = 0, fp = 0
+        for (q, query) in queries.enumerated() {
+            let rowsA = labelSearch(rows: index.visual, query: query.text)
+            let peak = best(cosines[q])
+            let rowsB = zRows(q, margin: margin)
+            if let expect = query.expect {
+                if let first = rowsA.first {
+                    if lands(first.start, in: expect) { hit += 1 }
+                } else if z(peak.score, q) >= margin, lands(peak.time, in: expect) {
+                    hit += 1
+                }
+            } else if !rowsA.isEmpty || !rowsB.isEmpty {
+                fp += 1
+            }
+        }
+        print("| \(String(format: "%.1f", margin)) | \(hit)/\(a.answerable) | \(fp)/\(misses) |")
+    }
+
+    // The arithmetic a phone would do per query, from the numbers just used:
+    // one dot product per background frame plus a mean and a variance.
+    print("")
+    print(
+        "per-query cost at query time: \(background.frames) dot products of \(runner.embeddingDimension) "
+            + "floats = \(background.frames * runner.embeddingDimension / 1000)K multiply-adds, "
+            + "against \(samples.count * runner.embeddingDimension / 1000)K for the video's own frames.")
 }

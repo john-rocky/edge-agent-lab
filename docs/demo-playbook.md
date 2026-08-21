@@ -478,6 +478,69 @@ Raw run in `ios/bench/cliprung/results/journey-2026-08-21.md`.
   `--prime-clip` does, once, on purpose; until then the rung stays dark
   and the index is byte-for-byte today's.
 
+**The acceptance rule, attacked once more with a background corpus —
+better units, same ruling** (measured 2026-08-21, raw run in
+`ios/bench/cliprung/results/journey-z-2026-08-21.md`). The diagnosis
+above says the cosine scale is per-query, so the obvious repair is to
+give each query its own null: score it against frames of unrelated
+footage first and read the peak as `z = (peak − mean_bg) / sd_bg`,
+which is the same thing as a per-query cosine cut at `mean + z·sd`.
+The null: 211 clips × 2 frames = 422 frames from
+`~/code/what-can-ai-see/clips` (the wcas field tier), stratified up to
+5 per category across its 48 categories, none of them journey.mp4's
+four Pexels sources. The manifest is committed; the embeddings are
+derived data and cache to gitignored `.build/`.
+
+- **It works on precisely the failures the diagnosis predicted, and
+  the per-query scale is real and large.** The equivalent cosine cut at
+  z = 3 ranges **0.217 to 0.288** across eleven queries — most of the
+  band the old sweep pushed one number through. "A person walking
+  away", the poster child (cosine 0.265, above five true hits), lands
+  at z 2.09, below all eight. "Snow" lands at 0.94. In cosine units
+  five of eight true hits sit inside the false range; in z units, one.
+- **And it still does not decide presence: no z cut gives 8/8 with
+  0 FP.** A cut in (2.09, 2.36] gives 8/8 with 1 FP; a cut in
+  (2.77, 3.93] gives 6/8 with 0 FP. There is a (2.757, 2.773] window
+  that reads 7/8 with 0 FP — **0.016 wide, against the 0.156 a single z
+  moves when the null is halved.** That is noise wearing an operating
+  point's clothes, and the discipline that refuses the incumbent's
+  0.005 margin has to refuse this one too.
+- **The survivor is not a scale failure.** The one query still landing
+  inside the true range is "a cat" at z 2.757 on the beach puppy — the
+  confusion this spec already records *both* rungs making. Calibration
+  cannot fix a model that finds a puppy cat-like; a verification frame
+  can. So the ruling stands and its reason narrows: not "the numbers do
+  not separate" but "the embedding is wrong about this frame".
+- **Against the incumbent: equal where it ships, better where it does
+  not.** Labels-first with z ≥ 2.5–3.5 measures 8/8 with 1 FP — the same
+  8/8 with 1 FP as labels-first at cosine 0.27, and the FP is arm A's
+  cat both times. Invisible here because labels answer 6 of 8 and the
+  two they miss are the two highest cosines (0.329, 0.285), the easiest
+  work the rung could be given. Standalone, z dominates at every
+  namable operating point: 6/8 vs 4/8 at zero false positives, 8/8 vs
+  6/8 at one. And its 0-FP band is 1.15 z wide (32% of its hit spread)
+  against the incumbent's 0.013 cosine (13%), with a false positive
+  0.005 below the shipped number.
+- **Recommendation: do not change the app on this.** z buys no measured
+  point in the configuration that ships, and costs 422 KB of float16
+  frame embeddings that must ship with it (free-text queries mean the
+  null statistics cannot be precomputed). Query-time arithmetic is
+  nothing — 422 dot products of 512 floats, 216K multiply-adds against
+  ~11 ms for one frame of CLIP encoding. Adopt it when a second footage
+  set puts the label shelf silent on more than two of eight queries;
+  then the standalone number is the shipped one and the margin is worth
+  the asset.
+- **One limit the corpus made visible, which is the deeper reason not
+  to ship it as a verdict: a null can only calibrate a query whose
+  subject it has seen.** "A person walking away" is refused because the
+  wcas corpus is full of people (its background mean, 0.210, is the
+  highest of the eleven); a person-free null would have given it a low
+  mean, a high z and a false positive. "Snow" is refused for the safer
+  reason — the null has no snow either, but journey.mp4's own peak for
+  snow barely clears the corpus mean, so nothing inflates. The rule is
+  only as good as the null's coverage of what users ask about, and that
+  set is open-ended.
+
 ### F. Session hygiene for implementation sessions
 
 Model: Opus is the default executor for A–E; return to Fable only for
