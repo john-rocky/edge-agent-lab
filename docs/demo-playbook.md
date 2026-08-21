@@ -179,8 +179,18 @@ end-to-end; JA hits the index through the detector-noun aliases.
    list on this screen, not the world, the index, or a result.
 3. Speak the four beats. EN: "Find the moment the dog appears." /
    "Jump to that moment." / "Keep only that moment." / "Export it."
-   JA: 「犬が出てくる瞬間を探して。」/「その瞬間にジャンプして。」/
-   「その瞬間だけ残して。」/「**エクスポートして。**」
+   **Three beats, not four** (revised 2026-08-21 after the nine-run
+   measurement): beat 1 now performs the jump itself in 9 of 9 runs —
+   `search_frames` then `seek` — so a separate jump beat is a beat with
+   no visible change, which this file's first take rule forbids. The
+   found-it shot still happens; it happens on the sentence that asks
+   for it. The four-beat arc stays canon for anything where the model
+   does *not* pre-seek; check the log before assuming which room you
+   are in.
+   EN: "Find the moment the dog appears." / "Keep only that moment." /
+   "Export it."
+   JA:「犬が出てくる瞬間を探して。」/「その瞬間だけ残して。」/
+   「**エクスポートして。**」
    **Beat 4 was the wobbly one, and it is the money shot.** Bare
    「書き出して。」 routes away from export; 「動画を書き出して。」 was
    the fix, and it missed too — 12 scouts, 2026-08-21: control 2/3,
@@ -198,9 +208,20 @@ end-to-end; JA hits the index through the detector-noun aliases.
    EN "Export it." has never missed. Beat 3 landed keep_range 12–19 →
    7 s in all twelve runs, both languages — the arc itself is solid.
 4. Record via QuickTime device mirroring. Retries per the playbook
-   rule. Known JA wart: beat 1's spoken answer sometimes hedges after
-   a boundary check misfire — the chain still lands; retake for a
-   clean bubble.
+   rule. The old JA wart (beat 1 hedging after a boundary check
+   misfire) is gone with the check — 0 of 9 — and a bigger one took
+   its place: **the JA take answers in English.** Five of six JA runs
+   put an English bubble on a Japanese sentence, against 8 of 12
+   answering in Japanese when the check was still in the room. On a
+   voice take the bubble is the entire muted narrative, so this is now
+   the JA take's main retake cause. The ruling: the answer's language
+   is the *stage's* contract, not the pack's — a stage-only
+   instruction line saying to answer in the language of the request,
+   never added to `ToolBox.momentsInstructions`, which the bench shares
+   and which must stay the control. That shared text still names
+   check_moment even where the take's room has none; leave it, and
+   read a take's first log line (`TOOLS 23 — without check_moment`) for
+   what the room actually held.
 5. The Mac take (moment-seek-real-demo.mp4) demotes to the thread's
    second tweet — the "how" shot.
 
@@ -346,6 +367,14 @@ once they recur)
   — it did not come back down when the check got no further help. So
   the lever is not a better answer; it is leaving nothing there worth
   having, or removing the tool from the room.
+- **Removing the tool does not remove the ritual: the answering slot
+  refills.** Taking check_moment out of the take's room ended every
+  harm it caused — beat 1 denying its own search hit went 3/12 → 0/9,
+  index sweeps 2/12 → 0/9, a spurious set_clip_speed 2/12 → 0/9 — and
+  beat 1 immediately grew a `seek` instead, in 9 of 9 runs, where none
+  of the 12 runs with the check present had seeked there. The model
+  does not want *that tool*; it wants something to do after an answer.
+  Design for where the slot refills, because it will.
 - **The aggregate belongs to the config; the case list is a coin.** Two
   runs of one config scored identically on the old 40 and made the same
   number of check calls — while 7 of those 40 flipped verdict and 3 of
