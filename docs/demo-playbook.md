@@ -216,21 +216,32 @@ end-to-end; JA hits the index through the detector-noun aliases.
    put an English bubble on a Japanese sentence, against 8 of 12
    answering in Japanese when the check was still in the room. On a
    voice take the bubble is the entire muted narrative, so this is now
-   the JA take's main retake cause. The ruling was: the answer's
-   language is the *stage's* contract, not the pack's — a stage-only
-   instruction line saying to answer in the language of the request,
-   never added to `ToolBox.momentsInstructions`, which the bench shares
-   and must stay the control. **It shipped, it was measured, and it
-   failed: 1 of 6 before the line, 1 of 6 after.** The wiring is not in
-   doubt (the string is in the built dylib, appended unconditionally to
-   every stage session); the instruction is. So an instruction line in
-   the session preamble is not a lever on this model's answer language,
-   and the open question is whether anything closer to the turn is —
-   the same beat text carries a Japanese sentence and gets an English
-   reply, so the request's own language is evidently not the signal
-   either. What *did* correlate, and nobody designed: the check being
-   in the room at all (8 of 12 Japanese with it, 1 of 6 without it,
-   twice).
+   the JA take's main retake cause. The ruling — the answer's language
+   is the *stage's* contract, not the pack's, carried by a stage-only
+   line never added to `ToolBox.momentsInstructions`, which the bench
+   shares and must stay the control — was right about the slot and
+   wrong about the sentence. **In English it does nothing (1 of 11).
+   The same sentence in Japanese takes the JA take to 6 of 10**, and a
+   31-run A/B says why: what the model follows is the language the
+   instruction block is *written in*, not its content and not its
+   distance from the turn. All four conditions said the same thing; the
+   identical Japanese sentence appended one line under the beat text
+   moved nothing (0 of 5), while in the preamble it moved more than
+   half. Both position and language are load-bearing, neither alone
+   does anything, and the margin repeated exactly across two batches in
+   one sitting (A 0/5 then 0/5, B 3/5 then 3/5; Fisher one-sided
+   p = 0.021 against A, 0.002 against the other three pooled).
+   The committed line is 「リクエストと同じ言語で回答してください。」
+   **English is the attractor, and the effect is asymmetric**: an
+   English preamble overrides a Japanese request, while a Japanese
+   preamble does not override an English one — the EN take answered
+   English 3 of 3 under the Japanese line, which is why it was safe to
+   commit. Measured on the moments pack only; if another pack's EN take
+   ever answers Japanese, this line is the first place to look.
+   6 of 10 is a move, not a solved take: 4 JA takes in 10 still need a
+   language retake, and the earlier correlation nobody designed (8 of
+   12 Japanese with check_moment in the room, 1 of 6 without, twice)
+   still has no mechanism behind it.
    That shared instruction text still names check_moment even where
    the take's room has none; leave it, and read a take's first log line
    (`TOOLS 23 — without check_moment`) for what the room actually held.
@@ -379,6 +390,23 @@ once they recur)
   — it did not come back down when the check got no further help. So
   the lever is not a better answer; it is leaving nothing there worth
   having, or removing the tool from the room.
+- **The reply follows the language the instruction block is written
+  in — not the request's, not the nearest turn's.** 31 runs, four
+  conditions saying the same sentence: English preamble 1/11 Japanese
+  replies to Japanese requests, Japanese preamble 6/10, the identical
+  Japanese sentence appended per turn 0/5. Content is not the lever and
+  proximity is not the lever; the preamble's own language is. The
+  effect is asymmetric — English in the preamble suppresses a Japanese
+  reply, Japanese in the preamble permits but does not force one (an
+  EN take under a JA preamble stayed English 3/3). For a lane that
+  ships in two languages: write the preamble in the language the take
+  speaks, and re-measure the other language before shipping it.
+- **The guardrail is a coin too, not just a verb.** 「犬が出てくる瞬間
+  を探して。」 tripped Apple FM's safety filter once in 31 runs of the
+  same sentence — and that take exported the untrimmed 25.3 s. A beat
+  vocabulary that cleared the rail 30 times can still lose one; check
+  the exported duration with ffprobe rather than the toast, on every
+  take you intend to ship.
 - **Removing the tool does not remove the ritual: the answering slot
   refills.** Taking check_moment out of the take's room ended every
   harm it caused — beat 1 denying its own search hit went 3/12 → 0/9,
