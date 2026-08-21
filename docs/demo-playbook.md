@@ -106,6 +106,20 @@ lead stays, middle names the animal detector if the dog take is used):
 > Vision + Speech built the index. A sample of how far on-device
 > agents go.
 
+The real-footage variant (dog take; update the numbers to the shot
+take before posting — the journey cut is 12–19 s, 7 s out):
+
+> Say to your video editor: "find the moment the dog appears" — the
+> on-device index answers 12–19 s, the AI jumps there, cuts the
+> timeline to those 7 seconds and exports. Fully offline: Apple's
+> on-device model + the OS's own vision. A sample of how far
+> on-device agents go.
+
+和訳(チェック用): 動画エディタに「犬が出てくる瞬間を探して」と言うと、
+端末内の索引が 12–19 秒と答え、AI がそこへジャンプし、タイムラインを
+その 7 秒に切り詰めて書き出す。完全オフライン: オンデバイスモデル+
+OS 自身のビジョン。オンデバイスエージェントがどこまで行けるかのサンプル。
+
 ## Implementation specs (execute in order; no new judgment needed)
 
 ### A. Finish the real-footage take (in flight)
