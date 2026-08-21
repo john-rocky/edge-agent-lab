@@ -1,11 +1,19 @@
-// Two clips -> one 1280x720 mp4, aspect-fill, re-encoded via frame pull.
-// Usage: concat.swift <a.mp4> <secondsA> <b.mp4> <secondsB> <out.mp4>
+// N clips -> one 1280x720 mp4, aspect-fill, re-encoded via frame pull.
+// Usage: concat.swift <a.mp4> <secondsA> [<b.mp4> <secondsB> ...] <out.mp4>
+// Silent output on purpose: take footage for the frames/OCR indexes; add
+// commentary in the source clips when the transcript side is the demo.
 import AVFoundation
 import AppKit
 
 let argv = CommandLine.arguments
-let inputs = [(URL(fileURLWithPath: argv[1]), Double(argv[2])!), (URL(fileURLWithPath: argv[3]), Double(argv[4])!)]
-let out = URL(fileURLWithPath: argv[5])
+precondition(argv.count >= 4 && argv.count % 2 == 0, "usage: concat.swift <clip> <sec> [...] <out>")
+var inputs: [(URL, Double)] = []
+var i = 1
+while i + 1 < argv.count - 1 {
+  inputs.append((URL(fileURLWithPath: argv[i]), Double(argv[i + 1])!))
+  i += 2
+}
+let out = URL(fileURLWithPath: argv.last!)
 let width = 1280, height = 720, fps = 12
 
 try? FileManager.default.removeItem(at: out)
@@ -51,7 +59,6 @@ for (url, seconds) in inputs {
       space: CGColorSpaceCreateDeviceRGB(),
       bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)!
     ctx.interpolationQuality = .high
-    // Aspect-fill into the target frame.
     let scale = max(CGFloat(width) / CGFloat(cg.width), CGFloat(height) / CGFloat(cg.height))
     let w = CGFloat(cg.width) * scale, h = CGFloat(cg.height) * scale
     ctx.draw(cg, in: CGRect(x: (CGFloat(width) - w) / 2, y: (CGFloat(height) - h) / 2, width: w, height: h))
@@ -65,4 +72,4 @@ input.markAsFinished()
 let done = DispatchSemaphore(value: 0)
 writer.finishWriting { done.signal() }
 done.wait()
-print("wrote \(out.path): \(n) frames = \(n / fps) s")
+print("wrote \(out.path): \(n) frames = \(n / fps) s, \(inputs.count) scenes")

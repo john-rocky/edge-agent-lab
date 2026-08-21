@@ -133,12 +133,32 @@ the truths list names the thing. Spec:
 6. Record with takekit, assemble at 2 fps, deliver mp4 + the exported
    dog clip.
 
-### B. iPhone voice take (when the device is back)
+### B. iPhone voice take — the flagship (user shoots)
 
-`--scenario moments --voice`, the same real footage in the camera roll
-(or `--video` file). Speak the three beats. Record via QuickTime device
-mirroring. This becomes the flagship post video; the Mac take then
-demotes to the thread's second tweet (the "how" shot).
+Footage: **journey.mp4** (25 s, four scenes: street → forest path →
+beach puppy → sunset skyline; dog scene 12–19 s; built with
+takekit/concat.swift from Pexels 2675512 / 4729779 / 853936 /
+28320907). Scouted clean on the Mac lane 2026-08-21, EN four beats
+end-to-end; JA hits the index through the detector-noun aliases.
+
+1. AirDrop journey.mp4 to the phone, save to the camera roll **last**
+   (the app loads the newest library video).
+2. Build the LFMTools iOS target to the device (Xcode Beta 5), scheme
+   arguments: `--scenario moments --voice --autorun --backend apple`.
+   First launch fires the Photos / mic / speech permission prompts —
+   accept before the take.
+3. Speak the four beats. EN: "Find the moment the dog appears." /
+   "Jump to that moment." / "Keep only that moment." / "Export it."
+   JA: 「犬が出てくる瞬間を探して。」/「その瞬間にジャンプして。」/
+   「その瞬間だけ残して。」/「**動画を**書き出して。」 — the bare
+   「書き出して。」routes away from export (the video pack's measured
+   lesson holds in this room too).
+4. Record via QuickTime device mirroring. Retries per the playbook
+   rule. Known JA wart: beat 1's spoken answer sometimes hedges after
+   a boundary check misfire — the chain still lands; retake for a
+   clean bubble.
+5. The Mac take (moment-seek-real-demo.mp4) demotes to the thread's
+   second tweet — the "how" shot.
 
 ### C. Bench backport (bench/stage parity)
 
