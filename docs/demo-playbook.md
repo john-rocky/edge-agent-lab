@@ -326,26 +326,44 @@ A/B the ROADMAP promises: labels-only vs labels+CLIP hit rate on the
 same footage set, same beats. This is where "find the goal" starts
 working on footage with no scoreboard.
 
-**Readiness, audited 2026-08-21 — the weights are the lane's first
-step, not its assumption.** The ROADMAP said `clip` lives in the model
-repo; nothing on this machine holds CLIP/SigLIP/MobileCLIP weights in
-any loadable format (no .mlpackage, .mlmodelc, .tflite, .litertlm,
-.onnx, .pte, .aimodel). What exists is the conversion path
-(`coreai-models/models/clip/export.py`, `executorch-models/convert/
-export_clip.py` plus its two model cards) and a remote pointer
-(`coreai-kit` `ModelID.clipViTB32` → a HF repo, never fetched — the
-CoreAIKit model cache has a dozen other models and no CLIP). The
-runtime half is in better shape than the weights: `coreai-kit`'s
-`CoreAIKitVision/ImageTextEncoder.swift` already encodes both towers
-(`encode(image:)` / `encode(text:)` + `cosineSimilarity`) against a
-bundle of one .aimodel plus tokenizer.json, with a real BPE
-`CLIPTokenizer.swift` beside it — but lfm-tools-ios has no dependency
-on CoreAIKit today. So the order is: (1) produce a bundle (fetch or
-export both towers — the text tower is the half usually missing, and
-it is the half a text query needs), (2) prove `ImageTextEncoder` on
-one journey.mp4 frame outside the app, (3) then wire the rung and run
-the A/B. Vision's feature print is not a shortcut here: it compares
-image to image only, and nothing bridges it to a text query.
+**Readiness, corrected 2026-08-21 (user) — the rung is a dependency
+line, not a model project.** An earlier audit here searched the local
+disk, found no CLIP weights, and wrote that the weights were the lane's
+first step. That was wrong, and wrong in the way this repo's own rule
+warns about: absent from *this disk* is not absent. The weights are
+published, converted by us, on Hugging Face —
+`mlboydaisuke/clip-vit-base-patch32-CoreAI-official` (fp16 static
+.aimodel + tokenizer.json, 305 MB), plus
+`mlboydaisuke/CLIP-ViT-B32-ExecuTorch` (both towers as .pte, CoreML and
+XNNPACK variants) and `mlboydaisuke/clip-vit-b32-litert` (image encoder
+.tflite with *precomputed* label embeddings — classification shape, no
+runtime text tower, so not the one for free-text queries).
+
+The CoreAI bundle is the one to use, and it is already the exact shape
+`coreai-kit`'s `ImageTextEncoder` consumes — that class **downloads
+this repo itself**:
+
+```swift
+let encoder = try await ImageTextEncoder()
+let v = try await encoder.encode(text: "a dog on the beach")
+```
+
+One graph carries both towers: inputs `pixel_values` [1,3,224,224] and
+`input_ids`/`attention_mask` [3,77]; outputs `image_embeds` [1,512] and
+`text_embeds` [3,512], both L2-normalized, so cosine is a dot product
+and the text side is *batched three at a time* — size the
+model-expanded prompt set to that. The export deliberately pads text to
+the full 77-token context so free-text queries work, which is precisely
+the half that was called "usually missing". ~3.7 ms per image on the
+ANE (M4 Max, fp16); needs iOS 27 / macOS 27, which is already this
+app's floor, and the CoreAI framework is absent from the Simulator SDK,
+so this rung is device-and-Catalyst only.
+
+So the order is: (1) add CoreAIKit as a package dependency to
+lfm-tools-ios (it has none today), (2) prove `ImageTextEncoder` on one
+journey.mp4 frame, (3) wire it behind `search_frames` at the same ≤90
+samples and run the A/B. Vision's feature print remains no shortcut: it
+compares image to image only.
 
 ### F. Session hygiene for implementation sessions
 
