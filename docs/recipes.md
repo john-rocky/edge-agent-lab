@@ -602,7 +602,21 @@ present had seeked there. The model does not want *that tool*; it wants
 something to do after an answer. So the lever is never a better answer
 and rarely a better sentence: it is leaving nothing in the room worth
 calling, and then designing for where the slot refills, because it
-will. (Check the attribution before crediting your change: a spurious
+will.
+
+The cheapest reading of "design for where it refills" is a free
+occupant, and that was tested and is wrong. A no-argument `done` tool
+returning one word, added to the pack and to nothing else, was called
+**0 times in 92 cases across two rounds** while sitting in every run
+record. The slot does not take just any occupant: the ritual feeds on
+usefulness, and a result no later sentence can be built on is not a
+candidate — where the slot did refill, it refilled with a tool that
+comes back with a frame. A viable occupant has to be useful *and*
+harmless, which is a much harder tool to write than a sink. One caveat
+on the instrument before anyone repeats this: a bench that scores
+`called == expected` fails a trailing sink call exactly as it fails a
+trailing check, so a sink can measure there as neutral or costly and
+never as a saving. (Check the attribution before crediting your change: a spurious
 set_clip_speed vanished from the same nine runs and turned out to be a
 Japanese-input habit visible in the bench with the full pack present.)
 
