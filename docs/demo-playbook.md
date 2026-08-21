@@ -203,3 +203,11 @@ once they recur)
   (en_JP): explicit recognizer fallback chain, explicit fixture voices.
 - **Scout, then word.** Never write a beat before reading what the
   index actually produced for that exact footage.
+- **Detector rows start late — snap them to the scene boundary.** The
+  animal detector first fired ~2 s after the cut that opens the dog
+  scene, and the seek visibly missed the scene's head. "The moment" a
+  person means is the scene containing the detection: walk the row
+  start backward while the classifier's scene signature still matches
+  (Jaccard ≥ 0.5), capped at 4 s. The find→**jump**→cut→export arc is
+  the canonical four beats now — the jump is the "found it" shot, and
+  it must land on the cut, not on the detector's first confident frame.
