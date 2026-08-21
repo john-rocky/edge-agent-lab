@@ -500,3 +500,40 @@ check_moment 19 cases / 21 calls, with all 24 tools in the run record: the
 flag changes nothing the bench measures. That is the top of the band
 rather than a move (r38 17/46 and 15/40; r39, r39b and r40 all 16/46), and
 the ritual sits where it has sat since r39.
+
+r42 is the language ruling's round, and the ruling fails. The stage now
+adds one line of its own on top of whatever pack it assembles — "Answer in
+the language the request was made in." — at `StageModel`'s single session
+site, above `stateInstructions` rather than inside it, so
+`ToolBox.momentsInstructions` stays byte-identical to what r38–r41
+measured and the bench keeps its control. Nine more stage runs on
+journey.mp4, the same three beats and the same 23-tool room: **1 of the 6
+JA runs answered in Japanese**, which is exactly the 1 of 6 the line was
+written to fix, against the 8 of 12 the rounds with the check in the room
+managed with no language instruction at all. The sentence did reach the
+model — the running process loaded the dylib that carries it and the
+append is unconditional — so what is refuted is the instruction, not the
+wiring: on this model, on this pack, the answer's language is not
+something the instruction block decides. (Asked point blank in a throwaway
+run, the model denied having any language instruction, which is worth what
+any model's account of its own prompt is worth: nothing alone, suggestive
+beside the behaviour.) The rest of the round is the cleanest the take has
+measured — **all nine ran search_frames → seek 12 s → keep_range 12–19 →
+export, 25.3 s to a 7.000 s file every time, ffprobed, with no spurious
+call in any of the nine** — and **every beat-1 seek landed on the cut at
+12 s**, where r41's en-2 ran on to 19 s: that stray was a coin, and the
+found-it shot stays on the sentence that asks for it. Beat 1 named the
+range in 8 of 9 (en-2 said "at 12 seconds") and no JA beat 1 doubted its
+own hit. Shippable without a retake — right tool per beat, right numbers,
+beat 1 naming 12–19 and trusting the hit, bubbles in the beat's language —
+**1 of 6 JA and 2 of 3 EN**, the JA number being the language line's
+alone. Six runs and three runs are thin. The bench re-ran unchanged on the
+same binary: **16/46, 13 of the old 40, JA 7 / EN 9, check_moment 18 cases
+/ 24 calls**, the same 24-tool list in the run record — the band's floor
+rather than a move, and the ritual where it has sat since r39. The JSONL
+carries no instruction text, so the no-leak claim is verified from the
+source instead: the pack literal hashes identical to r41's, `Sources/Bench`
+untouched, `answerLanguageLine` named at exactly two lines and both inside
+the stage's session assembly — and the bench's own JA cases answered in
+Japanese 7 of 23 times, inside the 4–7 the unchanged instructions have
+produced every round.
