@@ -461,3 +461,42 @@ be read while the other is in flight.
   only that one changed an answer: the rest are digits split out of "1-0"
   or "440.5" in calls that had already matched an option by name. The floor
   was a real hole and a small one, which is what a parity fix should be.
+
+r41 is the control for the take lane's first product-side change, and the
+change is one flag: the stage learned `--without <names>`, which cuts the
+named tools out of whatever pack `--scenario` chose — the bench's `--only`
+turned around, for the other lane, because a take's room is a product
+decision where the bench's toolset is a measurement. The flagship now
+launches with `--without check_moment` and says so in its own log
+(`TOOLS 23 — without check_moment`); a name the pack does not hold is an
+error the way `--only`'s is, one ERROR line and no beats (verified with a
+bogus name). Nine stage runs on journey.mp4 measured the emptier room, six
+JA and three EN, each launched with `open -n` and the app quit between
+them: **all nine ran the whole arc — search_frames → seek 12 s →
+keep_range 12–19 → export, 25.3 s to a 7.000 s file every time, ffprobed
+rather than believed from the toast** — and every failure mode the check
+brought with it is gone. No beat-1 denial in nine runs, where three of the
+twelve check-in-the-room scouts denied their own search hit
+(「見つかりません」/「見ない」/"cannot be found"); no index sweep, where two
+of twelve swept; no spurious `set_clip_speed`, where two of twelve fired
+one; no beat-4 miss, where one of twelve went to `auto_captions`. What the
+room did not lose is the second call: **beat 1 grew a `seek` in 9 of 9
+runs**, the model jumping to the moment before it is asked to, which
+spends beat 2's money shot a beat early — and en-2's stray seek ran on to
+19 s, so its beat 2 landed on the scene's tail instead of the cut. The
+ritual moved rather than left; take away the tool that answers and the
+slot fills with the next tool that can, which is the plateau heuristic
+read from the other side. The other wart is language: 1 of the 6 JA runs
+answered in Japanese where 8 of 12 did with the check in the room, and on
+a voice take the bubble is the whole muted narrative. Counting a take a
+person could ship without a retake — right tool per beat, right numbers,
+beat 1 naming 12–19 and trusting the hit, bubbles in the beat's language —
+**1 of 6 JA and 2 of 3 EN**, and none of the nine if the beat-1 seek is
+counted disqualifying. Six runs and three runs are thin samples; the
+aggregate belongs to the configuration and none of this is a case list.
+r41 itself re-ran the bench unchanged on the same binary — the bench never
+passes `--without` — and the row is 18/46, 17 of the old 40, JA 7 / EN 11,
+check_moment 19 cases / 21 calls, with all 24 tools in the run record: the
+flag changes nothing the bench measures. That is the top of the band
+rather than a move (r38 17/46 and 15/40; r39, r39b and r40 all 16/46), and
+the ritual sits where it has sat since r39.
