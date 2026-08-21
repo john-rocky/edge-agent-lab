@@ -357,3 +357,60 @@ trio as the EN.
   Mac model answers 20 of 23 JA cases in English. The cases accept both
   languages' keywords, so it costs nothing here — but a voice take on
   the phone is a spoken answer, and that is a take-lane question.)
+
+r39 is spec D2's round, both fixes in both checks: 「いいえ」 joins the
+negation markers (with 「ません」, the polite negation ありません/いません
+are two instances of, and the kanji 無い/無し), and a check whose
+presence test has nothing it could ever test with now says it cannot
+tell instead of voting no.
+
+- **16/46, 13 of the old 40 — the band, one run.** r38 was 17/46 and
+  15/40; r37 and r37b were 13/40 twice before it. Nothing here is a
+  regression and nothing here is a win: the aggregate belongs to the
+  config, and this is one round of it. What moved outside the band is
+  the ritual. check_moment went from 15 cases / 15 calls to 19 / 20,
+  its highest yet against r35's 7 in 7 — and nothing in this diff
+  touches the tool description or the stop contract, since the check
+  only ever speaks after it has been called. The ritual grows on its
+  own.
+- **The はい/いいえ partition fires; the cannot-evaluate branch never got
+  the chance.** Replaying every check call of both rounds through the
+  old matcher and the new one, exactly one verdict changes, and it is
+  the same case in each: m-ja-check-2's 「はい」/「いいえ」 pair stops
+  reading all-positive and answers 「いいえ」 where it answered "none of
+  those". The blindness branch fired zero times in twenty calls — for
+  a reason worth having measured, which is that the model does not hand
+  the check a Japanese question. It words the check in English even on
+  JA cases (16 of 20 calls in r39, 10 of 15 in r38), and on the four
+  occasions it did ask in Japanese it wrote its options as timestamps,
+  「320–330 s」 — digits being exactly the ASCII the truths could hold,
+  so the presence test counts as runnable and reports a real absence.
+  The ruling is right about the failure; the failure needs a check the
+  model asks in Japanese *and* answers with Japanese options. That is
+  the real-footage shape, not the canned world's — a JA question meeting
+  an English label shelf, which is where the alias table is the only
+  bridge.
+- **m-ja-check-2 still fails, one layer down, and the failure is now
+  honest.** With the partition in, the check evaluates the single
+  content word the model's English question left it — "scene", against
+  truths reading "penalty, spot, ペナルティ, PK, goal" — finds it absent,
+  and answers 「いいえ」. The model says "The PK scene is not at 460
+  seconds" about a frame the penalty row covers. The verdict is
+  evaluated rather than blind now, and still wrong: the question the
+  model wrote threw the noun away and kept the wrapper. Two of the
+  three JA check mirrors also moved the asked time again (442 s for
+  460, 214 s for 100) — on JA input a timestamp in the request stays a
+  suggestion.
+- **The JA beat 2 split_clip did not recur — two scouts, neither
+  showed it.** Two JA runs on journey.mp4 and one EN, all three the
+  same arc: `MOMENTS check at 12 s sits on a cut — keeping the forward
+  scene: 12.6 s, 13.2 s, 13.8 s`, the evidence tail `cat, dog, liquid,
+  water, water body, ocean`, beat 1 trusting the search hit in both
+  languages, a bare seek to 12 s, keep_range 12–19 s, 25.3 s → 7 s.
+  r38's split_clip was a round, not a rule, and there is nothing to
+  reword. What the scouts caught instead is a beat 4 hole the video
+  pack already knew: 「動画を書き出して。」 went to auto_captions in the
+  first JA run — "could not transcribe: Operation Stopped", after which
+  the model declined to export at all — and to export_video cleanly in
+  the second. The bare 書き出す is ambiguous to the router in a way
+  "Export it." is not; EN exported 7 s at 1280×720 on the first try.
