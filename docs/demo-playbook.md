@@ -310,6 +310,33 @@ returns a *correctly evaluated* wrong no, and the 3-character floor in
 search tokenizer keeps a 2-char token when it carries a digit, and the
 two tokenizers should agree.
 
+**Both closed 2026-08-21, and the replay says neither was costing a
+verdict.** The floor went in r40 (one verdict, m-ja-check-2); what was
+left of tokenizer parity was the *boundary*, and the wrapper noun was
+untouched. Wrapper nouns now have a list of their own, read just before
+the presence test — scene, moment, part, section, place, spot, thing,
+area, 場面, 瞬間, 部分, 箇所, ところ — and a question with no surviving
+content word outside it falls to the same cannot-tell branch: a question
+left holding only wrappers is being tested for a word it never asked
+about, so the absence is real and the verdict is not. They are their own
+list rather than more stopwords, because a stopword is dropped and the
+rest of the question still carries it, while an all-wrapper question has
+nothing left to carry. And `contentWords` now splits where search splits
+(spaces and ` ,.!?'"「」『』、。`) instead of on every non-alphanumeric,
+so "1-0" reaches the truths whole instead of as "1" and "0". Replayed
+through both matchers over all 120 recorded check calls of r38–r42,
+**not one verdict changes**: the wrapper gate never fires, because a
+question whose every content word is a wrapper is not a question this
+model writes, and the boundary retokenizes 44 of the 120 without moving
+any of them, because every call that names "1-0" also offers it as an
+option and the direct-option match answers first. What the boundary buys
+shows only on constructed input, and it is the opposite of what the gap
+above predicted: the hole was a false *yes*, not a missing match — "Is
+the score 5-0?" at 300 s used to answer yes, because "0" is a substring
+of the truth "1-0", and now answers no. Two fixes, 120 calls, zero
+movement — which is what a parity fix should look like, and the reason
+to replay before believing one earned a round.
+
 And the beat-2 worry was a coin, not a rule: `split_clip` did not
 recur in any of three scouts (two JA, one EN), all of which ran
 seek 12 → keep_range 12–19 → 25.3 s becomes 7 s. Nothing to reword
@@ -414,7 +441,16 @@ Raw run in `ios/bench/cliprung/results/journey-2026-08-21.md`.
   case 4 ("there isn't one") and still gets the candidate it needs to
   act on a real find. This costs some decisiveness on genuine hits and
   buys immunity to footage whose scale we have not measured, which is
-  every footage but this one.
+  every footage but this one. **Shipped and re-measured 2026-08-21**:
+  `clipSearch` renders that sentence and no other, the harness now
+  prints what `search_frames` actually answers for all 11 queries, and
+  every rate in the file above is byte-identical to the run before it —
+  the ruling is wording, not retrieval, so a moved rate would have been
+  a bug in the diff. Six queries open with "found" off the label shelf,
+  two open with the negative and a candidate (the puppy at 0.33, the
+  skyline at 0.29), and the two should-miss queries the threshold
+  refuses — "snow" at 0.199, "a person walking away" at 0.265 — still
+  return the shelf's plain "no moments found", which is case 4 intact.
 - **Labels-first is what ships, and it is measurably the best arm.**
   Arm A's rows, arm B only where arm A returned nothing: 8/8 at every
   threshold from 0.18 to 0.27, and at 0.27 CLIP contributes no false

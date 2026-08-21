@@ -619,3 +619,42 @@ puppy at 12–13 s, and CLIP scores "a cat" *higher* on that scene than "dog".
 The next round is the first one with a device: the same 11 queries through
 `search_frames` on the phone, and beat 1 worded for a moment the shelf
 cannot name.
+
+r44 closes spec D2's last two holes and gives the CLIP rung the verdict word
+spec E ruled for it, and the honest headline is that the check half buys
+nothing a bench can see. Wrapper nouns — scene, moment, part, section, place,
+spot, thing, area and the JA five — are a list of their own now, read just
+before the presence test: a question with no content word outside that list
+falls to the cannot-tell branch, because an all-wrapper question is being
+tested for a word it never asked about, so its absence is real and its
+verdict is not. They are not more stopwords, since a stopword is dropped and
+the rest of the question still carries it. `contentWords` also splits where
+search splits (spaces and ` ,.!?'"「」『』、。`) instead of on every
+non-alphanumeric, so "1-0" reaches the truths whole instead of as "1" and
+"0" — both changes in both checks, textually parallel as ever. **Replayed
+through both matchers over all 120 recorded check calls of r38–r42, not one
+verdict moves.** The gate never fires, because a question whose every content
+word is a wrapper is not one this model writes; the boundary retokenizes 44
+of the 120 and moves none of them, because every call that names "1-0" also
+offers it as an option and the direct-option match answers first. What the
+boundary buys shows only on constructed input, and it inverts the gap's own
+prediction: the hole was a false *yes*, not a missing match — "Is the score
+5-0?" at 300 s used to answer yes, "0" being a substring of the truth "1-0",
+and answers no now. The CLIP half is spec E made literal: a CLIP-sourced row
+can no longer open with "found" whatever its score, but with the label
+shelf's own negative and the window named as a candidate — `no labelled
+moment matches "a puppy running on the sand" — the closest-looking window is
+12–19 s (visual similarity 0.33, not a confirmed sighting)`. The harness
+re-ran on the same 11 queries with that rendering printed beside the rates,
+and **every rate is byte-identical to the run before it**: six queries open
+with "found" off the shelf, two with the negative and a candidate (0.33 and
+0.29), and the two should-miss queries the 0.27 gate refuses keep the plain
+"no moments found" that case 4 needs. Both builds are clean and the rung is
+still device-only — "closest-looking window" is in the iOS dylib and absent
+from the Catalyst one. The bench row is **18/46, 16 of the old 40, JA 6 /
+EN 12, check_moment 15 cases / 17 calls**, the top of the band it has sat in
+since r38 and flat as expected. The one number that moved is the ritual, from
+r41's 19 cases and r42's 18 to 15 — and it is one run, not the diff:
+replayed through both matchers, all 17 of r44's own check calls return
+exactly what the pre-diff matcher would have returned, so not a character of
+what the model read this round came from the change.

@@ -330,6 +330,77 @@ for margin: Float in [0.02, 0.04, 0.06, 0.08] {
     print("| \(f2(margin)) | \(hit)/\(a.answerable) | \(fp)/\(misses) |")
 }
 
+// MARK: - The answer the model actually reads
+
+// The rates above are retrieval; this is the sentence. Spec E's ruling is that
+// the CLIP rung may rank but must not claim, so its row can never open with a
+// presence verb — the model has to keep "there isn't one" as an available
+// answer (bench case 4) while still getting a candidate to act on. Rendered
+// here with `MomentIndexBox.searchFrames`'s own wording on both paths, so the
+// A/B shows what the phone would say, not only where it would seek.
+//
+// Nothing below feeds the rates: it re-renders the same rows.
+
+/// `VideoEditBox.f` — the app drops a trailing .0, so a window reads "12–19 s".
+func fa(_ v: Double) -> String {
+    let r = (v * 10).rounded() / 10
+    return r == r.rounded() ? String(Int(r)) : String(format: "%.1f", r)
+}
+
+/// `MomentIndexBox.clipSearch`'s window merge, keeping each window's peak —
+/// strongest first, because the rendering names one window and ranks the rest.
+func clipWindows(_ scores: [Float], threshold: Float) -> [(row: Row, peak: Float)] {
+    var out: [(row: Row, peak: Float)] = []
+    for i in samples.indices where scores[i] >= threshold {
+        let time = samples[i].time
+        if var last = out.last, time - last.row.end <= step * 3.2 {
+            last.row.end = time + step / 2
+            last.peak = max(last.peak, scores[i])
+            out[out.count - 1] = last
+        } else {
+            out.append((Row(start: max(0, time - step / 2), end: time + step / 2, text: "clip"), scores[i]))
+        }
+    }
+    return out.sorted { $0.peak > $1.peak }
+}
+
+/// `MomentIndexBox.searchFrames`, verbatim in shape: the label rows if the
+/// shelf speaks, then the CLIP candidate, then the shelf's own negative.
+func searchFramesAnswer(_ q: Int, threshold: Float) -> String {
+    let rowsA = labelSearch(rows: index.visual, query: queries[q].text)
+    let negative = "no moments found for \"\(queries[q].text)\" in the picture"
+    if !rowsA.isEmpty {
+        let lines = rowsA.prefix(8).map { "\(fa($0.start))–\(fa($0.end)) s — \($0.text)" }
+        return "found \(rowsA.count) moment\(rowsA.count == 1 ? "" : "s"): "
+            + lines.joined(separator: "; ")
+    }
+    let windows = clipWindows(cosines[q], threshold: threshold)
+    guard let best = windows.first else { return negative }
+    var answer =
+        "no labelled moment matches \"\(queries[q].text)\" — the closest-looking window is "
+        + "\(fa(best.row.start))–\(fa(best.row.end)) s "
+        + "(visual similarity \(String(format: "%.2f", best.peak)), not a confirmed sighting)"
+    if windows.count > 1 {
+        answer += " · other close-looking windows: "
+            + windows.dropFirst().prefix(4).map {
+                "\(fa($0.row.start))–\(fa($0.row.end)) s (\(String(format: "%.2f", $0.peak)))"
+            }.joined(separator: ", ")
+    }
+    return answer
+}
+
+print("")
+print("### what search_frames answers at the shipped threshold (\(f2(0.27)))")
+print("")
+print("| query | verdict word | the row the model reads |")
+print("|---|---|---|")
+for q in queries.indices {
+    let answer = searchFramesAnswer(q, threshold: 0.27)
+    let word = answer.hasPrefix("found") ? "found (labels)"
+        : (answer.hasPrefix("no labelled moment matches") ? "no + candidate (CLIP)" : "no (labels)")
+    print("| \(queries[q].text) | \(word) | \(answer) |")
+}
+
 // The union the rung actually ships as: labels first, CLIP where labels are
 // silent — which is what "labels+CLIP" means in the ROADMAP's promise.
 print("")
