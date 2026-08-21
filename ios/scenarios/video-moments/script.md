@@ -658,3 +658,39 @@ r41's 19 cases and r42's 18 to 15 — and it is one run, not the diff:
 replayed through both matchers, all 17 of r44's own check calls return
 exactly what the pre-diff matcher would have returned, so not a character of
 what the model read this round came from the change.
+
+r45 tests the ritual's sink, and the sink is ignored. Canon's reading of the
+answering slot — the model "does not want *that tool*; it wants something to
+do after an answer", so design for where the slot refills — had no
+measurement under it, and the cheapest design it implies is a free occupant:
+the moments pack gained one tool and nothing else. `done`, no arguments,
+returning the neutral "acknowledged", described as what it is ("Call when the
+request has been carried out and nothing is left to do. Takes no arguments
+and changes nothing"). A tool in the room and never a clause in the preamble,
+because r34 already measured what a stop sentence costs —
+`ToolBox.momentsInstructions` stays byte-identical to what r38–r44 read, so
+the tool list, 24 → 25, is the round's only variable. Two runs of the one
+config, the aggregate belonging to the config: **r45 19/46, 16 of the old 40,
+JA 7 / EN 12, check_moment 16 cases / 18 calls; r45b 18/46, 14 of the old 40,
+JA 7 / EN 11, check_moment 21 cases / 23 calls** — inside the band on both
+ends, and r45b's 21 ritual cases is its high-water mark rather than a
+retreat. **`done` was called 0 times in 92 cases.** It was in the room: every
+row records `tools: 25` and the run line ends `…,seek,keep_range,done`. Index
+sweeps — a second or third search after one that already returned rows,
+counted the same way over the baselines — read r41 3 cases / 5 calls, r42
+7 / 13, r44 7 / 13, against r45's 7 / 13 and r45b's 4 / 7: nothing was
+displaced, because nothing was taken. Nothing was spent either — no case
+dropped work the request asked for, and the two chain cases exported in
+neither round, exactly as in r39–r44 (bench export_video has been 0 since
+r38, sink or no sink), so the r34 failure mode did not reappear in a new
+hat. The negative is clean, and it sharpens the heuristic it came from
+instead of refuting it: **the ritual feeds on usefulness, and `done` is
+useless by construction** — it returns one word no later sentence can be
+built on. The slot that refilled with `seek` when check_moment left the
+take's room refilled with a tool that comes back with a frame; a token is
+not a candidate for it. One thing this round could not have shown even had
+the sink been used: the runner scores `called == expected` exactly, so a
+trailing `done` fails a case precisely as a trailing check_moment does — here
+a sink can only be measured as neutral or costly, never as a saving. Testing
+the idea any further means scoring a terminal `done` as allowed, or measuring
+it on takes, and that is a decision to take rather than a knob to turn.

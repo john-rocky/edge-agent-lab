@@ -657,6 +657,26 @@ once they recur)
   three JA bench cases with the check present — it is a JA-input stray
   of the model's, not something the ruling bought. Before crediting a
   change to your change, look for it where your change was not made.)
+  **A harmless sink is not what it refills with — r45, and the idea is
+  dead as designed.** The cheapest thing "design for where the slot
+  refills" implies is a free occupant, so the moments pack got one more
+  tool and nothing else: `done`, no arguments, returning "acknowledged",
+  described as the thing to call when the request has been carried out
+  and nothing is left to do — a tool in the room, never a clause in the
+  preamble (r34 measured what a stop sentence costs), with
+  `momentsInstructions` byte-identical so the list, 24 → 25, was the only
+  variable. Two bench rounds, 92 cases, **0 calls**, with the tool named
+  in every run record. Score and ritual both stayed in their band (19/46
+  and 18/46; check_moment 16 and 21 cases against 15–19 before), and
+  index sweeps moved no further than they move between two runs of one
+  config (7 cases/13 calls and 4/7, against 3/5, 7/13, 7/13 for
+  r41/r42/r44). So the slot does not take just any occupant: the ritual
+  feeds on usefulness, and a result no later sentence can be built on is
+  not a candidate — where the slot did refill it refilled with `seek`,
+  which comes back with a frame. Read the instrument before repeating
+  this: the bench scores `called == expected`, so a trailing sink call
+  fails a case exactly as a trailing check does, and a sink can be
+  measured here as neutral or costly but never as a saving.
 - **The aggregate belongs to the config; the case list is a coin.** Two
   runs of one config scored identically on the old 40 and made the same
   number of check calls — while 7 of those 40 flipped verdict and 3 of
