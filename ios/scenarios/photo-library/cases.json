@@ -1,0 +1,824 @@
+[
+  {
+    "id": "l-en-when-1",
+    "input": "Show me the photos from last summer.",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "when": {
+            "contains": "summer"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-when-2",
+    "input": "What did I take last month?",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "when": {
+            "contains": "month"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-where-1",
+    "input": "Which photos did I take in Kyoto?",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "place": {
+            "contains": "kyoto"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-album-1",
+    "input": "Show me the Kyoto trip album.",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "album": {
+            "contains": "kyoto"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-fav-1",
+    "input": "Show me my favourites.",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "favorites_only": {
+            "equals": "true"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-look-1",
+    "input": "Find the beach photos.",
+    "lang": "en",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "search_photos",
+        "args": {
+          "query": {
+            "contains": "beach"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-look-2",
+    "input": "Where's the photo of the fireworks?",
+    "lang": "en",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "27",
+      "August 15",
+      "2026-08-15"
+    ],
+    "expected": [
+      {
+        "tool": "search_photos",
+        "args": {
+          "query": {
+            "contains": "firework"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-look-3",
+    "input": "Are there any photos of a cat?",
+    "lang": "en",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "no photos",
+      "not",
+      "none",
+      "n't"
+    ],
+    "expected": [
+      {
+        "tool": "search_photos",
+        "args": {
+          "query": {
+            "contains": "cat"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-blur-1",
+    "input": "Which photos came out blurry?",
+    "lang": "en",
+    "layer": "sharpness",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_blurry_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-en-text-1",
+    "input": "Find the photo that says Q1 ROADMAP.",
+    "lang": "en",
+    "layer": "text",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos_with_text",
+        "args": {
+          "text": {
+            "contains": "q1"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-text-2",
+    "input": "Where are the receipt photos?",
+    "lang": "en",
+    "layer": "text",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos_with_text",
+        "args": {
+          "text": {
+            "contains": "receipt"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-face-1",
+    "input": "Find the photos with Mei in them.",
+    "lang": "en",
+    "layer": "faces",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos_of_person",
+        "args": {
+          "name": {
+            "contains": "mei"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-dup-1",
+    "input": "Are there any duplicate photos?",
+    "lang": "en",
+    "layer": "duplicates",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_duplicates"
+      }
+    ]
+  },
+  {
+    "id": "l-en-check-1",
+    "input": "In photo 25, is the dog on the grass or on the sand?",
+    "lang": "en",
+    "layer": "vlm",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "grass"
+    ],
+    "expected": [
+      {
+        "tool": "check_photo",
+        "args": {
+          "id": {
+            "number": 25,
+            "tol": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-check-2",
+    "input": "Do I have any photos with a dog in them?",
+    "lang": "en",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "3",
+      "three",
+      "yes"
+    ],
+    "expected": [
+      {
+        "tool": "search_photos",
+        "args": {
+          "query": {
+            "contains": "dog"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-compound-1",
+    "input": "Show me the beach photos from last summer.",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "when": {
+            "contains": "summer"
+          }
+        }
+      },
+      {
+        "tool": "search_photos",
+        "args": {
+          "query": {
+            "contains": "beach"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-album-2",
+    "input": "Put the blurry ones in an album called Cleanup.",
+    "lang": "en",
+    "layer": "sharpness",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_blurry_photos"
+      },
+      {
+        "tool": "add_to_album",
+        "args": {
+          "album": {
+            "contains": "cleanup"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-fav-2",
+    "input": "Favourite the fireworks photo.",
+    "lang": "en",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "search_photos",
+        "args": {
+          "query": {
+            "contains": "firework"
+          }
+        }
+      },
+      {
+        "tool": "favorite_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-en-delete-1",
+    "input": "Delete the duplicates.",
+    "lang": "en",
+    "layer": "duplicates",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_duplicates"
+      },
+      {
+        "tool": "delete_photos",
+        "args": {
+          "confirm": {
+            "equals": "false"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-delete-2",
+    "input": "Yes, delete them.",
+    "lang": "en",
+    "layer": "act",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: 4 from near-identical pairs: #2 2025-07-05 Kamakura — beach, sea, surfboard; with Ken; #3 2025-07-05 Kamakura — beach, sea, surfboard; with Ken; #17 2026-02-08 Tokyo, Work — whiteboard, indoor; text \"Q1 ROADMAP — ship by Mar 31\"; #18 2026-02-08 Tokyo, Work — whiteboard, indoor; text \"Q1 ROADMAP — ship by Mar 31\". Awaiting confirmation: delete 4 photos.",
+    "expected": [
+      {
+        "tool": "delete_photos",
+        "args": {
+          "confirm": {
+            "equals": "true"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-undo-1",
+    "input": "Actually, undo that.",
+    "lang": "en",
+    "layer": "rail",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: 1 from \"fireworks\" in the picture: #27 2026-08-15 Kamakura — beach, sea, fireworks, night; favourite. Last change: favourites.",
+    "expected": [
+      {
+        "tool": "undo_last"
+      }
+    ]
+  },
+  {
+    "id": "l-en-ask-1",
+    "input": "Find the photos with this person in them.",
+    "lang": "en",
+    "layer": "ask",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expectAsk": true,
+    "expected": []
+  },
+  {
+    "id": "l-en-noop-1",
+    "input": "How many photos do I have?",
+    "lang": "en",
+    "layer": "state",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "28"
+    ],
+    "expected": []
+  },
+  {
+    "id": "l-en-noop-2",
+    "input": "Which albums do I have?",
+    "lang": "en",
+    "layer": "state",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "Kyoto"
+    ],
+    "expected": []
+  },
+  {
+    "id": "l-en-open-1",
+    "input": "Open the first one.",
+    "lang": "en",
+    "layer": "nav",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: 3 from out of focus: #5 2025-08-03 Kamakura — beach, sand, dog; out of focus; #9 2025-10-13 Kyoto, Kyoto trip — street, lantern, night; out of focus; #21 2026-04-05 Osaka — cherry blossom, park; out of focus.",
+    "expected": [
+      {
+        "tool": "open_photo",
+        "args": {
+          "id": {
+            "number": 5,
+            "tol": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-en-chain-1",
+    "input": "Find last summer's photos and put them in an album called Summer.",
+    "lang": "en",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos",
+        "args": {
+          "when": {
+            "contains": "summer"
+          }
+        }
+      },
+      {
+        "tool": "add_to_album",
+        "args": {
+          "album": {
+            "contains": "summer"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-ja-when-1",
+    "input": "去年の夏の写真を見せて。",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-when-2",
+    "input": "先月撮った写真は?",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-where-1",
+    "input": "京都で撮った写真はどれ?",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-album-1",
+    "input": "京都旅行のアルバムを見せて。",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-fav-1",
+    "input": "お気に入りの写真を見せて。",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-look-1",
+    "input": "海の写真を探して。",
+    "lang": "ja",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "search_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-look-2",
+    "input": "花火の写真ってどこだっけ?",
+    "lang": "ja",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "27",
+      "8月15日",
+      "2026-08-15",
+      "August 15"
+    ],
+    "expected": [
+      {
+        "tool": "search_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-look-3",
+    "input": "猫の写真ってある?",
+    "lang": "ja",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "ありません",
+      "なさそう",
+      "見つかり",
+      "ない",
+      "no photos",
+      "not"
+    ],
+    "expected": [
+      {
+        "tool": "search_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-blur-1",
+    "input": "ピントが甘い写真はどれ?",
+    "lang": "ja",
+    "layer": "sharpness",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_blurry_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-text-1",
+    "input": "「Q1 ROADMAP」と書いてある写真を探して。",
+    "lang": "ja",
+    "layer": "text",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos_with_text"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-text-2",
+    "input": "レシートの写真どこ?",
+    "lang": "ja",
+    "layer": "text",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos_with_text"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-face-1",
+    "input": "メイが写ってる写真を探して。",
+    "lang": "ja",
+    "layer": "faces",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos_of_person"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-dup-1",
+    "input": "同じような写真が重複してない?",
+    "lang": "ja",
+    "layer": "duplicates",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_duplicates"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-check-1",
+    "input": "25番の写真、犬は芝生の上?それとも砂の上?",
+    "lang": "ja",
+    "layer": "vlm",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "芝生",
+      "grass"
+    ],
+    "expected": [
+      {
+        "tool": "check_photo",
+        "args": {
+          "id": {
+            "number": 25,
+            "tol": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-ja-check-2",
+    "input": "犬が写ってる写真ってある?",
+    "lang": "ja",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "3",
+      "yes",
+      "はい",
+      "ある"
+    ],
+    "expected": [
+      {
+        "tool": "search_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-compound-1",
+    "input": "去年の夏の海の写真を見せて。",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      },
+      {
+        "tool": "search_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-album-2",
+    "input": "ブレてる写真を「整理」というアルバムに入れて。",
+    "lang": "ja",
+    "layer": "sharpness",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_blurry_photos"
+      },
+      {
+        "tool": "add_to_album"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-fav-2",
+    "input": "花火の写真をお気に入りにして。",
+    "lang": "ja",
+    "layer": "index",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "search_photos"
+      },
+      {
+        "tool": "favorite_photos"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-delete-1",
+    "input": "重複してる写真を削除して。",
+    "lang": "ja",
+    "layer": "duplicates",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_duplicates"
+      },
+      {
+        "tool": "delete_photos",
+        "args": {
+          "confirm": {
+            "equals": "false"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-ja-delete-2",
+    "input": "うん、削除して。",
+    "lang": "ja",
+    "layer": "act",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: 4 from near-identical pairs: #2 2025-07-05 Kamakura — beach, sea, surfboard; with Ken; #3 2025-07-05 Kamakura — beach, sea, surfboard; with Ken; #17 2026-02-08 Tokyo, Work — whiteboard, indoor; text \"Q1 ROADMAP — ship by Mar 31\"; #18 2026-02-08 Tokyo, Work — whiteboard, indoor; text \"Q1 ROADMAP — ship by Mar 31\". Awaiting confirmation: delete 4 photos.",
+    "expected": [
+      {
+        "tool": "delete_photos",
+        "args": {
+          "confirm": {
+            "equals": "true"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-ja-undo-1",
+    "input": "やっぱり今のは取り消して。",
+    "lang": "ja",
+    "layer": "rail",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: 1 from \"fireworks\" in the picture: #27 2026-08-15 Kamakura — beach, sea, fireworks, night; favourite. Last change: favourites.",
+    "expected": [
+      {
+        "tool": "undo_last"
+      }
+    ]
+  },
+  {
+    "id": "l-ja-ask-1",
+    "input": "この人が写ってる写真を探して。",
+    "lang": "ja",
+    "layer": "ask",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expectAsk": true,
+    "expected": []
+  },
+  {
+    "id": "l-ja-noop-1",
+    "input": "写真は全部で何枚ある?",
+    "lang": "ja",
+    "layer": "state",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "28"
+    ],
+    "expected": []
+  },
+  {
+    "id": "l-ja-noop-2",
+    "input": "アルバムは何がある?",
+    "lang": "ja",
+    "layer": "state",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "answerContains": [
+      "京都",
+      "Kyoto"
+    ],
+    "expected": []
+  },
+  {
+    "id": "l-ja-open-1",
+    "input": "最初のを開いて。",
+    "lang": "ja",
+    "layer": "nav",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: 3 from out of focus: #5 2025-08-03 Kamakura — beach, sand, dog; out of focus; #9 2025-10-13 Kyoto, Kyoto trip — street, lantern, night; out of focus; #21 2026-04-05 Osaka — cherry blossom, park; out of focus.",
+    "expected": [
+      {
+        "tool": "open_photo",
+        "args": {
+          "id": {
+            "number": 5,
+            "tol": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "l-ja-chain-1",
+    "input": "去年の夏の写真を「サマー」というアルバムに入れて。",
+    "lang": "ja",
+    "layer": "metadata",
+    "state": "Library: 28 photos, 2025-06-14 to 2026-08-18. Albums: Family (4), Kyoto trip (6), Work (3). Places: Kamakura, Kyoto, Osaka, Sapporo, Tokyo. Today: 2026-08-21 (Friday). Selection: none.",
+    "expected": [
+      {
+        "tool": "find_photos"
+      },
+      {
+        "tool": "add_to_album"
+      }
+    ]
+  }
+]

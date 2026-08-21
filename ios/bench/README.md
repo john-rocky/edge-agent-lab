@@ -163,6 +163,15 @@ canned rows — the split-at-playhead competence one step further from the
 words), the find → keep_range → export chain, a forced-choice
 check_moment on a shortlisted frame, and a red-card miss whose honest
 run sweeps all three indexes and answers "not there".
+`photo-library`: 26 + 26 over 13 tools — the orchestrator thesis
+(ROADMAP), where the cost gradient *is* the tool list: metadata
+(find_photos), the picture index (search_photos), the face and OCR
+layers, two detectors (blurry, duplicates) and one per-photo
+forced-choice check over a canned camera roll of 28 photos. Each case
+carries a `layer` field the Swift runner ignores and `rounds.py` reads
+with `ROUNDS_CASES`, so a round reports not only how many cases passed
+but how many opened on the rung that could answer them cheapest — the
+number this pack exists for.
 
 ## What a JSONL line records
 

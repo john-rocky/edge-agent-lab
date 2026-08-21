@@ -316,6 +316,32 @@ both languages filled the right slot on the next run (pm, Mac,
 2026-08-20). The name fixed the slot and only the slot: the date inside
 it stayed wrong (see the units recipe on weekday arithmetic).
 
+## Every optional filter is another slot to be wrong in
+
+The photo-library pack routes between six finders — metadata, the picture
+index, faces, written text, blurry, duplicates — and its first four
+rounds put **44 to 47 of 52 opening calls on the right one**, in both
+languages, with no cost order stated anywhere. Almost everything it lost,
+it lost *inside* the one finder that carries four optional filters:
+`find_photos(when, place, album, favorites_only)`. "Which photos did I
+take in Kyoto?" arrived as `album: "Kyoto trip"` — the state listed the
+albums and not the places, so the model filled the slot from the
+vocabulary it had been handed — and, once the places were listed too, as
+`when: "in Kyoto"`. "Show me the beach photos from last summer" filled
+`place: "beach"`, then "sea", "coast", "shore": five calls, ending in
+"the library doesn't contain any beach photos from last summer", of which
+it contains five. "…and put them in an album called Summer" put the
+*destination* album into the finder's album filter. "Favourite the
+fireworks photo" opened with `find_photos(favorites_only: true)`.
+
+The tools with one argument or none — the detectors — routed 4/4 in every
+round. So the failure is not the size of the room and not the model's
+sense of which tool: it is that an optional argument reads as an
+invitation, and a finder holding four of them will find somewhere to put
+every noun in the sentence. Give a clause its own tool where the clause
+is a thing people say, and count a fifth optional filter as a fifth
+chance to answer the wrong question confidently.
+
 ## Take the target as an argument when the model skips the setup call
 
 The video pack modeled "make the second clip slow motion" the way the
@@ -407,6 +433,34 @@ tools and a cancel tail at 41. The gated pair is a hazard at every
 list size it appears in; the app dialog is not a mitigation but the
 mechanism.
 
+## A finder's emptiest call is the dangerous one
+
+The photo-library stage's first end-to-end run deleted the library. Five
+beats, the last two being "Delete those." and "Yes, delete them."; the
+model deleted the one blurry photo on beat 4 (with `confirm: true` on the
+first ask, the collapse above), and then on beat 5, with nothing left
+selected, called `delete_photos` → *nothing is selected, find some first*
+→ `find_photos {}` → *found 27 photos (the whole library)* →
+`delete_photos` → **27 photos gone.**
+
+No step is a mistake by itself. The user said yes; the tool asked for a
+selection; the model made one; the tool did as it was told. The room
+wrote the rule: a bulk destructive tool that acts on "whatever the last
+finder found", plus a finder whose argument-less call means *everything*,
+is a wipe waiting for a confused turn — and a model reaches for the
+emptiest call exactly when it is most confused. Two structural fixes, both
+in the app and neither in a prompt: an argument-less finder answers with
+the *shape* of the collection (how many, which dates) and does not touch
+the selection, because "show me everything" is a question about a library
+rather than a selection of it; and the destructive tool refuses a
+selection that covers everything, whatever put it there. With both in,
+the same beats stop at two refusals and the library survives.
+
+The bench never saw this in four rounds: no case asks for an empty finder,
+and a runner that scores tool calls cannot score the world they leave
+behind. Give every pack with a destructive tool one demo run whose last
+beat is a bare "yes".
+
 ## Undo must own the going-back words
 
 `undo_last` in every pack, described "Undo the last change." Asked
@@ -419,6 +473,19 @@ re-derives the steps rather than calling the meta-tool. Manual reversal
 is *almost* right — until the history and the model's memory of the
 change disagree. If undo matters, put the going-back words in its
 description, expect the by-hand reversal anyway, and measure it.
+
+And when the room holds a destructive tool, the going-back words stop
+being a convenience axis and become a safety one. 「やっぱり今のは取り
+消して。」 — undo that — called **`delete_photos`** in the photo-library
+pack, in all four of its first rounds, against a state whose last change
+was marking one photo a favourite and whose selection was that photo: the
+model offered to delete it. `undo_last` was in the room, described with
+the going-back words it has always been described with, and lost them to
+the tool whose effect also reads as *make it not be* (取り消し is the word
+a Japanese UI puts on a cancel button). Undo failing is a lost beat; undo
+misrouting to delete is a destroyed library. Put a going-back case in
+every language the pack ships, and read it as a gate case rather than an
+undo case.
 
 ## The look-first prefix is character — wording will not remove it
 

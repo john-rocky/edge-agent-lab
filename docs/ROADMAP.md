@@ -169,6 +169,43 @@ Vision/CoreImage calls, a CLIP-style index, and
 `check_photo(id, question, options)` — scoring the route choice
 between layers: the retrieval archetype's "knowing what's missing",
 with the cost gradient explicit.
+**Built and first measured 2026-08-21** (Mac lane, l1–l3): the pack is
+the `library` toolset — 13 tools where the cost gradient is the tool
+list (find_photos / search_photos / find_photos_of_person /
+find_photos_with_text / find_blurry_photos / find_duplicates /
+check_photo, then open, album, favourite, a gated delete and the
+rails) — over a canned camera roll of 28 photos, 52 cases in
+scenarios/photo-library. **The thesis's own claim is what holds: with
+no cost order stated anywhere in the instructions, 44 to 47 of 52
+opening calls landed on the rung that can answer cheapest, across four
+rounds and both languages.** What fails is not the choice between
+layers but the slots inside one: `find_photos` carries four optional
+arguments and eats every noun in the sentence — "the beach photos"
+arrived as `place: "beach"` and the model told the user their library
+holds none of the five it holds. Two rounds of rulings closed that:
+the state names its places, a filter over a closed vocabulary refuses
+rather than reports absence, and a rung that finds nothing while
+another rung holds the word names *that* rung (「メイ」 went to the
+picture index, which does not hold people, and came back "no photos
+featuring メイ" about someone in four of them). **Answers asserting an
+absence the library does not have went 5 → 1 → 3 → 0; the score went
+37 → 39 → 40 → 36**, because a recovery is a second call and
+`called == expected` reads it exactly as it reads a ritual tail. That
+is this bench's second measured instrument limit (r45's sink was the
+first) and the pack's sharpest open item. **The worst behaviour the
+pack has produced came from the stage, not the bench**: its first
+five-beat run answered "Yes, delete them." — with nothing selected —
+by calling the finder with no arguments, selecting all 27 photos and
+deleting them. A bulk destructive tool plus a finder whose emptiest
+call means *everything* is a wipe waiting for a confused turn; an
+argument-less finder now answers with the library's shape and selects
+nothing, and delete refuses a whole-library selection. Four bench
+rounds never saw it. Also open: whether `album`
+belongs in a finder at all when `add_to_album` owns the word, a gate
+that survives two languages (JA 「削除して」 arrives `confirm: true`,
+EN calls no delete at all), and the perception rung — the mock library
+is real Vision's slot, not its substitute, and the pack is written so
+the swap changes no case. Canon: scenarios/photo-library/script.md.
 
 ### Video moment-seek (user, 2026-08-20) — retrieval pack candidate
 

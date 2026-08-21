@@ -46,6 +46,10 @@ for SCENARIO in "$@"; do
     # the video room plus canned index tools — clause→index routing, the
     # timestamp copy out of a result, and the find → seek/cut → export chain.
     video-moments) TOOLSET=moments ;;
+    # The orchestrator thesis's first pack (ROADMAP): a camera roll where the
+    # cost gradient is the tool list — metadata, the picture index, the
+    # detectors, one per-photo check — so which layer answered is the score.
+    photo-library) TOOLSET=library ;;
     store) TOOLSET=store ;;
     audio) TOOLSET=audio ;;
     docs) TOOLSET=docs ;;
