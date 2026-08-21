@@ -399,6 +399,22 @@ Raw run in `ios/bench/cliprung/results/journey-2026-08-21.md`.
   no person in it, above "ocean" at 0.232 on the beach it is actually
   looking at. Peak-minus-median contrast does not rescue it either
   (0.06 → 5/8 and 0 FP; 0.04 → 7/8 and 1).
+- **Ruling on the acceptance rule (the open problem the A/B named):
+  the rung may rank, so it must not claim.** No threshold separates
+  true hits (0.232–0.329) from false ones (0.199–0.265) because the
+  scale is per-query, and no calibration tried rescued it — so stop
+  trying to buy presence with a number. This lane's own rule decides
+  it instead: answers follow the verdict word, so a rung that cannot
+  decide presence must never use the presence verb. The threshold
+  stays, as a noise gate only; above it the result still opens with
+  the labels' negative verdict and offers the window as what it is —
+  `no labelled moment matches "a puppy running on the sand" — the
+  closest-looking window is 12–19 s (visual similarity 0.33, not a
+  confirmed sighting)`. The model keeps the honest miss it needs for
+  case 4 ("there isn't one") and still gets the candidate it needs to
+  act on a real find. This costs some decisiveness on genuine hits and
+  buys immunity to footage whose scale we have not measured, which is
+  every footage but this one.
 - **Labels-first is what ships, and it is measurably the best arm.**
   Arm A's rows, arm B only where arm A returned nothing: 8/8 at every
   threshold from 0.18 to 0.27, and at 0.27 CLIP contributes no false
@@ -469,6 +485,20 @@ once they recur)
   — it did not come back down when the check got no further help. So
   the lever is not a better answer; it is leaving nothing there worth
   having, or removing the tool from the room.
+- **A tool that can rank but cannot decide presence must not use the
+  presence verb.** CLIP's argmax found the right scene for 8 of 8
+  answerable queries on journey.mp4 and no cosine threshold could
+  refuse the 3 queries whose subject the footage never contained —
+  true hits 0.232–0.329 against false ones 0.199–0.265, because the
+  scale is per-query rather than per-corpus. Ranking and detection are
+  different competences, and a ranker that says "found" launders one
+  into the other. Give the weaker rung a verdict word its evidence
+  supports ("the closest-looking window is…"), keep the stronger
+  rung's verdict for the answer, and the retrieval stays usable
+  without the honest empty answer being lost. The corollary is a
+  question to ask first: before building a rung, ask the shelf — two
+  of the three queries this spec called unanswerable turned out to be
+  plain VNClassify labels.
 - **The reply follows the language the instruction block is written
   in — not the request's, not the nearest turn's.** 31 runs, four
   conditions saying the same sentence: English preamble 1/11 Japanese
