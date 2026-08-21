@@ -60,6 +60,21 @@
       {"tool": "search_frames", "args": {"query": {"contains": "yellow"}}},
       {"tool": "check_moment", "args": {"seconds": {"number": 160, "tol": 4}}}
     ] },
+  { "id": "m-en-veto-1", "input": "Find when the rain starts, then check that frame to confirm, and tell me when it starts.", "lang": "en",
+    "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
+    "answerContains": ["320"],
+    "expected": [
+      {"tool": "search_frames", "args": {"query": {"contains": "rain"}}},
+      {"tool": "check_moment", "args": {"seconds": {"number": 325, "tol": 6}}}
+    ] },
+  { "id": "m-en-check-2", "input": "Look at the frame at 460 seconds — is a penalty being taken there? Answer yes or no.", "lang": "en",
+    "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
+    "answerContains": ["yes"],
+    "expected": [{"tool": "check_moment", "args": {"seconds": {"number": 460, "tol": 0.1}}}] },
+  { "id": "m-en-check-3", "input": "Check the frame at 100 seconds — is there a goal there, or no goal?", "lang": "en",
+    "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
+    "answerContains": ["no"],
+    "expected": [{"tool": "check_moment", "args": {"seconds": {"number": 100, "tol": 0.1}}}] },
   { "id": "m-en-miss-1", "input": "When does the red card happen?", "lang": "en",
     "state": "Timeline: 1 clip, 600 s total, frame 1920×1080 (landscape). Clips: clip 1: 0–600 s (selected). Playhead: 240 s. Index: ready (frames, transcript, screen text).",
     "answerContains": ["no", "not", "isn", "couldn"],

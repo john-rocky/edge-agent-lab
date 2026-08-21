@@ -234,3 +234,51 @@ the same case flips across rounds, so read the taxonomy, not one run):
   indexes and said "isn't present" / 「見つかりませんでした」 in every
   round — fetch-then-admit, not invention: the retrieval archetype's
   ask_user lesson, answered by tools.
+
+r37 (2026-08-21) is the first round scored against a canned world level
+with the app's. Everything above was measured against a stricter check —
+one that refused by name whatever it could not match, and left the model
+to read the refusal as absence — and against a search whose hits opened
+with a bare count. The canned check now runs the real matcher's
+semantics (negation partition, yes/no decided by the question's content
+words, the verdict word first with the evidence tail behind it) and the
+canned search opens with "found", so r33–r36 and r37 are not the same
+question asked twice. The denominator is 43: three cases from the
+real-footage take's failure modes joined the EN block.
+
+- **14/43 — 13 of the old 40, against r35's 17 on the same config.**
+  Six of the forty moved down, two up; one run each side, fresh session
+  per case, so the number reads as a band, not a regression. What is not
+  noise-shaped: check_moment went from 7 calls in 7 cases (r35) to 15 in
+  14 (r37), and five of the six new failures grew a check_moment where
+  r35 made none — four of them checking a search that had already
+  succeeded (「実況が…」 twice, "find where the scoreboard changes to
+  1-0", "find where the commentator says 'incredible save'", all
+  single-call passes in r35), and one opening with a check on
+  「この動画、何秒ある?」, a question the state already answers. A check
+  that now answers something usable gives the retrieval ritual somewhere
+  to go; the stop contract is unchanged and still does not stop it. (The
+  sixth is the ask hole again — "cut out just that one moment" resolved
+  to keep_range. The two that moved up: m-en-written-3 lost the check it
+  had in r35, and m-en-cut-1 finally made the search → keep_range chain
+  it declined to make at all.)
+- **The verdict semantics carry, and the ritual is what fails the new
+  cases.** All three new cases passed `answerContains`; two failed on
+  selection. m-en-check-2 (yes/no at 460 s) got "yes" out of the check
+  and said "Yes, a penalty is being taken" — after searching the
+  transcript for "penalty" first, for a frame it had been handed the
+  time of. m-en-check-3 (negated options at 100 s) worded its own
+  options "goal present" / "no goal", the negative carried the verdict,
+  the answer said "there is no goal" — and then the model swept all
+  three indexes and cut the timeline to 0–6 s, an edit nobody asked
+  for. The backport does its job: the verdict word is now the answer in
+  the bench too. What it exposes is the ritual, again.
+- **The veto trap did not fire on its first run.** m-en-veto-1 passed:
+  the model worded its check options as timestamps ("starts at 320 s" /
+  "starts at 330 s") rather than a yes/no, so the check agreed with the
+  search and the final answer kept 320 s. The measured veto needs a
+  yes/no question whose words the truths cannot answer — the shape the
+  real-footage take produced — and the model did not choose that shape
+  here. The case is worth keeping precisely because the trap is the
+  model's wording choice, not the tool's: it will fire on the rounds
+  where the model asks "is it raining".
