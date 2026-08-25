@@ -66,6 +66,17 @@ the opposite failures — right numbers, wrong tool. The 2.6B's weights
 cap its context at 1024 tokens; 15 tool schemas barely fit and 17 don't:
 on phone RAM, the bigger model can be the weaker agent.
 
+## Why every pack here is tool-calling
+
+One tool call per round, not one program that calls the tools. That was a bet, and it was
+measured: [**whole-program CodeAct loses 0/3 to step-wise tool-calling's 2/3**](docs/codeact-vs-tool-calling.md)
+at 0.8B–2B, across five rungs of prompt hardening and self-repair. Shown its own runtime error
+and told not to repeat itself, a 2B model re-emitted the byte-identical program four times.
+
+The multi-round context tax buys the error recovery a small model has no other way to get. The
+harness, the tasks, the control and every run are in
+[`agent-frontier/`](agent-frontier/) — it builds and self-tests on CPU in ten seconds.
+
 ## Layout
 
     ios/
@@ -73,6 +84,7 @@ on phone RAM, the bigger model can be the weaker agent.
       bench/       toolbench — runner scripts, report.py, results/
       samples/     sample index (the app lives in LiteRT-Models for now)
     android/       the screen agent: app, sdk, conversion tools, findings
+    agent-frontier/ the CodeAct-vs-tool-calling harness, tasks, and every run behind it
     docs/          model routing, roadmap, findings
 
 [Roadmap](docs/ROADMAP.md): scenarios lead, the bench follows.

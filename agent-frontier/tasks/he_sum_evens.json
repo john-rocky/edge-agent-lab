@@ -1,0 +1,17 @@
+{
+  "id": "he_sum_evens",
+  "title": "Sum of even numbers",
+  "tier": "humaneval",
+  "source": "HumanEval / HackerRank canonical: filter+reduce over a number array — the single most common intro coding-eval primitive.",
+  "entry": "sumEvens",
+  "signature": "function sumEvens(nums)  // nums: number[] -> number (sum of the even values)",
+  "prompt": "Write a JavaScript function `sumEvens(nums)` that takes an array of integers and returns the sum of only the even numbers. If there are no even numbers, return 0. Negative even numbers count.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": [[1, 2, 3, 4]], "expect": 6 },
+    { "args": [[]], "expect": 0 },
+    { "args": [[7, 7, 7]], "expect": 0 },
+    { "args": [[-2, -4, 5]], "expect": -6 },
+    { "args": [[10]], "expect": 10 }
+  ]
+}

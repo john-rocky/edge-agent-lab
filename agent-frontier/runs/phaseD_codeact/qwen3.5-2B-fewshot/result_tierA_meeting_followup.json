@@ -1,0 +1,1 @@
+{"checks":[{"detail":"0 reminder(s) match (need 1)","kind":"reminder_exists","pass":false},{"detail":"reminders=0 want=1","kind":"reminder_count","pass":false}],"corpus_revisits":{"context_growth":[],"distinct_docs":0,"reads":[],"reread_count":0,"total_reads":0},"define_error":null,"mode":"codeact","ok":false,"task":"tierA_meeting_followup","tier":"tierA","tool_calls":3}

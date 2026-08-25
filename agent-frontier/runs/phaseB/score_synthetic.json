@@ -1,0 +1,108 @@
+{
+  "by_tier": {
+    "automation": {
+      "n": 5,
+      "pass": 4
+    },
+    "humaneval": {
+      "n": 5,
+      "pass": 4
+    }
+  },
+  "model": "synthetic-selftest",
+  "n": 10,
+  "pass_at_1": 8,
+  "pass_at_1_pct": 80.0,
+  "rows": [
+    {
+      "js_preview": "function daysUntil(fromISO, toISO) {   function to",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "auto_days_until",
+      "test_count": 5,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function extractUrls(text) {   var re = /https?:\\/",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "auto_extract_urls",
+      "test_count": 4,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function formatTodos(items) {   return items     .",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "auto_format_todo",
+      "test_count": 4,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function screenshotNames(files) {   return files  ",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "auto_group_screenshots",
+      "test_count": 4,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "// BROKEN: does not round to 2 decimals (100/3 -> ",
+      "note": "mismatch",
+      "pass": false,
+      "pass_count": 4,
+      "task": "auto_split_bill",
+      "test_count": 5,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function fizzbuzz(n) {   var out = [];   for (var ",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "he_fizzbuzz",
+      "test_count": 4,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function isPalindrome(s) {   var t = s.toLowerCase",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "he_is_palindrome",
+      "test_count": 5,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function romanToInt(s) {   var map = { I: 1, V: 5,",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "he_roman_to_int",
+      "test_count": 5,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function sumEvens(nums) {   return nums.filter(fun",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "he_sum_evens",
+      "test_count": 5,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "// BROKEN: returns the VALUES that sum to target, ",
+      "note": "mismatch",
+      "pass": false,
+      "pass_count": 0,
+      "task": "he_two_sum",
+      "test_count": 4,
+      "tier": "humaneval"
+    }
+  ]
+}

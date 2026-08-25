@@ -1,0 +1,32 @@
+{
+  "id": "tierA_notes_digest",
+  "title": "Cross-search notes → one digest note",
+  "tier": "tierA",
+  "source": "RESEARCH_TIERA.md #7 — Apple 'Be productive' positions Spotlight-across-Notes as the way to gather scattered notes; the 'summarize my notes on X' pattern.",
+  "spec": "Search my notes for everything about the Q3 launch, read what you find, and write ONE new note titled 'Q3 launch digest' that summarizes the key dates and owners across those notes. Do not modify my existing notes.",
+  "now": "2026-07-13T09:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 8,
+  "tool_allowlist": ["notes.search", "notes.get", "notes.create"],
+  "initial_state": {
+    "notes": [
+      { "id": "n1", "title": "Q3 launch kickoff", "body": "Q3 launch date is Sept 15. Owner: Priya. Marketing assets due Aug 20." },
+      { "id": "n2", "title": "Grocery list", "body": "milk, eggs, bread, coffee" },
+      { "id": "n3", "title": "Q3 launch risks", "body": "Legal review is the long pole. Owner: Sam. Target sign-off Sept 1." },
+      { "id": "n4", "title": "Book recommendations", "body": "Thinking Fast and Slow; The Making of Prince of Persia." }
+    ]
+  },
+  "final_check": {
+    "all": [
+      { "kind": "note_created", "title_contains": "Q3 launch digest", "body_contains": ["Sept 15", "Sam"] },
+      { "kind": "tool_called", "tool": "notes.search", "min_count": 1 }
+    ]
+  },
+  "mock_solution": [
+    { "call": { "tool": "notes.search", "args": { "query": "Q3 launch" } } },
+    { "call": { "tool": "notes.get", "args": { "id": "n1" } } },
+    { "call": { "tool": "notes.get", "args": { "id": "n3" } } },
+    { "call": { "tool": "notes.create", "args": { "title": "Q3 launch digest", "body": "Launch date Sept 15 (owner Priya). Marketing assets due Aug 20. Legal review is the long pole; target sign-off Sept 1 (owner Sam)." } } },
+    { "finish": "Wrote the 'Q3 launch digest' note summarizing both Q3 launch notes." }
+  ]
+}

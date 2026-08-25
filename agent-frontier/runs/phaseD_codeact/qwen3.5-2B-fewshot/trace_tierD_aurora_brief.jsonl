@@ -1,0 +1,11 @@
+{"mode":"codeact","task":"tierD_aurora_brief","tier":"tierD","tool_allowlist":["corpus.search","corpus.read"],"type":"meta"}
+{"action":"call","args":{"query":"Aurora launch"},"i":0,"tool":"corpus.search","type":"round"}
+{"action":"call","args":{"id":"d1"},"context_docs":["d1"],"i":1,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d2"},"context_docs":["d1","d2"],"i":2,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d3"},"context_docs":["d1","d2","d3"],"i":3,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d4"},"context_docs":["d1","d2","d3","d4"],"i":4,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d5"},"context_docs":["d1","d2","d3","d4","d5"],"i":5,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d6"},"context_docs":["d1","d2","d3","d4","d5","d6"],"i":6,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d7"},"context_docs":["d1","d2","d3","d4","d5","d6","d7"],"i":7,"tool":"corpus.read","type":"round"}
+{"action":"call","args":{"id":"d10"},"context_docs":["d1","d2","d3","d4","d5","d6","d7","d10"],"i":8,"tool":"corpus.read","type":"round"}
+{"checks":[{"detail":"missing cites=[\"d5\", \"d6\"] missing facts=[\"2026-09-15\", \"Priya\"]","kind":"brief_cites","pass":false},{"detail":"corpus.read called 8x (need 2)","kind":"tool_called","pass":true}],"corpus_revisits":{"context_growth":[1,2,3,4,5,6,7,8],"distinct_docs":8,"reads":[{"doc":"d1","first_time":true,"round":1},{"doc":"d2","first_time":true,"round":2},{"doc":"d3","first_time":true,"round":3},{"doc":"d4","first_time":true,"round":4},{"doc":"d5","first_time":true,"round":5},{"doc":"d6","first_time":true,"round":6},{"doc":"d7","first_time":true,"round":7},{"doc":"d10","first_time":true,"round":8}],"reread_count":0,"total_reads":8},"define_error":null,"logs":"Aurora launches on Project Aurora is an on-device assistant SDK. Public launch is gated on the v1.0 release. The internal codename is northlight..The security sign-off is owned by The security review targets sign-off by 2026-09-01, owned by Sam Okafor. Two findings remain open..\n","mode":"codeact","ok":false,"tool_calls":9,"type":"result","wall_ms":1.87}

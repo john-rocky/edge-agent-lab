@@ -1,0 +1,34 @@
+{
+  "id": "tierA_photo_album",
+  "title": "Find receipt screenshots → album",
+  "tier": "tierA",
+  "source": "RESEARCH_TIERA.md #1/#5 — 'Your Camera Roll Is a To-Do List' (screenshot triage) + Geeky Gadgets 'auto-albums' as the most-cited photo shortcut; Captr auto-sorts screenshots by type.",
+  "spec": "Find all my receipt screenshots and put them in an album called 'Receipts'. Only include screenshots that are receipts.",
+  "now": "2026-07-13T09:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 6,
+  "tool_allowlist": ["photos.search", "photos.create_album", "photos.add_to_album"],
+  "initial_state": {
+    "photos": [
+      { "id": "p1", "kind": "screenshot", "tags": ["receipt", "coffee"] },
+      { "id": "p2", "kind": "photo", "tags": ["beach", "sunset"] },
+      { "id": "p3", "kind": "screenshot", "tags": ["receipt", "hardware store"] },
+      { "id": "p4", "kind": "screenshot", "tags": ["boarding pass"] },
+      { "id": "p5", "kind": "photo", "tags": ["receipt"] }
+    ],
+    "albums": []
+  },
+  "final_check": {
+    "all": [
+      { "kind": "album_exists", "name": "Receipts" },
+      { "kind": "album_contains", "name": "Receipts", "all_of": ["p1", "p3"] },
+      { "kind": "album_excludes", "name": "Receipts", "ids": ["p2", "p4"] }
+    ]
+  },
+  "mock_solution": [
+    { "call": { "tool": "photos.search", "args": { "query": "receipt screenshot" } } },
+    { "call": { "tool": "photos.create_album", "args": { "name": "Receipts" } } },
+    { "call": { "tool": "photos.add_to_album", "args": { "album": "Receipts", "ids": ["p1", "p3"] } } },
+    { "finish": "Created the 'Receipts' album with the 2 receipt screenshots (p1, p3)." }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "tierD_aurora_brief",
+  "title": "Cited brief over a 10-document on-device corpus",
+  "tier": "tierD",
+  "source": "RESEARCH_TIERA.md — Tier D of the kickoff ladder ('端末内コーパス10文書→引用つきブリーフ'). Corpus is synthetic (fictional 'Project Aurora') so the facts are controllable and copyright-free; the demand shape is the on-device 'ask my documents' assistant.",
+  "spec": "Using only my on-device documents, write a short brief answering: (1) when does Aurora launch, (2) who owns the launch, and (3) who owns the security sign-off. Search the corpus, read the relevant documents, and in your final answer cite the document ids you used (e.g. d5) and include the exact dates and names.",
+  "now": "2026-07-13T09:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 12,
+  "tool_allowlist": ["corpus.search", "corpus.read"],
+  "initial_state": {
+    "corpus": [
+      { "id": "d1", "title": "Aurora — overview", "body": "Project Aurora is an on-device assistant SDK. Public launch is gated on the v1.0 release. The internal codename is northlight." },
+      { "id": "d2", "title": "Aurora — model card", "body": "Aurora ships a 2B parameter model quantized to int8. Peak memory is 1.8 GB on a phone." },
+      { "id": "d3", "title": "Aurora — benchmarks", "body": "On the internal suite Aurora scores 71 percent composite. Decode runs at 24 tokens per second on an iPhone 17 Pro." },
+      { "id": "d4", "title": "Aurora — pricing", "body": "Aurora is free for on-device use. There is no per-token charge because inference is local." },
+      { "id": "d5", "title": "Aurora — roadmap", "body": "The v1.0 launch is scheduled for 2026-09-15. A v1.1 with tool-calling follows in Q4." },
+      { "id": "d6", "title": "Aurora — ownership", "body": "The launch is owned by Priya Nair, the engineering lead. Sam Okafor owns the security sign-off." },
+      { "id": "d7", "title": "Aurora — risks", "body": "The long pole is the security review. If the security sign-off slips, the 2026-09-15 launch date slips with it." },
+      { "id": "d8", "title": "Office move memo", "body": "The team moves to the 4th floor on 2026-08-01. Remember to bring your badge for the new door." },
+      { "id": "d9", "title": "Holiday schedule", "body": "The office is closed from 2026-12-24 through 2026-12-26 for the winter holiday." },
+      { "id": "d10", "title": "Aurora — security review", "body": "The security review targets sign-off by 2026-09-01, owned by Sam Okafor. Two findings remain open." }
+    ]
+  },
+  "final_check": {
+    "all": [
+      { "kind": "brief_cites", "doc_ids": ["d5", "d6"], "facts": ["2026-09-15", "Priya", "Sam"] },
+      { "kind": "tool_called", "tool": "corpus.read", "min_count": 2 }
+    ]
+  },
+  "mock_solution": [
+    { "call": { "tool": "corpus.search", "args": { "query": "launch date owner security sign-off" } } },
+    { "call": { "tool": "corpus.read", "args": { "id": "d5" } } },
+    { "call": { "tool": "corpus.read", "args": { "id": "d6" } } },
+    { "call": { "tool": "corpus.read", "args": { "id": "d7" } } },
+    { "call": { "tool": "corpus.read", "args": { "id": "d5" } } },
+    { "call": { "tool": "corpus.read", "args": { "id": "d10" } } },
+    { "finish": "Aurora launches 2026-09-15 (d5). The launch is owned by Priya Nair and the security sign-off by Sam Okafor (d6, d10). Risk: the security sign-off target is 2026-09-01 (d10); if it slips, the 2026-09-15 launch slips with it (d7)." }
+  ]
+}

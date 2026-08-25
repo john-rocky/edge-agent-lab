@@ -1,0 +1,1 @@
+{"key":"c0","prompt":"Task: I have a meeting today. After it ends, I want to send follow-up notes to whoever I met with. Look at my calendar for today, then create a single reminder for tomorrow at 9:00 AM (my local time) to send the follow-up. Put the attendee's name in the reminder title.\n\nWrite the JavaScript program now, in a single ```js block."}

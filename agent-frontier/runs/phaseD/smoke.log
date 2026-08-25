@@ -1,0 +1,36 @@
+[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD/work_tierA_meeting_followup/round_0_in.jsonl
+[eval-driver] loading model (engine=pipelined, max_tokens=384, greedy) ...
+[eval-driver] loaded 'qwen3_5_0_8b_decode_int8hu_block32_sym' in 0.64s
+[eval-driver] prewarmed in 0.06s
+  [1/1] key=r0 ptok=350 gen=19 ttft=1.65 wall=1.76 decode=176.1 tok/s
+
+==== SUMMARY (qwen3_5_0_8b_decode_int8hu_block32_sym) ====
+load=0.6s prewarm=0.1s
+n=1  batch_wall=1.8s  mean_wall/q=1.76s
+total_gen_tokens=19  mean_gen/q=19.0  capped=0/1
+aggregate_decode=185.8 tok/s  peak_footprint=394 MB
+trace -> /Users/majimadaisuke/code/coreai/agent-frontier/phaseD/trace_tierA_meeting_followup.jsonl
+[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD/work_tierA_photo_album/round_0_in.jsonl
+[eval-driver] loading model (engine=pipelined, max_tokens=384, greedy) ...
+[eval-driver] loaded 'qwen3_5_0_8b_decode_int8hu_block32_sym' in 0.63s
+[eval-driver] prewarmed in 0.06s
+  [1/1] key=r0 ptok=295 gen=26 ttft=1.38 wall=1.51 decode=191.2 tok/s
+
+==== SUMMARY (qwen3_5_0_8b_decode_int8hu_block32_sym) ====
+load=0.6s prewarm=0.1s
+n=1  batch_wall=1.5s  mean_wall/q=1.51s
+total_gen_tokens=26  mean_gen/q=26.0  capped=0/1
+aggregate_decode=198.8 tok/s  peak_footprint=379 MB
+trace -> /Users/majimadaisuke/code/coreai/agent-frontier/phaseD/trace_tierA_photo_album.jsonl
+[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD/work_tierD_aurora_brief/round_0_in.jsonl
+[eval-driver] loading model (engine=pipelined, max_tokens=384, greedy) ...
+[eval-driver] loaded 'qwen3_5_0_8b_decode_int8hu_block32_sym' in 0.63s
+[eval-driver] prewarmed in 0.06s
+  [1/1] key=r0 ptok=320 gen=17 ttft=1.52 wall=1.61 decode=175.4 tok/s
+
+==== SUMMARY (qwen3_5_0_8b_decode_int8hu_block32_sym) ====
+load=0.6s prewarm=0.1s
+n=1  batch_wall=1.6s  mean_wall/q=1.61s
+total_gen_tokens=17  mean_gen/q=17.0  capped=0/1
+aggregate_decode=186.3 tok/s  peak_footprint=396 MB
+trace -> /Users/majimadaisuke/code/coreai/agent-frontier/phaseD/trace_tierD_aurora_brief.jsonl

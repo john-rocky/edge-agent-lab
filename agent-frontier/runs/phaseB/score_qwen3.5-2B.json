@@ -1,0 +1,108 @@
+{
+  "by_tier": {
+    "automation": {
+      "n": 5,
+      "pass": 4
+    },
+    "humaneval": {
+      "n": 5,
+      "pass": 5
+    }
+  },
+  "model": "qwen3.5-2B",
+  "n": 10,
+  "pass_at_1": 9,
+  "pass_at_1_pct": 90.0,
+  "rows": [
+    {
+      "js_preview": "function daysUntil(fromISO, toISO) {   const from ",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "auto_days_until",
+      "test_count": 5,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function extractUrls(text) {   const seen = new Se",
+      "note": "String.prototype.matchAll argument must not be a non-global regular expression",
+      "pass": false,
+      "pass_count": 0,
+      "task": "auto_extract_urls",
+      "test_count": 4,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function formatTodos(items) {   if (items.length =",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "auto_format_todo",
+      "test_count": 4,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function screenshotNames(files) {   const screensh",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "auto_group_screenshots",
+      "test_count": 4,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function splitBill(total, people) {   const perPer",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "auto_split_bill",
+      "test_count": 5,
+      "tier": "automation"
+    },
+    {
+      "js_preview": "function fizzbuzz(n) {   const result = [];   for ",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "he_fizzbuzz",
+      "test_count": 4,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function isPalindrome(s) {   const clean = s     .",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "he_is_palindrome",
+      "test_count": 5,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function romanToInt(s) {   const map = {     I: 1,",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "he_roman_to_int",
+      "test_count": 5,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function sumEvens(nums) {   let sum = 0;   for (le",
+      "note": "",
+      "pass": true,
+      "pass_count": 5,
+      "task": "he_sum_evens",
+      "test_count": 5,
+      "tier": "humaneval"
+    },
+    {
+      "js_preview": "function twoSum(nums, target) {   const map = new ",
+      "note": "",
+      "pass": true,
+      "pass_count": 4,
+      "task": "he_two_sum",
+      "test_count": 4,
+      "tier": "humaneval"
+    }
+  ]
+}

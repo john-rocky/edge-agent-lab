@@ -1,0 +1,16 @@
+{
+  "id": "auto_extract_urls",
+  "title": "Extract unique URLs from text",
+  "tier": "automation",
+  "source": "Apple ships a native Shortcuts action 'Get URLs from Input' that returns any links found in text; pulling links out of text is a recurring, first-party-supported Shortcuts need (also Automators forum requests). https://matthewcassinelli.com/actions/get-urls-from-input/",
+  "entry": "extractUrls",
+  "signature": "function extractUrls(text)  // text: string -> string[] (unique URLs, first-seen order)",
+  "prompt": "Write a JavaScript function `extractUrls(text)` that finds all web URLs in the text. A URL is a run of non-whitespace characters beginning with 'http://' or 'https://'. Return the URLs de-duplicated, in the order they first appear. Return an empty array if there are none.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": ["Visit https://apple.com then https://developer.apple.com"], "expect": ["https://apple.com", "https://developer.apple.com"] },
+    { "args": ["no links in this text"], "expect": [] },
+    { "args": ["http://a.com http://b.com http://a.com"], "expect": ["http://a.com", "http://b.com"] },
+    { "args": ["Mixed http://x.io and https://y.io and http://x.io again"], "expect": ["http://x.io", "https://y.io"] }
+  ]
+}

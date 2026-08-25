@@ -1,0 +1,24 @@
+{
+  "id": "tierA_timezone_reminder",
+  "title": "Argument accuracy: cross-time-zone reminder",
+  "tier": "tierA",
+  "source": "RESEARCH_TIERA.md #8 — Apple shipped a per-reminder Time Zone field in iOS/macOS 26 because people get cross-zone times wrong; timeanddate Meeting Planner exists for the same reason. Tests whether the agent passes the CORRECT argument to a tool.",
+  "spec": "Set a reminder to call the Tokyo office. They are available at 9:00 AM Tokyo time on 2026-07-15. Create the reminder at the correct moment expressed in my own local time zone. Do not use any conversion tool — just create the reminder with the right time.",
+  "now": "2026-07-13T08:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 4,
+  "tool_allowlist": ["reminders.create", "reminders.list"],
+  "initial_state": {
+    "reminders": []
+  },
+  "final_check": {
+    "all": [
+      { "kind": "reminder_exists", "title_contains": "Tokyo", "due_instant": "2026-07-15T09:00:00+09:00" },
+      { "kind": "reminder_count", "equals": 1 }
+    ]
+  },
+  "mock_solution": [
+    { "call": { "tool": "reminders.create", "args": { "title": "Call the Tokyo office", "due": "2026-07-14T17:00:00-07:00" } } },
+    { "finish": "Reminder set for 5:00 PM PDT on July 14 (that is 9:00 AM JST on July 15)." }
+  ]
+}

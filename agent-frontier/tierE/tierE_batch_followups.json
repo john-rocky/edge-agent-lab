@@ -1,0 +1,482 @@
+{
+  "id": "tierE_batch_followups",
+  "title": "One follow-up reminder for each of 20 meetings",
+  "tier": "tierE",
+  "source": "kickoff Tier E (long-horizon endurance): iterate over N calendar items creating one reminder each, to measure whether per-item quality degrades as the chain lengthens (later items dropped / duplicated). Each per-item check is a separate assertion so the pass/fail breakdown is the degradation curve.",
+  "spec": "I have 20 meetings on my calendar today. For EACH meeting, create exactly one reminder titled 'Follow up with <the attendee's full name>' due tomorrow at 9:00 AM. Do not skip any meeting and do not create duplicates.",
+  "now": "2026-07-14T09:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 48,
+  "tool_allowlist": [
+    "calendar.list",
+    "calendar.get",
+    "reminders.create",
+    "reminders.list"
+  ],
+  "initial_state": {
+    "calendar": [
+      {
+        "id": "m00",
+        "title": "Sync with Riley Okonkwo",
+        "start": "2026-07-14T08:00:00-07:00",
+        "end": "2026-07-14T08:30:00-07:00",
+        "attendees": [
+          "Riley Okonkwo"
+        ]
+      },
+      {
+        "id": "m01",
+        "title": "Sync with Sam Ramirez",
+        "start": "2026-07-14T09:00:00-07:00",
+        "end": "2026-07-14T09:30:00-07:00",
+        "attendees": [
+          "Sam Ramirez"
+        ]
+      },
+      {
+        "id": "m02",
+        "title": "Sync with Noa Nakamura",
+        "start": "2026-07-14T10:00:00-07:00",
+        "end": "2026-07-14T10:30:00-07:00",
+        "attendees": [
+          "Noa Nakamura"
+        ]
+      },
+      {
+        "id": "m03",
+        "title": "Sync with Ines Petrov",
+        "start": "2026-07-14T11:00:00-07:00",
+        "end": "2026-07-14T11:30:00-07:00",
+        "attendees": [
+          "Ines Petrov"
+        ]
+      },
+      {
+        "id": "m04",
+        "title": "Sync with Omar Haddad",
+        "start": "2026-07-14T12:00:00-07:00",
+        "end": "2026-07-14T12:30:00-07:00",
+        "attendees": [
+          "Omar Haddad"
+        ]
+      },
+      {
+        "id": "m05",
+        "title": "Sync with Kira Bergstrom",
+        "start": "2026-07-14T13:00:00-07:00",
+        "end": "2026-07-14T13:30:00-07:00",
+        "attendees": [
+          "Kira Bergstrom"
+        ]
+      },
+      {
+        "id": "m06",
+        "title": "Sync with Luca Vasquez",
+        "start": "2026-07-14T14:00:00-07:00",
+        "end": "2026-07-14T14:30:00-07:00",
+        "attendees": [
+          "Luca Vasquez"
+        ]
+      },
+      {
+        "id": "m07",
+        "title": "Sync with Aya Kowalski",
+        "start": "2026-07-14T15:00:00-07:00",
+        "end": "2026-07-14T15:30:00-07:00",
+        "attendees": [
+          "Aya Kowalski"
+        ]
+      },
+      {
+        "id": "m08",
+        "title": "Sync with Theo Fitzgerald",
+        "start": "2026-07-14T16:00:00-07:00",
+        "end": "2026-07-14T16:30:00-07:00",
+        "attendees": [
+          "Theo Fitzgerald"
+        ]
+      },
+      {
+        "id": "m09",
+        "title": "Sync with Mei Larsen",
+        "start": "2026-07-14T08:00:00-07:00",
+        "end": "2026-07-14T08:30:00-07:00",
+        "attendees": [
+          "Mei Larsen"
+        ]
+      },
+      {
+        "id": "m10",
+        "title": "Sync with Dev Delacroix",
+        "start": "2026-07-14T09:00:00-07:00",
+        "end": "2026-07-14T09:30:00-07:00",
+        "attendees": [
+          "Dev Delacroix"
+        ]
+      },
+      {
+        "id": "m11",
+        "title": "Sync with Pia Yamada",
+        "start": "2026-07-14T10:00:00-07:00",
+        "end": "2026-07-14T10:30:00-07:00",
+        "attendees": [
+          "Pia Yamada"
+        ]
+      },
+      {
+        "id": "m12",
+        "title": "Sync with Gus Oyelaran",
+        "start": "2026-07-14T11:00:00-07:00",
+        "end": "2026-07-14T11:30:00-07:00",
+        "attendees": [
+          "Gus Oyelaran"
+        ]
+      },
+      {
+        "id": "m13",
+        "title": "Sync with Vera Persson",
+        "start": "2026-07-14T12:00:00-07:00",
+        "end": "2026-07-14T12:30:00-07:00",
+        "attendees": [
+          "Vera Persson"
+        ]
+      },
+      {
+        "id": "m14",
+        "title": "Sync with Ike Guptill",
+        "start": "2026-07-14T13:00:00-07:00",
+        "end": "2026-07-14T13:30:00-07:00",
+        "attendees": [
+          "Ike Guptill"
+        ]
+      },
+      {
+        "id": "m15",
+        "title": "Sync with Rosa Marchetti",
+        "start": "2026-07-14T14:00:00-07:00",
+        "end": "2026-07-14T14:30:00-07:00",
+        "attendees": [
+          "Rosa Marchetti"
+        ]
+      },
+      {
+        "id": "m16",
+        "title": "Sync with Tomas Ibrahim",
+        "start": "2026-07-14T15:00:00-07:00",
+        "end": "2026-07-14T15:30:00-07:00",
+        "attendees": [
+          "Tomas Ibrahim"
+        ]
+      },
+      {
+        "id": "m17",
+        "title": "Sync with Nadia Novak",
+        "start": "2026-07-14T16:00:00-07:00",
+        "end": "2026-07-14T16:30:00-07:00",
+        "attendees": [
+          "Nadia Novak"
+        ]
+      },
+      {
+        "id": "m18",
+        "title": "Sync with Bram Escobar",
+        "start": "2026-07-14T08:00:00-07:00",
+        "end": "2026-07-14T08:30:00-07:00",
+        "attendees": [
+          "Bram Escobar"
+        ]
+      },
+      {
+        "id": "m19",
+        "title": "Sync with Hana Whitfield",
+        "start": "2026-07-14T09:00:00-07:00",
+        "end": "2026-07-14T09:30:00-07:00",
+        "attendees": [
+          "Hana Whitfield"
+        ]
+      }
+    ],
+    "reminders": []
+  },
+  "final_check": {
+    "all": [
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Okonkwo"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Ramirez"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Nakamura"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Petrov"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Haddad"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Bergstrom"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Vasquez"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Kowalski"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Fitzgerald"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Larsen"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Delacroix"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Yamada"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Oyelaran"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Persson"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Guptill"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Marchetti"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Ibrahim"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Novak"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Escobar"
+      },
+      {
+        "kind": "reminder_exists",
+        "title_contains": "Whitfield"
+      },
+      {
+        "kind": "reminder_count",
+        "equals": 20
+      }
+    ]
+  },
+  "mock_solution": [
+    {
+      "call": {
+        "tool": "calendar.list",
+        "args": {
+          "date": "2026-07-14"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Riley Okonkwo",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Sam Ramirez",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Noa Nakamura",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Ines Petrov",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Omar Haddad",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Kira Bergstrom",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Luca Vasquez",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Aya Kowalski",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Theo Fitzgerald",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Mei Larsen",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Dev Delacroix",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Pia Yamada",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Gus Oyelaran",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Vera Persson",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Ike Guptill",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Rosa Marchetti",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Tomas Ibrahim",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Nadia Novak",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Bram Escobar",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "reminders.create",
+        "args": {
+          "title": "Follow up with Hana Whitfield",
+          "due": "2026-07-15T09:00:00-07:00"
+        }
+      }
+    },
+    {
+      "finish": "Created 20 follow-up reminders, one per meeting."
+    }
+  ]
+}

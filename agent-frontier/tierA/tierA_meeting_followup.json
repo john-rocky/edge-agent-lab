@@ -1,0 +1,29 @@
+{
+  "id": "tierA_meeting_followup",
+  "title": "Meeting → follow-up reminder",
+  "tier": "tierA",
+  "source": "RESEARCH_TIERA.md #3/#4/#10 — 'meeting automation that sets a reminder to send follow-ups' (isitdev 5-automations) + Apple 'Be productive with Calendar/Reminders/Shortcuts'.",
+  "spec": "I have a meeting today. After it ends, I want to send follow-up notes to whoever I met with. Look at my calendar for today, then create a single reminder for tomorrow at 9:00 AM (my local time) to send the follow-up. Put the attendee's name in the reminder title.",
+  "now": "2026-07-13T08:30:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 6,
+  "tool_allowlist": ["calendar.list", "calendar.get", "reminders.create", "reminders.list"],
+  "initial_state": {
+    "calendar": [
+      { "id": "e1", "title": "Design review with Dana", "start": "2026-07-13T14:00:00-07:00", "end": "2026-07-13T15:00:00-07:00", "attendees": ["Dana"] },
+      { "id": "e2", "title": "Lunch", "start": "2026-07-13T12:00:00-07:00", "end": "2026-07-13T12:45:00-07:00", "attendees": [] }
+    ],
+    "reminders": []
+  },
+  "final_check": {
+    "all": [
+      { "kind": "reminder_exists", "title_contains": "Dana", "due": "2026-07-14T09:00:00-07:00" },
+      { "kind": "reminder_count", "equals": 1 }
+    ]
+  },
+  "mock_solution": [
+    { "call": { "tool": "calendar.list", "args": { "date": "2026-07-13" } } },
+    { "call": { "tool": "reminders.create", "args": { "title": "Send follow-up notes to Dana", "due": "2026-07-14T09:00:00-07:00" } } },
+    { "finish": "Created a follow-up reminder for Dana at 9:00 AM tomorrow." }
+  ]
+}

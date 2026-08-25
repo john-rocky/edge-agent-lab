@@ -1,0 +1,17 @@
+{
+  "id": "he_is_palindrome",
+  "title": "Valid palindrome (alphanumeric, case-insensitive)",
+  "tier": "humaneval",
+  "source": "LeetCode #125 Valid Palindrome — canonical string normalization + reverse/two-pointer; ubiquitous in coding screens.",
+  "entry": "isPalindrome",
+  "signature": "function isPalindrome(s)  // s: string -> boolean",
+  "prompt": "Write a JavaScript function `isPalindrome(s)` that returns true if the string is a palindrome when considering only alphanumeric characters and ignoring case, and false otherwise. An empty string (or a string with no alphanumeric characters) is a palindrome.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": ["A man, a plan, a canal: Panama"], "expect": true },
+    { "args": ["race a car"], "expect": false },
+    { "args": [""], "expect": true },
+    { "args": ["Was it a car or a cat I saw?"], "expect": true },
+    { "args": ["0P"], "expect": false }
+  ]
+}

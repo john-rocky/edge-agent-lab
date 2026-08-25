@@ -1,0 +1,17 @@
+{
+  "id": "auto_split_bill",
+  "title": "Split the bill",
+  "tier": "automation",
+  "source": "iPhone Shortcuts users request tip-and-split-among-N-people automations (Automators forum ask that spawned community builds; ShortcutsGallery 'Calculate Tip & Split'). https://talk.automators.fm/t/anyone-have-a-tip-calculator-shortcut-that-splits-bill-between-x-amount-if-people/6725",
+  "entry": "splitBill",
+  "signature": "function splitBill(total, people)  // total: number, people: integer -> number (per person, 2 decimals)",
+  "prompt": "Write a JavaScript function `splitBill(total, people)` that divides `total` evenly among `people` and returns the amount each person pays, rounded to 2 decimal places (as a number). For example splitBill(100, 3) is 33.33.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": [90, 3], "expect": 30 },
+    { "args": [100, 3], "expect": 33.33 },
+    { "args": [0, 5], "expect": 0 },
+    { "args": [12.5, 2], "expect": 6.25 },
+    { "args": [10, 8], "expect": 1.25 }
+  ]
+}

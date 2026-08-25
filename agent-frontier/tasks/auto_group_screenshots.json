@@ -1,0 +1,16 @@
+{
+  "id": "auto_group_screenshots",
+  "title": "Filter and sort screenshot filenames",
+  "tier": "automation",
+  "source": "Recurring iPhone need — users build Shortcuts to auto-delete/sort piled-up screenshots since Photos has no built-in cleanup (Gadget Hacks how-to; also mobilespoon.net). https://ios.gadgethacks.com/how-to/make-your-iphone-auto-delete-old-screenshots-so-your-photos-app-doesnt-become-hot-mess-0384935/",
+  "entry": "screenshotNames",
+  "signature": "function screenshotNames(files)  // files: string[] -> string[] (screenshots, sorted ascending)",
+  "prompt": "Write a JavaScript function `screenshotNames(files)`. Given an array of filenames, return only the ones that are screenshots — a filename is a screenshot if its name (ignoring case) starts with the word \"screenshot\". Return them sorted in ascending (case-sensitive) order. Return an empty array if none match.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": [["b.png", "Screenshot 2.png", "Screenshot 1.png", "note.txt"]], "expect": ["Screenshot 1.png", "Screenshot 2.png"] },
+    { "args": [["report.pdf", "cat.jpg"]], "expect": [] },
+    { "args": [["screenshot_home.jpg", "Screenshot_A.png", "IMG_001.png"]], "expect": ["Screenshot_A.png", "screenshot_home.jpg"] },
+    { "args": [["Screenshot.png"]], "expect": ["Screenshot.png"] }
+  ]
+}

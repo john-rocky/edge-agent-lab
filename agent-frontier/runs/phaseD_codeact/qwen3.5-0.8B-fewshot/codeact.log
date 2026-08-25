@@ -1,0 +1,36 @@
+[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact/qwen3.5-0.8B-fewshot/work_tierA_meeting_followup/codeact_in.jsonl
+[eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
+[eval-driver] loaded 'qwen3_5_0_8b_decode_int8hu_block32_sym' in 1.59s
+[eval-driver] prewarmed in 0.11s
+  [1/1] key=c0 ptok=680 gen=494 ttft=3.43 wall=5.88 decode=201.3 tok/s
+
+==== SUMMARY (qwen3_5_0_8b_decode_int8hu_block32_sym) ====
+load=1.6s prewarm=0.1s
+n=1  batch_wall=5.9s  mean_wall/q=5.88s
+total_gen_tokens=494  mean_gen/q=494.0  capped=0/1
+aggregate_decode=201.7 tok/s  peak_footprint=423 MB
+trace -> /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact/qwen3.5-0.8B-fewshot/trace_tierA_meeting_followup.jsonl
+[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact/qwen3.5-0.8B-fewshot/work_tierA_photo_album/codeact_in.jsonl
+[eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
+[eval-driver] loaded 'qwen3_5_0_8b_decode_int8hu_block32_sym' in 0.65s
+[eval-driver] prewarmed in 0.06s
+  [1/1] key=c0 ptok=623 gen=595 ttft=2.99 wall=5.96 decode=199.6 tok/s
+
+==== SUMMARY (qwen3_5_0_8b_decode_int8hu_block32_sym) ====
+load=0.6s prewarm=0.1s
+n=1  batch_wall=6.0s  mean_wall/q=5.96s
+total_gen_tokens=595  mean_gen/q=595.0  capped=0/1
+aggregate_decode=199.9 tok/s  peak_footprint=398 MB
+trace -> /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact/qwen3.5-0.8B-fewshot/trace_tierA_photo_album.jsonl
+[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact/qwen3.5-0.8B-fewshot/work_tierD_aurora_brief/codeact_in.jsonl
+[eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
+[eval-driver] loaded 'qwen3_5_0_8b_decode_int8hu_block32_sym' in 0.67s
+[eval-driver] prewarmed in 0.07s
+  [1/1] key=c0 ptok=651 gen=367 ttft=2.92 wall=4.58 decode=220.4 tok/s
+
+==== SUMMARY (qwen3_5_0_8b_decode_int8hu_block32_sym) ====
+load=0.7s prewarm=0.1s
+n=1  batch_wall=4.6s  mean_wall/q=4.58s
+total_gen_tokens=367  mean_gen/q=367.0  capped=0/1
+aggregate_decode=221.0 tok/s  peak_footprint=411 MB
+trace -> /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact/qwen3.5-0.8B-fewshot/trace_tierD_aurora_brief.jsonl

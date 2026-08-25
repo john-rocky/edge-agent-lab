@@ -1,0 +1,451 @@
+{
+  "id": "tierE_breadcrumb_chain",
+  "title": "Follow a 20-hop document trail",
+  "tier": "tierE",
+  "source": "kickoff Tier E (long-horizon endurance): a 20+ dependent-read chain to find where a small model loses the thread. Synthetic 'trail' corpus so the chain is controllable and copyright-free; each read reveals the next id (true sequential dependency).",
+  "spec": "Follow the trail through my documents. Start at the document titled 'Trailhead', then follow each 'Next, read cNN' pointer from one waypoint to the next, all the way to the end. Collect every codeword you see, in order. In your final answer, list all the codewords and the final passphrase.",
+  "now": "2026-07-14T09:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 28,
+  "tool_allowlist": [
+    "corpus.search",
+    "corpus.read"
+  ],
+  "initial_state": {
+    "corpus": [
+      {
+        "id": "c00",
+        "title": "Trailhead",
+        "body": "Waypoint 0. Codeword: ALFA. Next, read c01."
+      },
+      {
+        "id": "c01",
+        "title": "Waypoint 1",
+        "body": "Waypoint 1. Codeword: BRAVO. Next, read c02."
+      },
+      {
+        "id": "c02",
+        "title": "Waypoint 2",
+        "body": "Waypoint 2. Codeword: CHARLIE. Next, read c03."
+      },
+      {
+        "id": "c03",
+        "title": "Waypoint 3",
+        "body": "Waypoint 3. Codeword: DELTA. Next, read c04."
+      },
+      {
+        "id": "c04",
+        "title": "Waypoint 4",
+        "body": "Waypoint 4. Codeword: ECHO. Next, read c05."
+      },
+      {
+        "id": "c05",
+        "title": "Waypoint 5",
+        "body": "Waypoint 5. Codeword: FOXTROT. Next, read c06."
+      },
+      {
+        "id": "c06",
+        "title": "Waypoint 6",
+        "body": "Waypoint 6. Codeword: GOLF. Next, read c07."
+      },
+      {
+        "id": "c07",
+        "title": "Waypoint 7",
+        "body": "Waypoint 7. Codeword: HOTEL. Next, read c08."
+      },
+      {
+        "id": "c08",
+        "title": "Waypoint 8",
+        "body": "Waypoint 8. Codeword: INDIA. Next, read c09."
+      },
+      {
+        "id": "c09",
+        "title": "Waypoint 9",
+        "body": "Waypoint 9. Codeword: JULIET. Next, read c10."
+      },
+      {
+        "id": "c10",
+        "title": "Waypoint 10",
+        "body": "Waypoint 10. Codeword: KILO. Next, read c11."
+      },
+      {
+        "id": "c11",
+        "title": "Waypoint 11",
+        "body": "Waypoint 11. Codeword: LIMA. Next, read c12."
+      },
+      {
+        "id": "c12",
+        "title": "Waypoint 12",
+        "body": "Waypoint 12. Codeword: MIKE. Next, read c13."
+      },
+      {
+        "id": "c13",
+        "title": "Waypoint 13",
+        "body": "Waypoint 13. Codeword: NOVEMBER. Next, read c14."
+      },
+      {
+        "id": "c14",
+        "title": "Waypoint 14",
+        "body": "Waypoint 14. Codeword: OSCAR. Next, read c15."
+      },
+      {
+        "id": "c15",
+        "title": "Waypoint 15",
+        "body": "Waypoint 15. Codeword: PAPA. Next, read c16."
+      },
+      {
+        "id": "c16",
+        "title": "Waypoint 16",
+        "body": "Waypoint 16. Codeword: QUEBEC. Next, read c17."
+      },
+      {
+        "id": "c17",
+        "title": "Waypoint 17",
+        "body": "Waypoint 17. Codeword: ROMEO. Next, read c18."
+      },
+      {
+        "id": "c18",
+        "title": "Waypoint 18",
+        "body": "Waypoint 18. Codeword: SIERRA. Next, read c19."
+      },
+      {
+        "id": "c19",
+        "title": "Waypoint 19",
+        "body": "Waypoint 19. Codeword: TANGO. This is the end of the trail. The final passphrase is MIDNIGHT-LANTERN-77."
+      },
+      {
+        "id": "x1",
+        "title": "Office wifi",
+        "body": "The guest wifi password rotates monthly."
+      },
+      {
+        "id": "x2",
+        "title": "Coffee order",
+        "body": "Oat milk flat white, no sugar for the 10am."
+      },
+      {
+        "id": "x3",
+        "title": "Parking",
+        "body": "Level 3 is reserved for visitors on weekdays."
+      },
+      {
+        "id": "x4",
+        "title": "Fire drill",
+        "body": "The muster point is the north lawn by the flagpole."
+      },
+      {
+        "id": "x5",
+        "title": "Printer",
+        "body": "The 5th-floor printer jams on thick card stock."
+      }
+    ]
+  },
+  "final_check": {
+    "all": [
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "ALFA"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "BRAVO"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "CHARLIE"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "DELTA"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "ECHO"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "FOXTROT"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "GOLF"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "HOTEL"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "INDIA"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "JULIET"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "KILO"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "LIMA"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "MIKE"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "NOVEMBER"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "OSCAR"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "PAPA"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "QUEBEC"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "ROMEO"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "SIERRA"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "TANGO"
+        ]
+      },
+      {
+        "kind": "answer_contains",
+        "all_of": [
+          "MIDNIGHT-LANTERN-77"
+        ]
+      },
+      {
+        "kind": "tool_called",
+        "tool": "corpus.read",
+        "min_count": 20
+      }
+    ]
+  },
+  "mock_solution": [
+    {
+      "call": {
+        "tool": "corpus.search",
+        "args": {
+          "query": "trailhead"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c00"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c01"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c02"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c03"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c04"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c05"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c06"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c07"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c08"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c09"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c10"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c11"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c12"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c13"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c14"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c15"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c16"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c17"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c18"
+        }
+      }
+    },
+    {
+      "call": {
+        "tool": "corpus.read",
+        "args": {
+          "id": "c19"
+        }
+      }
+    },
+    {
+      "finish": "Codewords in order: ALFA, BRAVO, CHARLIE, DELTA, ECHO, FOXTROT, GOLF, HOTEL, INDIA, JULIET, KILO, LIMA, MIKE, NOVEMBER, OSCAR, PAPA, QUEBEC, ROMEO, SIERRA, TANGO. Final passphrase: MIDNIGHT-LANTERN-77."
+    }
+  ]
+}

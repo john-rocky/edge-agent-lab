@@ -1,0 +1,16 @@
+{
+  "id": "he_fizzbuzz",
+  "title": "FizzBuzz as an array",
+  "tier": "humaneval",
+  "source": "FizzBuzz — the canonical programmer screening task; returned as an array of strings so the result is exactly checkable.",
+  "entry": "fizzbuzz",
+  "signature": "function fizzbuzz(n)  // n: integer -> string[] of length n",
+  "prompt": "Write a JavaScript function `fizzbuzz(n)` that returns an array of n strings for the numbers 1 through n. For multiples of 3 use \"Fizz\", for multiples of 5 use \"Buzz\", for multiples of both use \"FizzBuzz\", otherwise the number as a string.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": [5], "expect": ["1", "2", "Fizz", "4", "Buzz"] },
+    { "args": [3], "expect": ["1", "2", "Fizz"] },
+    { "args": [15], "expect": ["1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz"] },
+    { "args": [1], "expect": ["1"] }
+  ]
+}

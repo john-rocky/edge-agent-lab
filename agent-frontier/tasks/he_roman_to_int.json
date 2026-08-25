@@ -1,0 +1,17 @@
+{
+  "id": "he_roman_to_int",
+  "title": "Roman numeral to integer",
+  "tier": "humaneval",
+  "source": "LeetCode #13 Roman to Integer — classic parsing with subtractive pairs (IV, IX, XL, ...); a standard eval item.",
+  "entry": "romanToInt",
+  "signature": "function romanToInt(s)  // s: string (valid Roman numeral) -> integer",
+  "prompt": "Write a JavaScript function `romanToInt(s)` that converts a valid Roman numeral string to its integer value. Symbols: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. When a smaller symbol appears before a larger one it is subtracted (e.g. IV=4, IX=9, XL=40, XC=90, CD=400, CM=900).",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": ["III"], "expect": 3 },
+    { "args": ["IV"], "expect": 4 },
+    { "args": ["IX"], "expect": 9 },
+    { "args": ["LVIII"], "expect": 58 },
+    { "args": ["MCMXCIV"], "expect": 1994 }
+  ]
+}

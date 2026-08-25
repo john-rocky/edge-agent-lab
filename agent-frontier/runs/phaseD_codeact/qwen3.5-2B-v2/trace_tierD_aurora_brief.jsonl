@@ -1,0 +1,2 @@
+{"mode":"codeact","task":"tierD_aurora_brief","tier":"tierD","tool_allowlist":["corpus.search","corpus.read"],"type":"meta"}
+{"checks":[{"detail":"missing cites=[\"d5\", \"d6\"] missing facts=[\"2026-09-15\", \"Priya\", \"Sam\"]","kind":"brief_cites","pass":false},{"detail":"corpus.read called 0x (need 2)","kind":"tool_called","pass":false}],"corpus_revisits":{"context_growth":[],"distinct_docs":0,"reads":[],"reread_count":0,"total_reads":0},"define_error":null,"logs":"","mode":"codeact","ok":false,"tool_calls":0,"type":"result","wall_ms":1.5}

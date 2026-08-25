@@ -1,0 +1,32 @@
+{
+  "id": "tierA_voicememo_actions",
+  "title": "FLAGSHIP: voice memo → transcript → my action items → reminders",
+  "tier": "tierA",
+  "source": "RESEARCH_TIERA.md #2 — Picovoice on-device cookbook (Whisper + local LLM → summarize + extract action items, audio never leaves device); 'Voice Recorder Audio Memos' ships an on-device AI Meeting Brief with decisions + action items.",
+  "spec": "Transcribe my 'Team sync' voice memo, work out the action items and who owns each one, and create a reminder for every action item that is assigned to me. I am Alex. Do not create reminders for action items owned by anyone else.",
+  "now": "2026-07-13T09:00:00-07:00",
+  "timezone": "America/Los_Angeles",
+  "max_rounds": 10,
+  "tool_allowlist": ["audio.transcribe", "reminders.create", "reminders.list"],
+  "initial_state": {
+    "audio_memos": [
+      { "id": "m1", "title": "Team sync", "transcript": "Alex: Let's ship the beta on Friday. Priya: I'll finalize the release notes by Thursday. Alex: I'll email the beta testers today, and I'll book the retro for next week. Sam: I can handle the App Store screenshots. Alex: One more thing, I need to update the pricing page before we ship." }
+    ],
+    "reminders": []
+  },
+  "final_check": {
+    "all": [
+      { "kind": "reminder_count", "equals": 3 },
+      { "kind": "reminder_exists", "title_contains": "beta testers" },
+      { "kind": "reminder_exists", "title_contains": "retro" },
+      { "kind": "reminder_exists", "title_contains": "pricing" }
+    ]
+  },
+  "mock_solution": [
+    { "call": { "tool": "audio.transcribe", "args": { "id": "m1" } } },
+    { "call": { "tool": "reminders.create", "args": { "title": "Email the beta testers" } } },
+    { "call": { "tool": "reminders.create", "args": { "title": "Book the retro for next week" } } },
+    { "call": { "tool": "reminders.create", "args": { "title": "Update the pricing page" } } },
+    { "finish": "Created 3 reminders for Alex's action items (email beta testers, book retro, update pricing page). Priya's and Sam's items were left out." }
+  ]
+}

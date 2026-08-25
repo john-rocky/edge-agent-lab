@@ -1,0 +1,17 @@
+{
+  "id": "auto_days_until",
+  "title": "Days between two dates",
+  "tier": "automation",
+  "source": "MacStories documents 'Days Until…' as a canonical Shortcuts date action; ShortcutsGallery hosts a whole days-until countdown category. https://www.macstories.net/stories/shortcuts-rewind-dates-calendars-and-beyond/",
+  "entry": "daysUntil",
+  "signature": "function daysUntil(fromISO, toISO)  // fromISO, toISO: 'YYYY-MM-DD' -> integer (toISO - fromISO in whole days)",
+  "prompt": "Write a JavaScript function `daysUntil(fromISO, toISO)` that takes two dates as 'YYYY-MM-DD' strings and returns the whole number of days from `fromISO` to `toISO` (toISO minus fromISO). The result is 0 for the same day and negative if `toISO` is earlier. Handle month lengths and leap years correctly; treat the dates as calendar days (no time zone effects).",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": ["2026-07-12", "2026-07-13"], "expect": 1 },
+    { "args": ["2026-01-01", "2026-12-31"], "expect": 364 },
+    { "args": ["2026-07-12", "2026-07-12"], "expect": 0 },
+    { "args": ["2026-07-13", "2026-07-12"], "expect": -1 },
+    { "args": ["2024-02-28", "2024-03-01"], "expect": 2 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "auto_format_todo",
+  "title": "Format todos as a Markdown checklist",
+  "tier": "automation",
+  "source": "Recurring Reminders/notes -> Markdown-checklist ('- [ ]'/'- [x]') demand — Apple Shortcut pulling Reminders into an Obsidian markdown note; ReminderSync App Store app uses the same format. https://fulcra.design/Posts/Automatically-download-Reminders-into-your-Obsidian-notes-with-Shortcuts/",
+  "entry": "formatTodos",
+  "signature": "function formatTodos(items)  // items: {title:string, done:boolean}[] -> string (Markdown checklist)",
+  "prompt": "Write a JavaScript function `formatTodos(items)` that takes an array of objects like { title: string, done: boolean } and returns a Markdown checklist string: one line per item, '- [x] ' + title if done is true, otherwise '- [ ] ' + title. Join the lines with a single newline and add no trailing newline. Return an empty string for an empty array.",
+  "timeout_ms": 2000,
+  "tests": [
+    { "args": [[{ "title": "Buy milk", "done": false }, { "title": "Call mom", "done": true }]], "expect": "- [ ] Buy milk\n- [x] Call mom" },
+    { "args": [[]], "expect": "" },
+    { "args": [[{ "title": "Solo", "done": true }]], "expect": "- [x] Solo" },
+    { "args": [[{ "title": "a", "done": false }, { "title": "b", "done": false }, { "title": "c", "done": true }]], "expect": "- [ ] a\n- [ ] b\n- [x] c" }
+  ]
+}
