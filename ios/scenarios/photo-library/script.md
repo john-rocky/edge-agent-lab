@@ -42,8 +42,10 @@ photographs, and "The perception rung, on real pixels" below is what it
 measured. It is not what the bench runs: every round in this file is the canned
 world, on purpose, because a case worded against a label is only scorable while
 that label is a fact somebody wrote down. The CLIP rung above it is device-only
-(playbook spec E: CoreAI.framework is absent from the Mac Catalyst SDK tree),
-so it waits for the phone.
+(playbook spec E: CoreAI.framework is absent from the Mac Catalyst SDK tree)
+and **runs on the phone** as of 2026-08-25 — see "On the phone" below, where it
+answers exactly one query of three and the other two turn out to be the label
+shelf's after all.
 
 ## The canned library (what a case can point at)
 
@@ -89,7 +91,7 @@ so it waits for the phone.
   nouns, cannot-tell — extracted so this pack cannot drift from the ruling.
   The two moment-seek copies stay where they are: they are r38–r45's control.
 
-## Rounds (Mac lane, Apple FM, one run each — a round is one run)
+## Rounds (Apple FM, one run each — a round is one run; l* is the Mac lane, d* the phone)
 
 | round | what changed | total | routed | absence-shaped answers |
 |---|---|---|---|---|
@@ -100,6 +102,7 @@ so it waits for the phone.
 | l4 | an argument-less finder selects nothing; delete refuses the whole library | 38/52 | 44/52 | 0 |
 | l5 | the album filter leaves find_photos and becomes its own tool | 43/52 | 47/52 | 0 |
 | l5b | nothing — l5 again, same binary | 40/52 | 46/52 | 0 |
+| **d1** | **the same cases on the phone** (2026-08-25, iPhone 17 Pro) | **41/52** | **47/52** | 0 |
 
 **Read the last two columns.** The total sat in a 36–40 band across five runs
 of four configurations before the album split moved it to 40–43, and on its own
@@ -394,6 +397,91 @@ library is the stage's. Swapping properly means re-wording the cases against
 the shelf's own vocabulary, on a library of real photographs someone actually
 took. That is a decision with a photo set attached, not a refactor.
 
+## On the phone (2026-08-25, iPhone 17 Pro, Apple FM)
+
+### d1 — 41/52, and the Mac lane's failure set is the phone's
+
+The pack's first device round, same 52 cases, `SCENARIO=photo-library
+./run-device.sh apple` (the scenario line was missing from the device runner
+until today; video-moments went in beside it).
+
+**41/52 (JA 19, EN 22), 47 of 52 routed** — inside the Mac's l5/l5b band of
+40–43, and the per-rung line is the Mac's to within a case everywhere. What
+makes it worth more than one number: **all nine cases that failed in both Mac
+runs failed on the phone too, and not one case that failed on both Macs passed
+on the phone.** The phone added two failures of its own, one of which (l-en-
+when-2) l5b had also failed. The Mac lane has always been hedged as a smoke
+test; this is the first measurement of how good a smoke test it is, and for
+this pack the answer is that its reproducible failures are the device's
+failures.
+
+Latency, for the table: median 3.18 s per case on the phone against 2.93 s on
+the Mac, mean 3.9 s against 3.4 s, worst case 7.3 s. Same model family, ~8%
+slower per turn, on a 52-case pack whose cases are one or two calls each.
+
+The two phone-side additions are both worth their names:
+
+- 「海の写真を探して。」 routed correctly to `search_photos` and then **opened
+  photo #27 and favourited it** — two acts nobody asked for, one of them a
+  state change. The eagerness recipe, on a pack that also holds a delete.
+- "What did I take last month?" arrived as `when: "July 2025"` — the model
+  resolved the relative phrase itself, and got the *year* wrong against a state
+  that says today is 2026-08-21. The argument accepts "last month" verbatim
+  precisely so the app can do the calendar; **offering the model the option not
+  to do arithmetic does not stop it doing arithmetic**, and when it does, it is
+  wrong in the way the units recipe predicts.
+
+### The CLIP rung, running in the app for the first time
+
+Spec E's rung has existed since 2026-08-21 as code that compiles out on
+Catalyst and had never executed inside the app. On the device it does:
+`LIBRARY CLIP embedded 12 photos`, the fixture library's photographs through
+`ImageTextEncoder` in the same loop as the OS judges, and `search_photos`
+labels-first with the embedding only where the shelf is silent.
+
+**And the first thing it found was a bug in the shelf, not a gap in it.** The
+first device beats had "Find the photos of tall buildings from above" falling
+through to CLIP — which looked like spec E's own example of what a label shelf
+cannot name, and was nothing of the kind: the classifier says `building`, the
+query says "buildings", and the matcher only did substring containment. One
+`s`. With the plural handled, the shelf answers that query itself and the rung
+stays dark. Spec E's rule was written for exactly this and it still nearly
+caught us: **ask the shelf before claiming a rung — and make sure the shelf was
+asked in a form it can answer.**
+
+What survives the fix is one query of three, and it is the one spec E named:
+
+```
+BEAT Find the photos of tall buildings from above.
+TOOL search_photos -> found 2 photos ("tall buildings from above" in the picture)   ← the shelf, after the plural fix
+BEAT Find a puppy running on the sand.
+LIBRARY CLIP "puppy running on the sand" → #1 0.303, #2 0.289
+TOOL search_photos -> no photo is labelled "puppy running on the sand" — the closest-looking 2 are, not confirmed sightings
+```
+
+The shelf holds `dog` and holds nothing for *puppy*, *running* or *sand*; CLIP
+ranks the two beach-puppy photos first, at 0.303 and 0.289 against the 0.27
+gate inherited from the moments sweep. The score is a noise gate and nothing
+rests on it, because the answer never claims presence.
+
+**The rename recipe got its positive control on the same afternoon.** The
+model read the CLIP row and answered *"No exact match for 'puppy running on the
+sand'. Closest: …"* — the candidate wording held all the way into the bubble.
+The identical re-wording did **not** hold two days earlier for
+`find_blurry_photos`, where the model answered "One photo looks blurry" off a
+result that never said blurry. Same model, same pack, same kind of re-worded
+result; the difference is that `search_photos` is a neutral name and
+`find_blurry_photos` is a verdict. A rung that can only rank has to be renamed,
+not just re-worded — now measured in both directions.
+
+One more misroute worth keeping: "Which photos have a dog in them?" opened with
+`find_photos_of_person(name: "dog")`. Not the noun — the *phrase*: "…in them"
+is what `find_photos_of_person` is described for ("the photos a named person is
+in"). The roster refusal caught it ("nobody called \"dog\" is named in this
+library — the people it knows are Aoi, Ken, Mei"), the model recovered through
+`check_photo` and answered correctly. That branch has now been the recovery
+three times: it is the most load-bearing sentence in the pack.
+
 ## The stage's first run deleted the library
 
 The stage is wired (`--scenario library --autorun --backend apple`, Mac
@@ -475,4 +563,7 @@ the prose question. Nothing about the argument decides it.
    somebody else's footage. A camera roll of real photographs — with faces in
    it — is what turns the fixture library into the pack's world and the pack
    into a take, and it is the one thing this lane cannot produce for itself.
-5. **The CLIP rung and the device take** — device only.
+5. **The take.** The device half is done — the bench round, the perception
+   rung and the CLIP rung all run on the phone — so what is left for a take is
+   the thing a take needs and a measurement does not: a library worth filming,
+   and beats worded against what its shelf actually says.

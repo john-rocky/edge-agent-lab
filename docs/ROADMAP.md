@@ -224,7 +224,20 @@ open: the remaining slots (`favorites_only` still catches the verb in
 (JA 「削除して」 arrives `confirm: true`, EN calls no delete at all),
 and a photo set with faces in it — the rung runs on twelve frames of
 somebody else's footage, and a camera roll is the one thing this lane
-cannot produce for itself. Canon:
+cannot produce for itself. **On the phone 2026-08-25** (iPhone 17 Pro,
+the pack's first device round): **41/52, 47 of 52 routed, inside the
+Mac's 40–43 band — and every case that failed in both Mac runs failed
+on the phone, with none passing there that both Macs had failed.** The
+Mac lane has been hedged as a smoke test since it was built; this is
+the first measurement of how good a smoke test it is, and for this
+pack its reproducible failures are the device's. Median 3.18 s a case
+against the Mac's 2.93 s. The CLIP rung ran inside the app for the
+first time (it has been device-only and compiled out since it was
+written): twelve fixture photographs embedded beside the OS judges,
+labels first, and the rung earning exactly one query of three — the
+other two were the label shelf's all along, one of them hidden behind
+a missing plural in our own matcher, which is the shelf-first rule
+catching its own author. Canon:
 scenarios/photo-library/script.md.
 
 ### Video moment-seek (user, 2026-08-20) — retrieval pack candidate

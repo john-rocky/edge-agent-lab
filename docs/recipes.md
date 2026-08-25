@@ -5,7 +5,8 @@ do and the measurement or failure that earned it. Sizes below: "small"
 means 1–3B running on the phone. Recipes from 2026-08-19 onward include
 failures measured on Apple FM via the Mac lane (the same model family,
 Catalyst build, `ios/bench/run-mac.sh`) — routing evidence, gathered
-without a phone.
+without a phone, and from 2026-08-25 some of it re-measured on the phone
+itself, where the Mac lane's failures reproduced.
 
 ## Name the tool for the verb the user will say
 
@@ -433,6 +434,28 @@ tools and a cancel tail at 41. The gated pair is a hazard at every
 list size it appears in; the app dialog is not a mitigation but the
 mechanism.
 
+## Ask the cheap layer in a form it can answer before adding an expensive one
+
+The moment-seek lane's rule is "before claiming a rung is needed, ask the
+shelf" — two of three queries it had filed under *CLIP territory* turned out
+to be plain VNClassify labels. The photo-library pack's first device run
+found the rule's second half. "Find the photos of tall buildings from
+above" fell through the label shelf to the embedding rung, which ranked the
+two skyline photos and looked like a clean demonstration of what a
+classifier cannot name. It was nothing of the kind: the classifier says
+`building`, the query says "buildings", and the matcher only did substring
+containment. One `s`. With plurals handled the shelf answers the query
+itself and the expensive rung stays dark; of three beats written to
+exercise it, exactly one survived — the one the earlier spec had already
+named ("a puppy running on the sand", where the shelf holds `dog` and holds
+nothing for puppy, running or sand).
+
+A rung is justified by what the cheaper layer *cannot* answer, and a
+tokenizer bug is indistinguishable from a vocabulary gap when you read it
+from above. Before you buy an index: log what the cheap layer was asked and
+what it holds, side by side, and make the query meet the vocabulary
+half-way.
+
 ## A rung that can only rank has to be renamed, not just re-worded
 
 The moment-seek lane ruled that a tool which can rank but cannot decide
@@ -456,6 +479,16 @@ decide must not be *named* for the decision either. Rename it for what
 it measures — the same way a tool is named for the verb the user will
 say — or expect the claim you refused to make to come back in the
 model's own sentence.
+
+The positive control landed four days later, on the phone, same pack and
+same model. The CLIP rung under `search_photos` returns the identical
+shape of answer — *"no photo is labelled "puppy running on the sand" —
+the closest-looking 2 are, not confirmed sightings"* — and the model
+answered *"No exact match for 'puppy running on the sand'. Closest: …"*.
+The candidate wording held all the way into the bubble. The only
+difference between the two cases is the name over the door:
+`search_photos` claims nothing, `find_blurry_photos` claims the verdict.
+Re-wording works when the name is neutral, and cannot when it is not.
 
 ## A finder's emptiest call is the dangerous one
 

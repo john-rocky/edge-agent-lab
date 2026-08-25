@@ -367,6 +367,24 @@ translate below.
 Reached = every expected call made, in order, with matching arguments;
 extras allowed except on no-op cases. Median per case.
 
+**2026-08-25, iPhone 17 Pro** — the retrieval archetype's photo-library
+pack, the first row measured on this device
+([raw](../ios/bench/results/2026-08-25-device/)):
+
+| pack | Apple FM (device) | Apple FM (Mac, same cases) |
+|---|---|---|
+| photo-library, 14 tools, 52 cases | 41/52 · 3.18 s median | 40–43/52 · 2.93 s median |
+
+The row that matters is the second column beside the first. This pack ran
+seven Mac rounds before it saw a phone, and the device landed inside the
+Mac's band with the *same failures*: every case that failed in both runs of
+the Mac's committed config failed on the phone, and none that failed on both
+Macs passed there. The Mac lane is still a smoke test by construction — a
+different machine, no LiteRT engine, no real permissions — but for a
+routing pack its reproducible failure set has now been measured as the
+device's, once, on one pack. Latency is the honest gap: about 8% slower per
+turn on the phone.
+
 | model | location | search | maps | photo OCR | translate | speak | no-op |
 |---|---|---|---|---|---|---|---|
 | Apple FM (on-device) | ✓ | ✓ | ✓ | ✓ | ✓* | ✓ | 0/2 |

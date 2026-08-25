@@ -35,6 +35,10 @@ case "$SCENARIO" in
   shopping) TOOLSET=shopping ;;
   money) TOOLSET=money ;;
   inbox) TOOLSET=inbox ;;
+  # The retrieval archetype's two packs. Both were built and rounded on the
+  # Mac lane; the numbers here are the first ones the model table can use.
+  video-moments) TOOLSET=moments ;;
+  photo-library) TOOLSET=library ;;
   *) echo "unknown scenario $SCENARIO"; exit 1 ;;
 esac
 [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }
