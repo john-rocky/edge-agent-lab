@@ -312,13 +312,15 @@ The ROADMAP's sentence for this pack is "a mock library with **real
 Vision/CoreImage calls**". It is true now, on the Mac, for four of the five
 rungs — and what it cost to find out is the part worth reading.
 
-Two new tools in `ios/bench`. `libraryfixture.swift` builds a library of real
-photographs out of footage this lane already holds: eight frames of
-journey.mp4 (the moment-seek take's own four Pexels scenes) and four from two
-what-can-ai-see Pexels clips, twelve photos with a manifest that carries the
-things no pixel does — dates, places, albums, favourites, the people's names.
-`libraryscout.swift` runs the shelf over them and prints what it says, because
-the playbook's rule for footage holds for stills: **scout, then word.**
+Two new tools in `ios/bench`. `libraryfetch.py` builds a library of real
+photographs — 28 of them, from Pexels, with a manifest that carries the things
+no pixel does (dates, places, albums, favourites, the people's names) and
+nothing about the pictures at all. `libraryscout.swift` runs the shelf over
+them and prints what it says, because the playbook's rule for footage holds for
+stills: **scout, then word.** (The first cut of this library was twelve frames
+cut out of footage the lane already held — journey.mp4 and two
+what-can-ai-see clips. It proved the plumbing and had no faces in it, which is
+why the numbers below moved when real photographs replaced it.)
 `PhotoLibraryBox.indexFixtures()` then replaces the canned rows with the
 measurement — classify + the animal detector for `looks`, VNRecognizeText for
 `text`, VNDetectFaceRectangles for face presence, variance of the Laplacian for
@@ -332,6 +334,10 @@ LIBRARY labels: adult, animal, beach, building, canine, cityscape, crosswalk,
                 decorative plant, dirt road, dog, foliage, land, liquid, machine
 LIBRARY softness: #9 152, #2 298, #1 316, #8 444, #7 448, #4 473
 ```
+
+(The 28-photograph library that replaced it indexes
+`8 faces detected, 5 with text, 2 in near-identical pairs` — every rung has
+material now, and the face rung has some for the first time.)
 
 What the shelf actually said, against what the canned world assumed:
 
@@ -544,6 +550,50 @@ Across five rounds and two stage runs, every combination has now been observed
 in both languages: confirm-true on the first ask, no delete call at all, and
 the prose question. Nothing about the argument decides it.
 
+## Casting a library (2026-08-26)
+
+`libraryfetch.py` holds the 28 Pexels IDs and the invented half — dates,
+places, albums, favourites, who is tagged. The photographs were chosen twice
+over, and the second pass is the one worth writing down.
+
+**By eye first**, on contact sheets: a camera roll has to look like somebody's
+year. Beaches in summer, a Kyoto trip in November, neon streets, ramen, a
+portrait shoot, a snowy Sapporo, one photo that came out badly. Four portraits
+of one woman from a single upload batch — Pexels IDs inside one batch is a
+reliable "same model" signal — plus two of a second woman by the sea, so the
+face rung has more than one name to know.
+
+**Then against the shelf**, and this is where the first cut died: of six beach
+photos chosen by looking, **exactly one produced a `beach` or `ocean` label**.
+The other five are beaches to a person and `chair`, `wood natural`,
+`(nothing over 0.35)` to VNClassify — "show me the beach photos" would have
+answered with one picture out of six and looked broken. Re-cast from
+candidates that were scouted first, the set now answers with four. The
+playbook's material rule — *pick footage the shelf can actually see* — is not
+about footage. It is about anything a rung has to name.
+
+Three more things the casting taught:
+
+- **The scout has to run where the app runs.** `libraryscout.swift` on the Mac
+  reads `COFFEE` off the shop-sign photo; the phone's Vision reads
+  `PAlAZIAL mackine weicones enbble … 4oz £2.50` off the same JPEG and never
+  finds the word. A beat worded against the Mac's OCR misses on the device —
+  which is exactly what happened on the first device run. The index now logs
+  one line per photo (`LIBRARY #25 … | text "…" | soft 1643`), so the take can
+  be worded against the phone's own eyes. The croissant menu is the reliable
+  OCR subject: both machines read `Croissant: • Plain... 4,5`.
+- **The alias table tracks a shelf, and the shelf changed.** 「海」 mapped to
+  `sea`, which is what the canned world calls it; the classifier says `ocean`.
+  Both entries are in the table now, duplicate keys and all — a Japanese noun
+  may have to reach two vocabularies at once, and a table that follows one of
+  them silently stops working the day the pack indexes pixels.
+- **In Japanese the alias table gates the embedding rung.** A JA query with no
+  alias never reaches CLIP: the finder refuses it as unevaluable first (a lone
+  JA clause can match no English label, which is the D2 branch working as
+  designed), and a JA query *with* an alias usually finds the label and never
+  needs CLIP. 「砂で遊んでる子犬」 answered off the shelf, through 犬→dog. The
+  rung's honest opening is English, or a query-expansion step nobody has built.
+
 ## Open, in the order that pays
 
 1. **The remaining slots.** l5 took `album` out and the band moved; what is
@@ -559,10 +609,8 @@ the prose question. Nothing about the argument decides it.
    able to say "this prefix is allowed" — a redirected first call followed by
    the right one is not the same event as a ritual tail, and today they score
    identically.
-4. **The photo set.** The rung runs; what it runs on is twelve frames of
-   somebody else's footage. A camera roll of real photographs — with faces in
-   it — is what turns the fixture library into the pack's world and the pack
-   into a take, and it is the one thing this lane cannot produce for itself.
+4. **The photo set** — done, 2026-08-26: 28 Pexels photographs, cast against
+   the shelf as well as by eye (see "Casting a library" below).
 5. **The take.** The device half is done — the bench round, the perception
    rung and the CLIP rung all run on the phone — so what is left for a take is
    the thing a take needs and a measurement does not: a library worth filming,

@@ -206,8 +206,9 @@ the destination album finally has only the tool that creates it to
 land on, and `place` reached its slot for the first time in five
 rounds; the repeat is what keeps that a two-or-three-case claim rather
 than the five the first run advertised. **The perception rung runs**
-(l5, stage only): `libraryfixture.swift` builds twelve real
-photographs out of footage this lane already holds,
+(l5, stage only): `libraryfetch.py` builds a library of real
+photographs (28 of them from Pexels, 2026-08-26; the first cut was
+twelve frames of footage the lane already held),
 `libraryscout.swift` prints what the shelf says about them, and
 `indexFixtures()` replaces the canned content with VNClassify, the
 animal detector, VNRecognizeText, face presence, a Laplacian sharpness

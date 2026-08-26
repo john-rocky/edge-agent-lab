@@ -172,13 +172,16 @@ carries a `layer` field the Swift runner ignores and `rounds.py` reads
 with `ROUNDS_CASES`, so a round reports not only how many cases passed
 but how many opened on the rung that could answer them cheapest — the
 number this pack exists for. Two scripts serve its perception rung,
-which the bench never runs and the stage does: `libraryfixture.swift`
-builds a library of real photographs out of footage already on disk
-(journey.mp4 and two what-can-ai-see Pexels clips) with a manifest for
-the things no pixel carries, and `libraryscout.swift` prints what
+which the bench never runs and the stage does: `libraryfetch.py`
+builds a library of 28 real photographs from Pexels with a manifest for
+the things no pixel carries (dates, places, albums, who is tagged) and
+nothing about the pictures, and `libraryscout.swift` prints what
 VNClassify, the animal detector, OCR, face detection, a Laplacian
 sharpness meter and an average hash say about a folder of images —
 scout, then word, the playbook's rule for footage applied to stills.
+Photos are cast against the shelf as well as by eye: of the first six
+beach photos chosen by looking, one produced a `beach` or `ocean`
+label.
 
 ## What a JSONL line records
 

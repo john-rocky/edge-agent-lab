@@ -125,3 +125,25 @@ Recording notes: the prop is the newest library video, ~10–20 s, landscape,
 with sound (beat 5 has to have something to mute), some motion (beat 3's
 slow motion has to read). Beat 6 saves a copy — delete it before the next
 take.
+
+**The prop is cut (2026-08-26).** `tokyo-street.mp4` — Pexels 17418596 by Huu
+Huynh, "a street in Tokyo with people walking down it": **34.8 s, 1920×1080
+landscape, AAC stereo at −20 dB**, lanterns and shopfronts at dusk with people
+walking toward the camera. It meets all four requirements the beats put on the
+footage, and the composition is the one that matters for beat 1: the street
+recedes down the middle, so cropping to 9:16 keeps the subject and the change
+is unmistakable on screen. Two alternates from the same photographer, same
+look, if it has to be re-cut: 17418615 (30 s) and 17422349 (22 s, a covered
+arcade — even stronger vertical).
+
+Loading it needs no camera roll: `--video tokyo-street.mp4` resolves a bare
+name against the app's own Documents, so `devicectl device copy to` puts the
+prop on the phone and the flag finds it there (verified on the device —
+`VIDEO loaded — Timeline: 1 clip, 34.8 s total, frame 1920×1080`). AirDrop the
+copy on the Desktop instead if the take should show the real Photos path.
+
+One thing the first device run says about the beats, before anyone records:
+「最初の2秒を切って、縦にして。」 — two verbs — made **only the trim**. Beat 1
+as scripted carries three (cut, vertical, fade), and the pack's own recipe for
+this is already written above: when the model cannot chain, chain in the tool,
+or split the beat. Scout beat 1 before shooting it.
