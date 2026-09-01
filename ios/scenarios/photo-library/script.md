@@ -550,6 +550,51 @@ Across five rounds and two stage runs, every combination has now been observed
 in both languages: confirm-true on the first ask, no delete call at all, and
 the prose question. Nothing about the argument decides it.
 
+## The take (2026-08-26, iPhone 17 Pro, EN, four beats)
+
+The pack's first end-to-end run in front of a camera, and the thing that had
+to be built before it could be filmed at all: **a photo pack whose stage draws
+a table of filenames is not a demo of a photo pack.** The stage now draws the
+camera roll as a grid of thumbnails and answers in light — every photo stays on
+screen the whole run, the ones the last finder returned keep full brightness,
+the rest fall back to 18% and grey. 28 becoming 6 is the only way a retrieval
+demo has ever been legible.
+
+```
+BEAT Show me the photos from last summer.
+TOOL find_photos      -> found 6 photos (summer 2025)
+BEAT Put them in an album called Summer.
+TOOL add_to_album     -> put 6 photos in Summer (a new album)
+BEAT Find a puppy running on the sand.
+LIBRARY CLIP "puppy running on the sand" → #4 0.319, #5 0.306
+TOOL search_photos    -> no photo is labelled "puppy running on the sand" — the closest-looking 2 are, not confirmed sightings
+BEAT Any photos of a cat?
+LIBRARY CLIP "cat" best 0.226 — under 0.27
+TOOL search_photos    -> no photos match "cat" in the picture
+```
+
+Four beats, one call each, no spurious calls. The arc is the pack's whole
+thesis in four sentences: the free layer answers, the answer is acted on, the
+expensive layer speaks only where the free one is silent and never claims a
+sighting, and the honest no survives all of it.
+
+**The fourth beat needed one more state line to come out clean.** On the first
+run it opened with `find_photos_of_person("cat")` — the roster refusal caught
+it and the model recovered, but that is two tool cards on screen for one
+question. The state named the albums and the places and never named the
+*people*, so a noun with nowhere else to go went to the tool that takes a name.
+`People: Aoi, Mei.` in the state line, and the misroute is gone. Third
+vocabulary, same lesson as the places in l2, paid for a third time: **whatever
+a filter's argument is drawn from, the state has to say out loud.**
+
+What is real in that recording, since a take's honesty is the whole product:
+the labels, the OCR, the faces, the softness, the duplicate pairs and the CLIP
+cosines are what the phone's own Vision, CoreImage and CoreAI returned about
+those 28 JPEGs, and the tool results on screen are the tools' actual output —
+the stage runs the real bodies, only the bench uses fakes. What is invented is
+the metadata: the dates, the places, the albums, and which face is called Mei.
+Pexels stock has no true "last summer in Kamakura", and no rung claims it does.
+
 ## Casting a library (2026-08-26)
 
 `libraryfetch.py` holds the 28 Pexels IDs and the invented half — dates,

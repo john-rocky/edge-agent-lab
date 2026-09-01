@@ -142,6 +142,13 @@ prop on the phone and the flag finds it there (verified on the device —
 `VIDEO loaded — Timeline: 1 clip, 34.8 s total, frame 1920×1080`). AirDrop the
 copy on the Desktop instead if the take should show the real Photos path.
 
+**Shot 2026-08-26 on the phone, three beats, three calls, nothing spurious**:
+`trim_clip` → 34.8 s becomes 32.8 s, `crop_video` → `cropped to 9:16 — the
+frame is now 606×1080` (the frame turning vertical on screen is the take's
+money shot), `export_video` → `exported 32.8 s at 606×1080`. Pulled off the
+device and ffprobed rather than believed from the toast: **606×1080, 32.805 s,
+audio track present, 40 MB.**
+
 One thing the first device run says about the beats, before anyone records:
 「最初の2秒を切って、縦にして。」 — two verbs — made **only the trim**. Beat 1
 as scripted carries three (cut, vertical, fade), and the pack's own recipe for
