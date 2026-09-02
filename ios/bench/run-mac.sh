@@ -20,6 +20,11 @@ set -u
 # whole run pulled nothing.
 unsetopt nomatch
 HERE=${0:a:h}
+# LANE=guided runs each pack's guided.json (the structured-output lane)
+# instead of cases.json; SCHEMA_IN_PROMPT=yes|no is Foundation Models'
+# includeSchemaInPrompt for that lane. Results get a -guided suffix.
+LANE=${LANE:-tools}
+SCHEMA_IN_PROMPT=${SCHEMA_IN_PROMPT:-}
 APP=~/code/LiteRT-Models/lfm-tools-ios/build/Build/Products/Debug-maccatalyst/LFMToolsMac.app/Contents/MacOS/LFMToolsMac
 FILES=~/Library/"Application Support"/LFMTools
 # BENCH_OUT overrides the destination — a second run on the same day must
@@ -40,6 +45,7 @@ for SCENARIO in "$@"; do
     coffee-run) TOOLSET=demo ;;
     photo-editing) TOOLSET=photo ;;
     focus) TOOLSET=focus ;;
+    chains) TOOLSET=chains ;;
     field-report) TOOLSET=report ;;
     video-editing) TOOLSET=video ;;
     # The retrieval archetype's first pack (ROADMAP "Video moment-seek"):
@@ -93,7 +99,13 @@ for SCENARIO in "$@"; do
       ;;
     *) echo "unknown scenario $SCENARIO"; exit 1 ;;
   esac
-  CASES="$HERE/../scenarios/$CASES_DIR/cases.json"
+  SUFFIX=""
+  if [[ "$LANE" == guided ]]; then
+    CASES="$HERE/../scenarios/$CASES_DIR/guided.json"
+    SUFFIX="-guided"
+  else
+    CASES="$HERE/../scenarios/$CASES_DIR/cases.json"
+  fi
   [[ -f "$CASES" ]] || { echo "no cases at $CASES"; exit 1; }
   if [[ "$SCENARIO" == polish* && ! -f "$FILES/toolbench-fixtures/loop-dark.jpg" ]]; then
     echo "no loop fixtures — generate them first: xcrun swift $HERE/fixtures.swift <base-photo>"
@@ -108,7 +120,8 @@ for SCENARIO in "$@"; do
   EXTRA=()
   [[ -n "$INSTR" ]] && EXTRA=(--instructions "$INSTR")
   [[ -n "$LADDER" ]] && EXTRA+=(--only "$(python3 "$HERE/ladder.py" tools "$LADDER")")
-  echo "== $SCENARIO (toolset $TOOLSET${INSTR:+, instructions $INSTR}) on Apple FM, Mac"
+  [[ -n "$SCHEMA_IN_PROMPT" ]] && EXTRA+=(--schema-in-prompt "$SCHEMA_IN_PROMPT")
+  echo "== $SCENARIO $LANE (toolset $TOOLSET${INSTR:+, instructions $INSTR}${SCHEMA_IN_PROMPT:+, schema-in-prompt $SCHEMA_IN_PROMPT}) on Apple FM, Mac"
   "$APP" --toolbench --toolset "$TOOLSET" $EXTRA --model apple >/dev/null 2>&1 &
   PID=$!
   # Up to 30 min per pack: a records pack with big state blocks and chains
@@ -120,7 +133,7 @@ for SCENARIO in "$@"; do
   kill $PID 2>/dev/null
   JSONL=$(ls -t "$FILES"/toolbench-<->.jsonl 2>/dev/null | head -1)
   if [[ -z "$JSONL" ]]; then echo "  no result written"; continue; fi
-  DEST="$OUT/mac-$SCENARIO-apple-fm.jsonl"
+  DEST="$OUT/mac-$SCENARIO$SUFFIX-apple-fm.jsonl"
   mv "$JSONL" "$DEST"
   rm -f "$FILES"/toolbench-*.done
   python3 - "$DEST" <<'EOF'
@@ -132,7 +145,9 @@ for line in open(sys.argv[1]):
     if r.get("pass"): passed+=1
     else:
         failed+=1
-        if r.get("loop"):
+        if r.get("guided"):
+            print(f"  FAIL {r['case']}: {r.get('error') or r.get('json')}")
+        elif r.get("loop"):
             ops=[[c["tool"] for c in rnd] for rnd in r.get("ops",[])]
             print(f"  FAIL {r['case']}: rounds={r.get('rounds')} stopped={r.get('stopped')}"
                   f" needs={r.get('needsPass')} avoid={r.get('avoidPass')} ops={ops}")

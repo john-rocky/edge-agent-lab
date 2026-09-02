@@ -22,11 +22,27 @@ MODELS=("$@")
 # A scenario pack is a cases file plus the in-app tool set it was written
 # against; they travel together or the run measures nothing.
 SCENARIO=${SCENARIO:-coffee-run}
-CASES="$HERE/../scenarios/$SCENARIO/cases.json"
+# LANE=tools (default) runs the pack's cases.json. LANE=guided runs its
+# guided.json — the structured-output lane (respond(to:schema:)), scored on
+# the returned fields. GUIDED=prompt|constrained and SCHEMA_IN_PROMPT=yes|no
+# are that lane's two switches (the LiteRT adapter's GuidedGeneration and
+# Foundation Models' includeSchemaInPrompt); both land on the run line.
+LANE=${LANE:-tools}
+GUIDED=${GUIDED:-}
+SCHEMA_IN_PROMPT=${SCHEMA_IN_PROMPT:-}
+if [[ "$LANE" == guided ]]; then
+  CASES="$HERE/../scenarios/$SCENARIO/guided.json"
+else
+  CASES="$HERE/../scenarios/$SCENARIO/cases.json"
+fi
+EXTRA=()
+[[ -n "$GUIDED" ]] && EXTRA+=(--guided "$GUIDED")
+[[ -n "$SCHEMA_IN_PROMPT" ]] && EXTRA+=(--schema-in-prompt "$SCHEMA_IN_PROMPT")
 case "$SCENARIO" in
   coffee-run) TOOLSET=demo ;;
   photo-editing) TOOLSET=photo ;;
   focus) TOOLSET=focus ;;
+  chains) TOOLSET=chains ;;
   field-report) TOOLSET=report ;;
   video-editing) TOOLSET=video ;;
   store) TOOLSET=store ;;
@@ -60,7 +76,7 @@ if [[ -d "$HERE/../scenarios/$SCENARIO/fixtures" ]]; then
       --destination "Documents/toolbench-fixtures/${fixture:t}" >/dev/null || exit 1
   done
 fi
-echo "pushing $SCENARIO cases (toolset $TOOLSET)..."
+echo "pushing $SCENARIO $LANE cases (toolset $TOOLSET${GUIDED:+, guided $GUIDED}${SCHEMA_IN_PROMPT:+, schema-in-prompt $SCHEMA_IN_PROMPT})..."
 xcrun devicectl device copy to --device "$DEVICE" \
   --domain-type appDataContainer --domain-identifier "$BUNDLE" \
   --source "$CASES" \
@@ -82,7 +98,7 @@ run_once() {
   for attempt in 1 2; do
     if timeout 20 xcrun devicectl device process launch --terminate-existing \
       --device "$DEVICE" "$BUNDLE" --toolbench --toolset "$TOOLSET" \
-      --model "$model" >/dev/null 2>&1; then
+      --model "$model" $EXTRA >/dev/null 2>&1; then
       launched=1
       break
     fi

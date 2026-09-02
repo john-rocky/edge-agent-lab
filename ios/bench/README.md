@@ -21,7 +21,7 @@ The runner lives inside the lfm-tools-ios app
 
 One model per app launch (`--model apple` for Apple's on-device model, any
 filename substring for a LiteRT bundle), one scenario pack per run
-(`--toolset demo|photo` picks the tool set the model sees).
+(`--toolset demo|photo|chains|…` picks the tool set the model sees).
 [`run-device.sh`](run-device.sh) loops the models, pushes the scenario's
 cases, and pulls the JSONL back:
 
@@ -182,6 +182,52 @@ scout, then word, the playbook's rule for footage applied to stills.
 Photos are cast against the shelf as well as by eye: of the first six
 beach photos chosen by looking, one produced a `beach` or `ocean`
 label.
+
+## The guided lane
+
+Tool calling is one contract a provider can be held to; a *structure* is
+the other — `respond(to:schema:)`, Foundation Models' guided generation.
+Each pack may carry a `guided.json` beside its `cases.json`: the same
+case format, plus a `schema` block the runner turns into a
+`DynamicGenerationSchema` and `expectedFields`, the argument matchers
+applied to the returned object's top-level fields. `expected` stays `[]`;
+tools stay in the room (the calls a provider makes on the way are
+recorded, not scored). The JSONL row carries `guided: true`, the schema's
+name, the returned `json` and `fieldsPass`.
+
+```json
+{ "id": "g-en-order-1", "lang": "en",
+  "input": "Two large lattes with oat milk, please.",
+  "schema": { "name": "CoffeeOrder", "fields": [
+      { "name": "item", "type": "string", "description": "The drink ordered." },
+      { "name": "size", "type": "enum", "values": ["small", "medium", "large"] },
+      { "name": "quantity", "type": "integer" },
+      { "name": "extras", "type": "array", "items": "string" } ] },
+  "expected": [],
+  "expectedFields": { "item": { "contains": "latte" }, "size": { "equals": "large" },
+                      "quantity": { "number": 2, "tol": 0 } } }
+```
+
+Field types: `string`, `integer`, `number`, `boolean`, `enum` (`values`),
+`array` (`items`, one scalar type); `optional: true` for a field a correct
+answer may omit. Anything richer belongs in a `@Generable` in the app.
+
+Two switches shape the lane, and both land on the run line so a row's
+condition survives into the table:
+
+- `--schema-in-prompt yes|no` (`SCHEMA_IN_PROMPT=` for the scripts) is
+  Foundation Models' own `includeSchemaInPrompt`, honored by both
+  providers.
+- `--guided prompt|constrained` (`GUIDED=`) is the LiteRT provider's:
+  whether the schema is enforced by the engine (constrained decoding —
+  every token checked against the grammar) or only written into the
+  prompt. Apple's model ignores it.
+
+`LANE=guided SCENARIO=coffee-run ./run-device.sh` runs a pack's guided
+lane on the phone; `LANE=guided ./run-mac.sh coffee-run chains` on the
+Mac (Apple FM). `coffee-run`, `photo-editing` and `chains` carry guided
+lanes today — order extraction, an edit request as operation + direction,
+a two-call plan with tool names as an enum — 5 EN + 5 JA each.
 
 ## What a JSONL line records
 

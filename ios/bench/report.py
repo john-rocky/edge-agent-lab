@@ -18,10 +18,19 @@ from collections import defaultdict
 
 
 def load_cases(scenario):
-    path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "..", "scenarios", scenario, "cases.json")
-    with open(path) as f:
-        return {c["id"]: c for c in json.load(f)}
+    # A pack's tool cases and, when it has one, its guided lane — both keyed
+    # by case id, so one report can hold a mixed run.
+    here = os.path.dirname(os.path.abspath(__file__))
+    cases = {}
+    for name in ("cases.json", "guided.json"):
+        path = os.path.join(here, "..", "scenarios", scenario, name)
+        if not os.path.exists(path):
+            if name == "cases.json":
+                raise OSError(path)
+            continue
+        with open(path) as f:
+            cases.update({c["id"]: c for c in json.load(f)})
+    return cases
 
 
 def matches(matcher, value, run_date=None):
@@ -105,7 +114,11 @@ def load(paths):
 
 
 def mark(rec, case, run_date=None):
-    if rec is not None and rec.get("expectAsk"):
+    if rec is not None and (rec.get("expectAsk") or rec.get("guided")):
+        # Guided rows are scored on their fields in the app; there is no
+        # "reached with extras" reading of a structure.
+        if rec.get("error"):
+            return "E"
         return "✓" if rec.get("pass") else "✗"
     if rec is None:
         return "·"
@@ -136,7 +149,8 @@ def main(paths, scenario):
         row = case.ljust(width)
         for model in models:
             rec = runs[model].get(case)
-            called = ",".join(rec["called"]) if rec else ""
+            called = ",".join(rec["called"]) if rec and not rec.get("guided") else (
+                (rec.get("json") or "")[:24] if rec else "")
             row += f"{mark(rec, case_defs.get(case), dates.get(model))} {called}"[:26].ljust(28)
         print(row)
 
@@ -144,7 +158,15 @@ def main(paths, scenario):
     for model in models:
         per = runs[model]
         for lang in ("en", "ja"):
-            recs = [r for r in per.values() if r["lang"] == lang]
+            guided = [r for r in per.values() if r["lang"] == lang and r.get("guided")]
+            recs = [r for r in per.values() if r["lang"] == lang and not r.get("guided")]
+            if guided:
+                cond = ", ".join(
+                    sorted({f"{'constrained' if r.get('constrained', True) else ''}"
+                            f"schema-in-prompt {r.get('schemaInPrompt')}" for r in guided}))
+                print(
+                    f"{model}  {lang}: guided {sum(r['pass'] for r in guided)}/{len(guided)}"
+                    f"  ({cond})")
             if not recs:
                 continue
             exact = sum(r["pass"] for r in recs)

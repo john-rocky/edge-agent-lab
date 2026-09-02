@@ -1,0 +1,568 @@
+[
+  {
+    "id": "g-en-edit-bright",
+    "lang": "en",
+    "input": "Make the photo a bit brighter.",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "brightness"
+      },
+      "direction": {
+        "equals": "increase"
+      }
+    }
+  },
+  {
+    "id": "g-en-edit-contrast",
+    "lang": "en",
+    "input": "Give it more contrast.",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "contrast"
+      },
+      "direction": {
+        "equals": "increase"
+      }
+    }
+  },
+  {
+    "id": "g-en-edit-cooler",
+    "lang": "en",
+    "input": "Make it cooler — less warm.",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "warmth"
+      },
+      "direction": {
+        "equals": "decrease"
+      }
+    }
+  },
+  {
+    "id": "g-en-edit-revert",
+    "lang": "en",
+    "input": "Undo everything and go back to the original.",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "revert"
+      }
+    }
+  },
+  {
+    "id": "g-en-edit-rotate",
+    "lang": "en",
+    "input": "Rotate it 90 degrees.",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "rotate"
+      },
+      "amount": {
+        "number": 90,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-ja-edit-bright",
+    "lang": "ja",
+    "input": "写真を少し明るくして。",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "brightness"
+      },
+      "direction": {
+        "equals": "increase"
+      }
+    }
+  },
+  {
+    "id": "g-ja-edit-contrast",
+    "lang": "ja",
+    "input": "コントラストを上げて。",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "contrast"
+      },
+      "direction": {
+        "equals": "increase"
+      }
+    }
+  },
+  {
+    "id": "g-ja-edit-cooler",
+    "lang": "ja",
+    "input": "もう少し寒色にして。暖かみを減らして。",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "warmth"
+      },
+      "direction": {
+        "equals": "decrease"
+      }
+    }
+  },
+  {
+    "id": "g-ja-edit-revert",
+    "lang": "ja",
+    "input": "全部取り消して、元の写真に戻して。",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "revert"
+      }
+    }
+  },
+  {
+    "id": "g-ja-edit-rotate",
+    "lang": "ja",
+    "input": "90度回転して。",
+    "schema": {
+      "name": "EditRequest",
+      "description": "One photo-editing request, as an operation and a direction.",
+      "fields": [
+        {
+          "name": "operation",
+          "type": "enum",
+          "values": [
+            "brightness",
+            "exposure",
+            "contrast",
+            "saturation",
+            "warmth",
+            "crop",
+            "resize",
+            "rotate",
+            "flip",
+            "blur",
+            "filter",
+            "undo",
+            "revert",
+            "remove_background",
+            "save"
+          ],
+          "description": "The edit asked for."
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "increase",
+            "decrease",
+            "none"
+          ],
+          "description": "Which way an adjustment goes; none for operations that have no direction."
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "A number the request names (degrees, percent); 0 when it names none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "operation": {
+        "equals": "rotate"
+      },
+      "amount": {
+        "number": 90,
+        "tol": 0
+      }
+    }
+  }
+]

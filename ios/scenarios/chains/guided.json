@@ -1,0 +1,622 @@
+[
+  {
+    "id": "g-en-chain-torch-battery",
+    "lang": "en",
+    "input": "Turn the flashlight on and tell me how much battery I have.",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "set_torch"
+      },
+      "second": {
+        "equals": "get_battery"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "false"
+      }
+    }
+  },
+  {
+    "id": "g-en-chain-ocr-translate",
+    "lang": "en",
+    "input": "Read the text in my latest photo and translate it into Japanese.",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "read_text_in_latest_photo"
+      },
+      "second": {
+        "equals": "translate"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "true"
+      }
+    }
+  },
+  {
+    "id": "g-en-chain-cafe-maps",
+    "lang": "en",
+    "input": "Find a cafe near me and open the first one in Maps.",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "search_places"
+      },
+      "second": {
+        "equals": "open_in_maps"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "true"
+      }
+    }
+  },
+  {
+    "id": "g-en-chain-two-clocks",
+    "lang": "en",
+    "input": "What time is it in Tokyo, and in London?",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "get_current_time"
+      },
+      "second": {
+        "equals": "get_current_time"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "false"
+      }
+    }
+  },
+  {
+    "id": "g-en-chain-where-loud",
+    "lang": "en",
+    "input": "Where am I, and how loud is it here?",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "get_location"
+      },
+      "second": {
+        "equals": "measure_sound_level"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "false"
+      }
+    }
+  },
+  {
+    "id": "g-ja-chain-torch-battery",
+    "lang": "ja",
+    "input": "フラッシュライトをつけて、バッテリー残量を教えて。",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "set_torch"
+      },
+      "second": {
+        "equals": "get_battery"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "false"
+      }
+    }
+  },
+  {
+    "id": "g-ja-chain-ocr-translate",
+    "lang": "ja",
+    "input": "最新の写真の文字を読んで、英語に翻訳して。",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "read_text_in_latest_photo"
+      },
+      "second": {
+        "equals": "translate"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "true"
+      }
+    }
+  },
+  {
+    "id": "g-ja-chain-cafe-maps",
+    "lang": "ja",
+    "input": "近くのカフェを探して、最初の一軒をマップで開いて。",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "search_places"
+      },
+      "second": {
+        "equals": "open_in_maps"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "true"
+      }
+    }
+  },
+  {
+    "id": "g-ja-chain-two-clocks",
+    "lang": "ja",
+    "input": "東京とロンドンは今何時？",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "get_current_time"
+      },
+      "second": {
+        "equals": "get_current_time"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "false"
+      }
+    }
+  },
+  {
+    "id": "g-ja-chain-where-loud",
+    "lang": "ja",
+    "input": "今どこにいる？ それと、ここの騒音はどれくらい？",
+    "schema": {
+      "name": "ChainPlan",
+      "description": "The two tool calls one request needs, in order.",
+      "fields": [
+        {
+          "name": "first",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call first."
+        },
+        {
+          "name": "second",
+          "type": "enum",
+          "values": [
+            "set_torch",
+            "get_battery",
+            "get_location",
+            "search_places",
+            "open_in_maps",
+            "get_current_time",
+            "read_text_in_latest_photo",
+            "translate",
+            "measure_sound_level",
+            "write_note"
+          ],
+          "description": "The tool to call second."
+        },
+        {
+          "name": "secondNeedsFirstResult",
+          "type": "boolean",
+          "description": "true when the second call takes what the first one returned."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "first": {
+        "equals": "get_location"
+      },
+      "second": {
+        "equals": "measure_sound_level"
+      },
+      "secondNeedsFirstResult": {
+        "equals": "false"
+      }
+    }
+  }
+]

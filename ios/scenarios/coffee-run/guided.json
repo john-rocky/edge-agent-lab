@@ -1,0 +1,417 @@
+[
+  {
+    "id": "g-en-order-1",
+    "lang": "en",
+    "input": "Two large lattes with oat milk, please.",
+    "schema": {
+      "name": "CoffeeOrder",
+      "description": "One coffee order as spoken at the counter.",
+      "fields": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "The drink ordered."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "description": "Cup size."
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "description": "How many cups."
+        },
+        {
+          "name": "extras",
+          "type": "array",
+          "items": "string",
+          "description": "Extras asked for; empty when none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "item": {
+        "contains": "latte"
+      },
+      "size": {
+        "equals": "large"
+      },
+      "quantity": {
+        "number": 2,
+        "tol": 0
+      },
+      "extras": {
+        "contains": "oat"
+      }
+    }
+  },
+  {
+    "id": "g-en-order-2",
+    "lang": "en",
+    "input": "One small americano.",
+    "schema": {
+      "name": "CoffeeOrder",
+      "description": "One coffee order as spoken at the counter.",
+      "fields": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "The drink ordered."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "description": "Cup size."
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "description": "How many cups."
+        },
+        {
+          "name": "extras",
+          "type": "array",
+          "items": "string",
+          "description": "Extras asked for; empty when none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "item": {
+        "contains": "americano"
+      },
+      "size": {
+        "equals": "small"
+      },
+      "quantity": {
+        "number": 1,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-en-order-3",
+    "lang": "en",
+    "input": "Three medium cappuccinos, one with an extra shot.",
+    "schema": {
+      "name": "CoffeeOrder",
+      "description": "One coffee order as spoken at the counter.",
+      "fields": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "The drink ordered."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "description": "Cup size."
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "description": "How many cups."
+        },
+        {
+          "name": "extras",
+          "type": "array",
+          "items": "string",
+          "description": "Extras asked for; empty when none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "item": {
+        "contains": "cappuccino"
+      },
+      "size": {
+        "equals": "medium"
+      },
+      "quantity": {
+        "number": 3,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-en-place-1",
+    "lang": "en",
+    "input": "From these search results, pick the closest one:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)",
+    "schema": {
+      "name": "PlacePick",
+      "description": "The place chosen from a list of search results.",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The place's name, exactly as listed."
+        },
+        {
+          "name": "distanceMeters",
+          "type": "integer",
+          "description": "Its distance in meters, as listed."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "name": {
+        "contains": "CAFE LA"
+      },
+      "distanceMeters": {
+        "number": 140,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-en-menu-1",
+    "lang": "en",
+    "input": "From this menu line, extract the item and its price: Latte ¥520",
+    "schema": {
+      "name": "MenuItem",
+      "description": "One line of a menu.",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The item's name."
+        },
+        {
+          "name": "priceYen",
+          "type": "integer",
+          "description": "Its price in yen, digits only."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "name": {
+        "contains": "latte"
+      },
+      "priceYen": {
+        "number": 520,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-ja-order-1",
+    "lang": "ja",
+    "input": "ラージのラテを2つ、オーツミルクで。",
+    "schema": {
+      "name": "CoffeeOrder",
+      "description": "One coffee order as spoken at the counter.",
+      "fields": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "The drink ordered."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "description": "Cup size."
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "description": "How many cups."
+        },
+        {
+          "name": "extras",
+          "type": "array",
+          "items": "string",
+          "description": "Extras asked for; empty when none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "size": {
+        "equals": "large"
+      },
+      "quantity": {
+        "number": 2,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-ja-order-2",
+    "lang": "ja",
+    "input": "スモールのアメリカーノを1つ。",
+    "schema": {
+      "name": "CoffeeOrder",
+      "description": "One coffee order as spoken at the counter.",
+      "fields": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "The drink ordered."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "description": "Cup size."
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "description": "How many cups."
+        },
+        {
+          "name": "extras",
+          "type": "array",
+          "items": "string",
+          "description": "Extras asked for; empty when none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "size": {
+        "equals": "small"
+      },
+      "quantity": {
+        "number": 1,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-ja-order-3",
+    "lang": "ja",
+    "input": "ミディアムのカプチーノを3つ、1つはエスプレッソ追加で。",
+    "schema": {
+      "name": "CoffeeOrder",
+      "description": "One coffee order as spoken at the counter.",
+      "fields": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "The drink ordered."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "description": "Cup size."
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "description": "How many cups."
+        },
+        {
+          "name": "extras",
+          "type": "array",
+          "items": "string",
+          "description": "Extras asked for; empty when none."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "size": {
+        "equals": "medium"
+      },
+      "quantity": {
+        "number": 3,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-ja-place-1",
+    "lang": "ja",
+    "input": "この検索結果から一番近い店を選んで:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)",
+    "schema": {
+      "name": "PlacePick",
+      "description": "The place chosen from a list of search results.",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The place's name, exactly as listed."
+        },
+        {
+          "name": "distanceMeters",
+          "type": "integer",
+          "description": "Its distance in meters, as listed."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "name": {
+        "contains": "CAFE LA"
+      },
+      "distanceMeters": {
+        "number": 140,
+        "tol": 0
+      }
+    }
+  },
+  {
+    "id": "g-ja-menu-1",
+    "lang": "ja",
+    "input": "このメニューの行から品名と価格を抜き出して: Latte ¥520",
+    "schema": {
+      "name": "MenuItem",
+      "description": "One line of a menu.",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The item's name."
+        },
+        {
+          "name": "priceYen",
+          "type": "integer",
+          "description": "Its price in yen, digits only."
+        }
+      ]
+    },
+    "expected": [],
+    "expectedFields": {
+      "priceYen": {
+        "number": 520,
+        "tol": 0
+      }
+    }
+  }
+]

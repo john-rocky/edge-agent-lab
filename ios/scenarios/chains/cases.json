@@ -1,0 +1,187 @@
+[
+  {
+    "id": "ch-en-torch-battery",
+    "input": "Turn the flashlight on and tell me how much battery I have.",
+    "lang": "en",
+    "expected": [
+      {
+        "tool": "set_torch",
+        "args": {
+          "on": {
+            "equals": "true"
+          }
+        }
+      },
+      {
+        "tool": "get_battery"
+      }
+    ]
+  },
+  {
+    "id": "ch-en-where-loud",
+    "input": "Where am I, and how loud is it here?",
+    "lang": "en",
+    "expected": [
+      {
+        "tool": "get_location"
+      },
+      {
+        "tool": "measure_sound_level"
+      }
+    ]
+  },
+  {
+    "id": "ch-en-two-clocks",
+    "input": "What time is it in Tokyo, and in London?",
+    "lang": "en",
+    "expected": [
+      {
+        "tool": "get_current_time",
+        "args": {
+          "timeZone": {
+            "contains": "Tokyo"
+          }
+        }
+      },
+      {
+        "tool": "get_current_time",
+        "args": {
+          "timeZone": {
+            "contains": "London"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "ch-en-ocr-translate",
+    "input": "Read the text in my latest photo and translate it into Japanese.",
+    "lang": "en",
+    "expected": [
+      {
+        "tool": "read_text_in_latest_photo"
+      },
+      {
+        "tool": "translate",
+        "args": {
+          "to": {
+            "equals": "ja"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "ch-en-cafe-maps",
+    "input": "Find a cafe near me and open the first one in Maps.",
+    "lang": "en",
+    "expected": [
+      {
+        "tool": "search_places",
+        "args": {
+          "query": {
+            "contains": "cafe"
+          }
+        }
+      },
+      {
+        "tool": "open_in_maps",
+        "args": {
+          "place": {
+            "contains": "CAFE LA"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "ch-ja-torch-battery",
+    "input": "フラッシュライトをつけて、バッテリー残量を教えて。",
+    "lang": "ja",
+    "expected": [
+      {
+        "tool": "set_torch",
+        "args": {
+          "on": {
+            "equals": "true"
+          }
+        }
+      },
+      {
+        "tool": "get_battery"
+      }
+    ]
+  },
+  {
+    "id": "ch-ja-where-loud",
+    "input": "今どこにいる？ それと、ここの騒音はどれくらい？",
+    "lang": "ja",
+    "expected": [
+      {
+        "tool": "get_location"
+      },
+      {
+        "tool": "measure_sound_level"
+      }
+    ]
+  },
+  {
+    "id": "ch-ja-two-clocks",
+    "input": "東京とロンドンは今何時？",
+    "lang": "ja",
+    "expected": [
+      {
+        "tool": "get_current_time",
+        "args": {
+          "timeZone": {
+            "contains": "Tokyo"
+          }
+        }
+      },
+      {
+        "tool": "get_current_time",
+        "args": {
+          "timeZone": {
+            "contains": "London"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "ch-ja-ocr-translate",
+    "input": "最新の写真の文字を読んで、英語に翻訳して。",
+    "lang": "ja",
+    "expected": [
+      {
+        "tool": "read_text_in_latest_photo"
+      },
+      {
+        "tool": "translate",
+        "args": {
+          "to": {
+            "equals": "en"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "ch-ja-cafe-maps",
+    "input": "近くのカフェを探して、最初の一軒をマップで開いて。",
+    "lang": "ja",
+    "expected": [
+      {
+        "tool": "search_places"
+      },
+      {
+        "tool": "open_in_maps",
+        "args": {
+          "place": {
+            "contains": "CAFE LA"
+          }
+        }
+      }
+    ]
+  }
+]
