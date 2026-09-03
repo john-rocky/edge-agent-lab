@@ -1,0 +1,22 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"LFM2.5-1.2B-Instruct_int4","schemaInPrompt":false,"toolNames":"get_location,search_places,read_text_in_latest_photo,translate,speak_out_loud,open_in_maps","tools":6,"toolset":"demo","type":"run"}
+{"case":"g-en-order-1","type":"start"}
+{"called":[],"calls":[],"case":"g-en-order-1","expected":[],"fieldsPass":false,"guided":true,"input":"Two large lattes with oat milk, please.","json":"{\"quantity\": 2, \"item\": \"confirmed\", \"size\": \"large\", \"extras\": [\"oat milk\"]}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":3128,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-2","type":"start"}
+{"called":[],"calls":[],"case":"g-en-order-2","expected":[],"fieldsPass":false,"guided":true,"input":"One small americano.","json":"{\"size\": \"medium\", \"extras\": [], \"item\": \"One small americano\", \"quantity\": 1}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1173,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-3","type":"start"}
+{"called":[],"calls":[],"case":"g-en-order-3","expected":[],"fieldsPass":false,"guided":true,"input":"Three medium cappuccinos, one with an extra shot.","json":"{\"item\": \"Three medium cappuccinos, one with an extra shot\", \"size\": \"small\", \"quantity\": 1, \"extras\": [\"extra shot\"]}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1510,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-place-1","type":"start"}
+{"called":[],"calls":[],"case":"g-en-place-1","expected":[],"fieldsPass":true,"guided":true,"input":"From these search results, pick the closest one:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)","json":"{\"distanceMeters\": 140, \"name\": \"CAFE LA\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1671,"pass":true,"schema":"PlacePick","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-menu-1","type":"start"}
+{"called":[],"calls":[],"case":"g-en-menu-1","expected":[],"fieldsPass":false,"guided":true,"input":"From this menu line, extract the item and its price: Latte ¥520","json":"{\"priceYen\": 520, \"name\": \"item\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":946,"pass":false,"schema":"MenuItem","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-order-1","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-order-1","expected":[],"fieldsPass":true,"guided":true,"input":"ラージのラテを2つ、オーツミルクで。","json":"{\"item\": \"ラージのラテ\", \"size\": \"large\", \"quantity\": 2, \"extras\": [\"オーツミルク\"]}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1486,"pass":true,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-order-2","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-order-2","expected":[],"fieldsPass":true,"guided":true,"input":"スモールのアメリカーノを1つ。","json":"{\"quantity\": 1, \"item\": \"スモールのアメリカーノ\", \"size\": \"small\", \"extras\": []}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1374,"pass":true,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-order-3","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-order-3","expected":[],"fieldsPass":true,"guided":true,"input":"ミディアムのカプチーノを3つ、1つはエスプレッソ追加で。","json":"{\"item\": \"ミディアムのカプチーノ\", \"extras\": [\"\/1 espresso\"], \"size\": \"medium\", \"quantity\": 3}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1654,"pass":true,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-place-1","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-place-1","expected":[],"fieldsPass":false,"guided":true,"input":"この検索結果から一番近い店を選んで:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)","json":"{\"name\": \"\/tools\/location-finder\", \"distanceMeters\": 240}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1612,"pass":false,"schema":"PlacePick","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-menu-1","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-menu-1","expected":[],"fieldsPass":true,"guided":true,"input":"このメニューの行から品名と価格を抜き出して: Latte ¥520","json":"{\"name\": \", \", \"priceYen\": 520}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":905,"pass":true,"schema":"MenuItem","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"failed":5,"model":"LFM2.5-1.2B-Instruct_int4","passed":5,"total":10,"type":"summary"}

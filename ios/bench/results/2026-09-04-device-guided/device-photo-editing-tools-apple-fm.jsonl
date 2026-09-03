@@ -1,0 +1,62 @@
+{"cases":30,"date":"2026-09-04","guided":"constrained","model":"apple-fm","schemaInPrompt":true,"toolNames":"crop_photo,resize_photo,zoom_photo,rotate_photo,flip_photo,adjust_photo_brightness,adjust_photo_exposure,adjust_photo_contrast,adjust_photo_saturation,adjust_photo_warmth,apply_photo_filter,blur_photo,auto_enhance_photo,remove_background,undo_photo_edit,revert_to_original,save_edited_photo","tools":17,"toolset":"photo","type":"run"}
+{"case":"p-en-bright-1","type":"start"}
+{"answer":"The photo is now a bit brighter.","argsPass":true,"called":["adjust_photo_brightness"],"calls":[{"args":"{\"amount\":20}","tool":"adjust_photo_brightness"}],"case":"p-en-bright-1","expected":["adjust_photo_brightness"],"input":"Make the photo a bit brighter.","lang":"en","model":"apple-fm","ms":3611,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-expo-1","type":"start"}
+{"answer":"The exposure has been increased by one stop.","argsPass":true,"called":["adjust_photo_exposure"],"calls":[{"args":"{\"stops\":1}","tool":"adjust_photo_exposure"}],"case":"p-en-expo-1","expected":["adjust_photo_exposure"],"input":"Increase the exposure by one stop.","lang":"en","model":"apple-fm","ms":1405,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-contrast-1","type":"start"}
+{"answer":"The photo has been adjusted to have more contrast.","argsPass":false,"called":["adjust_photo_contrast"],"calls":[{"args":"{\"amount\":100}","tool":"adjust_photo_contrast"}],"case":"p-en-contrast-1","expected":["adjust_photo_contrast"],"input":"Give it more contrast.","lang":"en","model":"apple-fm","ms":1452,"pass":false,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-crop-1","type":"start"}
+{"answer":"The photo has been cropped to a square aspect.","argsPass":true,"called":["crop_photo"],"calls":[{"args":"{\"aspect\":\"square\"}","tool":"crop_photo"}],"case":"p-en-crop-1","expected":["crop_photo"],"input":"Crop it square.","lang":"en","model":"apple-fm","ms":1395,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-zoom-1","type":"start"}
+{"answer":"The photo has been zoomed in to twice its original size.","argsPass":true,"called":["zoom_photo"],"calls":[{"args":"{\"factor\":2}","tool":"zoom_photo"}],"case":"p-en-zoom-1","expected":["zoom_photo"],"input":"Zoom in closer.","lang":"en","model":"apple-fm","ms":1528,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-resize-1","type":"start"}
+{"answer":"The photo has been resized to half its original size.","argsPass":true,"called":["resize_photo"],"calls":[{"args":"{\"percent\":50}","tool":"resize_photo"}],"case":"p-en-resize-1","expected":["resize_photo"],"input":"Shrink it to half size.","lang":"en","model":"apple-fm","ms":1476,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-warm-1","type":"start"}
+{"answer":"The photo now feels warmer.","argsPass":false,"called":["adjust_photo_warmth"],"calls":[{"args":"{\"amount\":100}","tool":"adjust_photo_warmth"}],"case":"p-en-warm-1","expected":["adjust_photo_warmth"],"input":"Make it feel warmer.","lang":"en","model":"apple-fm","ms":1462,"pass":false,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-rotate-1","type":"start"}
+{"answer":"The photo has been rotated 90 degrees.","argsPass":true,"called":["rotate_photo"],"calls":[{"args":"{\"degrees\":\"90\"}","tool":"rotate_photo"}],"case":"p-en-rotate-1","expected":["rotate_photo"],"input":"Rotate it 90 degrees.","lang":"en","model":"apple-fm","ms":1370,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-multi-1","type":"start"}
+{"answer":"The photo has been cropped to a square and made brighter.","argsPass":true,"called":["crop_photo","adjust_photo_brightness"],"calls":[{"args":"{\"aspect\":\"square\"}","tool":"crop_photo"},{"args":"{\"amount\":80}","tool":"adjust_photo_brightness"}],"case":"p-en-multi-1","expected":["crop_photo","adjust_photo_brightness"],"input":"Crop it square and make it brighter.","lang":"en","model":"apple-fm","ms":2086,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-noop-1","type":"start"}
+{"answer":"I cannot access the time or date information on your phone.","argsPass":true,"called":[],"calls":[],"case":"p-en-noop-1","expected":[],"input":"When did I take this photo?","lang":"en","model":"apple-fm","ms":1661,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-revert-1","type":"start"}
+{"answer":"All edits have been undone — you're back to the original photo.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"p-en-revert-1","expected":["revert_to_original"],"input":"Undo everything — back to the original photo.","lang":"en","model":"apple-fm","ms":1520,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-undo-1","type":"start"}
+{"answer":"The last edit has been undone.","argsPass":true,"called":["undo_photo_edit"],"calls":[{"args":"{}","tool":"undo_photo_edit"}],"case":"p-en-undo-1","expected":["undo_photo_edit"],"input":"Undo the last edit.","lang":"en","model":"apple-fm","ms":1412,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-reset-1","type":"start"}
+{"answer":"The photo has been reset back to its original state.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"p-en-reset-1","expected":["revert_to_original"],"input":"Reset it — back to the original.","lang":"en","model":"apple-fm","ms":1519,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-rmbg-1","type":"start"}
+{"answer":"The background has been removed from the photo.","argsPass":true,"called":["remove_background"],"calls":[{"args":"{}","tool":"remove_background"}],"case":"p-en-rmbg-1","expected":["remove_background"],"input":"Remove the background.","lang":"en","model":"apple-fm","ms":1479,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-en-rmbg-2","type":"start"}
+{"answer":"The background has been removed from the photo.","argsPass":true,"called":["remove_background"],"calls":[{"args":"{}","tool":"remove_background"}],"case":"p-en-rmbg-2","expected":["remove_background"],"input":"Cut out the person.","lang":"en","model":"apple-fm","ms":1505,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-bright-1","type":"start"}
+{"answer":"I've made the photo brighter.","argsPass":false,"called":["adjust_photo_brightness"],"calls":[{"args":"{\"amount\":100}","tool":"adjust_photo_brightness"}],"case":"p-ja-bright-1","expected":["adjust_photo_brightness"],"input":"写真をもう少し明るくして。","lang":"ja","model":"apple-fm","ms":1625,"pass":false,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-expo-1","type":"start"}
+{"answer":"The exposure has been increased by one stop.","argsPass":true,"called":["adjust_photo_exposure"],"calls":[{"args":"{\"stops\":1}","tool":"adjust_photo_exposure"}],"case":"p-ja-expo-1","expected":["adjust_photo_exposure"],"input":"露出を1段上げて。","lang":"ja","model":"apple-fm","ms":1619,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-contrast-1","type":"start"}
+{"answer":"コントラストを強くさせたものです。","argsPass":false,"called":["adjust_photo_contrast"],"calls":[{"args":"{\"amount\":100}","tool":"adjust_photo_contrast"}],"case":"p-ja-contrast-1","expected":["adjust_photo_contrast"],"input":"コントラストを強くして。","lang":"ja","model":"apple-fm","ms":1637,"pass":false,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-crop-1","type":"start"}
+{"answer":"The photo has been cropped to a square aspect ratio.","argsPass":true,"called":["crop_photo"],"calls":[{"args":"{\"aspect\":\"square\"}","tool":"crop_photo"}],"case":"p-ja-crop-1","expected":["crop_photo"],"input":"正方形に切り抜いて。","lang":"ja","model":"apple-fm","ms":1623,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-zoom-1","type":"start"}
+{"answer":"The photo has been zoomed in for a closer view.","argsPass":true,"called":["zoom_photo"],"calls":[{"args":"{\"factor\":1.8}","tool":"zoom_photo"}],"case":"p-ja-zoom-1","expected":["zoom_photo"],"input":"もっと寄って。","lang":"ja","model":"apple-fm","ms":1708,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-resize-1","type":"start"}
+{"answer":"The photo has been resized to half its original size.","argsPass":true,"called":["resize_photo"],"calls":[{"args":"{\"percent\":50}","tool":"resize_photo"}],"case":"p-ja-resize-1","expected":["resize_photo"],"input":"半分のサイズに縮小して。","lang":"ja","model":"apple-fm","ms":1651,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-warm-1","type":"start"}
+{"answer":"The photo has been made warmer.","argsPass":false,"called":["adjust_photo_warmth"],"calls":[{"args":"{\"amount\":100}","tool":"adjust_photo_warmth"}],"case":"p-ja-warm-1","expected":["adjust_photo_warmth"],"input":"暖かい雰囲気にして。","lang":"ja","model":"apple-fm","ms":1637,"pass":false,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-rotate-1","type":"start"}
+{"answer":"The photo has been rotated 90 degrees.","argsPass":true,"called":["rotate_photo"],"calls":[{"args":"{\"degrees\":\"90\"}","tool":"rotate_photo"}],"case":"p-ja-rotate-1","expected":["rotate_photo"],"input":"右に90度回転して。","lang":"ja","model":"apple-fm","ms":1545,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-multi-1","type":"start"}
+{"answer":"The photo has been cropped to a square and brightened.","argsPass":true,"called":["crop_photo","adjust_photo_brightness"],"calls":[{"args":"{\"aspect\":\"square\"}","tool":"crop_photo"},{"args":"{\"amount\":100}","tool":"adjust_photo_brightness"}],"case":"p-ja-multi-1","expected":["crop_photo","adjust_photo_brightness"],"input":"正方形に切り抜いて、明るくして。","lang":"ja","model":"apple-fm","ms":2313,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-noop-1","type":"start"}
+{"answer":"I couldn't determine the photo's capture time without accessing the system clock.","argsPass":true,"called":["blur_photo"],"calls":[{"args":"{\"radius\":5}","tool":"blur_photo"}],"case":"p-ja-noop-1","expected":[],"input":"この写真いつ撮った?","lang":"ja","model":"apple-fm","ms":1788,"pass":false,"selectionPass":false,"tools":17,"toolset":"photo"}
+{"case":"p-ja-revert-1","type":"start"}
+{"answer":"All edits have been discarded, and the photo is back to its original state.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"p-ja-revert-1","expected":["revert_to_original"],"input":"全部やめて、元の写真に戻して。","lang":"ja","model":"apple-fm","ms":1690,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-undo-1","type":"start"}
+{"answer":"最後の編集を元に戻しました。","argsPass":true,"called":["undo_photo_edit"],"calls":[{"args":"{}","tool":"undo_photo_edit"}],"case":"p-ja-undo-1","expected":["undo_photo_edit"],"input":"最後の編集だけ取り消して。","lang":"ja","model":"apple-fm","ms":1534,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-reset-1","type":"start"}
+{"answer":"The photo is now back to its original state.","argsPass":true,"called":["revert_to_original"],"calls":[{"args":"{}","tool":"revert_to_original"}],"case":"p-ja-reset-1","expected":["revert_to_original"],"input":"リセットして、元に戻して。","lang":"ja","model":"apple-fm","ms":1574,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-rmbg-1","type":"start"}
+{"answer":"背景を消して、結果は画面にしました。","argsPass":true,"called":["remove_background"],"calls":[{"args":"{}","tool":"remove_background"}],"case":"p-ja-rmbg-1","expected":["remove_background"],"input":"背景を消して。","lang":"ja","model":"apple-fm","ms":1675,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"case":"p-ja-rmbg-2","type":"start"}
+{"answer":"The background has been removed, showing only the person.","argsPass":true,"called":["remove_background"],"calls":[{"args":"{}","tool":"remove_background"}],"case":"p-ja-rmbg-2","expected":["remove_background"],"input":"人物だけ切り抜いて。","lang":"ja","model":"apple-fm","ms":1670,"pass":true,"selectionPass":true,"tools":17,"toolset":"photo"}
+{"failed":6,"model":"apple-fm","passed":24,"total":30,"type":"summary"}

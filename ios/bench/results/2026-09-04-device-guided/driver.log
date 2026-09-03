@@ -1,0 +1,382 @@
+[01:04:45] == tools coffee-run (1.2B-Instruct, apple)
+pushing coffee-run tools cases (toolset demo)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 3 KB
+Last modification date: 2026/08/18, 11:44
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1787633566.done)
+--- relaunch detached (restart from the top; the first run is repeated) ---
+[01:05:17] == tools coffee-run (1.2B-Instruct, apple)
+pushing coffee-run tools cases (toolset demo)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 3 KB
+Last modification date: 2026/08/18, 11:44
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1787633566.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788451517.jsonl
+{"failed":5,"model":"LFM2.5-1.2B-Instruct_int4","passed":15,"total":20,"type":"summary"}
+== apple (baseline: toolbench-1788451517.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788451599.jsonl
+  WARNED: asked apple, ran 
+{"type":"error","what":"system model unavailable"}
+  -> device-coffee-run-tools-lfm2.5-1.2b-instruct-int4.jsonl
+  -> device-coffee-run-tools-unknown.jsonl
+[01:06:59] == tools photo-editing (1.2B-Instruct, apple)
+pushing photo-editing tools cases (toolset photo)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 5 KB
+Last modification date: 2026/08/18, 16:53
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788451599.done)
+  no result after 30 min — did the app start with the args?
+== apple (baseline: toolbench-1788451599.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453484.jsonl
+{"failed":6,"model":"apple-fm","passed":24,"total":30,"type":"summary"}
+  -> device-photo-editing-tools-apple-fm.jsonl
+[01:41:20] == tools chains (1.2B-Instruct, apple)
+pushing chains tools cases (toolset chains)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 3 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453484.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453681.jsonl
+{"failed":10,"model":"LFM2.5-1.2B-Instruct_int4","passed":0,"total":10,"type":"summary"}
+== apple (baseline: toolbench-1788453681.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453743.jsonl
+{"failed":2,"model":"apple-fm","passed":8,"total":10,"type":"summary"}
+  -> device-chains-tools-lfm2.5-1.2b-instruct-int4.jsonl
+  -> device-chains-tools-apple-fm.jsonl
+[01:43:03] == guided 1.2B coffee-run guided=prompt schema-in-prompt=yes
+pushing coffee-run guided cases (toolset demo, guided prompt, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453743.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453784.jsonl
+{"failed":4,"model":"LFM2.5-1.2B-Instruct_int4","passed":6,"total":10,"type":"summary"}
+  -> device-coffee-run-guided-prompt-schematrue-lfm2.5-1.2b-instruct-int4.jsonl
+[01:43:45] == guided 1.2B photo-editing guided=prompt schema-in-prompt=yes
+pushing photo-editing guided cases (toolset photo, guided prompt, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 13 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453784.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453825.jsonl
+{"failed":6,"model":"LFM2.5-1.2B-Instruct_int4","passed":4,"total":10,"type":"summary"}
+  -> device-photo-editing-guided-prompt-schematrue-lfm2.5-1.2b-instruct-int4.jsonl
+[01:44:26] == guided 1.2B chains guided=prompt schema-in-prompt=yes
+pushing chains guided cases (toolset chains, guided prompt, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 16 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453825.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453867.jsonl
+{"failed":10,"model":"LFM2.5-1.2B-Instruct_int4","passed":0,"total":10,"type":"summary"}
+  -> device-chains-guided-prompt-schematrue-lfm2.5-1.2b-instruct-int4.jsonl
+[01:45:07] == guided 1.2B coffee-run guided=prompt schema-in-prompt=no
+pushing coffee-run guided cases (toolset demo, guided prompt, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453867.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453908.jsonl
+{"failed":10,"model":"LFM2.5-1.2B-Instruct_int4","passed":0,"total":10,"type":"summary"}
+  -> device-coffee-run-guided-prompt-schemafalse-lfm2.5-1.2b-instruct-int4.jsonl
+[01:45:29] == guided 1.2B photo-editing guided=prompt schema-in-prompt=no
+pushing photo-editing guided cases (toolset photo, guided prompt, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 13 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453908.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453929.jsonl
+{"failed":10,"model":"LFM2.5-1.2B-Instruct_int4","passed":0,"total":10,"type":"summary"}
+  -> device-photo-editing-guided-prompt-schemafalse-lfm2.5-1.2b-instruct-int4.jsonl
+[01:45:50] == guided 1.2B chains guided=prompt schema-in-prompt=no
+pushing chains guided cases (toolset chains, guided prompt, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 16 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453929.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788453950.jsonl
+{"failed":10,"model":"LFM2.5-1.2B-Instruct_int4","passed":0,"total":10,"type":"summary"}
+  -> device-chains-guided-prompt-schemafalse-lfm2.5-1.2b-instruct-int4.jsonl
+[01:46:11] == guided 1.2B coffee-run guided=constrained schema-in-prompt=yes
+pushing coffee-run guided cases (toolset demo, guided constrained, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453950.done)
+  no result after 30 min — did the app start with the args?
+[02:16:38] == guided 1.2B photo-editing guided=constrained schema-in-prompt=yes
+pushing photo-editing guided cases (toolset photo, guided constrained, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 13 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788453950.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788455799.jsonl
+{"failed":8,"model":"LFM2.5-1.2B-Instruct_int4","passed":2,"total":10,"type":"summary"}
+  -> device-photo-editing-guided-constrained-schematrue-lfm2.5-1.2b-instruct-int4.jsonl
+[02:16:59] == guided 1.2B chains guided=constrained schema-in-prompt=yes
+pushing chains guided cases (toolset chains, guided constrained, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 16 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788455799.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788455820.jsonl
+{"failed":10,"model":"LFM2.5-1.2B-Instruct_int4","passed":0,"total":10,"type":"summary"}
+  -> device-chains-guided-constrained-schematrue-lfm2.5-1.2b-instruct-int4.jsonl
+[02:17:41] == guided 1.2B coffee-run guided=constrained schema-in-prompt=no
+pushing coffee-run guided cases (toolset demo, guided constrained, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788455820.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788455861.jsonl
+{"failed":5,"model":"LFM2.5-1.2B-Instruct_int4","passed":5,"total":10,"type":"summary"}
+  -> device-coffee-run-guided-constrained-schemafalse-lfm2.5-1.2b-instruct-int4.jsonl
+[02:18:02] == guided 1.2B photo-editing guided=constrained schema-in-prompt=no
+pushing photo-editing guided cases (toolset photo, guided constrained, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 13 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788455861.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788455882.jsonl
+{"failed":5,"model":"LFM2.5-1.2B-Instruct_int4","passed":5,"total":10,"type":"summary"}
+  -> device-photo-editing-guided-constrained-schemafalse-lfm2.5-1.2b-instruct-int4.jsonl
+[02:18:23] == guided 1.2B chains guided=constrained schema-in-prompt=no
+pushing chains guided cases (toolset chains, guided constrained, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 16 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788455882.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788455904.jsonl
+{"failed":8,"model":"LFM2.5-1.2B-Instruct_int4","passed":2,"total":10,"type":"summary"}
+  -> device-chains-guided-constrained-schemafalse-lfm2.5-1.2b-instruct-int4.jsonl
+[02:18:44] == guided apple coffee-run schema-in-prompt=yes
+pushing coffee-run guided cases (toolset demo, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788455904.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788455925.jsonl
+{"failed":1,"model":"apple-fm","passed":7,"total":8,"type":"summary"}
+  engine hang aborted this run
+  relaunching apple once — a fresh process is a fresh engine
+== apple (baseline: toolbench-1788455925.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456149.jsonl
+{"failed":0,"model":"apple-fm","passed":10,"total":10,"type":"summary"}
+  -> device-coffee-run-guided-constrained-schematrue-apple-fm.jsonl
+  -> device-coffee-run-guided-constrained-schematrue-apple-fm-2.jsonl
+[02:23:30] == guided apple photo-editing schema-in-prompt=yes
+pushing photo-editing guided cases (toolset photo, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 13 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788456149.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456211.jsonl
+{"failed":0,"model":"apple-fm","passed":10,"total":10,"type":"summary"}
+  -> device-photo-editing-guided-constrained-schematrue-apple-fm.jsonl
+[02:24:11] == guided apple chains schema-in-prompt=yes
+pushing chains guided cases (toolset chains, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 16 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788456211.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456252.jsonl
+{"failed":2,"model":"apple-fm","passed":8,"total":10,"type":"summary"}
+  -> device-chains-guided-constrained-schematrue-apple-fm.jsonl
+[02:24:53] == guided apple coffee-run schema-in-prompt=no
+pushing coffee-run guided cases (toolset demo, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788456252.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456293.jsonl
+{"failed":4,"model":"apple-fm","passed":0,"total":4,"type":"summary"}
+  engine hang aborted this run
+  relaunching apple once — a fresh process is a fresh engine
+== apple (baseline: toolbench-1788456293.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456497.jsonl
+{"failed":5,"model":"apple-fm","passed":2,"total":7,"type":"summary"}
+  engine hang aborted this run
+  -> device-coffee-run-guided-constrained-schemafalse-apple-fm.jsonl
+  -> device-coffee-run-guided-constrained-schemafalse-apple-fm-2.jsonl
+[02:32:00] == guided apple photo-editing schema-in-prompt=no
+pushing photo-editing guided cases (toolset photo, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 13 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788456497.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456721.jsonl
+{"failed":0,"model":"apple-fm","passed":10,"total":10,"type":"summary"}
+  -> device-photo-editing-guided-constrained-schemafalse-apple-fm.jsonl
+[02:32:42] == guided apple chains schema-in-prompt=no
+pushing chains guided cases (toolset chains, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 16 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788456721.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456763.jsonl
+{"failed":10,"model":"apple-fm","passed":0,"total":10,"type":"summary"}
+  -> device-chains-guided-constrained-schemafalse-apple-fm.jsonl
+[02:33:23] ALL DONE
+[02:33:28] == REDO tools coffee-run (apple) pass 1
+pushing coffee-run tools cases (toolset demo)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 3 KB
+Last modification date: 2026/08/18, 11:44
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788456763.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456809.jsonl
+{"failed":7,"model":"apple-fm","passed":13,"total":20,"type":"summary"}
+  -> device-coffee-run-tools-apple-fm.jsonl
+[02:34:10] == REDO tools photo-editing (1.2B-Instruct) pass 1
+pushing photo-editing tools cases (toolset photo)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 5 KB
+Last modification date: 2026/08/18, 16:53
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788456809.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788456851.jsonl
+{"failed":13,"model":"LFM2.5-1.2B-Instruct_int4","passed":17,"total":30,"type":"summary"}
+  -> device-photo-editing-tools-lfm2.5-1.2b-instruct-int4.jsonl
+[02:38:35] == REDO guided 1.2B coffee-run guided=constrained schema-in-prompt=yes pass 1
+pushing coffee-run guided cases (toolset demo, guided constrained, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== 1.2B-Instruct (baseline: toolbench-1788456851.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788457116.jsonl
+{"failed":7,"model":"LFM2.5-1.2B-Instruct_int4","passed":3,"total":10,"type":"summary"}
+  -> device-coffee-run-guided-constrained-schematrue-lfm2.5-1.2b-instruct-int4.jsonl
+[02:39:16] == REDO guided apple coffee-run schema-in-prompt=yes pass 1
+pushing coffee-run guided cases (toolset demo, schema-in-prompt yes)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788457116.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788457157.jsonl
+{"failed":1,"model":"apple-fm","passed":2,"total":3,"type":"summary"}
+  engine hang aborted this run
+  relaunching apple once — a fresh process is a fresh engine
+== apple (baseline: toolbench-1788457157.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788457361.jsonl
+{"failed":1,"model":"apple-fm","passed":7,"total":8,"type":"summary"}
+  engine hang aborted this run
+  -> device-coffee-run-guided-constrained-schematrue-apple-fm.jsonl
+  -> device-coffee-run-guided-constrained-schematrue-apple-fm-3.jsonl
+[02:46:25] == REDO guided apple coffee-run schema-in-prompt=no pass 1
+pushing coffee-run guided cases (toolset demo, schema-in-prompt no)...
+File on Device
+Path: /private/var/mobile/Containers/Data/Application/CA8772C4-47FB-4634-A929-75988F4F3AE4/Documents/toolbench-cases.json
+URL Resources: Writable, Readable
+File Size: 9 KB
+Last modification date: 2026/09/02, 15:52
+Permissions: UID: 501, GID: 501, Permissions: 420
+Extended Attributes: ["com.apple.dataprotection.policy.exception-applied-by": "com.apple.containermanagerd"]
+== apple (baseline: toolbench-1788457361.done)
+  pulled: /Users/majimadaisuke/code/edge-agent-lab/ios/bench/results/2026-09-04-device-guided/toolbench-1788457585.jsonl
+{"failed":2,"model":"apple-fm","passed":0,"total":2,"type":"summary"}
+  engine hang aborted this run
+  relaunching apple once — a fresh process is a fresh engine
+== apple (baseline: toolbench-1788457585.done)
+[02:52:08] redo stopped by hand — Apple coffee-run schema=no re-hangs; reconciling file names manually

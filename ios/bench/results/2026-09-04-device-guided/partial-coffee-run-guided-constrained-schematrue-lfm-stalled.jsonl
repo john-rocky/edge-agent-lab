@@ -1,0 +1,11 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"LFM2.5-1.2B-Instruct_int4","schemaInPrompt":true,"toolNames":"get_location,search_places,read_text_in_latest_photo,translate,speak_out_loud,open_in_maps","tools":6,"toolset":"demo","type":"run"}
+{"case":"g-en-order-1","type":"start"}
+{"called":[],"calls":[],"case":"g-en-order-1","expected":[],"fieldsPass":false,"guided":true,"input":"Two large lattes with oat milk, please.","json":"{\"size\": \"large\", \"quantity\": 2, \"item\": \", \", \"extras\": [\"oat milk\"]}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":3956,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":true,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-2","type":"start"}
+{"called":[],"calls":[],"case":"g-en-order-2","expected":[],"fieldsPass":false,"guided":true,"input":"One small americano.","json":"{\"item\": \"One small americano.\", \"extras\": [], \"size\": \"medium\", \"quantity\": 1}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":2021,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":true,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-3","type":"start"}
+{"called":[],"calls":[],"case":"g-en-order-3","expected":[],"fieldsPass":false,"guided":true,"input":"Three medium cappuccinos, one with an extra shot.","json":"{\"quantity\": 3, \"extras\": [\"extra shot\"], \"size\": \"medium\", \"item\": \", \"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":2150,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":true,"tools":6,"toolset":"demo"}
+{"case":"g-en-place-1","type":"start"}
+{"at":"2026-09-03T16:46:22Z","type":"background"}
+{"called":[],"calls":[],"case":"g-en-place-1","expected":[],"fieldsPass":false,"guided":true,"input":"From these search results, pick the closest one:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)","json":"{\"distanceMeters\": 25, \"name\": \", \"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":2364,"pass":false,"schema":"PlacePick","schemaInPrompt":true,"tools":6,"toolset":"demo"}
+{"case":"g-en-menu-1","type":"start"}

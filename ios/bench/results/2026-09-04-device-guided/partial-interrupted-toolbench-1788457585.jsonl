@@ -1,0 +1,7 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"apple-fm","schemaInPrompt":false,"toolNames":"get_location,search_places,read_text_in_latest_photo,translate,speak_out_loud,open_in_maps","tools":6,"toolset":"demo","type":"run"}
+{"case":"g-en-order-1","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-en-order-1","expected":[],"fieldsPass":false,"guided":true,"input":"Two large lattes with oat milk, please.","json":"{\"size\": \"large\", \"quantity\": 2, \"item\": \"CAFE LA\", \"extras\": [\"oat milk\"]}","lang":"en","model":"apple-fm","ms":3673,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-2","type":"start"}
+{"case":"g-en-order-2","error":"timed out after 180s","fieldsPass":false,"guided":true,"input":"One small americano.","lang":"en","model":"apple-fm","ms":188077,"pass":false,"schema":"CoffeeOrder"}
+{"type":"abort","why":"engine hang; remaining cases not run"}
+{"failed":2,"model":"apple-fm","passed":0,"total":2,"type":"summary"}

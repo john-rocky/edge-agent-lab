@@ -1,0 +1,9 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"apple-fm","schemaInPrompt":true,"toolNames":"get_location,search_places,read_text_in_latest_photo,translate,speak_out_loud,open_in_maps","tools":6,"toolset":"demo","type":"run"}
+{"case":"g-en-order-1","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-en-order-1","expected":[],"fieldsPass":true,"guided":true,"input":"Two large lattes with oat milk, please.","json":"{\"extras\": [\"oat milk\"], \"size\": \"large\", \"quantity\": 2, \"item\": \"two large lattes with oat milk\"}","lang":"en","model":"apple-fm","ms":3337,"pass":true,"schema":"CoffeeOrder","schemaInPrompt":true,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-2","type":"start"}
+{"called":["search_places","open_in_maps","open_in_maps","open_in_maps","read_text_in_latest_photo","translate"],"calls":[],"case":"g-en-order-2","expected":[],"fieldsPass":true,"guided":true,"input":"One small americano.","json":"{\"size\": \"small\", \"quantity\": 1, \"extras\": [], \"item\": \"Americano\"}","lang":"en","model":"apple-fm","ms":5763,"pass":true,"schema":"CoffeeOrder","schemaInPrompt":true,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-3","type":"start"}
+{"case":"g-en-order-3","error":"timed out after 180s","fieldsPass":false,"guided":true,"input":"Three medium cappuccinos, one with an extra shot.","lang":"en","model":"apple-fm","ms":182854,"pass":false,"schema":"CoffeeOrder"}
+{"type":"abort","why":"engine hang; remaining cases not run"}
+{"failed":1,"model":"apple-fm","passed":2,"total":3,"type":"summary"}

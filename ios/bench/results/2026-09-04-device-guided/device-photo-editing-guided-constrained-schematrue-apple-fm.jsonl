@@ -1,0 +1,22 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"apple-fm","schemaInPrompt":true,"toolNames":"crop_photo,resize_photo,zoom_photo,rotate_photo,flip_photo,adjust_photo_brightness,adjust_photo_exposure,adjust_photo_contrast,adjust_photo_saturation,adjust_photo_warmth,apply_photo_filter,blur_photo,auto_enhance_photo,remove_background,undo_photo_edit,revert_to_original,save_edited_photo","tools":17,"toolset":"photo","type":"run"}
+{"case":"g-en-edit-bright","type":"start"}
+{"called":["adjust_photo_brightness"],"calls":[],"case":"g-en-edit-bright","expected":[],"fieldsPass":true,"guided":true,"input":"Make the photo a bit brighter.","json":"{\"operation\": \"brightness\", \"amount\": 20, \"direction\": \"increase\"}","lang":"en","model":"apple-fm","ms":3786,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-contrast","type":"start"}
+{"called":["adjust_photo_contrast"],"calls":[],"case":"g-en-edit-contrast","expected":[],"fieldsPass":true,"guided":true,"input":"Give it more contrast.","json":"{\"direction\": \"increase\", \"amount\": 100, \"operation\": \"contrast\"}","lang":"en","model":"apple-fm","ms":3452,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-cooler","type":"start"}
+{"called":["adjust_photo_warmth"],"calls":[],"case":"g-en-edit-cooler","expected":[],"fieldsPass":true,"guided":true,"input":"Make it cooler — less warm.","json":"{\"operation\": \"warmth\", \"amount\": -50, \"direction\": \"decrease\"}","lang":"en","model":"apple-fm","ms":3425,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-revert","type":"start"}
+{"called":["revert_to_original"],"calls":[],"case":"g-en-edit-revert","expected":[],"fieldsPass":true,"guided":true,"input":"Undo everything and go back to the original.","json":"{\"amount\": 0, \"operation\": \"revert\", \"direction\": \"none\"}","lang":"en","model":"apple-fm","ms":3338,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-rotate","type":"start"}
+{"called":["rotate_photo"],"calls":[],"case":"g-en-edit-rotate","expected":[],"fieldsPass":true,"guided":true,"input":"Rotate it 90 degrees.","json":"{\"direction\": \"none\", \"operation\": \"rotate\", \"amount\": 90}","lang":"en","model":"apple-fm","ms":3413,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-bright","type":"start"}
+{"called":["adjust_photo_brightness"],"calls":[],"case":"g-ja-edit-bright","expected":[],"fieldsPass":true,"guided":true,"input":"写真を少し明るくして。","json":"{\"operation\": \"brightness\", \"direction\": \"increase\", \"amount\": 80}","lang":"ja","model":"apple-fm","ms":3481,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-contrast","type":"start"}
+{"called":["adjust_photo_contrast"],"calls":[],"case":"g-ja-edit-contrast","expected":[],"fieldsPass":true,"guided":true,"input":"コントラストを上げて。","json":"{\"direction\": \"increase\", \"amount\": 100, \"operation\": \"contrast\"}","lang":"ja","model":"apple-fm","ms":3497,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-cooler","type":"start"}
+{"called":["adjust_photo_warmth"],"calls":[],"case":"g-ja-edit-cooler","expected":[],"fieldsPass":true,"guided":true,"input":"もう少し寒色にして。暖かみを減らして。","json":"{\"amount\": -50, \"operation\": \"warmth\", \"direction\": \"decrease\"}","lang":"ja","model":"apple-fm","ms":3383,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-revert","type":"start"}
+{"called":["revert_to_original"],"calls":[],"case":"g-ja-edit-revert","expected":[],"fieldsPass":true,"guided":true,"input":"全部取り消して、元の写真に戻して。","json":"{\"amount\": 0, \"direction\": \"none\", \"operation\": \"revert\"}","lang":"ja","model":"apple-fm","ms":3354,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-rotate","type":"start"}
+{"called":["rotate_photo"],"calls":[],"case":"g-ja-edit-rotate","expected":[],"fieldsPass":true,"guided":true,"input":"90度回転して。","json":"{\"operation\": \"rotate\", \"amount\": 90, \"direction\": \"increase\"}","lang":"ja","model":"apple-fm","ms":3432,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"failed":0,"model":"apple-fm","passed":10,"total":10,"type":"summary"}

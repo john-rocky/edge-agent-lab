@@ -1,0 +1,22 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"LFM2.5-1.2B-Instruct_int4","schemaInPrompt":true,"toolNames":"crop_photo,resize_photo,zoom_photo,rotate_photo,flip_photo,adjust_photo_brightness,adjust_photo_exposure,adjust_photo_contrast,adjust_photo_saturation,adjust_photo_warmth,apply_photo_filter,blur_photo,auto_enhance_photo,remove_background,undo_photo_edit,revert_to_original,save_edited_photo","tools":17,"toolset":"photo","type":"run"}
+{"case":"g-en-edit-bright","type":"start"}
+{"called":[],"calls":[],"case":"g-en-edit-bright","expected":[],"fieldsPass":true,"guided":true,"input":"Make the photo a bit brighter.","json":"{\"operation\": \"brightness\", \"amount\": 1, \"direction\": \"increase\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":3228,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-contrast","type":"start"}
+{"called":[],"calls":[],"case":"g-en-edit-contrast","expected":[],"fieldsPass":false,"guided":true,"input":"Give it more contrast.","json":"{\"operation\": \"resize\", \"amount\": 1, \"direction\": \"increase\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1521,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-cooler","type":"start"}
+{"called":[],"calls":[],"case":"g-en-edit-cooler","expected":[],"fieldsPass":false,"guided":true,"input":"Make it cooler — less warm.","json":"{\"direction\": \"decrease\", \"amount\": 1, \"operation\": \"filter\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1527,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-revert","type":"start"}
+{"called":[],"calls":[],"case":"g-en-edit-revert","expected":[],"fieldsPass":false,"guided":true,"input":"Undo everything and go back to the original.","json":"{\"operation\": \"undo\", \"amount\": 1, \"direction\": \"decrease\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1546,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-en-edit-rotate","type":"start"}
+{"called":[],"calls":[],"case":"g-en-edit-rotate","expected":[],"fieldsPass":false,"guided":true,"input":"Rotate it 90 degrees.","json":"{\"direction\": \"decrease\", \"amount\": -90, \"operation\": \"rotate\"}","lang":"en","model":"LFM2.5-1.2B-Instruct_int4","ms":1632,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-bright","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-edit-bright","expected":[],"fieldsPass":false,"guided":true,"input":"写真を少し明るくして。","json":"{\"operation\": \"resize\", \"amount\": 1, \"direction\": \"increase\"}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1577,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-contrast","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-edit-contrast","expected":[],"fieldsPass":false,"guided":true,"input":"コントラストを上げて。","json":"{\"direction\": \"increase\", \"amount\": 1, \"operation\": \"resize\"}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1578,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-cooler","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-edit-cooler","expected":[],"fieldsPass":false,"guided":true,"input":"もう少し寒色にして。暖かみを減らして。","json":"{\"direction\": \"decrease\", \"operation\": \"revert\", \"amount\": 0}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1619,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-revert","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-edit-revert","expected":[],"fieldsPass":false,"guided":true,"input":"全部取り消して、元の写真に戻して。","json":"{\"amount\": 0, \"operation\": \"undo\", \"direction\": \"decrease\"}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1608,"pass":false,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"case":"g-ja-edit-rotate","type":"start"}
+{"called":[],"calls":[],"case":"g-ja-edit-rotate","expected":[],"fieldsPass":true,"guided":true,"input":"90度回転して。","json":"{\"direction\": \"decrease\", \"operation\": \"rotate\", \"amount\": 90}","lang":"ja","model":"LFM2.5-1.2B-Instruct_int4","ms":1767,"pass":true,"schema":"EditRequest","schemaInPrompt":true,"tools":17,"toolset":"photo"}
+{"failed":8,"model":"LFM2.5-1.2B-Instruct_int4","passed":2,"total":10,"type":"summary"}

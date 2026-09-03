@@ -394,6 +394,67 @@ turn on the phone.
 
 \* one FoundationModels-internal error on the EN translate case.
 
+## The guided lane on device (2026-09-04, iPhone 17 Pro)
+
+The other contract a provider can be held to: a structure instead of a call
+(`respond(to:schema:)`, [bench README, "The guided lane"](../ios/bench/README.md)).
+Raw JSONL: [results/2026-09-04-device-guided](../ios/bench/results/2026-09-04-device-guided/)
+(`device-*.jsonl` is the complete run per condition; `partial-*` are the
+attempts a background event or a 180 s timeout cut short). 10 cases per
+pack, 5 EN + 5 JA; pass = Foundation Models parsed the object and every
+scored field is right. The pack's tools stay in the room.
+
+LFM2.5-1.2B-Instruct int4, CPU, through the LiteRT adapter — the adapter's
+`GuidedGeneration` (engine-enforced grammar vs prompt only) crossed with
+Foundation Models' `includeSchemaInPrompt`:
+
+| pack | constrained, schema in prompt (FM default) | constrained, no schema in prompt | prompt only, schema in prompt | prompt only, no schema |
+|---|---|---|---|---|
+| coffee-run | 3/10 | 5/10 | 6/10 | 0/10 |
+| photo-editing | 2/10 | 5/10 | 4/10 | 0/10 |
+| chains (two-call plan, tool names as an enum) | 0/10 | 2/10 | 0/10 | 0/10 |
+
+Apple Foundation Models on the same phone (`includeSchemaInPrompt` only —
+the engine switch is the LiteRT adapter's):
+
+| pack | schema in prompt | no schema in prompt |
+|---|---|---|
+| coffee-run | 10/10 | hangs — 2/7 before a 180 s timeout, three attempts |
+| photo-editing | 10/10 | 10/10 |
+| chains | 8/10 | 0/10 |
+
+What the rows say:
+
+- **The grammar buys parseability, not correctness.** Every constrained
+  row on the 1.2B parsed; prompt-only with no schema in the prompt never
+  did. But what the model puts in the fields depends on what the prompt
+  shows it: with the schema in the prompt the 1.2B copies the hint's
+  punctuation into values (`"item": ", "`, `"name": ", "`), and the
+  strongest 1.2B setting is the constraint with the schema kept *out* of
+  the prompt (5/10, 5/10) — the same ordering as on the Mac (8/10, 6/10;
+  [results/2026-09-02-mac-litert-guided](../ios/bench/results/2026-09-02-mac-litert-guided/)),
+  a few cases lower on the phone.
+- **Apple's model treats a guided turn as a tool-using turn.** With the
+  schema in the prompt it fills the structure directly (10/10, 10/10);
+  without it, it goes through the tools first — `search_places` →
+  `open_in_maps` on an order-extraction case, filling `item` with
+  "CAFE LA" from the canned result — and on coffee-run it does not come
+  back within 180 s in three attempts out of three. The chains plan is
+  executed rather than described (`set_torch` → `get_battery` called,
+  then the wrong plan written), 0/10.
+- **The chains plan is beyond the 1.2B** in every condition, on the phone
+  as on the Mac.
+
+Tool lane, same day, same build (the regression check for the adapter's
+guided-generation commit): coffee-run 15/20 (1.2B) / 13/20 (Apple FM),
+photo-editing 17/30 / 24/30, chains 0/10 / 8/10. The 1.2B numbers match
+the published rows; Apple FM's coffee-run is 4 below its 17/20 (the
+±2–4 run-to-run band, and one run). chains on the 1.2B is the gap the
+pack was written to show — one call per sentence, the second never comes
+— plus one adapter bug found here: the model writes `set_torch(on=True)`
+Python-style and the adapter passed "True" through as a string (fixed in
+the source branch after this run; not in the numbers above).
+
 ## Per model
 
 **Apple FM** — reached 17/20 (exact 6). Routes everything, and chains on

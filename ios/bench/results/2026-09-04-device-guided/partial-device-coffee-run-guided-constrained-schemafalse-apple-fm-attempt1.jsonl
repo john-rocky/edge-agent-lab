@@ -1,0 +1,17 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"apple-fm","schemaInPrompt":false,"toolNames":"get_location,search_places,read_text_in_latest_photo,translate,speak_out_loud,open_in_maps","tools":6,"toolset":"demo","type":"run"}
+{"case":"g-en-order-1","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-en-order-1","expected":[],"fieldsPass":false,"guided":true,"input":"Two large lattes with oat milk, please.","json":"{\"size\": \"large\", \"quantity\": 2, \"extras\": [\"oat milk\"], \"item\": \"CAFE LA\"}","lang":"en","model":"apple-fm","ms":3039,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-2","type":"start"}
+{"called":["search_places"],"calls":[],"case":"g-en-order-2","expected":[],"fieldsPass":false,"guided":true,"input":"One small americano.","json":"{\"extras\": [\"americano\"], \"item\": \"CAFE LA (140 m)\", \"size\": \"small\", \"quantity\": 1}","lang":"en","model":"apple-fm","ms":2092,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-3","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-en-order-3","expected":[],"fieldsPass":false,"guided":true,"input":"Three medium cappuccinos, one with an extra shot.","json":"{\"item\": \"CAFE LA\", \"quantity\": 3, \"extras\": [\"extra shot\"], \"size\": \"medium\"}","lang":"en","model":"apple-fm","ms":2536,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-place-1","type":"start"}
+{"called":["search_places"],"calls":[],"case":"g-en-place-1","expected":[],"fieldsPass":true,"guided":true,"input":"From these search results, pick the closest one:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)","json":"{\"name\": \"CAFE LA\", \"distanceMeters\": 140}","lang":"en","model":"apple-fm","ms":1707,"pass":true,"schema":"PlacePick","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-menu-1","type":"start"}
+{"called":["read_text_in_latest_photo"],"calls":[],"case":"g-en-menu-1","expected":[],"fieldsPass":true,"guided":true,"input":"From this menu line, extract the item and its price: Latte ¥520","json":"{\"name\": \"Latte\", \"priceYen\": 520}","lang":"en","model":"apple-fm","ms":1615,"pass":true,"schema":"MenuItem","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-order-1","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-ja-order-1","expected":[],"fieldsPass":false,"guided":true,"input":"ラージのラテを2つ、オーツミルクで。","json":"{\"item\": \"CAFE LA\", \"size\": \"small\", \"extras\": [\"latte\"], \"quantity\": 1}","lang":"ja","model":"apple-fm","ms":2576,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-ja-order-2","type":"start"}
+{"case":"g-ja-order-2","error":"timed out after 180s","fieldsPass":false,"guided":true,"input":"スモールのアメリカーノを1つ。","lang":"ja","model":"apple-fm","ms":191336,"pass":false,"schema":"CoffeeOrder"}
+{"type":"abort","why":"engine hang; remaining cases not run"}
+{"failed":5,"model":"apple-fm","passed":2,"total":7,"type":"summary"}

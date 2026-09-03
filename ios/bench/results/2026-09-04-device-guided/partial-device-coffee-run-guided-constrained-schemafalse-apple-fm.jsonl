@@ -1,0 +1,11 @@
+{"cases":10,"date":"2026-09-04","guided":"constrained","model":"apple-fm","schemaInPrompt":false,"toolNames":"get_location,search_places,read_text_in_latest_photo,translate,speak_out_loud,open_in_maps","tools":6,"toolset":"demo","type":"run"}
+{"case":"g-en-order-1","type":"start"}
+{"called":["search_places"],"calls":[],"case":"g-en-order-1","expected":[],"fieldsPass":false,"guided":true,"input":"Two large lattes with oat milk, please.","json":"{\"extras\": [\"oat milk\"], \"size\": \"small\", \"quantity\": 1, \"item\": \"Cafe La (140 m)\"}","lang":"en","model":"apple-fm","ms":2404,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-2","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-en-order-2","expected":[],"fieldsPass":false,"guided":true,"input":"One small americano.","json":"{\"size\": \"small\", \"item\": \"Blue Bottle Coffee\", \"quantity\": 1, \"extras\": []}","lang":"en","model":"apple-fm","ms":2439,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-order-3","type":"start"}
+{"called":["search_places","open_in_maps"],"calls":[],"case":"g-en-order-3","expected":[],"fieldsPass":false,"guided":true,"input":"Three medium cappuccinos, one with an extra shot.","json":"{\"quantity\": 3, \"size\": \"small\", \"extras\": [\"extra shot\"], \"item\": \"CAFE LA\"}","lang":"en","model":"apple-fm","ms":2466,"pass":false,"schema":"CoffeeOrder","schemaInPrompt":false,"tools":6,"toolset":"demo"}
+{"case":"g-en-place-1","type":"start"}
+{"case":"g-en-place-1","error":"timed out after 180s","fieldsPass":false,"guided":true,"input":"From these search results, pick the closest one:\n- CAFE LA (140 m)\n- Blue Bottle Coffee (240 m)\n- Doutor (310 m)","lang":"en","model":"apple-fm","ms":184363,"pass":false,"schema":"PlacePick"}
+{"type":"abort","why":"engine hang; remaining cases not run"}
+{"failed":4,"model":"apple-fm","passed":0,"total":4,"type":"summary"}
