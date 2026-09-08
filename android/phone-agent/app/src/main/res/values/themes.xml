@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.PhoneAgent" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#0B0F14</item>
+        <item name="android:statusBarColor">#0B0F14</item>
+        <item name="android:navigationBarColor">#0B0F14</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:textColor">#E6EDF3</item>
+    </style>
+</resources>
