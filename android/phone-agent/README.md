@@ -47,6 +47,28 @@ adb shell am start -n io.github.johnrocky.phoneagent/.MainActivity \
 Extras: `model`, `backend` (`cpu`|`gpu`), `threads`, `prompt`, `name`, `autorun`, `fixture` (`seed` puts two events
 on the agent's own calendar for tomorrow; `wipe` deletes that calendar), `cache` (engine cache dir), `notools`.
 
+`format` selects `spark` (default, existing behavior) or `qwenxml`. The latter parses the native
+`<tool_call><function=NAME><parameter=KEY>VALUE</parameter></function></tool_call>` form in
+`QwenXmlToolCalls.kt` (a hand scanner, no regex), reuses the same PhoneTools definitions and result messages,
+supplies a phone-assistant system instruction in place of the bundle's default, and passes `enable_thinking=false`
+in extraContext. The boolean `think` extra turns thinking on for `qwenxml`; it defaults to false. Spark keeps its
+existing settings. Incomplete or malformed XML stops the run visibly before any call from that turn executes.
+
+Second model: [Agents-A1-4B](https://huggingface.co/litert-community/Agents-A1-4B) (InternScience, Apache-2.0),
+`Agents-A1-4B_mixed_int4.litertlm` as published, no repack, CPU: `--es format qwenxml --ez think false`. Recorded on a
+Galaxy S26 in airplane mode: alarm 08:10, the 08:30–09:20 ride added, the 09:00 standup clash reported, 81 s from tap
+to answer, 5.0 GB peak.
+
+Debug builds carry the applicationId suffix `.a1` so a demo install never replaces an existing package (the activity
+class stays `io.github.johnrocky.phoneagent.MainActivity`). Under that suffix the app keeps its own local calendar
+(`Phone Agent A1`) and prefixes its Clock alarm labels (`A1 demo · …`) so they can be found and deleted afterwards;
+label-based `ACTION_DISMISS_ALARM` did not remove a future alarm on the Samsung Clock — delete the labeled row in
+Clock by hand, then uninstall.
+
+Optional run instrumentation for takes: `run_id` names app-private `<id>-loaded.json` / `<id>-report.json` files with
+the exact calls and results, final answer, decode-token counts, wall time and VmHWM; `fixture_only=true` runs a
+fixture without loading the engine; `dismiss_alarm` requests dismissal of a label this installation set itself.
+
 The agent reads and writes only its own local "Phone Agent" calendar, never an account calendar. Alarms and timers
 go to the phone's Clock app through the public `AlarmClock` intents (`EXTRA_SKIP_UI`), so they are real — delete the
 alarm afterwards.

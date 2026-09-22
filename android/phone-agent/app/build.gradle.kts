@@ -19,6 +19,9 @@ android {
         ndk { abiFilters += setOf("arm64-v8a") }
     }
     buildTypes {
+        debug {
+            applicationIdSuffix = ".a1"
+        }
         release {
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("debug")
@@ -36,4 +39,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("androidx.activity:activity:1.10.1")
     implementation("com.google.code.gson:gson:2.11.0")
+    testImplementation("junit:junit:4.13.2")
 }

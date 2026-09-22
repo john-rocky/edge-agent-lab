@@ -1,0 +1,12 @@
+Loading preset from scripts/tools_preset.py:
+- Tools:
+  - get_weather
+  - multiply
+  - web_search
+<tool_call>
+<function=web_search>
+<parameter=query>
+LiteRT-LM release notes latest
+</parameter>
+</function>
+</tool_call>

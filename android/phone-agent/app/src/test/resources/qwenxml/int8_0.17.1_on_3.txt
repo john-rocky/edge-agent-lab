@@ -1,0 +1,15 @@
+Loading preset from scripts/tools_preset.py:
+- Tools:
+  - get_weather
+  - multiply
+  - web_search
+[thought] The user wants me to search the web for the latest LiteRT-LM release notes. I need to use the web_search tool to find this information. The query should be something like "LiteRT-LM release notes" or "LiteRT-LM latest release notes". Let me start with a focused search. [/thought]
+
+
+<tool_call>
+<function=web_search>
+<parameter=query>
+LiteRT-LM release notes
+</parameter>
+</function>
+</tool_call>

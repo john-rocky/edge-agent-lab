@@ -32,6 +32,7 @@ import com.google.ai.edge.litertlm.Message
 import com.google.ai.edge.litertlm.MessageCallback
 import com.google.ai.edge.litertlm.SamplerConfig
 import com.google.ai.edge.litertlm.ThinkingConfig
+import com.google.gson.Gson
 import java.io.File
 import java.util.concurrent.Executors
 
@@ -49,6 +50,8 @@ import java.util.concurrent.Executors
  *   --ei threads 4                        CPU backend thread count (default 4; the runtime's own default ran on one core)
  *   --ez cache true                       give the engine a cache dir (XNNPACK weight cache); default off
  *   --ez notools true                     plain chat, no tool list in the prompt (timing control)
+ *   --es format spark|qwenxml             tool-call syntax (default spark)
+ *   --ez think true|false                 qwenxml thinking (default false; Spark unchanged)
  */
 class MainActivity : ComponentActivity() {
     private val bg = Executors.newSingleThreadExecutor()
@@ -66,9 +69,28 @@ class MainActivity : ComponentActivity() {
     private var modelPath = ""
     private var backendName = "cpu"
     private var modelName = "Spark-X2.5-1.7B int4"
+    private var format = PhoneAgentFormat.SPARK
+    private var think = false
     private var turns = 0
     private var toolCalls = 0
     private var runStart = 0L
+    private var loadSeconds = 0.0
+    private var finalAnswer = ""
+    private var requestText = ""
+    private var runStartedUnixMs = 0L
+    private val turnReports = mutableListOf<Map<String, Any?>>()
+    private val executedCalls = mutableListOf<Map<String, Any?>>()
+    private val runId get() = (intent.getStringExtra("run_id") ?: "run").also {
+        require(it.matches(Regex("[A-Za-z0-9_-]+"))) { "invalid run_id" }
+    }
+    private fun saveReport(suffix: String, data: Any) {
+        val file = File(filesDir, "$runId-$suffix.json")
+        val tmp = File(filesDir, "$runId-$suffix.tmp")
+        tmp.writeText(Gson().toJson(data))
+        check(tmp.renameTo(file)) { "could not save run report" }
+    }
+    private fun peakMemoryKiB(): Long? = File("/proc/self/status").readLines()
+        .firstOrNull { it.startsWith("VmHWM:") }?.trim()?.split(Regex("\\s+"))?.get(1)?.toLongOrNull()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,18 +114,30 @@ class MainActivity : ComponentActivity() {
 
         val perms = arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
         if (perms.any { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }) requestPermissions(perms, 1)
-        when (intent.getStringExtra("fixture")) {
-            "seed" -> status.text = tools.seedTomorrow()
-            "wipe" -> status.text = tools.wipeOwnCalendar()
+        val fixtureResult = when (intent.getStringExtra("fixture")) {
+            "seed" -> tools.seedTomorrow()
+            "wipe" -> tools.wipeOwnCalendar()
+            else -> null
+        }
+        fixtureResult?.let { status.text = it; Log.i(TAG, "fixture $it") }
+        val dismissal = intent.getStringExtra("dismiss_alarm")?.let { tools.dismissOwnAlarm(it) }
+        if (intent.getBooleanExtra("fixture_only", false)) {
+            saveReport("fixture", mapOf("result" to fixtureResult, "dismissal" to dismissal,
+                "own_alarm_labels" to tools.ownAlarmLabels(), "package" to packageName))
+            return
         }
 
         bg.execute { loadModel() }
     }
 
+    @OptIn(com.google.ai.edge.litertlm.ExperimentalApi::class)
     private fun loadModel() {
         ui { status.text = "Loading model…" }
         val t0 = SystemClock.elapsedRealtime()
         try {
+            com.google.ai.edge.litertlm.ExperimentalFlags.enableBenchmark = true
+            format = PhoneAgentFormat.fromExtra(intent.getStringExtra("format"))
+            think = intent.getBooleanExtra("think", false)
             val be: Backend = if (backendName == "gpu") Backend.GPU() else Backend.CPU(threadCount = intent.getIntExtra("threads", 4))
             val cache = if (intent.getBooleanExtra("cache", false)) cacheDir.absolutePath else null
             val e = Engine(EngineConfig(modelPath = modelPath, backend = be, maxNumTokens = 4096, cacheDir = cache))
@@ -111,6 +145,10 @@ class MainActivity : ComponentActivity() {
             engine = e
             conv = newConversation(e)
             val secs = (SystemClock.elapsedRealtime() - t0) / 1000.0
+            loadSeconds = secs
+            saveReport("loaded", mapOf("engine_load_seconds" to secs, "backend" to backendName,
+                "threads" to intent.getIntExtra("threads", 4), "pid" to android.os.Process.myPid(),
+                "vmhwm_kib" to peakMemoryKiB(), "model_path" to modelPath))
             Log.i(TAG, "loaded $modelPath on $backendName in $secs s")
             ui {
                 status.text = "Ready · loaded in %.1f s".format(secs); send.isEnabled = true
@@ -123,19 +161,19 @@ class MainActivity : ComponentActivity() {
     }
 
     /** The date goes in as system text (the Mac sweeps that passed ran this way); the tools stay the way to act. */
-    private fun systemText(): String = "The current date and time is " +
-        java.text.SimpleDateFormat("EEEE, yyyy-MM-dd HH:mm", java.util.Locale.US).format(java.util.Date()) +
-        ". You control the user's phone through the tools; use them."
+    private fun systemText(): String = format.systemText(
+        java.text.SimpleDateFormat("EEEE, yyyy-MM-dd HH:mm", java.util.Locale.US).format(java.util.Date()),
+    )
 
     private fun newConversation(e: Engine): Conversation = e.createConversation(
         ConversationConfig(
             systemInstruction = Contents.of(systemText()),
             samplerConfig = SamplerConfig(topK = 1, topP = 1.0, temperature = 0.0, seed = 0),
-            thinkingConfig = ThinkingConfig(true),
+            thinkingConfig = ThinkingConfig(if (format == PhoneAgentFormat.QWENXML) think else true),
             automaticToolCalling = false,
             // The bundle's chat template renders `tools` the vendor way (## Tools ... <tools>JSON</tools>);
             // the app parses the calls, so the runtime's own tool machinery stays out of the loop.
-            extraContext = if (intent.getBooleanExtra("notools", false)) emptyMap() else mapOf("tools" to tools.descriptions()),
+            extraContext = format.extraContext(tools.descriptions(), intent.getBooleanExtra("notools", false), think),
         ),
     )
 
@@ -144,11 +182,15 @@ class MainActivity : ComponentActivity() {
         if (text.isEmpty() || conv == null) return
         send.isEnabled = false; input.isEnabled = false; input.text.clear()
         turns = 0; toolCalls = 0; runStart = SystemClock.elapsedRealtime()
+        requestText = text; finalAnswer = ""; runStartedUnixMs = System.currentTimeMillis()
+        turnReports.clear(); executedCalls.clear()
+        Log.i(TAG, "run started id=$runId prompt=$text")
         addBubble(text)
         turn(Message.user(text))
     }
 
     /** One model turn: stream thought + text, then either run the tool calls and go again, or finish. */
+    @OptIn(com.google.ai.edge.litertlm.ExperimentalApi::class)
     private fun turn(msg: Message) {
         val c = conv ?: return
         turns++
@@ -169,8 +211,17 @@ class MainActivity : ComponentActivity() {
             }
             override fun onDone() {
                 val secs = (SystemClock.elapsedRealtime() - t0) / 1000.0
-                Log.i(TAG, "turn $turns done in $secs s, thought ${thought.length} chars, text: $text")
-                ui { thoughtCard.done(thought.length, secs); afterTurn(text.toString()) }
+                ui {
+                    val metrics = try {
+                        val b = c.getBenchmarkInfo()
+                        mapOf<String, Any?>("generated_tokens" to b.lastDecodeTokenCount,
+                            "prefill_tokens" to b.lastPrefillTokenCount)
+                    } catch (e: Exception) { mapOf<String, Any?>("metrics_error" to e.toString()) }
+                    turnReports.add(mapOf("turn" to turns, "seconds" to secs, "text" to text.toString(),
+                        "thought" to thought.toString(), "vmhwm_kib" to peakMemoryKiB()) + metrics)
+                    Log.i(TAG, "turn $turns done in $secs s, thought ${thought.length} chars, text: $text")
+                    thoughtCard.done(thought.length, secs); afterTurn(text.toString())
+                }
             }
             override fun onError(e: Throwable) {
                 Log.e(TAG, "turn $turns failed", e)
@@ -180,9 +231,15 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun afterTurn(text: String) {
-        val calls = SparkToolCalls.parse(text)
-        val said = SparkToolCalls.withoutCalls(text)
+        val calls = format.parse(text)
+        val said = format.withoutCalls(text)
+        if (format == PhoneAgentFormat.QWENXML && QwenXmlToolCalls.hasUnparsedMarkup(text)) {
+            addCard("Stopped · malformed tool call", text, C_BAD)
+            finish(false)
+            return
+        }
         if (calls.isEmpty()) {
+            finalAnswer = said
             addCard("Answer", if (said.isEmpty()) "(no text)" else said, C_ANSWER, big = true).body.text = md(said)
             finish(true)
             return
@@ -194,6 +251,8 @@ class MainActivity : ComponentActivity() {
             toolCalls++
             val card = addCard("${tools.icon(call.name)} ${SparkToolCalls.render(call)}", "running…", C_TOOL, mono = true)
             val result = tools.call(call.name, call.args)
+            executedCalls.add(mapOf("turn" to turns, "name" to call.name, "arguments" to call.args,
+                "result" to result, "elapsed_seconds" to (SystemClock.elapsedRealtime() - runStart) / 1000.0))
             Log.i(TAG, "tool ${SparkToolCalls.render(call)} -> $result")
             card.body.text = (if (result.startsWith("Error")) "✗ " else "✓ ") + result
             card.body.setTextColor(if (result.startsWith("Error")) Color.parseColor("#F85149") else Color.parseColor("#3FB950"))
@@ -207,6 +266,16 @@ class MainActivity : ComponentActivity() {
         status.text = if (ok) "Done · $turns turns · $toolCalls tool calls · %.0f s".format(total) else "Stopped"
         Log.i(TAG, "run finished ok=$ok turns=$turns toolCalls=$toolCalls total=$total s")
         if (ok) addCard("Phone state now", tools.phoneState(), C_STATE, mono = true)
+        saveReport("report", mapOf("ok" to ok, "run_id" to runId, "prompt" to requestText,
+            "package" to packageName, "model" to modelName, "backend" to backendName,
+            "threads" to intent.getIntExtra("threads", 4), "format" to format.name,
+            "thinking" to think, "sampler" to mapOf("top_k" to 1, "top_p" to 1.0, "temperature" to 0.0, "seed" to 0),
+            "runtime_version" to "0.16.1", "engine_load_seconds" to loadSeconds,
+            "run_started_unix_ms" to runStartedUnixMs, "run_finished_unix_ms" to System.currentTimeMillis(),
+            "wall_seconds" to total, "turns" to turnReports, "calls" to executedCalls,
+            "generated_tokens" to if (turnReports.all { it["generated_tokens"] is Int }) turnReports.sumOf { it["generated_tokens"] as Int } else null,
+            "final_answer" to finalAnswer, "phone_state" to if (ok) tools.phoneState() else null,
+            "own_alarm_labels" to tools.ownAlarmLabels(), "vmhwm_kib" to peakMemoryKiB()))
         val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER; setPadding(0, dp(8), 0, dp(8)) }
         row.addView(chip("Open Clock") { startActivity(tools.showAlarms()) })
         row.addView(chip("Open Calendar") { startActivity(tools.showCalendar(PhoneTools.tomorrowNoon())) })

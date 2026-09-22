@@ -1,0 +1,114 @@
+[
+  {
+    "file": "int8_0.17.1_off_1.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_0.17.1_off_1.txt",
+    "sha256": "6469c8d638bc152cb146bb9db86ad843b88c110a3fd5736b80d4e00149d0385e",
+    "expected_name": "get_weather",
+    "expected_args": {
+      "location": "Tokyo"
+    }
+  },
+  {
+    "file": "int8_0.17.1_off_2.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_0.17.1_off_2.txt",
+    "sha256": "837188ff7693baa483e90cf9c4cafb3d169a6cf20c5c9434a79855a558fe18ce",
+    "expected_name": "multiply",
+    "expected_args": {
+      "a": "17",
+      "b": "25"
+    }
+  },
+  {
+    "file": "int8_0.17.1_off_3.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_0.17.1_off_3.txt",
+    "sha256": "4a62b233fb4b277a7c6734664e3ed669a4531823529a07d34ed2dd2e9f214b99",
+    "expected_name": "web_search",
+    "expected_args": {
+      "query": "LiteRT-LM release notes latest"
+    }
+  },
+  {
+    "file": "int8_0.17.1_on_1.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_0.17.1_on_1.txt",
+    "sha256": "1cc9d2ee44c242ccd293096fc7598ced42ca640da9d529d5a4e08c3e7a59edb0",
+    "expected_name": "get_weather",
+    "expected_args": {
+      "location": "Tokyo"
+    }
+  },
+  {
+    "file": "int8_0.17.1_on_2.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_0.17.1_on_2.txt",
+    "sha256": "5b486e5611e0abf0457d2c89e1f16b4fea3e6513d215897c7fbbbc0980d9faf8",
+    "expected_name": "multiply",
+    "expected_args": {
+      "a": "17",
+      "b": "25"
+    }
+  },
+  {
+    "file": "int8_0.17.1_on_3.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_0.17.1_on_3.txt",
+    "sha256": "34a202747916bf2ece63e99cd2fe38177bd89141afdb12f18044f04f87762ff0",
+    "expected_name": "web_search",
+    "expected_args": {
+      "query": "LiteRT-LM release notes"
+    }
+  },
+  {
+    "file": "int8_nightly_off_1.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_nightly_off_1.txt",
+    "sha256": "6469c8d638bc152cb146bb9db86ad843b88c110a3fd5736b80d4e00149d0385e",
+    "expected_name": "get_weather",
+    "expected_args": {
+      "location": "Tokyo"
+    }
+  },
+  {
+    "file": "int8_nightly_off_2.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_nightly_off_2.txt",
+    "sha256": "837188ff7693baa483e90cf9c4cafb3d169a6cf20c5c9434a79855a558fe18ce",
+    "expected_name": "multiply",
+    "expected_args": {
+      "a": "17",
+      "b": "25"
+    }
+  },
+  {
+    "file": "int8_nightly_off_3.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/int8_nightly_off_3.txt",
+    "sha256": "4a62b233fb4b277a7c6734664e3ed669a4531823529a07d34ed2dd2e9f214b99",
+    "expected_name": "web_search",
+    "expected_args": {
+      "query": "LiteRT-LM release notes latest"
+    }
+  },
+  {
+    "file": "mixed_int4_0.17.1_off_1.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/mixed_int4_0.17.1_off_1.txt",
+    "sha256": "6469c8d638bc152cb146bb9db86ad843b88c110a3fd5736b80d4e00149d0385e",
+    "expected_name": "get_weather",
+    "expected_args": {
+      "location": "Tokyo"
+    }
+  },
+  {
+    "file": "mixed_int4_0.17.1_off_2.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/mixed_int4_0.17.1_off_2.txt",
+    "sha256": "837188ff7693baa483e90cf9c4cafb3d169a6cf20c5c9434a79855a558fe18ce",
+    "expected_name": "multiply",
+    "expected_args": {
+      "a": "17",
+      "b": "25"
+    }
+  },
+  {
+    "file": "mixed_int4_0.17.1_off_3.txt",
+    "source": "ec46ebce2d1efa3561a9154ffef6773d918e646d:agents_a1_work/results/tools_xml/mixed_int4_0.17.1_off_3.txt",
+    "sha256": "4a62b233fb4b277a7c6734664e3ed669a4531823529a07d34ed2dd2e9f214b99",
+    "expected_name": "web_search",
+    "expected_args": {
+      "query": "LiteRT-LM release notes latest"
+    }
+  }
+]

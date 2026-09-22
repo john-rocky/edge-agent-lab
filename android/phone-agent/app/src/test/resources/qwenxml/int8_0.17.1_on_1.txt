@@ -1,0 +1,15 @@
+Loading preset from scripts/tools_preset.py:
+- Tools:
+  - get_weather
+  - multiply
+  - web_search
+[thought] The user is asking about the weather in Tokyo right now. I need to use the get_weather tool to get the current weather for Tokyo. The tool requires a location parameter, which should be "Tokyo". Let me call the tool. [/thought]
+
+
+<tool_call>
+<function=get_weather>
+<parameter=location>
+Tokyo
+</parameter>
+</function>
+</tool_call>

@@ -20,6 +20,21 @@ import java.util.TimeZone
  * timer in the Clock app. Nothing is simulated; a tool that cannot do its job says so in its result.
  */
 class PhoneTools(private val ctx: Context) {
+    // CalendarProvider and Clock are shared across packages. Isolate this demo explicitly.
+    private val isolatedDemo get() = ctx.packageName.endsWith(".a1")
+    private val calendarName get() = if (isolatedDemo) "Phone Agent A1" else CAL_NAME
+    private val calendarAccount get() = if (isolatedDemo) ctx.packageName else CAL_NAME
+    private val alarmPrefs get() = ctx.getSharedPreferences("demo_alarms", Context.MODE_PRIVATE)
+    fun ownAlarmLabels(): List<String> = alarmPrefs.getStringSet("labels", emptySet())!!.sorted()
+
+    fun dismissOwnAlarm(label: String): String {
+        require(isolatedDemo && label in ownAlarmLabels()) { "not an alarm owned by this demo" }
+        ctx.startActivity(Intent(AlarmClock.ACTION_DISMISS_ALARM)
+            .putExtra(AlarmClock.EXTRA_ALARM_SEARCH_MODE, AlarmClock.ALARM_SEARCH_MODE_LABEL)
+            .putExtra(AlarmClock.EXTRA_MESSAGE, label)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        return "Requested dismissal of '$label' through Clock"
+    }
     data class Param(val name: String, val type: String, val description: String)
     data class Spec(val name: String, val description: String, val params: List<Param>)
 
@@ -118,15 +133,17 @@ class PhoneTools(private val ctx: Context) {
 
     private fun setAlarm(hour: Int, minute: Int, label: String): String {
         require(hour in 0..23 && minute in 0..59) { "hour must be 0-23 and minute 0-59" }
+        val clockLabel = if (isolatedDemo) "A1 demo · $label" else label
         val i = Intent(AlarmClock.ACTION_SET_ALARM)
             .putExtra(AlarmClock.EXTRA_HOUR, hour)
             .putExtra(AlarmClock.EXTRA_MINUTES, minute)
-            .putExtra(AlarmClock.EXTRA_MESSAGE, label)
+            .putExtra(AlarmClock.EXTRA_MESSAGE, clockLabel)
             .putExtra(AlarmClock.EXTRA_SKIP_UI, true)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return try {
+            if (isolatedDemo) alarmPrefs.edit().putStringSet("labels", (ownAlarmLabels() + clockLabel).toSet()).commit()
             ctx.startActivity(i)
-            "Alarm set for %02d:%02d (%s)".format(hour, minute, label)
+            "Alarm set for %02d:%02d (%s)".format(hour, minute, clockLabel)
         } catch (e: ActivityNotFoundException) {
             "Error: no clock app can set alarms on this phone"
         }
@@ -154,23 +171,23 @@ class PhoneTools(private val ctx: Context) {
     fun calendarId(): Long {
         val proj = arrayOf(CalendarContract.Calendars._ID)
         ctx.contentResolver.query(CalendarContract.Calendars.CONTENT_URI, proj,
-            CalendarContract.Calendars.ACCOUNT_TYPE + "=? AND " + CalendarContract.Calendars.NAME + "=?",
-            arrayOf(CalendarContract.ACCOUNT_TYPE_LOCAL, CAL_NAME), null)?.use { c ->
+            CalendarContract.Calendars.ACCOUNT_TYPE + "=? AND " + CalendarContract.Calendars.ACCOUNT_NAME + "=? AND " + CalendarContract.Calendars.NAME + "=?",
+            arrayOf(CalendarContract.ACCOUNT_TYPE_LOCAL, calendarAccount, calendarName), null)?.use { c ->
             if (c.moveToFirst()) return c.getLong(0)
         }
         val uri = CalendarContract.Calendars.CONTENT_URI.buildUpon()
             .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-            .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, CAL_NAME)
+            .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, calendarAccount)
             .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL)
             .build()
         val v = ContentValues().apply {
-            put(CalendarContract.Calendars.ACCOUNT_NAME, CAL_NAME)
+            put(CalendarContract.Calendars.ACCOUNT_NAME, calendarAccount)
             put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL)
-            put(CalendarContract.Calendars.NAME, CAL_NAME)
-            put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, CAL_NAME)
+            put(CalendarContract.Calendars.NAME, calendarName)
+            put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, calendarName)
             put(CalendarContract.Calendars.CALENDAR_COLOR, 0xFF58A6FF.toInt())
             put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_OWNER)
-            put(CalendarContract.Calendars.OWNER_ACCOUNT, CAL_NAME)
+            put(CalendarContract.Calendars.OWNER_ACCOUNT, calendarAccount)
             put(CalendarContract.Calendars.VISIBLE, 1)
             put(CalendarContract.Calendars.SYNC_EVENTS, 1)
         }
@@ -234,9 +251,10 @@ class PhoneTools(private val ctx: Context) {
     fun wipeOwnCalendar(): String {
         val n = ctx.contentResolver.delete(CalendarContract.Calendars.CONTENT_URI.buildUpon()
             .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-            .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, CAL_NAME)
+            .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, calendarAccount)
             .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL).build(),
-            CalendarContract.Calendars.NAME + "=?", arrayOf(CAL_NAME))
+            CalendarContract.Calendars.ACCOUNT_TYPE + "=? AND " + CalendarContract.Calendars.ACCOUNT_NAME + "=? AND " + CalendarContract.Calendars.NAME + "=?",
+            arrayOf(CalendarContract.ACCOUNT_TYPE_LOCAL, calendarAccount, calendarName))
         return "deleted $n calendar(s)"
     }
 
