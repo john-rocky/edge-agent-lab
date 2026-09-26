@@ -429,11 +429,15 @@ What the rows say:
   row on the 1.2B parsed; prompt-only with no schema in the prompt never
   did. But what the model puts in the fields depends on what the prompt
   shows it: with the schema in the prompt the 1.2B copies the hint's
-  punctuation into values (`"item": ", "`, `"name": ", "`), and the
-  strongest 1.2B setting is the constraint with the schema kept *out* of
-  the prompt (5/10, 5/10) — the same ordering as on the Mac (8/10, 6/10;
-  [results/2026-09-02-mac-litert-guided](../ios/bench/results/2026-09-02-mac-litert-guided/)),
-  a few cases lower on the phone.
+  punctuation into values (`"item": ", "`, `"name": ", "`). Keeping the
+  schema out of the prompt under the constraint is the strongest 1.2B
+  setting on photo-editing (5/10, against 4/10 prompt only), as on the Mac
+  (6/10 against 4/10;
+  [results/2026-09-02-mac-litert-guided](../ios/bench/results/2026-09-02-mac-litert-guided/)).
+  On coffee-run the phone reverses the Mac's order: prompt only with the
+  schema in the prompt scored 6/10, the constraint without it 5/10 (Mac:
+  7/10 and 8/10). Corrected 2026-09-26; this line used to say the ordering
+  matched the Mac on both packs.
 - **Apple's model treats a guided turn as a tool-using turn.** With the
   schema in the prompt it fills the structure directly (10/10, 10/10);
   without it, it goes through the tools first — `search_places` →
