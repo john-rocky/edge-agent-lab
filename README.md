@@ -10,7 +10,7 @@ For example, in the coffee-run demo you say "Where am I?", "Find a coffee shop n
 |---|---|---|
 | [Coffee run](ios/scenarios/coffee-run/) | "Where am I?" … "Open CAFE LA in Apple Maps." | Location, places search, menu OCR, then Maps |
 | [Photo editing](ios/scenarios/photo-editing/) | "Make the photo a bit brighter." "A bit warmer, too." "Undo everything — back to the original." "Remove the background." | Edits stack, and one sentence reverts the whole chain. The app has 17 editing tools. The recorded run used the 1.2B with the one-step undo tool removed |
-| [Focus](ios/scenarios/focus/) | "Dim the screen — I need to focus." "Silence all my notifications and set a one-hour focus timer." | Benchmarked, not recorded yet. Both models call `set_brightness` for the first sentence. The last sentence needs two calls (cancel the notifications, set the timer): Apple's model makes both but sets 600 s, and the 1.2B makes one broken call |
+| [Focus](ios/scenarios/focus/) | "Dim the screen — I need to focus." "Silence all my notifications and set a one-hour focus timer." | Benchmarked, not recorded yet. Apple's model and the 1.2B both call `set_brightness` for the first sentence. The last sentence needs two calls (cancel the notifications, set the timer): Apple's model makes both but sets 600 s, and the 1.2B makes one broken call |
 | [Android screen agent](android/) | "open the notification history" | Takes a screenshot, asks a local vision model where to tap, then taps. It runs on a Pixel 8a |
 
 [More scenarios](docs/scenarios.md) cover video editing, a store admin, an audio mixer and documents. The [roadmap](docs/ROADMAP.md) has what I plan next.
@@ -28,7 +28,7 @@ cd agent-frontier/harness && swift build -c release
 
 ## Which model to run
 
-No model won every scenario. I measured each one on an iPhone with 20 Japanese and English cases ([full tables and raw results](docs/model-routing.md)). A case counts when the model made every expected call, in order, with matching arguments. Extra calls are allowed, except where no call was expected:
+No model won every scenario. On 2026-08-18 I measured each one on an iPhone (iOS 27, LFM2.5 on CPU) with 20 Japanese and English cases ([full tables and raw results](docs/model-routing.md)). A case counts when the model made every expected call, in order, with matching arguments. Extra calls are allowed, except where no call was expected:
 
 | Scenario | Apple's Foundation Models | LFM2.5-1.2B int4 | LFM2.5-2.6B int4 |
 |---|---|---|---|
@@ -42,7 +42,7 @@ The photo-editing app now has 17 tools. With those and 30 cases, Apple's model g
 
 ## Why one tool call at a time
 
-I measured whether a small model does better writing one program that calls the tools or making one tool call per step. At 2B, the whole-program approach solved 0 of 3 tasks and the step-by-step approach solved 2 of 3 ([the note](docs/codeact-vs-tool-calling.md)), so the scenarios here make one tool call per step.
+I measured whether a small model does better writing one program that calls the tools or making one tool call per step. With qwen3.5-2B on a Mac GPU, the whole-program approach solved 0 of 3 tasks and the step-by-step approach solved 2 of 3 ([the note](docs/codeact-vs-tool-calling.md)), so the scenarios here make one tool call per step.
 
 ## Layout
 
@@ -50,7 +50,7 @@ I measured whether a small model does better writing one program that calls the 
       scenarios/    one folder per scenario, usually cases.json and script.md
       bench/        the benchmark runner scripts, report.py and results
       samples/      sample index
-    android/        the screen agent: app, SDK, conversion tools and findings
+    android/        the screen agent (app, SDK, conversion tools, findings) and phone-agent, a tool-calling agent app
     agent-frontier/ the test of whole programs versus one call per step
     docs/           model routing, roadmap and findings
 
