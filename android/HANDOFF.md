@@ -141,7 +141,4 @@ tool registry は未実装(非目標)。FunctionGemma 270M(公式、NL→functio
 
 ## 制約(必読)
 
-- **naming/公開ゲート**: litert- prefix は Space の side-project 相談(08-12 投稿、返答待ち)の範囲。
-  返答まで本リポは中立名のまま、GitHub 公開もしない。
 - 発信は実機動画標準(seeds.md 参照)。クロスランタイム比較数値の公開は Gemma-4 のみ。
-- LiteRT チーム最優先の序列は不変 — このレーンは 7b 別枠。

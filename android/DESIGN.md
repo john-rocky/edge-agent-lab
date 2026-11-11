@@ -13,10 +13,6 @@ part before the image; on device that silently destroys localization while
 leaving description intact. Both are written up in [FINDINGS.md](FINDINGS.md);
 build and run instructions are in [app/README.md](app/README.md).
 
-Naming note (updated 2026-08-18): the side-project gate turned out to cover
-the litert-compat lane only, so this repo is public. The `litert-` prefix
-stays unused here.
-
 ## What the demo is
 
 Take a screenshot of the phone, ask a local VLM where to tap in plain language,
