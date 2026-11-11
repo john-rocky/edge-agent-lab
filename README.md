@@ -1,93 +1,58 @@
 # edge-agent-lab
 
-Vague human input — text, voice, an image — turned into real app
-functionality by a model that fits on the phone. No network, no cloud
-fallback. This repo is three things: a showcase of what already works, the
-patterns to build it with, and measurements of which model to run.
+I'm testing whether a model small enough for a phone can turn plain speech, text or a photo into calls to an app's functions, with no cloud model behind it. This repo has the scenarios I've built so far and the measurements comparing the models.
 
-## What already works
+For example, in the coffee-run demo you say "Where am I?", "Find a coffee shop near me.", "Read the text in my latest photo." and "Open CAFE LA in Apple Maps." The phone finds its location, searches for places, reads the menu with OCR and opens Maps. A 1.2B model made all 4 tool calls correctly in that run, and got 15 of [the 20 test cases](#which-model-to-run) right.
 
-| scenario | you say | what happens |
+## Scenarios
+
+| Scenario | You say | What happens |
 |---|---|---|
-| [Coffee run](ios/scenarios/coffee-run/) | "Where am I?" … "Open CAFE LA in Apple Maps." | location → places search → menu OCR → Maps opens. Recorded, 4/4 tool calls on a 1.2B |
-| [Photo editing](ios/scenarios/photo-editing/) | "A bit brighter." "Warmer." "Undo everything." "Remove the background." | 17 editing tools; edits stack, a whole chain reverts by voice, the subject lifts off the background. Benched on 3 models, recorded |
-| [Focus](ios/scenarios/focus/) | "Dim the screen — I need to focus." "Silence my notifications and set a one-hour timer." | one sentence fans out into notifications + timer + brightness. Benched on 2 models (a 12/20 draw, opposite failures); recording next |
-| [Field report](ios/scenarios/field-report/) | "Read the text in my latest photo." "Remind me tomorrow at 9 to file the report." | gauge photo → OCR → note → next-morning reminder, fully offline. Pack built; bench and recording next |
-| [Video editing](ios/scenarios/video-editing/) | "Cut the first two seconds, make it vertical, and fade out at the end." "Split it at the playhead." "Turn it into a Reel." | a CapCut's menu, said out loud: 15 tools (incl. synthesized background music and the make_reel compound) on the newest library video. The model never sees a frame — the app's state opens every message and the tools take the numbers it names. Routing verified on Apple FM (Mac) |
-| [Store](ios/scenarios/store/) | "Which products have fewer than 5 in stock?" "Cut their prices by 10%." "Fulfil all the paid orders that haven't shipped yet." | a Shopify admin's menu over canned records: search / filter makes a selection, bulk actions act on it — records, not pixels; a second class of bench case (was the query right). 16 tools; routing verified on Apple FM (Mac) |
-| [Audio](ios/scenarios/audio/) | "The keys are a bit loud — turn them down a bit." "Solo the drums." "Fade out at the end, then export it." | a GarageBand mixer over four tracks the phone synthesizes and plays: faders are numbers the model reads from the state and moves; effects rebuild the graph mid-song; the mixer is on stage, faders visibly at their levels. 16 tools; routing verified on Apple FM (Mac) |
-| [Documents](ios/scenarios/docs/) | "Which pages mention the deposit?" "Delete the cover page." "Sign the last page." | an Acrobat / Goodnotes menu on a real PDF (PDFKit): pages named by their first line in the state, so "the cover" and "the last page" are numbers the model reads; highlights, watermark, ink signature, page extraction. 14 tools; routing verified on Apple FM (Mac) |
-| [Shopping](ios/scenarios/shopping/) | "Find wireless earbuds." "Add the second one to the cart — two of them." "Use the coupon SAVE10." | the buyer's side of the counter: numbered results in the state, the cart's arithmetic in the app. 9 tools over a canned catalog |
-| [Money](ios/scenarios/money/) | "What did I spend this week?" "They're all groceries — categorize them." "Find my subscriptions." | a household-budget app over a month of canned spending: finders select, categorize acts on the selection, the reports do the arithmetic. 9 tools |
-| [Inbox](ios/scenarios/inbox/) | "Archive all the newsletters." "Snooze the invoice from Kanda Goods until tomorrow." | mail triage over fifteen canned messages: find-then-act chains; drafts are written, never sent. 9 tools |
-| [Vision](ios/scenarios/vision/) | "If there's a person in it, cut them out." "Anything you'd fix? Do it." | the photo goes in with the words and the pixels pick the tool — Foundation Models vision, natively (`Attachment` in, `ImageReference` out). 5/5 on Apple FM |
-| [Chains](ios/scenarios/chains/) | "Turn the flashlight on and tell me how much battery I have." "What time is it in Tokyo, and in London?" | two calls out of one sentence, on unrelated tools. 4/4 on Apple FM |
-| [Compound](ios/scenarios/compound/) | "I need to focus for 20 minutes." "Give me my morning briefing." | one call, several APIs: notifications cleared + screen dimmed + timer; five readings in one. The model picks the one call over the three |
-| [Briefing](ios/scenarios/briefing/) · [Sensors](ios/scenarios/sensors/) · [Handoff](ios/scenarios/handoff/) | "Which way am I facing?" "Turn it off and play the mail sound." | quick packs on Apple FM — 17/17 beats; the compass timing out and the model falling back to orientation is the one to watch |
-| [Android screen agent](android/) | "open the notification history" | screenshot → local VLM → tap point → real tap → loop, on a Pixel 8a |
+| [Coffee run](ios/scenarios/coffee-run/) | "Where am I?" … "Open CAFE LA in Apple Maps." | Location, places search, menu OCR, then Maps |
+| [Photo editing](ios/scenarios/photo-editing/) | "Make the photo a bit brighter." "A bit warmer, too." "Undo everything — back to the original." "Remove the background." | Edits stack, and one sentence reverts the whole chain. The app has 17 editing tools. The recorded run used the 1.2B with the one-step undo tool removed |
+| [Focus](ios/scenarios/focus/) | "Dim the screen — I need to focus." "Silence all my notifications and set a one-hour focus timer." | Benchmarked, not recorded yet. Both models call `set_brightness` for the first sentence. The last sentence needs two calls (cancel the notifications, set the timer): Apple's model makes both but sets 600 s, and the 1.2B makes one broken call |
+| [Android screen agent](android/) | "open the notification history" | Takes a screenshot, asks a local vision model where to tap, then taps. It runs on a Pixel 8a |
 
-Input is not only typed: the chat has a microphone (SpeechAnalyzer,
-words landing as they are said) and a paperclip (a photo goes in with the
-message — Apple's model reads it natively, a LiteRT vision bundle through
-the adapter). The stage's `--voice` takes every beat from the air.
+[More scenarios](docs/scenarios.md) cover video editing, a store admin, an audio mixer and documents. The [roadmap](docs/ROADMAP.md) has what I plan next.
 
-Each iOS scenario is a **pack**: a tool set, a demo script, and benchmark
-cases that grow the model table below at the same time. The app hosting
-them is
-[lfm-tools-ios](https://github.com/john-rocky/LiteRT-Models/tree/screen-agent/lfm-tools-ios)
-— LFM2.5 behind Apple's `LanguageModel` protocol via a
-[LiteRT-LM adapter](https://github.com/john-rocky/LiteRT-LM/tree/apple-fm-guided-constrained-decoding),
-so the same session runs Apple's model or an open one: swap the backend,
-keep the tools.
+## Try it
+
+- **iPhone:** [lfm-tools-ios](https://github.com/john-rocky/LiteRT-Models/tree/screen-agent/lfm-tools-ios) is the app that runs these scenarios. It runs Apple's model or LFM2.5 through Apple's `LanguageModel` protocol, so you can change the model and keep the tools.
+- **Android:** [the screen agent app](android/app/README.md).
+- **A Mac, with no phone:** you can build the test harness behind [one tool call at a time](#why-one-tool-call-at-a-time) and run its self-test in about ten seconds. The self-test runs no model. Its last line starts with `CODEACT SELFTEST: PASS`.
+
+```bash
+cd agent-frontier/harness && swift build -c release
+./.build/release/agentrun codeact-selftest --tasks ../tierA --ref-dir ../codeact
+```
 
 ## Which model to run
 
-Measured on device, 20 JP/EN cases per scenario pack
-([full tables and raw JSONL](docs/model-routing.md)). Reached = expected
-calls made, with correct arguments:
+No model won every scenario. I measured each one on an iPhone with 20 Japanese and English cases ([full tables and raw results](docs/model-routing.md)). A case counts when the model made every expected call, in order, with matching arguments. Extra calls are allowed, except where no call was expected:
 
-| pack | Apple FM | LFM2.5-1.2B int4 | LFM2.5-2.6B int4 |
+| Scenario | Apple's Foundation Models | LFM2.5-1.2B int4 | LFM2.5-2.6B int4 |
 |---|---|---|---|
-| Coffee run (6 tools) | **17/20**, 3 s/case | 15/20, 4.4 s | 17/20, 15.5 s |
-| Photo editing (15 tools) | 14/20, 2.7 s | **16/20**, 7.2 s | 2/20 — context overflow |
-| Photo editing (17 tools, 30 cases) | **24/30**, 1.8 s | 17/30, 7 s | 0/30 — tool list alone is 1054 tokens > 1024 |
-| Focus (10 tools) | 12/20, 1.4 s | 12/20, 7.1 s | rerun pending |
+| Coffee run (6 tools) | 17/20, 3 s per case | 15/20, 4.4 s | 17/20, 15.5 s |
+| Photo editing (15 tools) | 14/20, 2.7 s | 16/20, 7.2 s | 2/20, context overflow |
+| Focus (10 tools) | 12/20, 1.4 s | 12/20, 7.1 s | 8/10 in English, run cut short |
 
-Working hypothesis: Apple's Foundation Models wins iOS tool-calling
-outright — it is trained for exactly this. The measurements keep
-sharpening it: Apple FM is 2–5× faster, routes everything and tells
-undo / revert / remove-background apart by name — but it grabs a tool
-on requests that need none, and its numbers are wrong more often than
-its tools: "warmer" → amount -100, 「もう少し明るく」 → 100, "one-hour
-timer" → 600 s, "25 minutes" → 150 s. The 1.2B never chains and gives
-all the going-back words to one-step undo (the demo cuts that tool for
-it), but it beat Apple FM on the 15-tool pack and ties it on focus with
-the opposite failures — right numbers, wrong tool. The 2.6B's weights
-cap its context at 1024 tokens; 15 tool schemas barely fit and 17 don't:
-on phone RAM, the bigger model can be the weaker agent.
+Apple's model was 1.5 to 5 times faster, but it often got numbers wrong: "warmer" became an amount of -100, and "one-hour timer" became 600 s. The 1.2B usually got the numbers right but sometimes called the wrong tool. The app caps the 2.6B at 1,024 tokens of context, because iOS kills the process at 2,048, so 15 tool schemas left it almost no room to answer.
 
-## Why every pack here is tool-calling
+The photo-editing app now has 17 tools. With those and 30 cases, Apple's model got 24 right, the 1.2B 17, and the 2.6B none, because the tool list and instructions no longer fit.
 
-One tool call per round, not one program that calls the tools. That was a bet, and it was
-measured: [**whole-program CodeAct loses 0/3 to step-wise tool-calling's 2/3**](docs/codeact-vs-tool-calling.md)
-at 0.8B–2B, across five rungs of prompt hardening and self-repair. Shown its own runtime error
-and told not to repeat itself, a 2B model re-emitted the byte-identical program four times.
+## Why one tool call at a time
 
-The multi-round context tax buys the error recovery a small model has no other way to get. The
-harness, the tasks, the control and every run are in
-[`agent-frontier/`](agent-frontier/) — it builds and self-tests on CPU in ten seconds.
+I measured whether a small model does better writing one program that calls the tools or making one tool call per step. At 2B, the whole-program approach solved 0 of 3 tasks and the step-by-step approach solved 2 of 3 ([the note](docs/codeact-vs-tool-calling.md)), so the scenarios here make one tool call per step.
 
 ## Layout
 
     ios/
-      scenarios/   scenario packs: cases.json + script.md per scenario
-      bench/       toolbench — runner scripts, report.py, results/
-      samples/     sample index (the app lives in LiteRT-Models for now)
-    android/       the screen agent: app, sdk, conversion tools, findings
-    agent-frontier/ the CodeAct-vs-tool-calling harness, tasks, and every run behind it
-    docs/          model routing, roadmap, findings
-
-[Roadmap](docs/ROADMAP.md): scenarios lead, the bench follows.
+      scenarios/    one folder per scenario, usually cases.json and script.md
+      bench/        the benchmark runner scripts, report.py and results
+      samples/      sample index
+    android/        the screen agent: app, SDK, conversion tools and findings
+    agent-frontier/ the test of whole programs versus one call per step
+    docs/           model routing, roadmap and findings
 
 ## Models
 
