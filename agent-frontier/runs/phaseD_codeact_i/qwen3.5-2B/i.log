@@ -1,4 +1,4 @@
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a0/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a0/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.67s
 [eval-driver] prewarmed in 0.08s
@@ -9,7 +9,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=6.4s  mean_wall/q=6.42s
 total_gen_tokens=373  mean_gen/q=373.0  capped=0/1
 aggregate_decode=158.3 tok/s  peak_footprint=422 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a1/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a1/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.71s
 [eval-driver] prewarmed in 0.09s
@@ -20,7 +20,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=9.8s  mean_wall/q=9.80s
 total_gen_tokens=373  mean_gen/q=373.0  capped=0/1
 aggregate_decode=157.8 tok/s  peak_footprint=441 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a2/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a2/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.73s
 [eval-driver] prewarmed in 0.08s
@@ -31,7 +31,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=9.8s  mean_wall/q=9.85s
 total_gen_tokens=373  mean_gen/q=373.0  capped=0/1
 aggregate_decode=162.0 tok/s  peak_footprint=440 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a3/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_meeting_followup/a3/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.69s
 [eval-driver] prewarmed in 0.08s
@@ -42,7 +42,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=9.7s  mean_wall/q=9.74s
 total_gen_tokens=373  mean_gen/q=373.0  capped=0/1
 aggregate_decode=161.2 tok/s  peak_footprint=422 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a0/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a0/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.68s
 [eval-driver] prewarmed in 0.08s
@@ -53,7 +53,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=5.0s  mean_wall/q=4.97s
 total_gen_tokens=190  mean_gen/q=190.0  capped=0/1
 aggregate_decode=159.6 tok/s  peak_footprint=423 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a1/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a1/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.67s
 [eval-driver] prewarmed in 0.08s
@@ -64,7 +64,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=7.0s  mean_wall/q=7.02s
 total_gen_tokens=190  mean_gen/q=190.0  capped=0/1
 aggregate_decode=164.3 tok/s  peak_footprint=442 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a2/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a2/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.67s
 [eval-driver] prewarmed in 0.08s
@@ -75,7 +75,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=7.0s  mean_wall/q=6.98s
 total_gen_tokens=190  mean_gen/q=190.0  capped=0/1
 aggregate_decode=163.8 tok/s  peak_footprint=437 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a3/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierA_photo_album/a3/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.66s
 [eval-driver] prewarmed in 0.08s
@@ -86,7 +86,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=7.1s  mean_wall/q=7.07s
 total_gen_tokens=190  mean_gen/q=190.0  capped=0/1
 aggregate_decode=162.8 tok/s  peak_footprint=438 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a0/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a0/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.67s
 [eval-driver] prewarmed in 0.07s
@@ -97,7 +97,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=5.8s  mean_wall/q=5.85s
 total_gen_tokens=320  mean_gen/q=320.0  capped=0/1
 aggregate_decode=164.6 tok/s  peak_footprint=435 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a1/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a1/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.69s
 [eval-driver] prewarmed in 0.08s
@@ -108,7 +108,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=9.1s  mean_wall/q=9.07s
 total_gen_tokens=320  mean_gen/q=320.0  capped=0/1
 aggregate_decode=164.5 tok/s  peak_footprint=420 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a2/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a2/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.68s
 [eval-driver] prewarmed in 0.08s
@@ -119,7 +119,7 @@ load=0.7s prewarm=0.1s
 n=1  batch_wall=9.1s  mean_wall/q=9.09s
 total_gen_tokens=320  mean_gen/q=320.0  capped=0/1
 aggregate_decode=164.6 tok/s  peak_footprint=439 MB
-[eval-driver] 1 prompts from /Users/majimadaisuke/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a3/codeact_in.jsonl
+[eval-driver] 1 prompts from /Users/USER/code/coreai/agent-frontier/phaseD_codeact_i/qwen3.5-2B/work_tierD_aurora_brief/a3/codeact_in.jsonl
 [eval-driver] loading model (engine=pipelined, max_tokens=700, greedy) ...
 [eval-driver] loaded 'qwen3_5_2b_decode_int8hu_block32_sym' in 0.66s
 [eval-driver] prewarmed in 0.07s
