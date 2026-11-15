@@ -543,9 +543,7 @@ derived data and cache to gitignored `.build/`.
 
 ### F. Session hygiene for implementation sessions
 
-Model: Opus is the default executor for A–E; return to Fable only for
-new failure-mode taxonomy or when a spec here proves wrong in a way
-that needs re-design. Keep every run's log lines (`MOMENTS …`) — they
+Keep every run's log lines (`MOMENTS …`) — they
 are the scouting instrument. Commit messages carry findings, not
 file lists (see git log for the register).
 
