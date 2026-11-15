@@ -78,7 +78,7 @@ take should carry, visibly:
 - **Two clips, subject in exactly one.** street→beach-dog gives "find
   the dog" one honest answer. Same-subject-in-both is the shortlist
   demo — harder, save it for after the check tool is proven on takes.
-- **Locale audit before recording** (x-post-style rule): EN post means
+- **Locale audit before recording**: EN post means
   EN everything in frame — synthesized voices explicitly English
   (`say -v Daniel`; the system default followed the device locale and
   wrecked recognition), on-screen text EN, names neutral, no currency

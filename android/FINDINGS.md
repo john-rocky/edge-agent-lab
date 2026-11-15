@@ -570,8 +570,7 @@ threads, and saw between no change and 2.07x depending on input size: with the
 process averaging 1.64 cores, a small model leans on the fastest core's clock
 while a large one spreads out and stops noticing. Their measurement, not ours,
 cited for the ratio and the mechanism only — their absolute per-model figures
-are deliberately not reproduced here, and none of this belongs in anything
-outbound (the cross-runtime publishing rule in HANDOFF.md covers it).
+are deliberately not reproduced here.
 
 Worth keeping the check in mind rather than the number: screen off, lock screen,
 or a pulled-down notification shade drop a process to `background`, and that one
