@@ -1,10 +1,10 @@
 # Review brief — re-audit of the 2026-08-14 findings
 
-For a cold session re-examining this work. Written to be attacked, not
+For a reviewer re-examining this work. Written to be attacked, not
 believed. Read [FINDINGS.md](FINDINGS.md) for the full detail; this file says
 what is solid, what is inference, and what I got wrong on the way.
 
-## Track record of the session that produced this
+## Track record of this work
 
 I published three different diagnoses of the same symptom. The first two were
 wrong:
@@ -121,7 +121,7 @@ Device: Pixel 8a, `4C131JEKB15210`, ~15 GB free.
 - `/data/local/tmp/probe.png` — 320×768 Settings screenshot, the exact bytes the
   app fed the engine. `prompt.txt` / `p2..p4.txt` are the four grounding prompts.
 - **`/data/local/tmp` also holds another lane's `.pte` files.** I cleared 29 GB
-  of old test artifacts there earlier with the user's approval; new ones have
+  of old test artifacts there earlier; new ones have
   appeared since. Do not sweep it blindly.
 - App `com.edgeagent.lab` installed; bundle in its external files dir.
 - Repaired bundles: `~/code/litertlm-convert/lfm25vl_work/out_fixb/`.

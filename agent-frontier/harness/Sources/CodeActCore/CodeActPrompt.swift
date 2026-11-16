@@ -3,7 +3,7 @@ import AgentRunCore
 
 // CodeActPrompt — the CodeAct action protocol: instead of one-JSON-tool-call-per-round,
 // the model writes ONE JS program that does the whole task (loops/branches in JS, the
-// kickoff's thesis). The exposed host functions are AgentRunCore's tools with dots turned
+// project's thesis). The exposed host functions are AgentRunCore's tools with dots turned
 // to underscores. The extractor (JSProbeCore.Prompt.extractJS) pulls the ```js block.
 public enum CodeActPrompt {
 

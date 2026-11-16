@@ -12,7 +12,7 @@ import Foundation
 //                  asks a small model for one tool call as JSON, and parses it. Kept out
 //                  of AgentRunCore so this library has no engine dependency; the CLI's
 //                  model mode supplies it. The heavy prefix-cache/session wiring is a
-//                  separate session's job (kickoff "やらないこと").
+//                  separate piece of work, out of scope here.
 
 public struct ToolCall: Equatable {
     public let tool: String

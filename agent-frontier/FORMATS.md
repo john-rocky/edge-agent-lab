@@ -1,8 +1,8 @@
 # agent-frontier formats
 
-The kickoff's discipline note ranks the *formats* the harness produces above the code
+The project ranks the *formats* the harness produces above the code
 (SWE-bench logic: a format becomes a standard the moment a third party uses it). These
-are kept small and separable on purpose. Priority order from the kickoff:
+are kept small and separable on purpose. Priority order:
 
 1. **Task-definition format** — two flavors: Phase-A pure functions (§1) and Tier-A/D
    stateful tool-calling tasks (§2). Stable.
@@ -48,7 +48,7 @@ The stateful, tool-calling sibling of §1. Instead of a pure function scored on 
 values, a task carries an **initial device world**, a **tool allowlist**, and a
 **deterministic final-state check**. The agent runs a multi-round loop (pick a tool, pass
 args, see the result, repeat) and is scored on what it *did to the world* + what it said.
-Still one JSON file = one portable task. (The kickoff calls this the "task-definition
+Still one JSON file = one portable task. (Planned as a "task-definition
 YAML"; it is rendered as JSON to reuse the Phase-A tooling and avoid a YAML parser
 dependency in the Swift harness — the shape is identical.)
 
@@ -115,7 +115,7 @@ and a do-nothing `NullBrain` (must FAIL) for every task.
 
 ## 3. JS-bridge manifest (byproduct ②)
 
-The kickoff's thesis: on iOS, the set of host functions you JSExport into the
+The thesis: on iOS, the set of host functions you JSExport into the
 JavaScriptCore sandbox **is** the agent's permission model (App Store rule 2.5.2 makes
 JSCore the only legal path to run generated code, so the bridge choice = the security
 boundary). This manifest writes that boundary down. It is **generated from the tool
@@ -148,7 +148,7 @@ from the *executed* surface. Enforcement is out of scope — the deliverable is 
 }
 ```
 
-The point for the Apple conversation: a reviewer (or an OS) can read this manifest and know
+The point: a reviewer (or an OS) can read this manifest and know
 *exactly* what a generated script can touch, before it runs — a concrete answer to
 "how do you make on-device agents safe?".
 
@@ -204,4 +204,4 @@ Rolled up per model by `score_phaseB.py` into `phaseB/score_<model>.json` (pass@
   scaffold cannot leak the answer. `parse` folds `cited_ids` into the finish answer as
   `… [sources: d5, d6]`, so the SAME deterministic `brief_cites` check (§2) scores it with no
   checker change; folding is a no-op in `off` (the field is never emitted). This is the P2c
-  probe that isolates "format" from "reasoning" (`../AGENT_STATE.md` GATE-RESULT P2c).
+  probe that isolates "format" from "reasoning".

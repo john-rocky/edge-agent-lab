@@ -1,6 +1,6 @@
 # Tier E — long-horizon endurance (CPU harness built; GPU run pending)
 
-The kickoff's top rung: a **20+ tool-call chain** to find *where* round-count degrades a small
+The top rung: a **20+ tool-call chain** to find *where* round-count degrades a small
 model. Built as CPU-self-testable tasks (P0/P1 discipline) that **reuse the Runner, Tools, and
 Checker unchanged** — no new assertion kinds. Two tasks isolate the two long-horizon failure
 modes:
@@ -29,7 +29,7 @@ mock confirms the profile is granular — an agent that finishes 12 of 20 items 
 
 ## Regenerate / sweep N
 
-`gen_tierE.py` emits both tasks (canonical N=20, committed). Parameterized so the GPU session can
+`gen_tierE.py` emits both tasks (canonical N=20, committed). Parameterized so a GPU run can
 sweep N to locate the onset:
 
 ```bash
@@ -37,7 +37,7 @@ python3 gen_tierE.py            # N=20 → the two committed files
 python3 gen_tierE.py 30 sweep   # → tierE_*_n30.json (uncommitted; for the sweep)
 ```
 
-## Hand-off to the GPU session
+## The GPU run
 
 Everything above is done and needs no compute. The model run is one command, GPU-gated:
 
@@ -46,11 +46,10 @@ cd .. && ./driver/run_tierE.sh              # 2B on both tasks (self-acquires/re
 MODELS="0.8b 2b" ./driver/run_tierE.sh      # both sizes
 ```
 
-It prints each task's `✓/·` profile + the degradation onset. What to record:
+It prints each task's `✓/·` profile + the degradation onset. What to look at:
 - **Onset depth** per task/model (first `·`). Breadcrumb: the hop it loses coherence. Batch: the
   item index where drops start (item k lands ~round k+1 → onset index ≈ round depth).
 - **Compare to the short chains** (Tier-A 6-round, Tier-D 3-round): does a 20-step task degrade
   *earlier per step* than a short one, or only run out of rounds? That's the endurance finding.
 - **Failure texture** from the trace (`phaseE/trace_*.jsonl`): does batch drop late items, or
   loop/duplicate (watch the `repeat` nudges)? Does breadcrumb read a decoy and derail?
-- Fold the result into `../AGENT_STATE.md` as **GATE-RESULT P2b** and the report's contour map.

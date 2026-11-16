@@ -97,7 +97,7 @@ search or filter first"). Repair-after-refusal is not in the model's
 repertoire; the first call has to be right. Raw JSONL:
 [honest fakes](../ios/bench/results/2026-08-19-mac-r7/).
 
-The shopping round (the next session, same date) took the lowest-ratio
+The shopping round (later the same date) took the lowest-ratio
 pack from 23 to 24 of 34 in three one-variable runs — a small net move
 hiding five attributable flips. What worked: the brand went into the
 state's result lines ("3 Sony Noise Cancelling Earbuds"), and "Put the

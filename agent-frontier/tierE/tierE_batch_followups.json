@@ -2,7 +2,7 @@
   "id": "tierE_batch_followups",
   "title": "One follow-up reminder for each of 20 meetings",
   "tier": "tierE",
-  "source": "kickoff Tier E (long-horizon endurance): iterate over N calendar items creating one reminder each, to measure whether per-item quality degrades as the chain lengthens (later items dropped / duplicated). Each per-item check is a separate assertion so the pass/fail breakdown is the degradation curve.",
+  "source": "Tier E (long-horizon endurance): iterate over N calendar items creating one reminder each, to measure whether per-item quality degrades as the chain lengthens (later items dropped / duplicated). Each per-item check is a separate assertion so the pass/fail breakdown is the degradation curve.",
   "spec": "I have 20 meetings on my calendar today. For EACH meeting, create exactly one reminder titled 'Follow up with <the attendee's full name>' due tomorrow at 9:00 AM. Do not skip any meeting and do not create duplicates.",
   "now": "2026-07-14T09:00:00-07:00",
   "timezone": "America/Los_Angeles",

@@ -612,7 +612,7 @@ out (the committed config lands at 23/34 — the structural gain minus the
 noise). The state opens every message: whatever workflow it names
 outranks the tool guides, so make it name the contract, not a habit.
 
-Applied to the money pack the next session, the same split taught a new
+Applied to the money pack later, the same split taught a new
 well: "Only the bulk tools (categorize, flag) need a list, search or
 filter first" put the act-tools' names in every message, and every
 finder in both languages grew a categorize + flag tail — 22/30 → 16/30,

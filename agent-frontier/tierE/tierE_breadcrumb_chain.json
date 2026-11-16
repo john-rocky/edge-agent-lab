@@ -2,7 +2,7 @@
   "id": "tierE_breadcrumb_chain",
   "title": "Follow a 20-hop document trail",
   "tier": "tierE",
-  "source": "kickoff Tier E (long-horizon endurance): a 20+ dependent-read chain to find where a small model loses the thread. Synthetic 'trail' corpus so the chain is controllable and copyright-free; each read reveals the next id (true sequential dependency).",
+  "source": "Tier E (long-horizon endurance): a 20+ dependent-read chain to find where a small model loses the thread. Synthetic 'trail' corpus so the chain is controllable and copyright-free; each read reveals the next id (true sequential dependency).",
   "spec": "Follow the trail through my documents. Start at the document titled 'Trailhead', then follow each 'Next, read cNN' pointer from one waypoint to the next, all the way to the end. Collect every codeword you see, in order. In your final answer, list all the codewords and the final passphrase.",
   "now": "2026-07-14T09:00:00-07:00",
   "timezone": "America/Los_Angeles",

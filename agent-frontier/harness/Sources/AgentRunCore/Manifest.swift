@@ -1,7 +1,7 @@
 import Foundation
 
-// Manifest — byproduct ② from the kickoff: the JS-bridge manifest, a declarative
-// capability + permission ledger. The kickoff's thesis is that on iOS the set of
+// Manifest — byproduct ②: the JS-bridge manifest, a declarative
+// capability + permission ledger. The thesis is that on iOS the set of
 // host functions you JSExport into the JavaScriptCore sandbox *is* the agent's
 // permission model (App Store rule 2.5.2 makes JSCore the only legal path to run
 // generated code, so the bridge choice = the security boundary). This manifest is

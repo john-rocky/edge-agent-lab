@@ -2,7 +2,7 @@
   "id": "tierD_aurora_brief",
   "title": "Cited brief over a 10-document on-device corpus",
   "tier": "tierD",
-  "source": "RESEARCH_TIERA.md — Tier D of the kickoff ladder ('端末内コーパス10文書→引用つきブリーフ'). Corpus is synthetic (fictional 'Project Aurora') so the facts are controllable and copyright-free; the demand shape is the on-device 'ask my documents' assistant.",
+  "source": "RESEARCH_TIERA.md — Tier D of the task ladder (a cited brief over a 10-document on-device corpus). Corpus is synthetic (fictional 'Project Aurora') so the facts are controllable and copyright-free; the demand shape is the on-device 'ask my documents' assistant.",
   "spec": "Using only my on-device documents, write a short brief answering: (1) when does Aurora launch, (2) who owns the launch, and (3) who owns the security sign-off. Search the corpus, read the relevant documents, and in your final answer cite the document ids you used (e.g. d5) and include the exact dates and names.",
   "now": "2026-07-13T09:00:00-07:00",
   "timezone": "America/Los_Angeles",

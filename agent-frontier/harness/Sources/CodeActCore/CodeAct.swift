@@ -6,7 +6,7 @@ import AgentRunCore
 // CodeAct — run ONE JS program (written by the model, or a reference program) that
 // accomplishes a Tier-A/D task by calling the device tools directly, in a single round.
 //
-// This is the CodeAct arm of the kickoff's headline experiment (CodeAct vs tool-calling).
+// This is the CodeAct arm of the headline experiment (CodeAct vs tool-calling).
 // It REUSES the P0 JSCore probe as the execution engine:
 //   * CJSWatchdog — the runaway-kill watchdog (an infinite loop is terminated, not hung).
 //   * the same console bridge + exception-capture pattern JSProbeCore uses.

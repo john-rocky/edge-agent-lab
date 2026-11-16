@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """gen_tierE.py — generate the Tier-E long-horizon endurance tasks.
 
-Tier E (kickoff ladder): a 20+ tool-call chain to find WHERE round-count degrades a small model
+Tier E (top of the task ladder): a 20+ tool-call chain to find WHERE round-count degrades a small model
 ("long-distance endurance"). Two failure modes, one task each — both reuse the existing Runner,
 Tools, and Checker unchanged (no new assertion kinds), so they self-test on CPU like P0/P1:
 
@@ -19,7 +19,7 @@ assertion, so the pass/fail breakdown *is* the degradation profile — no new ch
   python3 gen_tierE.py            # canonical N=20 → the two committed task files
   python3 gen_tierE.py 30 sweep   # emit tierE_*_n30.json (for the GPU N-sweep; not committed)
 
-Parameterized so the GPU session can sweep N (10/20/30/40) to locate the onset.
+Parameterized so a GPU run can sweep N (10/20/30/40) to locate the onset.
 """
 import json, os, sys
 
@@ -70,7 +70,7 @@ def breadcrumb(n):
     mock.append({"finish": "Codewords in order: " + ", ".join(words) + ". Final passphrase: " + SECRET + "."})
     return {
         "id": "tierE_breadcrumb_chain", "title": f"Follow a {n}-hop document trail", "tier": "tierE",
-        "source": "kickoff Tier E (long-horizon endurance): a 20+ dependent-read chain to find where a "
+        "source": "Tier E (long-horizon endurance): a 20+ dependent-read chain to find where a "
                   "small model loses the thread. Synthetic 'trail' corpus so the chain is controllable "
                   "and copyright-free; each read reveals the next id (true sequential dependency).",
         "spec": "Follow the trail through my documents. Start at the document titled 'Trailhead', then "
@@ -102,7 +102,7 @@ def batch(n):
     mock.append({"finish": f"Created {n} follow-up reminders, one per meeting."})
     return {
         "id": "tierE_batch_followups", "title": f"One follow-up reminder for each of {n} meetings", "tier": "tierE",
-        "source": "kickoff Tier E (long-horizon endurance): iterate over N calendar items creating one "
+        "source": "Tier E (long-horizon endurance): iterate over N calendar items creating one "
                   "reminder each, to measure whether per-item quality degrades as the chain lengthens "
                   "(later items dropped / duplicated). Each per-item check is a separate assertion so the "
                   "pass/fail breakdown is the degradation curve.",
