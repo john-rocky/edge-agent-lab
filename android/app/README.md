@@ -71,8 +71,8 @@ bazelisk build //app:screen_grounding \
 adb install -r -i com.android.vending bazel-bin/app/screen_grounding.apk
 ```
 
-The Bazel workspace is the repository root, not this directory — `//app` is the
-demo, `//sdk` is the library.
+Run both commands from `android/`, which is the Bazel workspace. `//app` is this
+directory and `//sdk` is the library.
 
 macOS: if `xcode-select` points at an Xcode beta, host-tool compiles fail with
 "absolute path inclusion(s)". The committed `.bazelrc` pins `DEVELOPER_DIR` for
@@ -106,7 +106,7 @@ overlay.
 Choose **Share entire screen** in the consent dialog — it defaults to
 "Share one app", which captures this app rather than what is behind it.
 
-Four modes:
+Five modes:
 
 | mode | what it does |
 |---|---|
@@ -157,7 +157,7 @@ the SDK declares in `Seams.kt`.
 | `CaptureService.kt` | holds the MediaProjection for the session; `captureScreen()` is the `ScreenSource` |
 | `TapService.kt` | the accessibility service; `AccessibilityExecutor` is the `ActionExecutor` |
 | `OverlayView.kt` | the marker rendering |
-| `MainActivity.kt` | wiring and the four modes |
+| `MainActivity.kt` | wiring and the five modes |
 
 Framing, the prompt and parser, the engine and the loop are in
 [`../sdk`](../sdk/README.md).
