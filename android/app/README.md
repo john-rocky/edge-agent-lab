@@ -57,9 +57,12 @@ the 3B alone. They are fine for the visibility rulers and useless for this app.
 ## Build
 
 Prereqs: Android SDK (API 35, build-tools 35.0.0), NDK, `bazelisk`. The SDK and
-NDK paths in `MODULE.bazel` are machine-specific — the NDK one in particular
-moves whenever the SDK manager updates it, and the failure is an opaque
-`can't readdir()` at analysis time.
+NDK paths are machine-specific. Put yours in `android/user.bazelrc`, which git
+ignores, as two lines with absolute paths:
+`common --repo_env=ANDROID_HOME=<sdk>` and
+`common --repo_env=ANDROID_NDK_HOME=<sdk>/ndk/<version>`. The NDK path ends in
+the NDK version, so it changes with each NDK update. An NDK path that no longer
+exists shows up as an opaque `can't readdir()` at analysis time.
 
 ```bash
 bazelisk build //app:screen_grounding \
