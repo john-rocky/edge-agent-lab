@@ -36,7 +36,7 @@
 {"case":"d-en-ask-1","type":"start"}
 {"answer":"What should the note say?","argsPass":true,"asked":true,"called":[],"calls":[],"case":"d-en-ask-1","expectAsk":true,"expected":[],"input":"Add a note.","lang":"en","model":"apple-fm","ms":1770,"pass":true,"selectionPass":true}
 {"case":"d-en-fill-1","type":"start"}
-{"answer":"I've added \"Daisuke Majima\" to the tenant name field.","argsPass":true,"called":["fill_field"],"calls":[{"args":"{\"field\":\"tenant_name\",\"value\":\"Daisuke Majima\"}","tool":"fill_field"}],"case":"d-en-fill-1","expected":["fill_field"],"input":"Put 'Daisuke Majima' in the tenant name field.","lang":"en","model":"apple-fm","ms":2150,"pass":true,"selectionPass":true}
+{"answer":"I've added \"Taro Yamada\" to the tenant name field.","argsPass":true,"called":["fill_field"],"calls":[{"args":"{\"field\":\"tenant_name\",\"value\":\"Taro Yamada\"}","tool":"fill_field"}],"case":"d-en-fill-1","expected":["fill_field"],"input":"Put 'Taro Yamada' in the tenant name field.","lang":"en","model":"apple-fm","ms":2150,"pass":true,"selectionPass":true}
 {"case":"d-en-redact-1","type":"start"}
 {"answer":"All occurrences of \"Sakura Property\" are now blacked out.","argsPass":true,"called":["redact_text"],"calls":[{"args":"{\"text\":\"Sakura Property\"}","tool":"redact_text"}],"case":"d-en-redact-1","expected":["redact_text"],"input":"Black out every 'Sakura Property'.","lang":"en","model":"apple-fm","ms":1970,"pass":true,"selectionPass":true}
 {"case":"d-en-undo-1","type":"start"}
@@ -78,7 +78,7 @@
 {"case":"d-ja-ask-1","type":"start"}
 {"answer":"What should the note say?","argsPass":true,"asked":true,"called":[],"calls":[],"case":"d-ja-ask-1","expectAsk":true,"expected":[],"input":"メモを付けて。","lang":"ja","model":"apple-fm","ms":1860,"pass":true,"selectionPass":true}
 {"case":"d-ja-fill-1","type":"start"}
-{"answer":"I've entered \"Daisuke Majima\" into the tenant_name field.","argsPass":true,"called":["fill_field"],"calls":[{"args":"{\"field\":\"tenant_name\",\"value\":\"Daisuke Majima\"}","tool":"fill_field"}],"case":"d-ja-fill-1","expected":["fill_field"],"input":"入居者名の欄に「Daisuke Majima」と入れて。","lang":"ja","model":"apple-fm","ms":2247,"pass":true,"selectionPass":true}
+{"answer":"I've entered \"Taro Yamada\" into the tenant_name field.","argsPass":true,"called":["fill_field"],"calls":[{"args":"{\"field\":\"tenant_name\",\"value\":\"Taro Yamada\"}","tool":"fill_field"}],"case":"d-ja-fill-1","expected":["fill_field"],"input":"入居者名の欄に「Taro Yamada」と入れて。","lang":"ja","model":"apple-fm","ms":2247,"pass":true,"selectionPass":true}
 {"case":"d-ja-redact-1","type":"start"}
 {"answer":"All occurrences of \"Sakura Property\" are now blacked out.","argsPass":true,"called":["redact_text"],"calls":[{"args":"{\"text\":\"Sakura Property\"}","tool":"redact_text"}],"case":"d-ja-redact-1","expected":["redact_text"],"input":"「Sakura Property」を全部黒塗りにして。","lang":"ja","model":"apple-fm","ms":2070,"pass":true,"selectionPass":true}
 {"case":"d-ja-undo-1","type":"start"}
